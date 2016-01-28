@@ -11,27 +11,28 @@ import ContentSend from 'material-ui/lib/svg-icons/content/send';
 import Divider from 'material-ui/lib/divider';
 
 import TextField from 'material-ui/lib/text-field';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 const ResultPrice = () => (
     <Card>
         <List>
-          <ListItem primaryText="CURSO" leftIcon={<ContentInbox />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
-          <ListItem primaryText="REGISTRO" leftIcon={<ActionGrade />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
-          <ListItem primaryText="MATERIALES" leftIcon={<ContentSend />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
-          <ListItem primaryText="ESTADIA" leftIcon={<ContentDrafts />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
+          <ListItem primaryText="CURSO" leftIcon={<ContentInbox />} secondaryText="$ 800.0U SD"/>
+          <ListItem primaryText="REGISTRO" leftIcon={<ActionGrade />} secondaryText="$ 800.0U SD"/>
+          <ListItem primaryText="MATERIALES" leftIcon={<ContentSend />} secondaryText="$ 800.0U SD"/>
+          <ListItem primaryText="ESTADIA" leftIcon={<ContentDrafts />} secondaryText="$ 800.0U SD"/>
           <Divider />
-          <ListItem primaryText="TRASLADO" leftIcon={<ContentInbox />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
-          <ListItem primaryText="FINANCIEROS" leftIcon={<ContentInbox />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
-          <ListItem primaryText="ASISTENCIA" leftIcon={<ContentInbox />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
-          <ListItem primaryText="VISA" leftIcon={<ContentInbox />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
+          <ListItem primaryText="TRASLADO" leftIcon={<ContentInbox />} secondaryText="$ 800.0U SD"/>
+          <ListItem primaryText="FINANCIEROS" leftIcon={<ContentInbox />} secondaryText="$ 800.0U SD"/>
+          <ListItem primaryText="ASISTENCIA" leftIcon={<ContentInbox />} secondaryText="$ 800.0U SD"/>
+          <ListItem primaryText="VISA" leftIcon={<ContentInbox />} secondaryText="$ 800.0U SD"/>
           <Divider />
-          <ListItem primaryText="TOTAL" leftIcon={<ContentInbox />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
+          <ListItem primaryText="TOTAL" leftIcon={<ContentInbox />} secondaryText="$ 800.0U SD"/>
           <Divider />
-          <ListItem primaryText="PESOS" leftIcon={<ContentInbox />} rightIcon={<TextField hintText="USD" disabled={true} floatingLabelText="800.00" />} />
+          <ListItem primaryText="PESOS" leftIcon={<ContentInbox />} secondaryText="$ 800.0U SD"/>
           <Divider />
-          <ListItem primaryText="IMPRIMIR" leftIcon={<ContentInbox />} />
-          <ListItem primaryText="NUEVA" leftIcon={<ContentInbox />} />
         </List>
+        <RaisedButton label="IMPRIMIR" primary={true} />
+        <RaisedButton label="NUEVA" secondary={true} />
     </Card>
 );
 

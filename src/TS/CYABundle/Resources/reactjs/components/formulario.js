@@ -10,6 +10,7 @@ class Formulario extends React.Component {
                 <SelectFieldCurso source="http://beta.json-generator.com/api/json/get/EJUqMwJte" />
                 <br/>
                 <SelectFieldPais source="http://beta.json-generator.com/api/json/get/4JUuXEAde" />
+                <br/>
                 <ResultPrice />
             </form>
         );
