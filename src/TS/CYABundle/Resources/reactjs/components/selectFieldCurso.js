@@ -3,7 +3,7 @@ import $ from 'jquery';
 import SelectField from 'material-ui/lib/select-field';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
-var SelectFieldPais = React.createClass({
+var SelectFieldCurso = React.createClass({
     getInitialState: function () {
         return {data: [], value: "CO"};
     },
@@ -20,8 +20,8 @@ var SelectFieldPais = React.createClass({
             cache: false,
             context: this,
             success: function(data) {
-                data.map(function (country) {
-                    array.push(<MenuItem key={country.code} value={country.code} primaryText={country.name}/>);
+                data.map(function (course) {
+                    array.push(<MenuItem key={course.id} value={course.id} primaryText={course.name}/>);
                 });
                 this.setState({data: array});
             }.bind(this),
@@ -33,11 +33,11 @@ var SelectFieldPais = React.createClass({
 
     render: function () {
         return (
-            <SelectField value={this.state.value} onChange={this.handleChange}  floatingLabelText="Pais" autoWidth={true}>
+            <SelectField value={this.state.value} onChange={this.handleChange}  floatingLabelText="Cursos" autoWidth={true}>
                 { this.state.data }
             </SelectField>
         );
     }
 });
 
-export default SelectFieldPais;
+export default SelectFieldCurso;
