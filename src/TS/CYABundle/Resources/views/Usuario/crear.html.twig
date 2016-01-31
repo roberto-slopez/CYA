@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+{% block iconHead %}
+    <i class="gi gi-user"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+    Usuarios
+{% endblock pageTitle %}
+{% block subtitle %}
+    Crear
+{% endblock subtitle %}
+
+{% block action %}
+    <div class="block-options pull-right">
+        <a data-original-title="Regresar" href="{{ url('lista_usuario') }}" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title=""><i class="fa fa-chevron-left"></i></a>
+    </div>
+{% endblock action %}
+
+{% block titlePanel %}
+    Ingreso
+{% endblock titlePanel %}
+
+{% block bodyPanel %}
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}, 'style': 'horizontal'}) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.nombreImpresion) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword) }}
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-12">
+                <label class="control-label">Roles:</label>
+                {{ form_widget(form.roles, {'attr': {'placeholder': 'Roles'}}) }}
+            </div>
+        </div>
+    </div>
+
+    {% form_theme form 'form_div_layout.html.twig' %}
+    <label class="switch switch-default">
+        {{ form_label(form.enabled) }}
+        {{ form_widget(form.enabled) }}
+    <span></span>
+    </label>
+    <br/>
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Guardar</button>
+    {{ form_end(form) }}
+    <br/>
+{% endblock bodyPanel %}

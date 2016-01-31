@@ -1,0 +1,63 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% block fos_user_content %}
+    <!-- Login Alternative Row -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Login Container -->
+                <div id="login-container">
+                    <!-- Login Title -->
+                    <div class="login-title text-center">
+                        <h1><strong>Login</strong></h1>
+                    </div>
+                    <!-- END Login Title -->
+
+                    <!-- Login Block -->
+                    <div class="block push-bit">
+                        <!-- Login Form -->
+                        <form id="form-login" class="form-horizontal" action="{{ path("fos_user_security_check") }}" accept-charset="utf-8" method="post">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                            {% if error %}
+                                <div class="alert alert-dismissable alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <strong>Error!</strong> {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </div>
+                            {% endif %}
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="gi gi-user"></i></span>
+                                        <input type="text" class="form-control input-lg" placeholder="{{ last_username|default('Usuario') }}" id="username" name="_username">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                                        <input type="password" id="password" name="_password" class="form-control input-lg" placeholder="Password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-actions">
+                                <div class="col-xs-4">
+                                    <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
+                                        <input type="checkbox" id="login-remember-me" name="_remember_me" checked>
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login to Dashboard</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- END Login Form -->
+                    </div>
+                    <!-- END Login Block -->
+                </div>
+                <!-- END Login Container -->
+            </div>
+        </div>
+    </div>
+    <!-- END Login Alternative Row -->
+{% endblock %}

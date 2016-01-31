@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+{% block iconHead %}
+    <i class="gi gi-user"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+    Usuarios
+{% endblock pageTitle %}
+{% block subtitle %}
+    Lista
+{% endblock subtitle %}
+
+{% block action %}
+    <div class="block-options pull-right">
+        <a data-original-title="Crear usuario" href="{{ url('crear_usuario') }}" class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
+    </div>
+{% endblock action %}
+
+{% block bodyPanel %}
+    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Usuario</th>
+            <th>Roles</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.username }}{% if not usuario.enabled %}<span class="label label-warning">!</span> {% endif %}</td>
+                <td><span class="label label-info"><strong>{{ usuario.roles|join(', ') }}</strong></span></td>
+                <td>
+                    <a href="{{ url('editar_usuario', {'id': usuario.id }) }}" class="btn btn-alt btn-sm btn-success" title="Editar">
+                        <i class="gi gi-pencil"></i>
+                        Editar
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock bodyPanel %}
+{% block extraJS %}
+    <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
+{% endblock extraJS %}

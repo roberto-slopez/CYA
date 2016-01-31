@@ -3,6 +3,12 @@
 namespace TS\CYABundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -34,54 +40,39 @@ class UsuarioType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add(
-                'nombreImpresion',
-                null,
-                [
-                    'label' => 'Nombre:'
-                ]
-            )
-            ->add(
-                'username',
-                null,
-                array(
-                    'label' => 'Usuario:',
-                )
-            )
-            ->add(
-                'email',
-                'email',
-                array(
-                    'label' => 'Email:',
-                )
-            )
+            ->add('nombreImpresion', TextType::class, ['label' => 'Nombre:'])
+            ->add('username', TextType::class, ['label' => 'Usuario:'])
+            ->add('email', EmailType::class, ['label' => 'Email:'])
             ->add(
                 'plainPassword',
-                'repeated',
-                array(
-                    'type' => 'password',
-                    'first_options' => array('label' => 'Contraseña'),
-                    'second_options' => array('label' => 'Confirme contraseñanalis'),
+                RepeatedType::class,
+                [
+                    'type' => PasswordType::class,
+                    'first_options' => ['label' => 'Contraseña'],
+                    'second_options' => ['label' => 'Confirme contraseñanalis'],
                     'invalid_message' => 'fos_user.password.mismatch',
-                )
+                ]
             );
 
         if (!$this->editarCuenta) {
             $builder
-                ->add( 'enabled', 'checkbox', ['label' => 'Activo'])
-                ->add('roles', 'choice', [
+                ->add('enabled', CheckboxType::class, ['label' => 'Activo'])
+                ->add(
+                    'roles',
+                    ChoiceType::class,
+                    [
                         'multiple' => true,
-                        'attr' => ['class' => 'select2-list'],
+                        'attr' => ['class' => 'select-chosen'],
                         'choices' => [
                             'ROLE_SUPER_ADMIN' => 'Super administrador',
                             'ROLE_ADMIN' => 'Administrador',
                             'ROLE_USER' => 'Usuario',
-                        ]
+                        ],
                     ]
                 );
         }
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
