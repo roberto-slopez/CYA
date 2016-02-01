@@ -1,6 +1,8 @@
 /** In this file, we create a React component which incorporates components provided by material-ui */
 
 import React from 'react';
+const {Grid, Row, Col} = require('react-flexgrid');
+
 import RaisedButton from 'material-ui/lib/raised-button';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
@@ -66,15 +68,25 @@ const Main = React.createClass({
         );
         return (
             <div style={containerStyle}>
+            <Grid>
                 <Card>
-                    <CardTitle title="Title" subtitle="Subtitle"/>
-                    <CardActions>
-                    <Formulario />
-                    </CardActions>
-                    <CardText>
-                        Ejemplo de funcionamiendo de ReactJS
-                    </CardText>
+                <Row>
+                    <Col md={12}>
+                    <CardTitle title="Cotizador" subtitle="Consejería, Estudios en el exterior"/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <CardActions>
+                        <Formulario />
+                        </CardActions>
+                        <CardText>
+                            Ejemplo de funcionamiendo de ReactJS
+                        </CardText>
+                    </Col>
+                </Row>
                 </Card>
+            </Grid>
             </div>
         );
     }

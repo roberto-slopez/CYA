@@ -1,6 +1,7 @@
 import React from 'react';
-import Card from 'material-ui/lib/card/card';
+const {Grid, Row, Col} = require('react-flexgrid');
 
+import Card from 'material-ui/lib/card/card';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import ActionGrade from 'material-ui/lib/svg-icons/action/grade';
@@ -30,9 +31,17 @@ const ResultPrice = () => (
           <Divider />
           <ListItem primaryText="PESOS" leftIcon={<ContentInbox />} secondaryText="$ 800.0U SD"/>
           <Divider />
+          <ListItem>
+          <Row className="center-md">
+              <Col md={6}>
+                  <RaisedButton label="IMPRIMIR" primary={true} />
+              </Col>
+              <Col md={6}>
+                  <RaisedButton label="NUEVA" secondary={true} />
+              </Col>
+          </Row>
+          </ListItem>
         </List>
-        <RaisedButton label="IMPRIMIR" primary={true} />
-        <RaisedButton label="NUEVA" secondary={true} />
     </Card>
 );
 
