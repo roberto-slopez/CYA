@@ -8,5 +8,5 @@ Colaboradores:
 * <b>Backend: Symfony3 PHP7</b>
 * <b>Frontend: ReactJS</b>
 
-[reactjs](http://www.unixstickers.com/image/data/stickers/react/badge/React-JS.sh.png "reactjs" =250x)
-[symfony3](http://ddi-dev.com/uploads/media/news/0001/01/9717c090d63392680acc39b810ad232bfb2dcf6b.jpeg "symfony 3" =250x)
+[reactjs](http://www.unixstickers.com/image/data/stickers/react/badge/React-JS.sh.png, "reactjs")
+[symfony3](http://ddi-dev.com/uploads/media/news/0001/01/9717c090d63392680acc39b810ad232bfb2dcf6b.jpeg, "symfony 3")
