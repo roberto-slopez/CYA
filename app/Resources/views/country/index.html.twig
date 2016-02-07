@@ -13,22 +13,20 @@
         {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Code</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Coin_id</th>
+                <th>Coin</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for country in countries %}
             <tr>
-                <td><a href="{{ path('admin_country_show', { 'id': country.id }) }}">{{ country.id }}</a></td>
                 <td>{{ country.code }}</td>
                 <td>{{ country.name }}</td>
                 <td>{{ country.description }}</td>
-                <td>{{ country.coinid }}</td>
+                <td>{{ country.coin.name }}</td>
                 <td>                        <div class="btn-group">
                             <a href="{{ path('admin_country_show', { 'id': country.id }) }}" class="btn btn-xs btn-primary">show</a>
                         </div>                        <div class="btn-group">

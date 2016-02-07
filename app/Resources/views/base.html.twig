@@ -51,7 +51,7 @@
         <div id="sidebar">
             <div id="sidebar-scroll">
                 <div class="sidebar-content">
-                    <a href="index.html" class="sidebar-brand">
+                    <a href="{{ url("main") }}" class="sidebar-brand">
                         <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Admin</strong>cotizador</span>
                     </a>
 
@@ -77,10 +77,10 @@
                             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-cogwheel sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Catálogos</span></a>
                             <ul>
                                 <li>
-                                    <a href="javascript:void(0)">Cursos</a>
+                                    <a href="{{ url("admin_coin_index") }}">Coin</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)">Paises</a>
+                                    <a href="{{ url("admin_country_index") }}">Country</a>
                                 </li>
                             </ul>
                         </li>
@@ -186,7 +186,7 @@
                                 </div>
                             </div>
                         {% endblock action %}
-                        <h2>{% block titlePanel %}Block{% endblock titlePanel %}</h2>
+                        <h2>{% block titlePanel %}CRUD{% endblock titlePanel %}</h2>
                     </div>
                     {% block bodyPanel %}
                         <p>Inicio</p>
