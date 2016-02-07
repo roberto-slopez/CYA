@@ -1,0 +1,99 @@
+Pais:
+  -id
+  -codigo
+  -nombre
+  -descripcion
+  -id_moneda
+Ciudad:
+  -id
+  -codigo
+  -nombre
+  -descripcion
+  -id_pais
+Cede:
+  -id
+  -nombre
+  -descripcion
+  -tipo
+Cusro:
+  -id
+  -id_cede
+  -nombre
+  -descripcion
+  -activo
+  -id_precio_curso
+PrecioCurso:
+  -id
+  -semanaMinima
+  -semanaMaxima
+  -precio
+Alojamiento:
+  -id
+  -nombre
+  -type
+  -valor_por_semana
+Vendedor:
+  -id_vendedor
+  -nombres
+  -apellidos
+  -identificacion
+  -telefono
+  -direccion
+  -observaciones
+Moneda:
+  -id
+  -codigo
+  -simbolo
+  -nombre
+  -descripcion
+Cliente:
+  -id
+  -nombres
+  -apellidos
+  -identificacion
+  -telefono
+  -direccion
+  -observaciones
+Servicios:
+  -id
+  -name
+  -description
+  -price
+ServiciosOpcionales:
+  -id
+  -name
+  -description
+  -price
+CotizacionFlexibe:
+  -id
+  -note
+CotizacionPaquete:
+  -id
+  -alojamiento_valor
+  -note
+CotizacionExamen:
+  -id
+  -note
+exchangeRate:
+  -id
+  -usd
+  -local
+  -date
+
+#Cotizacion Curso
+  #Curso flexible por semana
+  #Pais, Ciudad, Moneda, Observaciones
+  #Sede, Alojamiento, Otros servicios
+#Cotizacion Paquete
+  #Paquete con semanas fijas
+  #Pais, Ciudad, Moneda, Observaciones
+  #Sede, Alojamiento, Otros servicios
+#Cotizacion Examen
+  #Examenes de certificacion con semanas flexibles
+  #Pais, Ciudad, Moneda, Observaciones
+  #Sede, Alojamiento, Otros servicios
+
+#Gastos adicionales por terceros
+
+#Features
+  #Buscar reportes por medio de nombres de clientes
