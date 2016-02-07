@@ -29,10 +29,9 @@ class Usuario extends BaseUser
     const ROLE_USER = 'ROLE_USER';
 
     /**
+     * @ORM\Column(type="guid")
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @var integer
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     protected $id;
 
