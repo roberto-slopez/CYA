@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %}
+<i class="fa fa-pencil-square-o"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+    Seller
+{% endblock pageTitle %}
+{% block subtitle %}
+Editar
+{% endblock subtitle %}
+
+{% block titlePanel %}
+Edición Seller
+{% endblock titlePanel %}
+{% block action %}{% endblock action %}
+{% block bodyPanel %}
+            {{ form_start(delete_form) }}
+        <div class="form-group form-actions">
+            <div class="col-md-12 col-md-offset-6">
+                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+            </div>
+        </div>
+        {{ form_end(delete_form) }}    {{ form_start(edit_form, {'attr': {'class': 'form-horizontal form-bordered'} }) }}
+        {{ form_widget(edit_form) }}
+        <div class="form-group">
+            <div class="col-md-12 col-md-offset-6">
+                <input type="submit" value="Edit" class="btn btn-sm btn-success" />
+            </div>
+        </div>
+        <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('admin_seller_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a>    </div>
+</div>{{ form_end(edit_form) }}
+{% endblock bodyPanel %}

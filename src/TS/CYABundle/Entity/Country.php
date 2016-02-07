@@ -53,7 +53,7 @@ class Country
 
     /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="country")
-     * @ORM\JoinColumn(name="id", referencedColumnName="Country_id", nullable=false)
+     * @ORM\JoinColumn(name="id", referencedColumnName="country_id", nullable=false)
      */
     protected $quotations;
 

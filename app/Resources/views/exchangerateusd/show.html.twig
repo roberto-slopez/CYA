@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %}
+<i class="fa fa-eye"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+exchangeRateUSD
+{% endblock pageTitle %}
+{% block subtitle %}
+Visualizar
+{% endblock subtitle %}
+{% block titlePanel %}
+exchangeRateUSD
+{% endblock titlePanel %}
+{% block action %}
+        <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('admin_exchangeRateUSD_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a>            <a href="{{ path('admin_exchangeRateUSD_edit', { 'id': exchangeRateUSD.id }) }}" class="btn btn-sm btn-warning">
+                <i class="gi gi-edit"></i>
+                Edit
+            </a>    </div>
+</div>{% endblock action %}
+{% block bodyPanel %}
+    <div class="table-responsive">
+        <table class="table table-vcenter table-striped">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                        <td>{{ exchangeRateUSD.id }}</td>
+                </tr>
+                <tr>
+                    <th>Local</th>
+                        <td>{{ exchangeRateUSD.local }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                        <td>{% if exchangeRateUSD.date %}{{ exchangeRateUSD.date|date('Y-m-d') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Coin_id</th>
+                        <td>{{ exchangeRateUSD.coinid }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock bodyPanel %}

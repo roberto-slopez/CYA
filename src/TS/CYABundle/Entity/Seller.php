@@ -66,6 +66,12 @@ class Seller
      */
     protected $quotations;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Usuario", mappedBy="sellers")
+     * @ORM\JoinColumn(name="user_seller_id", referencedColumnName="seller_id")
+     */
+    protected $userSeller;
+
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
@@ -289,6 +295,25 @@ class Seller
     public function getQuotations()
     {
         return $this->quotations;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserSeller()
+    {
+        return $this->userSeller;
+    }
+
+    /**
+     * @param $userSeller
+     * @return mixed
+     */
+    public function setUserSeller($userSeller)
+    {
+        $this->userSeller = $userSeller;
+
+        return $userSeller;
     }
 
     public function __sleep()

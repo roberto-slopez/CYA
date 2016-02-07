@@ -57,10 +57,10 @@ class Lodging
     protected $quotations;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Deadquarter", inversedBy="lodgings")
+     * @ORM\ManyToOne(targetEntity="Headquarter", inversedBy="lodgings")
      * @ORM\JoinColumn(name="headquarters_id", referencedColumnName="id", nullable=false)
      */
-    protected $deadquarter;
+    protected $headquarter;
 
     public function __construct()
     {
@@ -242,26 +242,26 @@ class Lodging
     }
 
     /**
-     * Set Deadquarter entity (many to one).
+     * Set Headquarter entity (many to one).
      *
-     * @param \TS\CYABundle\Entity\Deadquarter $deadquarter
+     * @param \TS\CYABundle\Entity\Headquarter $headquarter
      * @return \TS\CYABundle\Entity\Lodging
      */
-    public function setDeadquarter(Deadquarter $deadquarter = null)
+    public function setHeadquarter(Headquarter $headquarter = null)
     {
-        $this->deadquarter = $deadquarter;
+        $this->headquarter = $headquarter;
 
         return $this;
     }
 
     /**
-     * Get Deadquarter entity (many to one).
+     * Get Headquarter entity (many to one).
      *
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
-    public function getDeadquarter()
+    public function getHeadquarter()
     {
-        return $this->deadquarter;
+        return $this->headquarter;
     }
 
     public function __sleep()

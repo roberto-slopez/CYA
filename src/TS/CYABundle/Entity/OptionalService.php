@@ -52,10 +52,10 @@ class OptionalService
     protected $quotations;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Deadquarter", inversedBy="optionalServices")
+     * @ORM\ManyToOne(targetEntity="Headquarter", inversedBy="optionalServices")
      * @ORM\JoinColumn(name="headquarters_id", referencedColumnName="id", nullable=false)
      */
-    protected $deadquarter;
+    protected $headquarter;
 
     public function __construct()
     {
@@ -214,26 +214,26 @@ class OptionalService
     }
 
     /**
-     * Set Deadquarter entity (many to one).
+     * Set Headquarter entity (many to one).
      *
-     * @param \TS\CYABundle\Entity\Deadquarter $deadquarter
+     * @param \TS\CYABundle\Entity\Headquarter $headquarter
      * @return \TS\CYABundle\Entity\OptionalService
      */
-    public function setDeadquarter(Deadquarter $deadquarter = null)
+    public function setHeadquarter(Headquarter $headquarter = null)
     {
-        $this->deadquarter = $deadquarter;
+        $this->headquarter = $headquarter;
 
         return $this;
     }
 
     /**
-     * Get Deadquarter entity (many to one).
+     * Get Headquarter entity (many to one).
      *
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
-    public function getDeadquarter()
+    public function getHeadquarter()
     {
-        return $this->deadquarter;
+        return $this->headquarter;
     }
 
     public function __sleep()

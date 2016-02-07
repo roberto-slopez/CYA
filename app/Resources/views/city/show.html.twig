@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %}
+<i class="fa fa-eye"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+City
+{% endblock pageTitle %}
+{% block subtitle %}
+Visualizar
+{% endblock subtitle %}
+{% block titlePanel %}
+City
+{% endblock titlePanel %}
+{% block action %}
+        <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('admin_city_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a>            <a href="{{ path('admin_city_edit', { 'id': city.id }) }}" class="btn btn-sm btn-warning">
+                <i class="gi gi-edit"></i>
+                Edit
+            </a>    </div>
+</div>{% endblock action %}
+{% block bodyPanel %}
+    <div class="table-responsive">
+        <table class="table table-vcenter table-striped">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                        <td>{{ city.id }}</td>
+                </tr>
+                <tr>
+                    <th>Code</th>
+                        <td>{{ city.code }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                        <td>{{ city.name }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                        <td>{{ city.description }}</td>
+                </tr>
+                <tr>
+                    <th>Country_id</th>
+                        <td>{{ city.countryid }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock bodyPanel %}

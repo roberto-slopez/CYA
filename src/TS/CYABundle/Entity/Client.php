@@ -57,7 +57,7 @@ class Client
 
     /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="client")
-     * @ORM\JoinColumn(name="id", referencedColumnName="Client_id", nullable=false)
+     * @ORM\JoinColumn(name="id", referencedColumnName="client_id", nullable=false)
      */
     protected $quotations;
 

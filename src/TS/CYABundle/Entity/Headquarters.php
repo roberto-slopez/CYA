@@ -10,10 +10,10 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
 /**
  * TS\CYABundle\Entity\Deadquarter
  *
- * @ORM\Entity(repositoryClass="Repository\DeadquarterRepository")
+ * @ORM\Entity(repositoryClass="Repository\HeadquarterRepository")
  * @ORM\Table(name="Deadquarters", indexes={@ORM\Index(name="fk_Sede_Ciudad1_idx", columns={"Ciudad_id"})})
  */
-class Deadquarter
+class Headquarter
 {
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable;
@@ -43,41 +43,41 @@ class Deadquarter
     /**
      * @ORM\Column(type="string")
      */
-    protected $Ciudad_id;
+    protected $ciudad_id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Course", mappedBy="deadquarter")
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="headquarter")
      * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
      */
     protected $courses;
 
     /**
-     * @ORM\OneToMany(targetEntity="Lodging", mappedBy="deadquarter")
+     * @ORM\OneToMany(targetEntity="Lodging", mappedBy="headquarter")
      * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
      */
     protected $lodgings;
 
     /**
-     * @ORM\OneToMany(targetEntity="OptionalService", mappedBy="deadquarter")
+     * @ORM\OneToMany(targetEntity="OptionalService", mappedBy="headquarter")
      * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
      */
     protected $optionalServices;
 
     /**
-     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="deadquarter")
-     * @ORM\JoinColumn(name="id", referencedColumnName="Deadquarters_id", nullable=false)
+     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="headquarter")
+     * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
      */
     protected $quotations;
 
     /**
-     * @ORM\OneToMany(targetEntity="Service", mappedBy="deadquarter")
+     * @ORM\OneToMany(targetEntity="Service", mappedBy="headquarter")
      * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
      */
     protected $services;
 
     /**
-     * @ORM\ManyToOne(targetEntity="City", inversedBy="deadquarters")
-     * @ORM\JoinColumn(name="Ciudad_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="headquarters")
+     * @ORM\JoinColumn(name="ciudad_id", referencedColumnName="id", nullable=false)
      */
     protected $city;
 
@@ -94,7 +94,7 @@ class Deadquarter
      * Set the value of id.
      *
      * @param integer $id
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function setId($id)
     {
@@ -117,7 +117,7 @@ class Deadquarter
      * Set the value of name.
      *
      * @param string $name
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function setName($name)
     {
@@ -140,7 +140,7 @@ class Deadquarter
      * Set the value of description.
      *
      * @param string $description
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function setDescription($description)
     {
@@ -163,7 +163,7 @@ class Deadquarter
      * Set the value of type.
      *
      * @param string $type
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function setType($type)
     {
@@ -185,12 +185,12 @@ class Deadquarter
     /**
      * Set the value of Ciudad_id.
      *
-     * @param integer $Ciudad_id
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @param integer $ciudad_id
+     * @return \TS\CYABundle\Entity\Headquarter
      */
-    public function setCiudadId($Ciudad_id)
+    public function setCiudadId($ciudad_id)
     {
-        $this->Ciudad_id = $Ciudad_id;
+        $this->ciudad_id = $ciudad_id;
 
         return $this;
     }
@@ -202,14 +202,14 @@ class Deadquarter
      */
     public function getCiudadId()
     {
-        return $this->Ciudad_id;
+        return $this->ciudad_id;
     }
 
     /**
      * Add Course entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Course $course
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function addCourse(Course $course)
     {
@@ -222,7 +222,7 @@ class Deadquarter
      * Remove Course entity from collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Course $course
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function removeCourse(Course $course)
     {
@@ -245,7 +245,7 @@ class Deadquarter
      * Add Lodging entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Lodging $lodging
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function addLodging(Lodging $lodging)
     {
@@ -258,7 +258,7 @@ class Deadquarter
      * Remove Lodging entity from collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Lodging $lodging
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function removeLodging(Lodging $lodging)
     {
@@ -281,7 +281,7 @@ class Deadquarter
      * Add OptionalService entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\OptionalService $optionalService
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function addOptionalService(OptionalService $optionalService)
     {
@@ -294,7 +294,7 @@ class Deadquarter
      * Remove OptionalService entity from collection (one to many).
      *
      * @param \TS\CYABundle\Entity\OptionalService $optionalService
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function removeOptionalService(OptionalService $optionalService)
     {
@@ -317,7 +317,7 @@ class Deadquarter
      * Add Quotation entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function addQuotation(Quotation $quotation)
     {
@@ -330,7 +330,7 @@ class Deadquarter
      * Remove Quotation entity from collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function removeQuotation(Quotation $quotation)
     {
@@ -353,7 +353,7 @@ class Deadquarter
      * Add Service entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Service $service
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function addService(Service $service)
     {
@@ -366,7 +366,7 @@ class Deadquarter
      * Remove Service entity from collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Service $service
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function removeService(Service $service)
     {
@@ -389,7 +389,7 @@ class Deadquarter
      * Set City entity (many to one).
      *
      * @param \TS\CYABundle\Entity\City $city
-     * @return \TS\CYABundle\Entity\Deadquarter
+     * @return \TS\CYABundle\Entity\Headquarter
      */
     public function setCity(City $city = null)
     {

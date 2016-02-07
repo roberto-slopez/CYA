@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %} <i class="gi gi-list"></i>{% endblock iconHead %}
+{% block pageTitle %}
+    Client
+{% endblock pageTitle %}
+{% block subtitle %} Lista {% endblock subtitle %}
+    {% block action %}
+        <div class="block-options pull-right">
+            <a href="{{ path('admin_client_new') }}" data-original-title="Create a new entry"
+               class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
+        </div>
+        {% endblock action %}
+        {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First_name</th>
+                <th>Last_name</th>
+                <th>Indentification</th>
+                <th>Telephone</th>
+                <th>Adress</th>
+                <th>Notes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td><a href="{{ path('admin_client_show', { 'id': client.id }) }}">{{ client.id }}</a></td>
+                <td>{{ client.firstname }}</td>
+                <td>{{ client.lastname }}</td>
+                <td>{{ client.indentification }}</td>
+                <td>{{ client.telephone }}</td>
+                <td>{{ client.adress }}</td>
+                <td>{{ client.notes }}</td>
+                <td>                        <div class="btn-group">
+                            <a href="{{ path('admin_client_show', { 'id': client.id }) }}" class="btn btn-xs btn-primary">show</a>
+                        </div>                        <div class="btn-group">
+                            <a href="{{ path('admin_client_edit', { 'id': client.id }) }}" class="btn btn-xs btn-primary">edit</a>
+                        </div>                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock bodyPanel %}
+{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script {% endblock extraJS %}

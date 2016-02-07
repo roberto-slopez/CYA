@@ -42,7 +42,7 @@ class Package
 
     /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="package")
-     * @ORM\JoinColumn(name="id", referencedColumnName="Package_id", nullable=true)
+     * @ORM\JoinColumn(name="id", referencedColumnName="package_id", nullable=true)
      */
     protected $quotations;
 

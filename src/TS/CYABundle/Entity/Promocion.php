@@ -8,12 +8,12 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggableTrait;
 
 /**
- * TS\CYABundle\Entity\Promocione
+ * TS\CYABundle\Entity\Promocion
  *
- * @ORM\Entity(repositoryClass="Repository\PromocioneRepository")
+ * @ORM\Entity(repositoryClass="Repository\PromocionRepository")
  * @ORM\Table(name="Promociones")
  */
-class Promocione
+class Promocion
 {
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable;
@@ -41,8 +41,8 @@ class Promocione
     protected $percentage;
 
     /**
-     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="promocione")
-     * @ORM\JoinColumn(name="id", referencedColumnName="Promociones_id", nullable=true)
+     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="promocion")
+     * @ORM\JoinColumn(name="id", referencedColumnName="promociones_id", nullable=true)
      */
     protected $quotations;
 
@@ -55,7 +55,7 @@ class Promocione
      * Set the value of id.
      *
      * @param integer $id
-     * @return \TS\CYABundle\Entity\Promocione
+     * @return \TS\CYABundle\Entity\Promocion
      */
     public function setId($id)
     {
@@ -78,7 +78,7 @@ class Promocione
      * Set the value of name.
      *
      * @param string $name
-     * @return \TS\CYABundle\Entity\Promocione
+     * @return \TS\CYABundle\Entity\Promocion
      */
     public function setName($name)
     {
@@ -101,7 +101,7 @@ class Promocione
      * Set the value of code.
      *
      * @param string $code
-     * @return \TS\CYABundle\Entity\Promocione
+     * @return \TS\CYABundle\Entity\Promocion
      */
     public function setCode($code)
     {
@@ -124,7 +124,7 @@ class Promocione
      * Set the value of percentage.
      *
      * @param integer $percentage
-     * @return \TS\CYABundle\Entity\Promocione
+     * @return \TS\CYABundle\Entity\Promocion
      */
     public function setPercentage($percentage)
     {
@@ -147,7 +147,7 @@ class Promocione
      * Add Quotation entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\Promocione
+     * @return \TS\CYABundle\Entity\Promocion
      */
     public function addQuotation(Quotation $quotation)
     {
@@ -160,7 +160,7 @@ class Promocione
      * Remove Quotation entity from collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\Promocione
+     * @return \TS\CYABundle\Entity\Promocion
      */
     public function removeQuotation(Quotation $quotation)
     {

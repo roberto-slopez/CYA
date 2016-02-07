@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %}
+<i class="fa fa-eye"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+Client
+{% endblock pageTitle %}
+{% block subtitle %}
+Visualizar
+{% endblock subtitle %}
+{% block titlePanel %}
+Client
+{% endblock titlePanel %}
+{% block action %}
+        <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('admin_client_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a>            <a href="{{ path('admin_client_edit', { 'id': client.id }) }}" class="btn btn-sm btn-warning">
+                <i class="gi gi-edit"></i>
+                Edit
+            </a>    </div>
+</div>{% endblock action %}
+{% block bodyPanel %}
+    <div class="table-responsive">
+        <table class="table table-vcenter table-striped">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                        <td>{{ client.id }}</td>
+                </tr>
+                <tr>
+                    <th>First_name</th>
+                        <td>{{ client.firstname }}</td>
+                </tr>
+                <tr>
+                    <th>Last_name</th>
+                        <td>{{ client.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Indentification</th>
+                        <td>{{ client.indentification }}</td>
+                </tr>
+                <tr>
+                    <th>Telephone</th>
+                        <td>{{ client.telephone }}</td>
+                </tr>
+                <tr>
+                    <th>Adress</th>
+                        <td>{{ client.adress }}</td>
+                </tr>
+                <tr>
+                    <th>Notes</th>
+                        <td>{{ client.notes }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock bodyPanel %}

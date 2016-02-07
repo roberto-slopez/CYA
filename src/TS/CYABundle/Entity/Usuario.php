@@ -41,6 +41,11 @@ class Usuario extends BaseUser
      */
     private $nombreImpresion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Seller", mappedBy="userSeller")
+     */
+    protected $sellers;
+
     public function __construct()
     {
         parent::__construct();

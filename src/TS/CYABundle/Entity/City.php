@@ -46,10 +46,10 @@ class City
     protected $country_id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Deadquarter", mappedBy="city")
+     * @ORM\OneToMany(targetEntity="Headquarter", mappedBy="city")
      * @ORM\JoinColumn(name="id", referencedColumnName="Ciudad_id", nullable=false)
      */
-    protected $deadquarters;
+    protected $headquarters;
 
     /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="city")
@@ -65,7 +65,7 @@ class City
 
     public function __construct()
     {
-        $this->deadquarters = new ArrayCollection();
+        $this->headquarters = new ArrayCollection();
         $this->quotations = new ArrayCollection();
     }
 
@@ -185,39 +185,39 @@ class City
     }
 
     /**
-     * Add Deadquarter entity to collection (one to many).
+     * Add Headquarter entity to collection (one to many).
      *
-     * @param \TS\CYABundle\Entity\Deadquarter $deadquarter
+     * @param \TS\CYABundle\Entity\Headquarter $headquarter
      * @return \TS\CYABundle\Entity\City
      */
-    public function addDeadquarter(Deadquarter $deadquarter)
+    public function addHeadquarter(Headquarter $headquarter)
     {
-        $this->deadquarters[] = $deadquarter;
+        $this->headquarters[] = $headquarter;
 
         return $this;
     }
 
     /**
-     * Remove Deadquarter entity from collection (one to many).
+     * Remove Headquarter entity from collection (one to many).
      *
-     * @param \TS\CYABundle\Entity\Deadquarter $deadquarter
+     * @param \TS\CYABundle\Entity\Headquarter $headquarter
      * @return \TS\CYABundle\Entity\City
      */
-    public function removeDeadquarter(Deadquarter $deadquarter)
+    public function removeHeadquarter(Headquarter $headquarter)
     {
-        $this->deadquarters->removeElement($deadquarter);
+        $this->headquarters->removeElement($headquarter);
 
         return $this;
     }
 
     /**
-     * Get Deadquarter entity collection (one to many).
+     * Get Headquarter entity collection (one to many).
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDeadquarters()
+    public function getHeadquarters()
     {
-        return $this->deadquarters;
+        return $this->headquarters;
     }
 
     /**

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %}
+<i class="fa fa-eye"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+Package
+{% endblock pageTitle %}
+{% block subtitle %}
+Visualizar
+{% endblock subtitle %}
+{% block titlePanel %}
+Package
+{% endblock titlePanel %}
+{% block action %}
+        <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('admin_package_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a>            <a href="{{ path('admin_package_edit', { 'id': package.id }) }}" class="btn btn-sm btn-warning">
+                <i class="gi gi-edit"></i>
+                Edit
+            </a>    </div>
+</div>{% endblock action %}
+{% block bodyPanel %}
+    <div class="table-responsive">
+        <table class="table table-vcenter table-striped">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                        <td>{{ package.id }}</td>
+                </tr>
+                <tr>
+                    <th>Lodging_price</th>
+                        <td>{{ package.lodgingprice }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                        <td>{{ package.name }}</td>
+                </tr>
+                <tr>
+                    <th>Semanas</th>
+                        <td>{{ package.semanas }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock bodyPanel %}
