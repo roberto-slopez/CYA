@@ -12,14 +12,14 @@ use TS\CYABundle\Form\HeadquarterType;
 /**
  * Headquarter controller.
  *
- * @Route("/admin/headquerter")
+ * @Route("/admin/headquarter")
  */
 class HeadquarterController extends Controller
 {
     /**
      * Lists all Headquarter entities.
      *
-     * @Route("/", name="admin_headquerter_index")
+     * @Route("/", name="admin_headquarter_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -36,7 +36,7 @@ class HeadquarterController extends Controller
     /**
      * Creates a new Headquarter entity.
      *
-     * @Route("/new", name="admin_headquerter_new")
+     * @Route("/new", name="admin_headquarter_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -50,7 +50,7 @@ class HeadquarterController extends Controller
             $em->persist($headquarter);
             $em->flush();
 
-            return $this->redirectToRoute('admin_headquerter_show', array('id' => $headquarter->getId()));
+            return $this->redirectToRoute('admin_headquarter_show', array('id' => $headquarter->getId()));
         }
 
         return $this->render('headquarter/new.html.twig', array(
@@ -62,7 +62,7 @@ class HeadquarterController extends Controller
     /**
      * Finds and displays a Headquarter entity.
      *
-     * @Route("/{id}", name="admin_headquerter_show")
+     * @Route("/{id}", name="admin_headquarter_show")
      * @Method("GET")
      */
     public function showAction(Headquarter $headquarter)
@@ -78,7 +78,7 @@ class HeadquarterController extends Controller
     /**
      * Displays a form to edit an existing Headquarter entity.
      *
-     * @Route("/{id}/edit", name="admin_headquerter_edit")
+     * @Route("/{id}/edit", name="admin_headquarter_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Headquarter $headquarter)
@@ -92,7 +92,7 @@ class HeadquarterController extends Controller
             $em->persist($headquarter);
             $em->flush();
 
-            return $this->redirectToRoute('admin_headquerter_edit', array('id' => $headquarter->getId()));
+            return $this->redirectToRoute('admin_headquarter_edit', array('id' => $headquarter->getId()));
         }
 
         return $this->render('headquarter/edit.html.twig', array(
@@ -105,7 +105,7 @@ class HeadquarterController extends Controller
     /**
      * Deletes a Headquarter entity.
      *
-     * @Route("/{id}", name="admin_headquerter_delete")
+     * @Route("/{id}", name="admin_headquarter_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Headquarter $headquarter)
@@ -119,7 +119,7 @@ class HeadquarterController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('admin_headquerter_index');
+        return $this->redirectToRoute('admin_headquarter_index');
     }
 
     /**
@@ -132,7 +132,7 @@ class HeadquarterController extends Controller
     private function createDeleteForm(Headquarter $headquarter)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_headquerter_delete', array('id' => $headquarter->getId())))
+            ->setAction($this->generateUrl('admin_headquarter_delete', array('id' => $headquarter->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -10,7 +10,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
 /**
  * TS\CYABundle\Entity\Promocion
  *
- * @ORM\Entity(repositoryClass="Repository\PromocionRepository")
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\PromocionRepository")
  * @ORM\Table(name="Promociones")
  */
 class Promocion

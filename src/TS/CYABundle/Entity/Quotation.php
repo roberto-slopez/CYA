@@ -9,7 +9,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
 /**
  * TS\CYABundle\Entity\Quotation
  *
- * @ORM\Entity(repositoryClass="Repository\QuotationRepository")
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\QuotationRepository")
  * @ORM\Table(name="Quotation", indexes={@ORM\Index(name="fk_Flexible_Country1_idx", columns={"country_id"}), @ORM\Index(name="fk_Flexible_City1_idx", columns={"city_id"}), @ORM\Index(name="fk_Flexible_headquarters1_idx", columns={"headquarters_id"}), @ORM\Index(name="fk_Flexible_Client1_idx", columns={"client_id"}), @ORM\Index(name="fk_Flexible_Seller1_idx", columns={"seller_id"}), @ORM\Index(name="fk_Flexible_Lodging1_idx", columns={"lodging_id"}), @ORM\Index(name="fk_Flexible_Service1_idx", columns={"service_id"}), @ORM\Index(name="fk_Flexible_OptionalService1_idx", columns={"optionalService_id"}), @ORM\Index(name="fk_Flexible_Course1_idx", columns={"course_id"}), @ORM\Index(name="fk_Quotation_Promociones1_idx", columns={"promociones_id"}), @ORM\Index(name="fk_Quotation_Package1_idx", columns={"package_id"})})
  */
 class Quotation

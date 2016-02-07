@@ -8,10 +8,10 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggableTrait;
 
 /**
- * TS\CYABundle\Entity\Deadquarter
+ * TS\CYABundle\Entity\Headquarter
  *
- * @ORM\Entity(repositoryClass="Repository\HeadquarterRepository")
- * @ORM\Table(name="Deadquarters", indexes={@ORM\Index(name="fk_Sede_Ciudad1_idx", columns={"Ciudad_id"})})
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\HeadquarterRepository")
+ * @ORM\Table(name="Headquarters", indexes={@ORM\Index(name="fk_headquarter_city_1_idx", columns={"city_id"})})
  */
 class Headquarter
 {
@@ -77,7 +77,7 @@ class Headquarter
 
     /**
      * @ORM\ManyToOne(targetEntity="City", inversedBy="headquarters")
-     * @ORM\JoinColumn(name="ciudad_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="city_id", referencedColumnName="id", nullable=false)
      */
     protected $city;
 

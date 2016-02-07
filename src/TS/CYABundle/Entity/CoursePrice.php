@@ -10,7 +10,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
 /**
  * TS\CYABundle\Entity\CoursePrice
  *
- * @ORM\Entity(repositoryClass="Repository\CoursePriceRepository")
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\CoursePriceRepository")
  * @ORM\Table(name="CoursePrice")
  */
 class CoursePrice
@@ -41,14 +41,28 @@ class CoursePrice
     protected $price;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssignmentPriceCourse", mappedBy="coursePrice")
-     * @ORM\JoinColumn(name="id", referencedColumnName="course_price_id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="TS\CYABundle\Entity\Course", inversedBy="coursePrice")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=false)
      */
-    protected $assignmentPriceCourses;
+    protected $course;
 
-    public function __construct()
+    /**
+     * @return Course
+     */
+    public function getCourse()
     {
-        $this->assignmentPriceCourses = new ArrayCollection();
+        return $this->course;
+    }
+
+    /**
+     * @param Course|null $course
+     * @return $this
+     */
+    public function setCourse(Course $course = null)
+    {
+        $this->course = $course;
+
+        return $this;
     }
 
     /**
@@ -141,42 +155,6 @@ class CoursePrice
     public function getPrice()
     {
         return $this->price;
-    }
-
-    /**
-     * Add AssignmentPriceCourse entity to collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\AssignmentPriceCourse $assignmentPriceCourse
-     * @return \TS\CYABundle\Entity\CoursePrice
-     */
-    public function addAssignmentPriceCourse(AssignmentPriceCourse $assignmentPriceCourse)
-    {
-        $this->assignmentPriceCourses[] = $assignmentPriceCourse;
-
-        return $this;
-    }
-
-    /**
-     * Remove AssignmentPriceCourse entity from collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\AssignmentPriceCourse $assignmentPriceCourse
-     * @return \TS\CYABundle\Entity\CoursePrice
-     */
-    public function removeAssignmentPriceCourse(AssignmentPriceCourse $assignmentPriceCourse)
-    {
-        $this->assignmentPriceCourses->removeElement($assignmentPriceCourse);
-
-        return $this;
-    }
-
-    /**
-     * Get AssignmentPriceCourse entity collection (one to many).
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAssignmentPriceCourses()
-    {
-        return $this->assignmentPriceCourses;
     }
 
     public function __sleep()

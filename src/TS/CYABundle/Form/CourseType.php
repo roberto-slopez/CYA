@@ -2,9 +2,12 @@
 
 namespace TS\CYABundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use TS\CYABundle\Form\CoursePriceType;
 
 class CourseType extends AbstractType
 {
@@ -15,11 +18,19 @@ class CourseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('headquarter', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Headquarter',
+                'choice_label' => 'name'
+            ])
             ->add('name')
             ->add('description')
             ->add('enable')
-            ->add('headquarters_id')
-            ->add('headquarter')
+            ->add('coursePrice', CollectionType::class, [
+                'entry_type' => CoursePriceType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' => true
+            ])
         ;
     }
     

@@ -6,7 +6,7 @@
 {% block subtitle %} Lista {% endblock subtitle %}
     {% block action %}
         <div class="block-options pull-right">
-            <a href="{{ path('admin_headquerter_new') }}" data-original-title="Create a new entry"
+            <a href="{{ path('admin_headquarter_new') }}" data-original-title="Create a new entry"
                class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
         </div>
         {% endblock action %}
@@ -24,15 +24,15 @@
         <tbody>
         {% for headquarter in headquarters %}
             <tr>
-                <td><a href="{{ path('admin_headquerter_show', { 'id': headquarter.id }) }}">{{ headquarter.id }}</a></td>
+                <td><a href="{{ path('admin_headquarter_show', { 'id': headquarter.id }) }}">{{ headquarter.id }}</a></td>
                 <td>{{ headquarter.name }}</td>
                 <td>{{ headquarter.description }}</td>
                 <td>{{ headquarter.type }}</td>
                 <td>{{ headquarter.ciudadid }}</td>
                 <td>                        <div class="btn-group">
-                            <a href="{{ path('admin_headquerter_show', { 'id': headquarter.id }) }}" class="btn btn-xs btn-primary">show</a>
+                            <a href="{{ path('admin_headquarter_show', { 'id': headquarter.id }) }}" class="btn btn-xs btn-primary">show</a>
                         </div>                        <div class="btn-group">
-                            <a href="{{ path('admin_headquerter_edit', { 'id': headquarter.id }) }}" class="btn btn-xs btn-primary">edit</a>
+                            <a href="{{ path('admin_headquarter_edit', { 'id': headquarter.id }) }}" class="btn btn-xs btn-primary">edit</a>
                         </div>                </td>
             </tr>
         {% endfor %}

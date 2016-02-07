@@ -10,7 +10,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
 /**
  * TS\CYABundle\Entity\Client
  *
- * @ORM\Entity(repositoryClass="Repository\ClientRepository")
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\ClientRepository")
  * @ORM\Table(name="Client")
  */
 class Client

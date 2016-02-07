@@ -9,7 +9,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
 /**
  * TS\CYABundle\Entity\ExchangeRateUSD
  *
- * @ORM\Entity(repositoryClass="Repository\ExchangeRateUSDRepository")
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\ExchangeRateUSDRepository")
  * @ORM\Table(name="exchangeRateUSD", indexes={@ORM\Index(name="fk_exchangeRateUSD_Moneda1_idx", columns={"coin_id"})})
  */
 class ExchangeRateUSD

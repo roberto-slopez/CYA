@@ -10,7 +10,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
 /**
  * TS\CYABundle\Entity\OptionalService
  *
- * @ORM\Entity(repositoryClass="Repository\OptionalServiceRepository")
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\OptionalServiceRepository")
  * @ORM\Table(name="OptionalService", indexes={@ORM\Index(name="fk_ServiciosOpcionales_Sede1_idx", columns={"headquarters_id"})})
  */
 class OptionalService

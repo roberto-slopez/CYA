@@ -10,7 +10,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
 /**
  * TS\CYABundle\Entity\Lodging
  *
- * @ORM\Entity(repositoryClass="Repository\LodgingRepository")
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\LodgingRepository")
  * @ORM\Table(name="Lodging", indexes={@ORM\Index(name="fk_Alojamiento_Sede1_idx", columns={"headquarters_id"})})
  */
 class Lodging
