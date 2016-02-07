@@ -1,7 +1,6 @@
 {% block extends %}
 {{ "{% extends 'base.html.twig' %}" }}
 {% endblock extends %}
-
 {% block body %}
 {{ "{% block iconHead %} <i class=\"gi gi-list\"></i>{% endblock iconHead %}" }}
 {{ "{% block pageTitle %}" }}
@@ -67,17 +66,11 @@
             {%- if loop.last %}
 
                 <td>
-                    <ul>
-
                     {%- for action in record_actions %}
-
-                        <li>
-                            <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">{{ action }}</a>
-                        </li>
-
+                        <div class="btn-group">
+                            <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}" class="btn btn-xs btn-primary">{{ action }}</a>
+                        </div>
                     {%- endfor %}
-
-                    </ul>
                 </td>
 
             {%- endif %}

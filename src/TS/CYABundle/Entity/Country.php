@@ -10,7 +10,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
 /**
  * TS\CYABundle\Entity\Country
  *
- * @ORM\Entity(repositoryClass="Repository\CountryRepository")
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\CountryRepository")
  * @ORM\Table(name="Country", indexes={@ORM\Index(name="fk_Pais_Moneda1_idx", columns={"coin_id"})})
  */
 class Country

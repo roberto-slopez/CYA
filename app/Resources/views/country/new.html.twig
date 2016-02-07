@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %}
+    <i class="fa fa-asterisk"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+    Country
+{% endblock pageTitle %}
+{% block subtitle %}
+    Crear
+{% endblock subtitle %}
+
+{% block titlePanel %}
+    Ingreso Country
+{% endblock titlePanel %}
+{% block action %}{% endblock action %}
+{% block bodyPanel %}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal form-bordered'} }) }}
+        {{ form_widget(form) }}
+            <div class="form-group">
+                <div class="col-md-12 col-md-offset-6">
+                    <input type="submit" value="Create" class="btn btn-sm btn-success"/>
+                </div>
+            </div>
+                        <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('admin_country_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a>    </div>
+</div>{{ form_end(form) }}
+{% endblock bodyPanel %}

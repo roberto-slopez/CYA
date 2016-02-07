@@ -18,5 +18,26 @@
     Bienvenido
 {% endblock titlePanel %}
 {% block bodyPanel %}
-    <p>Bienvenido al administrador del cotizador</p>
+    <form action="page_forms_general.php" method="post" class="form-horizontal form-bordered" onsubmit="return false;">
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="example-hf-email">Email</label>
+            <div class="col-md-9">
+                <input type="email" id="example-hf-email" name="example-hf-email" class="form-control" placeholder="Enter Email..">
+                <span class="help-block">Please enter your email</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="example-hf-password">Password</label>
+            <div class="col-md-9">
+                <input type="password" id="example-hf-password" name="example-hf-password" class="form-control" placeholder="Enter Password..">
+                <span class="help-block">Please enter your password</span>
+            </div>
+        </div>
+        <div class="form-group form-actions">
+            <div class="col-md-9 col-md-offset-3">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-user"></i> Login</a>
+                <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</a>
+            </div>
+        </div>
+    </form>
 {% endblock bodyPanel %}
