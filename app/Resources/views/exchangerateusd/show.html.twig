@@ -28,20 +28,16 @@ exchangeRateUSD
         <table class="table table-vcenter table-striped">
             <tbody>
                 <tr>
-                    <th>Id</th>
-                        <td>{{ exchangeRateUSD.id }}</td>
-                </tr>
-                <tr>
                     <th>Local</th>
-                        <td>{{ exchangeRateUSD.local }}</td>
+                        <td>{{ exchangeRateUSD.local |number_format(2, '.', ',') }}</td>
                 </tr>
                 <tr>
                     <th>Date</th>
                         <td>{% if exchangeRateUSD.date %}{{ exchangeRateUSD.date|date('Y-m-d') }}{% endif %}</td>
                 </tr>
                 <tr>
-                    <th>Coin_id</th>
-                        <td>{{ exchangeRateUSD.coinid }}</td>
+                    <th>Coin</th>
+                        <td>{{ exchangeRateUSD.coin.name }}</td>
                 </tr>
             </tbody>
         </table>

@@ -28,10 +28,6 @@ City
         <table class="table table-vcenter table-striped">
             <tbody>
                 <tr>
-                    <th>Id</th>
-                        <td>{{ city.id }}</td>
-                </tr>
-                <tr>
                     <th>Code</th>
                         <td>{{ city.code }}</td>
                 </tr>
@@ -44,8 +40,8 @@ City
                         <td>{{ city.description }}</td>
                 </tr>
                 <tr>
-                    <th>Country_id</th>
-                        <td>{{ city.countryid }}</td>
+                    <th>Country</th>
+                        <td>{{ city.country.name }}</td>
                 </tr>
             </tbody>
         </table>

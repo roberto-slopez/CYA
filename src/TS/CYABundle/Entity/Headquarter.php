@@ -11,7 +11,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
  * TS\CYABundle\Entity\Headquarter
  *
  * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\HeadquarterRepository")
- * @ORM\Table(name="Headquarters", indexes={@ORM\Index(name="fk_headquarter_city_1_idx", columns={"city_id"})})
+ * @ORM\Table(name="Headquarter", indexes={@ORM\Index(name="fk_headquarter_city_1_idx", columns={"city_id"})})
  */
 class Headquarter
 {

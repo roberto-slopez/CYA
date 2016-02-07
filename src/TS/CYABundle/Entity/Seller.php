@@ -67,8 +67,8 @@ class Seller
     protected $quotations;
 
     /**
-     * @ORM\OneToMany(targetEntity="Usuario", mappedBy="sellers")
-     * @ORM\JoinColumn(name="user_seller_id", referencedColumnName="seller_id")
+     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="sellers")
+     * @ORM\JoinColumn(name="user_seller_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $userSeller;
 

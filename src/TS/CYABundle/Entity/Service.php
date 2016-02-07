@@ -55,7 +55,7 @@ class Service
      * @ORM\ManyToOne(targetEntity="Headquarter", inversedBy="services")
      * @ORM\JoinColumn(name="headquarters_id", referencedColumnName="id", nullable=false)
      */
-    protected $deadquarter;
+    protected $headquarter;
 
     public function __construct()
     {
@@ -221,7 +221,7 @@ class Service
      */
     public function setHeadquarter(Headquarter $headquarter = null)
     {
-        $this->deadquarter = $headquarter;
+        $this->headquarter = $headquarter;
 
         return $this;
     }
@@ -233,7 +233,7 @@ class Service
      */
     public function getHeadquarter()
     {
-        return $this->deadquarter;
+        return $this->headquarter;
     }
 
     public function __sleep()

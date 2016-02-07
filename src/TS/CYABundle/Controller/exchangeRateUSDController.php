@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use TS\CYABundle\Entity\exchangeRateUSD;
+use TS\CYABundle\Entity\ExchangeRateUSD;
 use TS\CYABundle\Form\exchangeRateUSDType;
 
 /**
@@ -26,7 +26,7 @@ class exchangeRateUSDController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $exchangeRateUSDs = $em->getRepository('TSCYABundle:exchangeRateUSD')->findAll();
+        $exchangeRateUSDs = $em->getRepository('TSCYABundle:ExchangeRateUSD')->findAll();
 
         return $this->render('exchangerateusd/index.html.twig', array(
             'exchangeRateUSDs' => $exchangeRateUSDs,
@@ -41,7 +41,7 @@ class exchangeRateUSDController extends Controller
      */
     public function newAction(Request $request)
     {
-        $exchangeRateUSD = new exchangeRateUSD();
+        $exchangeRateUSD = new ExchangeRateUSD();
         $form = $this->createForm('TS\CYABundle\Form\exchangeRateUSDType', $exchangeRateUSD);
         $form->handleRequest($request);
 
@@ -50,7 +50,7 @@ class exchangeRateUSDController extends Controller
             $em->persist($exchangeRateUSD);
             $em->flush();
 
-            return $this->redirectToRoute('admin_exchangeRateUSD_show', array('id' => $exchangerateusd->getId()));
+            return $this->redirectToRoute('admin_exchangeRateUSD_show', array('id' => $exchangeRateUSD->getId()));
         }
 
         return $this->render('exchangerateusd/new.html.twig', array(

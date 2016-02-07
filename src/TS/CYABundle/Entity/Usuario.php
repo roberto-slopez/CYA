@@ -49,7 +49,7 @@ class Usuario extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->vendedors = new ArrayCollection();
+        $this->sellers = new ArrayCollection();
     }
 
     /**

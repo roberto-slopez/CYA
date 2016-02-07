@@ -2,7 +2,9 @@
 
 namespace TS\CYABundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,9 +18,13 @@ class exchangeRateUSDType extends AbstractType
     {
         $builder
             ->add('local')
-            ->add('date', 'date')
-            ->add('coin_id')
-            ->add('coin')
+            ->add('date', DateType::class, [
+                'data' => new \DateTime('today'),
+            ])
+            ->add('coin', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Coin',
+                'choice_label' => 'name'
+            ])
         ;
     }
     

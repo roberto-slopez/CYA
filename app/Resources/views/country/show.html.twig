@@ -28,10 +28,6 @@ Country
         <table class="table table-vcenter table-striped">
             <tbody>
                 <tr>
-                    <th>Id</th>
-                        <td>{{ country.id }}</td>
-                </tr>
-                <tr>
                     <th>Code</th>
                         <td>{{ country.code }}</td>
                 </tr>
@@ -44,8 +40,8 @@ Country
                         <td>{{ country.description }}</td>
                 </tr>
                 <tr>
-                    <th>Coin_id</th>
-                        <td>{{ country.coinid }}</td>
+                    <th>Coin</th>
+                        <td>{{ country.coin.name }}</td>
                 </tr>
             </tbody>
         </table>

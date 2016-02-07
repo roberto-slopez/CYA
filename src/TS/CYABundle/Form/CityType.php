@@ -2,6 +2,7 @@
 
 namespace TS\CYABundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,8 +19,10 @@ class CityType extends AbstractType
             ->add('code')
             ->add('name')
             ->add('description')
-            ->add('country_id')
-            ->add('country')
+            ->add('country', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Country',
+                'choice_label' => 'name'
+            ])
         ;
     }
     
