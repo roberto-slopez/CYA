@@ -26,7 +26,7 @@ Headquarter
             <td>{{ headquarter.name }}</td>
             <td>{{ headquarter.description }}</td>
             <td>{{ headquarter.type }}</td>
-            <td>{{ headquarter.ciudadid }}</td>
+            <td>{{ headquarter.city.name }}</td>
             <td>
                 <div class="btn-group">
                     <a href="{{ path('admin_headquarter_show', { 'id': headquarter.id }) }}" class="btn btn-xs btn-primary">show</a>

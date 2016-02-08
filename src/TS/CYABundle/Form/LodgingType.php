@@ -5,6 +5,7 @@ namespace TS\CYABundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class LodgingType extends AbstractType
 {
@@ -19,11 +20,13 @@ class LodgingType extends AbstractType
             ->add('type')
             ->add('price_per_week')
             ->add('description')
-            ->add('headquarters_id')
-            ->add('headquarter')
+            ->add('headquarter', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Headquarter',
+                'choice_label' => 'name'
+            ])
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

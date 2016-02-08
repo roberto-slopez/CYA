@@ -18,6 +18,10 @@ class Headquarter
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable;
 
+    const SIMPLE = "SIMPLE";
+    const DOBLE = "DOBLE";
+    const TRIPLE = "TRIPLE";
+
     /**
      * @ORM\Column(type="guid")
      * @ORM\Id
