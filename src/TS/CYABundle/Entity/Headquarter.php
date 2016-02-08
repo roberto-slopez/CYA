@@ -41,11 +41,6 @@ class Headquarter
     protected $type;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    protected $ciudad_id;
-
-    /**
      * @ORM\OneToMany(targetEntity="Course", mappedBy="headquarter")
      * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
      */

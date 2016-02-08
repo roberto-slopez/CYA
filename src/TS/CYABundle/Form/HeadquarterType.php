@@ -2,6 +2,7 @@
 
 namespace TS\CYABundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,11 +19,13 @@ class HeadquarterType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('type')
-            ->add('ciudad_id')
-            ->add('city')
+            ->add('city',  EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\City',
+                'choice_label' => 'name'
+            ])
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
