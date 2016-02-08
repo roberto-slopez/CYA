@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{ asset("bundles/tscya/css/main.css") }}">
 
     <link rel="stylesheet" href="{{ asset("bundles/tscya/css/themes.css") }}">
-    <link rel="stylesheet" href="{{ asset("bundles/tscya/css/themes/night.css") }}">
+    <link rel="stylesheet" href="{{ asset("bundles/tscya/css/themes/emerald.css") }}">
     {% endblock stylesheets %}
 
     {% block scriptHead %}
@@ -51,7 +51,7 @@
         <div id="sidebar">
             <div id="sidebar-scroll">
                 <div class="sidebar-content">
-                    <a href="index.html" class="sidebar-brand">
+                    <a href="{{ url("main") }}" class="sidebar-brand">
                         <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Admin</strong>cotizador</span>
                     </a>
 
@@ -71,16 +71,51 @@
                     </div>
                     <ul class="sidebar-nav">
                         <li>
-                            <a href="{{ url("main") }}" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
+                            <a href="{{ url("main") }}" class=" active">
+                                <i class="gi gi-stopwatch sidebar-nav-icon"></i>
+                                <span class="sidebar-nav-mini-hide">
+                                    {% trans %} Dashboard {% endtrans %}
+                                </span>
+                            </a>
                         </li>
                         <li>
                             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-cogwheel sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Catálogos</span></a>
                             <ul>
                                 <li>
-                                    <a href="javascript:void(0)">Cursos</a>
+                                    <a href="{{ url("admin_exchangeRateUSD_index") }}">{% trans %} Exchange Rate {% endtrans %} USD</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)">Paises</a>
+                                    <a href="{{ url("admin_coin_index") }}">{% trans %} Coin {% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_country_index") }}">{% trans %}Country{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_city_index") }}">{% trans %}City{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_lodging_index") }}">{% trans %}Lodging{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_headquarter_index") }}">{% trans %}Headquarter{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_service_index") }}">{% trans %}Service{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_course_index") }}">{% trans %}Course{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_client_index") }}">{% trans %}Client{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_seller_index") }}">{% trans %}Seller{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_promocion_index") }}">{% trans %}Promocion{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url("admin_package_index") }}">{% trans %}Package{% endtrans %}</a>
                                 </li>
                             </ul>
                         </li>
@@ -101,7 +136,7 @@
 
                 <form action="#{#search#}" method="post" class="navbar-form-custom">
                     <div class="form-group">
-                        <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
+                        <input type="text" id="top-search" name="top-search" class="form-control" placeholder="{% trans %}Search{% endtrans %}...">
                     </div>
                 </form>
 
@@ -186,7 +221,7 @@
                                 </div>
                             </div>
                         {% endblock action %}
-                        <h2>{% block titlePanel %}Block{% endblock titlePanel %}</h2>
+                        <h2>{% block titlePanel %}CRUD{% endblock titlePanel %}</h2>
                     </div>
                     {% block bodyPanel %}
                         <p>Inicio</p>

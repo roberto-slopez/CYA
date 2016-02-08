@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %} <i class="gi gi-list"></i>{% endblock iconHead %}
+{% block pageTitle %}
+    Promocion
+{% endblock pageTitle %}
+{% block subtitle %} Lista {% endblock subtitle %}
+    {% block action %}
+        <div class="block-options pull-right">
+            <a href="{{ path('admin_promocion_new') }}" data-original-title="Create a new entry"
+               class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
+        </div>
+        {% endblock action %}
+        {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Percentage</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for promocion in promocions %}
+            <tr>
+                <td><a href="{{ path('admin_promocion_show', { 'id': promocion.id }) }}">{{ promocion.id }}</a></td>
+                <td>{{ promocion.name }}</td>
+                <td>{{ promocion.code }}</td>
+                <td>{{ promocion.percentage }}</td>
+                <td>                        <div class="btn-group">
+                            <a href="{{ path('admin_promocion_show', { 'id': promocion.id }) }}" class="btn btn-xs btn-primary">show</a>
+                        </div>                        <div class="btn-group">
+                            <a href="{{ path('admin_promocion_edit', { 'id': promocion.id }) }}" class="btn btn-xs btn-primary">edit</a>
+                        </div>                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock bodyPanel %}
+{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script {% endblock extraJS %}

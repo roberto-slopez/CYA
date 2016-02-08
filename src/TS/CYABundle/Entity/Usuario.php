@@ -29,10 +29,9 @@ class Usuario extends BaseUser
     const ROLE_USER = 'ROLE_USER';
 
     /**
+     * @ORM\Column(type="guid")
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @var integer
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     protected $id;
 
@@ -42,10 +41,15 @@ class Usuario extends BaseUser
      */
     private $nombreImpresion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Seller", mappedBy="userSeller")
+     */
+    protected $sellers;
+
     public function __construct()
     {
         parent::__construct();
-        $this->vendedors = new ArrayCollection();
+        $this->sellers = new ArrayCollection();
     }
 
     /**

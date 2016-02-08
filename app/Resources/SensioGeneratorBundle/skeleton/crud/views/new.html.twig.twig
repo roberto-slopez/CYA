@@ -1,17 +1,32 @@
 {% block extends %}
 {{ "{% extends 'base.html.twig' %}" }}
 {% endblock extends %}
+{{ "{% block iconHead %}" }}
+    <i class="fa fa-asterisk"></i>
+{{ "{% endblock iconHead %}" }}
 
+{{ "{% block pageTitle %}" }}
+    {{ entity }}
+{{ "{% endblock pageTitle %}" }}
+{{ "{% block subtitle %}" }}
+    Crear
+{{ "{% endblock subtitle %}" }}
+
+{{ "{% block titlePanel %}" }}
+    Ingreso {{ entity }}
+{{ "{% endblock titlePanel %}" }}
+{{ "{% block action %}{% endblock action %}" }}
 {% block body %}
-{{ "{% block body %}" }}
-    <h1>{{ entity }} creation</h1>
-
-    {{ '{{ form_start(form) }}' }}
-        {{ '{{ form_widget(form) }}' }}
-        <input type="submit" value="Create" />
-    {{ '{{ form_end(form) }}' }}
-
-{% set hide_edit, hide_delete = true, true %}
-{{ include('crud/views/others/record_actions.html.twig.twig') -}}
-{{ "{% endblock %}" }}
+{{ "{% block bodyPanel %}" }}
+    {{ "{{ form_start(form, {'attr': {'class': 'form-horizontal form-bordered'} }) }}" }}
+        {{ "{{ form_widget(form) }}" }}
+            <div class="form-group">
+                <div class="col-md-12 col-md-offset-6">
+                    <input type="submit" value="Create" class="btn btn-sm btn-success"/>
+                </div>
+            </div>
+            {% set hide_edit, hide_delete = true, true %}
+            {{ include('crud/views/others/record_actions.html.twig.twig') -}}
+    {{ "{{ form_end(form) }}" }}
+{{ "{% endblock bodyPanel %}" }}
 {% endblock body %}

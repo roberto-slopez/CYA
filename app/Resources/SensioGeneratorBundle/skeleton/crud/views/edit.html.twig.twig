@@ -1,17 +1,41 @@
 {% block extends %}
 {{ "{% extends 'base.html.twig' %}" }}
 {% endblock extends %}
+{{ "{% block iconHead %}" }}
+<i class="fa fa-pencil-square-o"></i>
+{{ "{% endblock iconHead %}" }}
 
+{{ "{% block pageTitle %}" }}
+    {{ entity }}
+{{ "{% endblock pageTitle %}" }}
+{{ "{% block subtitle %}" }}
+Editar
+{{ "{% endblock subtitle %}" }}
+
+{{ "{% block titlePanel %}" }}
+Edición {{ entity }}
+{{ "{% endblock titlePanel %}" }}
+{{ "{% block action %}{% endblock action %}" }}
 {% block body %}
-{{ "{% block body %}" }}
-    <h1>{{ entity }} edit</h1>
-
-    {{ '{{ form_start(edit_form) }}' }}
-        {{ '{{ form_widget(edit_form) }}' }}
-        <input type="submit" value="Edit" />
-    {{ '{{ form_end(edit_form) }}' }}
-
-{% set hide_edit, hide_delete = true, false %}
-{{ include('crud/views/others/record_actions.html.twig.twig') -}}
-{{ "{% endblock %}" }}
+{{ "{% block bodyPanel %}" }}
+    {% set hide_edit, hide_delete = true, false %}
+    {%- if ('delete' in actions) and (not hide_delete) %}
+        {{ '{{ form_start(delete_form) }}' }}
+        <div class="form-group form-actions">
+            <div class="col-md-12 col-md-offset-6">
+                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+            </div>
+        </div>
+        {{ '{{ form_end(delete_form) }}' }}
+    {%- endif %}
+    {{ "{{ form_start(edit_form, {'attr': {'class': 'form-horizontal form-bordered'} }) }}" }}
+        {{ "{{ form_widget(edit_form) }}" }}
+        <div class="form-group">
+            <div class="col-md-12 col-md-offset-6">
+                <input type="submit" value="Edit" class="btn btn-sm btn-success" />
+            </div>
+        </div>
+        {{ include('crud/views/others/record_actions.html.twig.twig') -}}
+    {{ "{{ form_end(edit_form) }}" }}
+{{ "{% endblock bodyPanel %}" }}
 {% endblock body %}

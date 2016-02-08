@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %}
+<i class="fa fa-eye"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+Seller
+{% endblock pageTitle %}
+{% block subtitle %}
+Visualizar
+{% endblock subtitle %}
+{% block titlePanel %}
+Seller
+{% endblock titlePanel %}
+{% block action %}
+        <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('admin_seller_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a>            <a href="{{ path('admin_seller_edit', { 'id': seller.id }) }}" class="btn btn-sm btn-warning">
+                <i class="gi gi-edit"></i>
+                Edit
+            </a>    </div>
+</div>{% endblock action %}
+{% block bodyPanel %}
+    <div class="table-responsive">
+        <table class="table table-vcenter table-striped">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                        <td>{{ seller.id }}</td>
+                </tr>
+                <tr>
+                    <th>First_name</th>
+                        <td>{{ seller.firstname }}</td>
+                </tr>
+                <tr>
+                    <th>Last_name</th>
+                        <td>{{ seller.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Indentification</th>
+                        <td>{{ seller.indentification }}</td>
+                </tr>
+                <tr>
+                    <th>Telephone</th>
+                        <td>{{ seller.telephone }}</td>
+                </tr>
+                <tr>
+                    <th>Adress</th>
+                        <td>{{ seller.adress }}</td>
+                </tr>
+                <tr>
+                    <th>Notes</th>
+                        <td>{{ seller.notes }}</td>
+                </tr>
+                <tr>
+                    <th>Enable</th>
+                        <td>{% if seller.enable %}Yes{% else %}No{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock bodyPanel %}
