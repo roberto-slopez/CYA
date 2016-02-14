@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by @roberto-slopez
+ * Created by @roberto-slopez.
  * User: tscompany
- * Date: 7/02/16
- * Time: 04:38 PM
+ * Date: 14/02/16
+ * Time: 03:23 PM
  */
 
 namespace TS\CYABundle\Repository;
@@ -12,10 +12,10 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
 /**
- * Class CoursePriceRepository
+ * Class ExamRepository
  * @package TS\CYABundle\Repository
  */
-class CoursePriceRepository extends EntityRepository
+class ExamRepository extends EntityRepository
 {
 
 }

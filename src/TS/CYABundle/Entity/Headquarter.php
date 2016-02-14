@@ -45,6 +45,12 @@ class Headquarter
     protected $type;
 
     /**
+     * @ORM\OneToMany(targetEntity="Exam", mappedBy="headquarter")
+     * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
+     */
+    protected $exam;
+
+    /**
      * @ORM\OneToMany(targetEntity="Course", mappedBy="headquarter")
      * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
      */
@@ -82,6 +88,7 @@ class Headquarter
 
     public function __construct()
     {
+        $this->exam = new ArrayCollection();
         $this->courses = new ArrayCollection();
         $this->lodgings = new ArrayCollection();
         $this->optionalServices = new ArrayCollection();
@@ -182,29 +189,6 @@ class Headquarter
     }
 
     /**
-     * Set the value of Ciudad_id.
-     *
-     * @param integer $ciudad_id
-     * @return \TS\CYABundle\Entity\Headquarter
-     */
-    public function setCiudadId($ciudad_id)
-    {
-        $this->ciudad_id = $ciudad_id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Ciudad_id.
-     *
-     * @return integer
-     */
-    public function getCiudadId()
-    {
-        return $this->ciudad_id;
-    }
-
-    /**
      * Add Course entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Course $course
@@ -238,6 +222,42 @@ class Headquarter
     public function getCourses()
     {
         return $this->courses;
+    }
+
+    /**
+     * Add Course entity to collection (one to many).
+     *
+     * @param \TS\CYABundle\Entity\Exam $exam
+     * @return \TS\CYABundle\Entity\Headquarter
+     */
+    public function addExam(Exam $exam)
+    {
+        $this->exam[] = $exam;
+
+        return $this;
+    }
+
+    /**
+     * Remove Course entity from collection (one to many).
+     *
+     * @param \TS\CYABundle\Entity\Exam $exam
+     * @return \TS\CYABundle\Entity\Headquarter
+     */
+    public function removeExam(Exam $exam)
+    {
+        $this->exam->removeElement($exam);
+
+        return $this;
+    }
+
+    /**
+     * Get Course entity collection (one to many).
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExam()
+    {
+        return $this->exam;
     }
 
     /**
@@ -409,6 +429,6 @@ class Headquarter
 
     public function __sleep()
     {
-        return array('id', 'name', 'description', 'type', 'Ciudad_id');
+        return array('id', 'name', 'description', 'type', 'city_id');
     }
 }

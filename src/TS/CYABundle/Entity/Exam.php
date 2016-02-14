@@ -2,6 +2,8 @@
 /**
  * Created by @roberto-slopez.
  * User: tscompany
+ * Date: 14/02/16
+ * Time: 03:16 PM
  */
 
 namespace TS\CYABundle\Entity;
@@ -12,12 +14,13 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggableTrait;
 
 /**
- * TS\CYABundle\Entity\Course
+ * Class Exam
+ * @package TS\CYABundle\Entity
  *
- * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\CourseRepository")
- * @ORM\Table(name="Course", indexes={@ORM\Index(name="fk_Curso_Sede1_idx", columns={"headquarters_id"})})
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\ExamRepository")
+ * @ORM\Table(name="Exam")
  */
-class Course
+class Exam
 {
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable;
@@ -55,34 +58,31 @@ class Course
     protected $headquarters_id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Package", mappedBy="course")
-     * @ORM\JoinColumn(name="id", referencedColumnName="course_id", nullable=false)
-     */
-    protected $package;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="course")
-     * @ORM\JoinColumn(name="id", referencedColumnName="course_id", nullable=false)
+     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="exam")
+     * @ORM\JoinColumn(name="id", referencedColumnName="exam_id", nullable=false)
      */
     protected $quotations;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Headquarter", inversedBy="courses")
+     * @ORM\ManyToOne(targetEntity="Headquarter", inversedBy="exam")
      * @ORM\JoinColumn(name="headquarters_id", referencedColumnName="id", nullable=false)
      */
     protected $headquarter;
 
+    /**
+     * Exam constructor.
+     */
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
-        $this->package = new ArrayCollection();
     }
+
 
     /**
      * Set the value of id.
      *
      * @param integer $id
-     * @return \TS\CYABundle\Entity\Course
+     * @return \TS\CYABundle\Entity\Exam
      */
     public function setId($id)
     {
@@ -105,7 +105,7 @@ class Course
      * Set the value of name.
      *
      * @param string $name
-     * @return \TS\CYABundle\Entity\Course
+     * @return \TS\CYABundle\Entity\Exam
      */
     public function setName($name)
     {
@@ -128,7 +128,7 @@ class Course
      * Set the value of description.
      *
      * @param string $description
-     * @return \TS\CYABundle\Entity\Course
+     * @return \TS\CYABundle\Entity\Exam
      */
     public function setDescription($description)
     {
@@ -151,7 +151,7 @@ class Course
      * Set the value of enable.
      *
      * @param boolean $enable
-     * @return \TS\CYABundle\Entity\Course
+     * @return \TS\CYABundle\Entity\Exam
      */
     public function setEnable($enable)
     {
@@ -174,7 +174,7 @@ class Course
      * Set the value of headquarters_id.
      *
      * @param integer $headquarters_id
-     * @return \TS\CYABundle\Entity\Course
+     * @return \TS\CYABundle\Entity\Exam
      */
     public function setHeadquartersId($headquarters_id)
     {
@@ -197,7 +197,7 @@ class Course
      * Add Quotation entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\Course
+     * @return \TS\CYABundle\Entity\Exam
      */
     public function addQuotation(Quotation $quotation)
     {
@@ -210,7 +210,7 @@ class Course
      * Remove Quotation entity from collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\Course
+     * @return \TS\CYABundle\Entity\Exam
      */
     public function removeQuotation(Quotation $quotation)
     {
@@ -233,7 +233,7 @@ class Course
      * Set Headquarter entity (many to one).
      *
      * @param \TS\CYABundle\Entity\Headquarter $headquarter
-     * @return \TS\CYABundle\Entity\Course
+     * @return \TS\CYABundle\Entity\Exam
      */
     public function setHeadquarter(Headquarter $headquarter = null)
     {
@@ -271,41 +271,6 @@ class Course
         return $this;
     }
 
-    /**
-     * Add Course entity to collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\Package $package
-     * @return \TS\CYABundle\Entity\Headquarter
-     */
-    public function addPackage(Package $package)
-    {
-        $this->package[] = $package;
-
-        return $this;
-    }
-
-    /**
-     * Remove package entity from collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\Package $package
-     * @return \TS\CYABundle\Entity\Headquarter
-     */
-    public function removePackage(Package $package)
-    {
-        $this->package->removeElement($package);
-
-        return $this;
-    }
-
-    /**
-     * Get Course entity collection (one to many).
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPackege()
-    {
-        return $this->package;
-    }
     public function __sleep()
     {
         return array('id', 'name', 'price', 'description', 'enable', 'headquarters_id');
