@@ -17,6 +17,8 @@ class Quotation
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable;
 
+    const FLEXIBLE = 'FLEXIBLE';
+    const PACKAGE = 'PACKAGE';
     /**
      * @ORM\Column(type="guid")
      * @ORM\Id
@@ -725,7 +727,7 @@ class Quotation
     /**
      * Set Promocione entity (many to one).
      *
-     * @param \TS\CYABundle\Entity\Promocione $promocion
+     * @param \TS\CYABundle\Entity\Promocion $promocion
      * @return \TS\CYABundle\Entity\Quotation
      */
     public function setPromocione(Promocion $promocion = null)
@@ -756,6 +758,22 @@ class Quotation
         $this->package = $package;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExam()
+    {
+        return $this->exam;
+    }
+
+    /**
+     * @param mixed $exam
+     */
+    public function setExam($exam)
+    {
+        $this->exam = $exam;
     }
 
     /**

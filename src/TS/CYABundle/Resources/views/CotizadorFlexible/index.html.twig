@@ -1,40 +1,39 @@
 {% extends '::base.html.twig' %}
 {% block iconHead %}
-    <i class="gi gi-user"></i>
+    <i class="gi gi-list"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
-    Usuarios
+    Cotizador
 {% endblock pageTitle %}
 {% block subtitle %}
-    Lista
+    Flexible
 {% endblock subtitle %}
 
 {% block action %}
     <div class="block-options pull-right">
-        <a data-original-title="Crear usuario" href="{{ url('crear_usuario') }}" class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
+        <a data-original-title="Nueva cotización" href="{{ url('cotizador_flexible_new') }}" class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
     </div>
 {% endblock action %}
-
+{% block titlePanel %}Lista{% endblock titlePanel %}
 {% block bodyPanel %}
     <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
         <thead>
         <tr>
-            <th>Usuario</th>
-            <th>Roles</th>
+            <th>Course</th>
+            <th>Client</th>
+            <th>Weeks</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        {% for usuario in usuarios %}
+        {% for quotation in quotations %}
             <tr>
-                <td>{{ usuario.username }}{% if not usuario.enabled %}<span class="label label-warning">!</span> {% endif %}</td>
-                <td><span class="label label-info"><strong>{{ usuario.roles|join(', ') }}</strong></span></td>
+                <td>{{ quotation.course.name }}</td>
+                <td>{{ quotation.client.fullName }}</td>
+                <td>{{ quotation.semanas }}</td>
                 <td>
-                    <a href="{{ url('editar_usuario', {'id': usuario.id }) }}" class="btn btn-alt btn-sm btn-success" title="Editar">
-                        <i class="gi gi-pencil"></i>
-                        Editar
-                    </a>
+                    Editar
                 </td>
             </tr>
         {% endfor %}

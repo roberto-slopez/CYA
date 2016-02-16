@@ -18,3 +18,37 @@ Dashboard: Inicio
 Search: Buscar
 Type: Tipo
 Headquarters: Sedes
+Date: Fecha
+Local: Local
+SIMPLE: Simple
+DOBLE: Doble
+TRIPLE: Triple
+Price per week: Precio por semana
+Actions: Acciones
+Enable: Activo
+Price: Precio
+price: precio
+Lodging price: Precio alojamiento
+Weeks: Semanas
+First name: Nombre
+Last name: Apellido
+Indentification: Identificación
+Telephone: Telefono:
+Adress: Dirección
+Notes: Notas
+Note: Nota
+User seller: Usuario vendedor
+Name: Nombre
+User name: Nombre de usuario
+Email: Correo electrónico
+Password: Contraseña
+Confirm password: Confirmar contraseña
+Selec Some Options: Selecione alguna opción
+ROLE_SUPER_ADMIN: Super administrador
+ROLE_ADMIN: Administrador
+ROLE_USER: Usuario
+ROLE_SELLER: Vendedor
+Roles: Roles
+Flexible quotation: Cotizador flexible
+Optional service: Servicio opcional
+Exam: Examen

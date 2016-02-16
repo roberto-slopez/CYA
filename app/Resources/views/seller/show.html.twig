@@ -28,35 +28,35 @@ Seller
         <table class="table table-vcenter table-striped">
             <tbody>
                 <tr>
-                    <th>Id</th>
-                        <td>{{ seller.id }}</td>
-                </tr>
-                <tr>
-                    <th>First_name</th>
+                    <th>{% trans %}First name{% endtrans %}</th>
                         <td>{{ seller.firstname }}</td>
                 </tr>
                 <tr>
-                    <th>Last_name</th>
+                    <th>{% trans %}Last name{% endtrans %}</th>
                         <td>{{ seller.lastname }}</td>
                 </tr>
                 <tr>
-                    <th>Indentification</th>
+                    <th>{% trans %}Indentification{% endtrans %}</th>
                         <td>{{ seller.indentification }}</td>
                 </tr>
                 <tr>
-                    <th>Telephone</th>
+                    <th>{% trans %}Telephone{% endtrans %}</th>
                         <td>{{ seller.telephone }}</td>
                 </tr>
                 <tr>
-                    <th>Adress</th>
+                    <th>{% trans %}Adress{% endtrans %}</th>
                         <td>{{ seller.adress }}</td>
                 </tr>
                 <tr>
-                    <th>Notes</th>
+                    <th>{% trans %}Notes{% endtrans %}</th>
                         <td>{{ seller.notes }}</td>
                 </tr>
                 <tr>
-                    <th>Enable</th>
+                    <th>{% trans %}User seller{% endtrans %}</th>
+                    <td>{{ seller.userSeller.nombreImpresion }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans %}Enable{% endtrans %}</th>
                         <td>{% if seller.enable %}Yes{% else %}No{% endif %}</td>
                 </tr>
             </tbody>

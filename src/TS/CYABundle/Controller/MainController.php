@@ -9,8 +9,7 @@ Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
 Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
-* @Route("admin")
-* @Security("has_role('ROLE_ADMIN')")
+* @Security("has_role('ROLE_USER')")
 */
 class MainController extends BaseController
 {

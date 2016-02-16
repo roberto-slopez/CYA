@@ -40,23 +40,23 @@ class UsuarioType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('nombreImpresion', TextType::class, ['label' => 'Nombre:'])
-            ->add('username', TextType::class, ['label' => 'Usuario:'])
-            ->add('email', EmailType::class, ['label' => 'Email:'])
+            ->add('nombreImpresion', TextType::class, ['label' => 'Name'])
+            ->add('username', TextType::class, ['label' => 'User name'])
+            ->add('email', EmailType::class, ['label' => 'Email'])
             ->add(
                 'plainPassword',
                 RepeatedType::class,
                 [
                     'type' => PasswordType::class,
-                    'first_options' => ['label' => 'Contraseña'],
-                    'second_options' => ['label' => 'Confirme contraseñanalis'],
+                    'first_options' => ['label' => 'Password'],
+                    'second_options' => ['label' => 'Confirm password'],
                     'invalid_message' => 'fos_user.password.mismatch',
                 ]
             );
 
         if (!$this->editarCuenta) {
             $builder
-                ->add('enabled', CheckboxType::class, ['label' => 'Activo'])
+                ->add('enabled', CheckboxType::class)
                 ->add(
                     'roles',
                     ChoiceType::class,
@@ -64,9 +64,10 @@ class UsuarioType extends AbstractType
                         'multiple' => true,
                         'attr' => ['class' => 'select-chosen'],
                         'choices' => [
-                            'ROLE_SUPER_ADMIN' => 'Super administrador',
-                            'ROLE_ADMIN' => 'Administrador',
-                            'ROLE_USER' => 'Usuario',
+                            'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN',
+                            'ROLE_ADMIN' => 'ROLE_ADMIN',
+                            'ROLE_USER' => 'ROLE_USER',
+                            'ROLE_SELLER' => 'ROLE_SELLER',
                         ],
                     ]
                 );

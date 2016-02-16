@@ -13,22 +13,20 @@
         {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Enable</th>
-                <th>Headquarters_id</th>
-                <th>Actions</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Description{% endtrans %}</th>
+                <th>{% trans %}Enable{% endtrans %}</th>
+                <th>{% trans %}Headquarter{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
         {% for course in courses %}
             <tr>
-                <td><a href="{{ path('admin_course_show', { 'id': course.id }) }}">{{ course.id }}</a></td>
                 <td>{{ course.name }}</td>
                 <td>{{ course.description }}</td>
                 <td>{% if course.enable %}Yes{% else %}No{% endif %}</td>
-                <td>{{ course.headquartersid }}</td>
+                <td>{{ course.headquarter.name }}</td>
                 <td>                        <div class="btn-group">
                             <a href="{{ path('admin_course_show', { 'id': course.id }) }}" class="btn btn-xs btn-primary">show</a>
                         </div>                        <div class="btn-group">

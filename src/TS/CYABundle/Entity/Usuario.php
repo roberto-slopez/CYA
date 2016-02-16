@@ -89,7 +89,11 @@ class Usuario extends BaseUser
      */
     public function getNombreImpresion()
     {
-        return $this->nombreImpresion;
+        if ($this->nombreImpresion) {
+            return $this->nombreImpresion;
+        }
+
+        return $this->usernameCanonical;
     }
 
     public function setNombreImpresion($nombreImpresion)

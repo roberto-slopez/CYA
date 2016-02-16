@@ -13,11 +13,10 @@
         {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Lodging_price</th>
-                <th>Name</th>
-                <th>Semanas</th>
-                <th>Actions</th>
+                <th>{% trans %}Lodging price{% endtrans %}</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Weeks{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
@@ -37,4 +36,4 @@
         </tbody>
     </table>
 {% endblock bodyPanel %}
-{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script {% endblock extraJS %}
+{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script> {% endblock extraJS %}

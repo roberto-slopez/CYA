@@ -7,6 +7,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
+use TS\CYABundle\Entity\Quotation;
+use TS\CYABundle\Form\QuotationType;
 
 /**
  * Class CotizadorFlexibleController
@@ -19,12 +22,48 @@ class CotizadorFlexibleController extends BaseController
     /**
      * @Route("/", name="cotizador_flexible_index")
      * @Template()
+     * @Method("GET")
+     *
      * @return array
      */
     public function indexAction()
     {
-        return [
+        $quotations = $this->getDoctrine()->getManager()->getRepository('TSCYABundle:Quotation')->findBy([
+            'type' => Quotation::FLEXIBLE
+        ]);
 
+        return [
+            'quotations' => $quotations
+        ];
+    }
+
+    /**
+     * @Route("/new", name="cotizador_flexible_new")
+     * @Template()
+     * @Method({"GET", "POST"})
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function newAction(Request $request)
+    {
+        $quotation = new Quotation();
+        $quotation->setType(Quotation::FLEXIBLE);
+
+        $form = $this->createForm(QuotationType::class, $quotation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($quotation);
+            $em->flush();
+
+            $this->setFlashAviso('Registro agregado correctamente');
+            return $this->redirectToRoute('cotizador_flexible_index');
+        }
+
+        return [
+            'form' => $form->createView(),
         ];
     }
 }

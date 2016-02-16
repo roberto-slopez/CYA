@@ -1,52 +1,48 @@
 {% extends 'base.html.twig' %}
 {% block iconHead %}
-<i class="fa fa-eye"></i>
+    <i class="fa fa-eye"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
-Course
+    Course
 {% endblock pageTitle %}
 {% block subtitle %}
-Visualizar
+    Visualizar
 {% endblock subtitle %}
 {% block titlePanel %}
-Course
+    Course
 {% endblock titlePanel %}
 {% block action %}
-        <div class="form-group form-actions">
+    <div class="form-group form-actions">
     <div class="col-md-12 col-md-offset-6">
         <a href="{{ path('admin_course_index') }}" class="btn btn-sm btn-primary">
             <i class="hi hi-chevron-left"></i>
             Regresar
-        </a>            <a href="{{ path('admin_course_edit', { 'id': course.id }) }}" class="btn btn-sm btn-warning">
-                <i class="gi gi-edit"></i>
-                Edit
-            </a>    </div>
-</div>{% endblock action %}
+        </a> <a href="{{ path('admin_course_edit', { 'id': course.id }) }}" class="btn btn-sm btn-warning">
+            <i class="gi gi-edit"></i>
+            Edit
+        </a></div>
+    </div>{% endblock action %}
 {% block bodyPanel %}
     <div class="table-responsive">
         <table class="table table-vcenter table-striped">
             <tbody>
-                <tr>
-                    <th>Id</th>
-                        <td>{{ course.id }}</td>
-                </tr>
-                <tr>
-                    <th>Name</th>
-                        <td>{{ course.name }}</td>
-                </tr>
-                <tr>
-                    <th>Description</th>
-                        <td>{{ course.description }}</td>
-                </tr>
-                <tr>
-                    <th>Enable</th>
-                        <td>{% if course.enable %}Yes{% else %}No{% endif %}</td>
-                </tr>
-                <tr>
-                    <th>Headquarters_id</th>
-                        <td>{{ course.headquartersid }}</td>
-                </tr>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ course.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Description{% endtrans %}</th>
+                <td>{{ course.description }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Enable{% endtrans %}</th>
+                <td>{% if course.enable %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Headquarter{% endtrans %}</th>
+                <td>{{ course.headquartersid }}</td>
+            </tr>
             </tbody>
         </table>
     </div>

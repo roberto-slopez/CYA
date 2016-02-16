@@ -67,6 +67,13 @@ class Client
     }
 
     /**
+     * @return string
+     */
+    public function getFullName() {
+        return $this->getFirstName() .' '.$this->getLastName() ;
+    }
+
+    /**
      * Set the value of id.
      *
      * @param string $id

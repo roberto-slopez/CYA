@@ -32,6 +32,13 @@
     {% block scriptHead %}
     {# Modernizr (browser feature detection library) & Respond.js (enables responsive CSS code on browsers that don't support it, eg IE8) #}
     <script src="{{ asset('bundles/tscya/js/vendor/modernizr-respond.min.js') }}"></script>
+    <script>
+        var current = null;
+        function navSwitch(node){
+            current = node;
+            current.className = "active";
+        }
+    </script>
     {% endblock scriptHead %}
 </head>
 <body>
@@ -71,7 +78,7 @@
                     </div>
                     <ul class="sidebar-nav">
                         <li>
-                            <a href="{{ url("main") }}" class=" active">
+                            <a href="{{ url("main") }}" onclick="navSwitch(this)">
                                 <i class="gi gi-stopwatch sidebar-nav-icon"></i>
                                 <span class="sidebar-nav-mini-hide">
                                     {% trans %} Dashboard {% endtrans %}
@@ -79,43 +86,51 @@
                             </a>
                         </li>
                         <li>
+                            <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Cotizadores</span></a>
+                            <ul>
+                                <li>
+                                    <a onclick="navSwitch(this)" href="{{ url('cotizador_flexible_index') }}">{% trans %} Flexible quotation {% endtrans %}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-cogwheel sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Catálogos</span></a>
                             <ul>
                                 <li>
-                                    <a href="{{ url("admin_exchangeRateUSD_index") }}">{% trans %} Exchange Rate {% endtrans %} USD</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_exchangeRateUSD_index") }}">{% trans %} Exchange Rate {% endtrans %} USD</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_coin_index") }}">{% trans %} Coin {% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_coin_index") }}">{% trans %} Coin {% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_country_index") }}">{% trans %}Country{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_country_index") }}">{% trans %}Country{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_city_index") }}">{% trans %}City{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_city_index") }}">{% trans %}City{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_lodging_index") }}">{% trans %}Lodging{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_headquarter_index") }}">{% trans %}Headquarter{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_headquarter_index") }}">{% trans %}Headquarter{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_lodging_index") }}">{% trans %}Lodging{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_service_index") }}">{% trans %}Service{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_service_index") }}">{% trans %}Service{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_course_index") }}">{% trans %}Course{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_course_index") }}">{% trans %}Course{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_client_index") }}">{% trans %}Client{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_client_index") }}">{% trans %}Client{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_seller_index") }}">{% trans %}Seller{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_seller_index") }}">{% trans %}Seller{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_promocion_index") }}">{% trans %}Promocion{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_promocion_index") }}">{% trans %}Promocion{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url("admin_package_index") }}">{% trans %}Package{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_package_index") }}">{% trans %}Package{% endtrans %}</a>
                                 </li>
                             </ul>
                         </li>

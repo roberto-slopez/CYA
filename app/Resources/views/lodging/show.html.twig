@@ -28,24 +28,24 @@ Lodging
         <table class="table table-vcenter table-striped">
             <tbody>
                 <tr>
-                    <th>Name</th>
+                    <th>{% trans %}Name{% endtrans %}</th>
                         <td>{{ lodging.name }}</td>
                 </tr>
                 <tr>
-                    <th>Type</th>
+                    <th>{% trans %}Type{% endtrans %}</th>
                         <td>{{ lodging.type }}</td>
                 </tr>
                 <tr>
-                    <th>Price_per_week</th>
+                    <th>{% trans %}Price per week{% endtrans %}</th>
                         <td>{{ lodging.priceperweek }}</td>
                 </tr>
                 <tr>
-                    <th>Description</th>
+                    <th>{% trans %}Description{% endtrans %}</th>
                         <td>{{ lodging.description }}</td>
                 </tr>
                 <tr>
-                    <th>Headquarters</th>
-                        <td>{{ lodging.headquartersid }}</td>
+                    <th>{% trans %}Headquarters{% endtrans %}</th>
+                        <td>{{ lodging.headquarter.name }}</td>
                 </tr>
             </tbody>
         </table>
