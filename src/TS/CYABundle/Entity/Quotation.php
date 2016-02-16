@@ -160,6 +160,12 @@ class Quotation
      */
     protected $package;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Exam", inversedBy="quotations")
+     * @ORM\JoinColumn(name="exam_id", referencedColumnName="id", nullable=false)
+     */
+    protected $exam;
+
     public function __construct()
     {
     }

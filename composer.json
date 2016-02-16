@@ -1,5 +1,5 @@
 {
-    "name": "tscompany/cotizadorYAdmin",
+    "name": "tscompany/CYA",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -32,7 +32,7 @@
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "jms/serializer-bundle": "dev-master",
-        "appventus/extradoctrine-bundle": "dev-master"
+        "liuggio/excelbundle": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

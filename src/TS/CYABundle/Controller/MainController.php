@@ -20,14 +20,6 @@ class MainController extends BaseController
     */
     public function indexAction()
     {
-        $message = \Swift_Message::newInstance()
-        ->setSubject('Registration confirmation')
-        ->setFrom('eldinsanchez@gmail.com')
-        ->setTo('tscompany09@gmail.com')
-        ->setContentType('text/plain')
-        ->setBody("test");
-
-        $this->get('mailer')->send($message);
         return [
         ];
     }

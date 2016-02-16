@@ -36,10 +36,25 @@ class Package
     protected $name;
 
     /**
+     * @ORM\Column(type="float")
+     */
+    protected $course_price;
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $semanas;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $course_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="package")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=false)
+     */
+    protected $course;
     /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="package")
      * @ORM\JoinColumn(name="id", referencedColumnName="package_id", nullable=true)

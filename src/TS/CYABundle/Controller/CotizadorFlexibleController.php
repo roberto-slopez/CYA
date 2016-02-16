@@ -2,7 +2,6 @@
 
 namespace TS\CYABundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Security,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
@@ -10,21 +9,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
- * Class CotizadorController
+ * Class CotizadorFlexibleController
  * @package TS\CYABundle\Controller
+ *
+ * @Route("/admin/cotizador/flexible")
  */
-class CotizadorController extends Controller
+class CotizadorFlexibleController extends BaseController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="cotizador_flexible_index")
      * @Template()
-     *
      * @return array
      */
     public function indexAction()
     {
         return [
-            'cotizador' => 'cotizador'
+
         ];
     }
 }
