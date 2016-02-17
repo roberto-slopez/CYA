@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use TS\CYABundle\Form\EventListener\AddCityFieldSubscriber;
 
 class QuotationType extends AbstractType
 {
@@ -16,14 +17,14 @@ class QuotationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $propertyPathToCity = 'city';
+        $builder->addEventSubscriber(new AddCityFieldSubscriber($propertyPathToCity));
         $builder
             ->add('country', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Country',
-                'choice_label' => 'name'
-            ])
-            ->add('city', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\City',
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'empty_data' => 'Country',
+                'attr' => ['class' => 'country_selector']
             ])
             ->add('headquarter', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Headquarter',

@@ -17,5 +17,16 @@ use Doctrine\ORM\Query;
  */
 class CityRepository extends EntityRepository
 {
+    /**
+     * @param $countryId
+     * @return array
+     */
+    public function getByCountry($countryId)
+    {
+        $qb = $this->createQueryBuilder('city');
+        $qb->where('city.country_id=:country')
+            ->setParameter('country', $countryId);
 
+        return $qb->getQuery()->getResult();
+    }
 }

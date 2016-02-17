@@ -27,9 +27,9 @@ monolog:
         #firephp:
         #    type:   firephp
         #    level:  info
-        #chromephp:
-        #    type:   chromephp
-        #    level:  info
+        chromephp:
+            type:   chromephp
+            level:  info
 
 swiftmailer:
     transport: '%mailer_transport%'

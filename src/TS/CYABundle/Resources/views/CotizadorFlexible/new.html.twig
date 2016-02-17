@@ -44,3 +44,27 @@
     {{ form_end(form) }}
     <br/>
 {% endblock bodyPanel %}
+{% block extraJS %}
+    <script type="text/javascript">
+        $(".country_selector").change(function(){
+            var data = {
+                countryId: $(this).val()
+            };
+
+            $.ajax({
+                type: 'post',
+                url: '{{ path("select_cities") }}',
+                data: data,
+                success: function(data) {
+                    var $city_selector = $('.city_selector');
+
+                    $city_selector.html('<option>City</option>');
+
+                    for (var i=0, total = data.length; i < total; i++) {
+                        $city_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock extraJS %}

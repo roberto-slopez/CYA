@@ -28,12 +28,12 @@ class CotizadorFlexibleController extends BaseController
      */
     public function indexAction()
     {
-        $quotations = $this->getDoctrine()->getManager()->getRepository('TSCYABundle:Quotation')->findBy([
-            'type' => Quotation::FLEXIBLE
-        ]);
+        $quotations = $this->getDoctrine()->getManager()
+            ->getRepository('TSCYABundle:Quotation')
+            ->getLastRecords(10);
 
         return [
-            'quotations' => $quotations
+            'quotations' => $quotations,
         ];
     }
 
@@ -59,6 +59,7 @@ class CotizadorFlexibleController extends BaseController
             $em->flush();
 
             $this->setFlashAviso('Registro agregado correctamente');
+
             return $this->redirectToRoute('cotizador_flexible_index');
         }
 
