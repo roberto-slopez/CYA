@@ -1,7 +1,7 @@
 #Cotizador & Admin
 A Symfony 3  project created on January 24, 2016, 11:59 am.
 
-##Un sistema de cotización más administrador.
+##Un sistema de cotización y administrador.
 Colaboradores:
 * @roberto-slopez
 
