@@ -27,6 +27,6 @@ class CityRepository extends EntityRepository
         $qb->where('city.country_id=:country')
             ->setParameter('country', $countryId);
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getArrayResult();
     }
 }

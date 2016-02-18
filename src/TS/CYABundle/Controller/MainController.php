@@ -36,7 +36,22 @@ class MainController extends BaseController
     {
         $countryId = $request->request->get('countryId');
         $em = $this->getDoctrine()->getManager();
-        $cities = $em->getRepository('TSCYABundle:City')->findAll();
+        $cities = $em->getRepository('TSCYABundle:City')->getByCountry($countryId);
+
+        return new JsonResponse($cities);
+    }
+
+    /**
+     * @Route("/headquarters", name="select_headquarters", options={"expose"=true})
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function headquarterAction(Request $request)
+    {
+        $headquarterId = $request->request->get('headquarterId');
+        $em = $this->getDoctrine()->getManager();
+        $cities = $em->getRepository('TSCYABundle:Headquarter')->getByCity($headquarterId);
 
         return new JsonResponse($cities);
     }

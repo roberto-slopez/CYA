@@ -17,5 +17,18 @@ use Doctrine\ORM\Query;
  */
 class SellerRepository extends EntityRepository
 {
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function getByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('seller')
+            ->leftJoin('seller.userSeller', 'user')
+            ->where('user.id = :user_id')
+            ->setParameter('user_id', $userId)
+            ->setMaxResults(1);
 
+        return $qb->getQuery()->getResult()[0];
+    }
 }

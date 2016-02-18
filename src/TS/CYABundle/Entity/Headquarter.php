@@ -18,9 +18,9 @@ class Headquarter
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable;
 
-    const SIMPLE = "SIMPLE";
-    const DOBLE = "DOBLE";
-    const TRIPLE = "TRIPLE";
+    const SCHOOL = "SCHOOL";
+    const COLLEGE = "COLLEGE";
+    const OTHERS = "OTHERS";
 
     /**
      * @ORM\Column(type="guid")
@@ -42,7 +42,7 @@ class Headquarter
     /**
      * @ORM\Column(name="`type`", type="string", length=50)
      */
-    protected $type;
+    protected $type = self::SCHOOL;
 
     /**
      * @ORM\OneToMany(targetEntity="Exam", mappedBy="headquarter")

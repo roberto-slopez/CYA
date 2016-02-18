@@ -13,20 +13,18 @@
         {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>First_name</th>
-                <th>Last_name</th>
-                <th>Indentification</th>
-                <th>Telephone</th>
-                <th>Adress</th>
-                <th>Notes</th>
-                <th>Actions</th>
+                <th>{% trans %}First name{% endtrans %}</th>
+                <th>{% trans %}Last name{% endtrans %}</th>
+                <th>{% trans %}Indentification{% endtrans %}</th>
+                <th>{% trans %}Telephone{% endtrans %}</th>
+                <th>{% trans %}Adress{% endtrans %}</th>
+                <th>{% trans %}Notes{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
         {% for client in clients %}
             <tr>
-                <td><a href="{{ path('admin_client_show', { 'id': client.id }) }}">{{ client.id }}</a></td>
                 <td>{{ client.firstname }}</td>
                 <td>{{ client.lastname }}</td>
                 <td>{{ client.indentification }}</td>
@@ -43,4 +41,4 @@
         </tbody>
     </table>
 {% endblock bodyPanel %}
-{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script {% endblock extraJS %}
+{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script> {% endblock extraJS %}

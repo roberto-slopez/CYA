@@ -42,6 +42,7 @@ class HeadquarterController extends Controller
     public function newAction(Request $request)
     {
         $headquarter = new Headquarter();
+        $headquarter->setType(Headquarter::SCHOOL);
         $form = $this->createForm('TS\CYABundle\Form\HeadquarterType', $headquarter);
         $form->handleRequest($request);
 

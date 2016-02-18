@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use TS\CYABundle\Entity\Client;
+use TS\CYABundle\Entity\OptionalService;
 use TS\CYABundle\Entity\Quotation;
 use TS\CYABundle\Form\QuotationType;
 
@@ -47,7 +49,17 @@ class CotizadorFlexibleController extends BaseController
      */
     public function newAction(Request $request)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $seller = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('TSCYABundle:Seller')
+            ->getByUser($user->getId());
+
         $quotation = new Quotation();
+        $quotation->addClient(new Client());
+        $quotation->addOptionalService(new OptionalService());
+        $quotation->setSeller($seller);
         $quotation->setType(Quotation::FLEXIBLE);
 
         $form = $this->createForm(QuotationType::class, $quotation);

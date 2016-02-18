@@ -21,9 +21,9 @@ class HeadquarterType extends AbstractType
             ->add('description')
             ->add('type', ChoiceType::class, [
                 'choices'  => [
-                    Headquarter::SIMPLE => Headquarter::SIMPLE,
-                    Headquarter::DOBLE => Headquarter::SIMPLE,
-                    Headquarter::TRIPLE => Headquarter::SIMPLE,
+                    Headquarter::SCHOOL => Headquarter::SCHOOL,
+                    Headquarter::COLLEGE => Headquarter::COLLEGE,
+                    Headquarter::OTHERS => Headquarter::OTHERS,
                 ]
             ])
             ->add('city',  EntityType::class, [

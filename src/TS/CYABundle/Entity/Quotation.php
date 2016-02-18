@@ -2,8 +2,10 @@
 
 namespace TS\CYABundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use TS\CYABundle\Entity\Client;
 use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggableTrait;
 
 /**
@@ -170,6 +172,8 @@ class Quotation
 
     public function __construct()
     {
+        $this->client =  new ArrayCollection();
+        $this->optionalService = new ArrayCollection();
     }
 
     /**
@@ -587,22 +591,31 @@ class Quotation
     }
 
     /**
-     * Set Client entity (many to one).
-     *
      * @param \TS\CYABundle\Entity\Client $client
-     * @return \TS\CYABundle\Entity\Quotation
+     * @return $this
      */
-    public function setClient(Client $client = null)
+    public function addClient(Client $client)
     {
-        $this->client = $client;
+        $this->client->add($client);
 
         return $this;
     }
 
     /**
-     * Get Client entity (many to one).
+     * @param \TS\CYABundle\Entity\Client $client
+     * @return $this
+     */
+    public function removeQuotation(Client $client)
+    {
+        $this->client->removeElement($client);
+
+        return $this;
+    }
+
+    /**
+     * Get Quotation entity collection (one to many).
      *
-     * @return \TS\CYABundle\Entity\Client
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getClient()
     {
@@ -679,22 +692,29 @@ class Quotation
     }
 
     /**
-     * Set OptionalService entity (many to one).
-     *
-     * @param \TS\CYABundle\Entity\OptionalService $optionalService
-     * @return \TS\CYABundle\Entity\Quotation
+     * @param OptionalService $optionalService
+     * @return $this
      */
-    public function setOptionalService(OptionalService $optionalService = null)
+    public function addOptionalService(OptionalService $optionalService)
     {
-        $this->optionalService = $optionalService;
+        $this->optionalService[] = $optionalService;
 
         return $this;
     }
 
     /**
-     * Get OptionalService entity (many to one).
-     *
-     * @return \TS\CYABundle\Entity\OptionalService
+     * @param OptionalService $optionalService
+     * @return $this
+     */
+    public function removeOptionalService(OptionalService $optionalService)
+    {
+        $this->optionalService->removeElement($optionalService);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
      */
     public function getOptionalService()
     {

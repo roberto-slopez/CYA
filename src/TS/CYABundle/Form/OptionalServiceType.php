@@ -16,10 +16,7 @@ class OptionalServiceType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
             ->add('price')
-            ->add('headquarters_id')
-            ->add('headquarter')
         ;
     }
     
