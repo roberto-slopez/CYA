@@ -2,9 +2,13 @@
 
 namespace TS\CYABundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use TS\CYABundle\Entity\Service;
 
 class ServiceType extends AbstractType
 {
@@ -17,9 +21,19 @@ class ServiceType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('price')
-            ->add('headquarters_id')
-            ->add('deadquarter')
+            ->add('price', MoneyType::class, [
+                'currency' => 'USD'
+            ])
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    Service::OPTIONAL => Service::OPTIONAL,
+                    Service::REQUIRED => Service::REQUIRED
+                ]
+            ])
+            ->add('headquarter', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Headquarter',
+                'choice_label' => 'name'
+            ])
         ;
     }
     

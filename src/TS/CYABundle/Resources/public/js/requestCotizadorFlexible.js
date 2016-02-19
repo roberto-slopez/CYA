@@ -23,7 +23,7 @@ $(".country_selector").change(function(){
 });
 $(".city_selector").change(function(){
     var data = {
-        headquarterId: $(this).val()
+        cityId: $(this).val()
     };
 
     $.ajax({
@@ -31,12 +31,59 @@ $(".city_selector").change(function(){
         url: Routing.generate('select_headquarters', null, true),
         data: data,
         success: function(data) {
-            var $city_selector = $('.headquarter_selector');
-
-            $city_selector.html('<option>Seleccionar opción</option>');
+            var $headquarter_selector = $('.headquarter_selector');
+            $headquarter_selector.html('<option>Seleccionar opción</option>');
 
             for (var i=0, total = data.length; i < total; i++) {
-                $city_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                $headquarter_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            }
+        }
+    });
+});
+
+$(".headquarter_selector").change(function(){
+    var data = {
+        headquarterId: $(this).val()
+    };
+
+    //Lodging
+    $.ajax({
+        type: 'post',
+        url: Routing.generate('select_lodgings', null, true),
+        data: data,
+        success: function(data) {
+            var $lodging_selector = $('.lodging_selector');
+            $lodging_selector.html('<option>Seleccionar opción</option>');
+
+            for (var i=0, total = data.length; i < total; i++) {
+                $lodging_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            }
+        }
+    });
+    //Course
+    $.ajax({
+        type: 'post',
+        url: Routing.generate('select_courses', null, true),
+        data: data,
+        success: function(data) {
+            var $course_selector = $('.course_selector');
+            $course_selector.html('<option>Seleccionar opción</option>');
+
+            for (var i=0, total = data.length; i < total; i++) {
+                $course_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            }
+        }
+    });
+    //Service
+    $.ajax({
+        type: 'post',
+        url: Routing.generate('select_services', null, true),
+        data: data,
+        success: function(data) {
+            var $service_selector = $('.service_selector');
+
+            for (var i=0, total = data.length; i < total; i++) {
+                $service_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
             }
         }
     });

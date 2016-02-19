@@ -36,9 +36,14 @@ class Promocion
     protected $code;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     protected $percentage;
+
+    /**
+     * @ORM\Column(name="`enable`", type="boolean")
+     */
+    protected $enable;
 
     /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="promocion")
@@ -49,6 +54,25 @@ class Promocion
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getEnable()
+    {
+        return $this->enable;
+    }
+
+    /**
+     * @param boolean $enable
+     * @return $this
+     */
+    public function setEnable($enable)
+    {
+        $this->enable = $enable;
+
+        return $this;
     }
 
     /**

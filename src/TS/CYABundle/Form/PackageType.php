@@ -2,9 +2,10 @@
 
 namespace TS\CYABundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,10 +18,23 @@ class PackageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lodging_price')
             ->add('name')
+            ->add('lodging_price', MoneyType::class, [
+                'currency' => 'USD'
+            ])
+            ->add('course_price', MoneyType::class, [
+                'currency' => 'USD'
+            ])
             ->add('semanas', IntegerType::class, [
                 'label' => 'Weeks'
+            ])
+            ->add('headquarter', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Headquarter',
+                'choice_label' => 'name'
+            ])
+            ->add('course', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Course',
+                'choice_label' => 'name'
             ])
         ;
     }

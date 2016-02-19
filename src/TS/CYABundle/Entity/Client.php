@@ -26,12 +26,12 @@ class Client
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=250, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=false)
      */
     protected $first_name;
 
     /**
-     * @ORM\Column(type="string", length=250, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=false)
      */
     protected $last_name;
 

@@ -26,7 +26,7 @@ class Package
     protected $id;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     protected $lodging_price;
 
@@ -55,6 +55,13 @@ class Package
      * @ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=false)
      */
     protected $course;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Headquarter", inversedBy="package")
+     * @ORM\JoinColumn(name="headquarter_id", referencedColumnName="id", nullable=false)
+     */
+    protected $headquarter;
+
     /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="package")
      * @ORM\JoinColumn(name="id", referencedColumnName="package_id", nullable=true)
@@ -64,6 +71,63 @@ class Package
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoursePrice()
+    {
+        return $this->course_price;
+    }
+
+    /**
+     * @param $course_price
+     * @return $this
+     */
+    public function setCoursePrice($course_price)
+    {
+        $this->course_price = $course_price;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    /**
+     * @param $course
+     * @return $this
+     */
+    public function setCourse($course)
+    {
+        $this->course = $course;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeadquarter()
+    {
+        return $this->headquarter;
+    }
+
+    /**
+     * @param $headquarter
+     * @return $this
+     */
+    public function setHeadquarter($headquarter)
+    {
+        $this->headquarter = $headquarter;
+
+        return $this;
     }
 
     /**

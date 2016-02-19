@@ -17,6 +17,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\ORM\EntityRepository;
 use TS\CYABundle\Entity\City;
 use TS\CYABundle\Entity\Headquarter;
+
 /**
  * Class AddHeadquarterFieldSubscriber
  * @package TS\CYABundle\Form\EventListener
@@ -54,8 +55,8 @@ class AddHeadquarterFieldSubscriber implements  EventSubscriberInterface
         $formOptions = [
             'class' => 'TS\CYABundle\Entity\Headquarter',
             'placeholder' => 'Choose an option',
-            'label' => 'City',
-            'attr' => ['class' => 'headquarter_selector'],
+            'label' => 'Headquarter',
+            'attr' => ['class' => 'headquarter_selector select-select2'],
             'query_builder' => function (EntityRepository $repository) use ($city) {
                 $qb = $repository->createQueryBuilder('headquarter')
                     ->innerJoin('headquarter.city', 'city')

@@ -18,6 +18,8 @@ class Service
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable;
 
+    const OPTIONAL = 'OPTIONAL';
+    const REQUIRED = 'REQUIRED';
     /**
      * @ORM\Column(type="guid")
      * @ORM\Id
@@ -34,6 +36,11 @@ class Service
      * @ORM\Column(type="string", length=250, nullable=true)
      */
     protected $description;
+
+    /**
+     * @ORM\Column(name="`type`", type="string", length=10)
+     */
+    protected $type = self::OPTIONAL;
 
     /**
      * @ORM\Column(type="float")
@@ -60,6 +67,25 @@ class Service
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param $type
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 
     /**

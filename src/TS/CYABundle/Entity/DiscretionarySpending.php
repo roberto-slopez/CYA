@@ -8,12 +8,13 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggableTrait;
 
 /**
- * TS\CYABundle\Entity\OptionalService
+ * Class DiscretionarySpending
+ * @package TS\CYABundle\Entity
  *
- * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\OptionalServiceRepository")
- * @ORM\Table(name="OptionalService", indexes={@ORM\Index(name="fk_ServiciosOpcionales_Sede1_idx", columns={"headquarters_id"})})
+ * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\DiscretionarySpendingRepository")
+ * @ORM\Table(name="DiscretionarySpending")
  */
-class OptionalService
+class DiscretionarySpending
 {
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable;
@@ -28,7 +29,7 @@ class OptionalService
     /**
      * @ORM\Column(name="`name`", type="string", length=250)
      */
-    protected $name;
+    protected $name = 'DiscretionarySpending';
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
@@ -36,26 +37,15 @@ class OptionalService
     protected $description;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     protected $price;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    protected $headquarters_id;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="optionalService")
-     * @ORM\JoinColumn(name="id", referencedColumnName="OptionalService_id", nullable=false)
+     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="discretionarySpending")
+     * @ORM\JoinColumn(name="id", referencedColumnName="discretionarySpending_id", nullable=false)
      */
     protected $quotations;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Headquarter", inversedBy="optionalServices")
-     * @ORM\JoinColumn(name="headquarters_id", referencedColumnName="id", nullable=false)
-     */
-    protected $headquarter;
 
     public function __construct()
     {
@@ -66,7 +56,7 @@ class OptionalService
      * Set the value of id.
      *
      * @param integer $id
-     * @return \TS\CYABundle\Entity\OptionalService
+     * @return \TS\CYABundle\Entity\DiscretionarySpending
      */
     public function setId($id)
     {
@@ -89,7 +79,7 @@ class OptionalService
      * Set the value of name.
      *
      * @param string $name
-     * @return \TS\CYABundle\Entity\OptionalService
+     * @return \TS\CYABundle\Entity\DiscretionarySpending
      */
     public function setName($name)
     {
@@ -112,7 +102,7 @@ class OptionalService
      * Set the value of description.
      *
      * @param string $description
-     * @return \TS\CYABundle\Entity\OptionalService
+     * @return \TS\CYABundle\Entity\DiscretionarySpending
      */
     public function setDescription($description)
     {
@@ -135,7 +125,7 @@ class OptionalService
      * Set the value of price.
      *
      * @param float $price
-     * @return \TS\CYABundle\Entity\OptionalService
+     * @return \TS\CYABundle\Entity\DiscretionarySpending
      */
     public function setPrice($price)
     {
@@ -155,33 +145,10 @@ class OptionalService
     }
 
     /**
-     * Set the value of headquarters_id.
-     *
-     * @param integer $headquarters_id
-     * @return \TS\CYABundle\Entity\OptionalService
-     */
-    public function setHeadquartersId($headquarters_id)
-    {
-        $this->headquarters_id = $headquarters_id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of headquarters_id.
-     *
-     * @return integer
-     */
-    public function getHeadquartersId()
-    {
-        return $this->headquarters_id;
-    }
-
-    /**
      * Add Quotation entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\OptionalService
+     * @return \TS\CYABundle\Entity\DiscretionarySpending
      */
     public function addQuotation(Quotation $quotation)
     {
@@ -194,7 +161,7 @@ class OptionalService
      * Remove Quotation entity from collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\OptionalService
+     * @return \TS\CYABundle\Entity\DiscretionarySpending
      */
     public function removeQuotation(Quotation $quotation)
     {
@@ -211,29 +178,6 @@ class OptionalService
     public function getQuotations()
     {
         return $this->quotations;
-    }
-
-    /**
-     * Set Headquarter entity (many to one).
-     *
-     * @param \TS\CYABundle\Entity\Headquarter $headquarter
-     * @return \TS\CYABundle\Entity\OptionalService
-     */
-    public function setHeadquarter(Headquarter $headquarter = null)
-    {
-        $this->headquarter = $headquarter;
-
-        return $this;
-    }
-
-    /**
-     * Get Headquarter entity (many to one).
-     *
-     * @return \TS\CYABundle\Entity\Headquarter
-     */
-    public function getHeadquarter()
-    {
-        return $this->headquarter;
     }
 
     public function __sleep()

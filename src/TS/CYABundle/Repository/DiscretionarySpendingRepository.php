@@ -12,10 +12,10 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
 /**
- * Class OptionalServiceRepository
+ * Class DiscretionarySpending
  * @package TS\CYABundle\Repository
  */
-class OptionalServiceRepository extends EntityRepository
+class DiscretionarySpending extends EntityRepository
 {
 
 }

@@ -24,7 +24,9 @@ class CourseType extends AbstractType
                 'choice_label' => 'name'
             ])
             ->add('name')
-            ->add('price', MoneyType::class)
+            ->add('price', MoneyType::class, [
+                'currency' => 'USD'
+            ])
             ->add('description')
             ->add('enable')
         ;

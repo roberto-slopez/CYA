@@ -24,35 +24,34 @@
 
     {{ form_start(form) }}
     {{ form_errors(form) }}
+    <div class="form-inline text-center bg-info">
+        <h3>Cliente</h3>
+        {{ form_row(form.client.first_name) }}
+        {{ form_row(form.client.last_name) }}
+    </div>
     {{ form_row(form.country) }}
     {{ form_row(form.city) }}
     {{ form_row(form.headquarter) }}
-    {{ form_row(form.course) }}
     {{ form_row(form.lodging) }}
+    {{ form_row(form.course) }}
     {{ form_row(form.service) }}
-    <ul class="item list list-unstyled form-inline text-center" data-prototype="{{ form_widget(form.optionalService.vars.prototype)|e }}">
+    <ul class="item list list-unstyled form-inline text-center" data-prototype="{{ form_widget(form.discretionarySpending.vars.prototype)|e }}">
 
-        <h3>Service opcional</h3>
+        <h3>Gastos opcionales</h3>
+        <style>
+            li>div>div.form-group {
+                width: 100%;
+            }
+        </style>
         {# iterate over each existing tag and render its only field: name #}
-        {% for optionalService in form.optionalService %}
+        {% for discretionarySpending in form.discretionarySpending %}
             <li class="bg-info">
-                {{ form_row(optionalService.name) }}
-                {{ form_row(optionalService.price) }}
+                {{ form_row(discretionarySpending.description) }}
             </li>
         {% endfor %}
     </ul>
-    {{ form_row(form.exam) }}
     {{ form_row(form.semanas) }}
     {{ form_row(form.note) }}
-    {% for client in form.client %}
-        {{ form_row(client.first_name) }}
-        {{ form_row(client.last_name) }}
-        {{ form_row(client.indentification) }}
-        {{ form_row(client.telephone) }}
-        {{ form_row(client.adress) }}
-        {{ form_row(client.notes) }}
-    {% endfor %}
-
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Guardar</button>
@@ -65,7 +64,7 @@
     <script type="text/javascript">
         // setup an "add a tag" link
         var $addTagLink = $('<a href="#" class="btn btn-sm btn-warning">Agregar</a>');
-        var $newLinkLi = $('<div class="form-group col-sm-10"></div>').append($addTagLink);
+        var $newLinkLi = $('<div class="col-md-12"></div>').append($addTagLink);
 
         jQuery(document).ready(function() {
             // Get the ul that holds the collection of tags
@@ -109,7 +108,7 @@
             var $newFormLi = $('<li class="bg-info"></li>').append(newForm);
 
             // also add a remove button, just for this example
-            $newFormLi.append('<a href="#" class="remove-tag btn btn-sm"><i class="fa fa-minus-square"></i></a>');
+            //$newFormLi.append('<a href="#" class="remove-tag btn btn-xs btn-danger"><i class="fa fa-minus-square"></i></a>');
 
             $newLinkLi.before($newFormLi);
 
@@ -126,7 +125,7 @@
         }
 
         function addTagFormDeleteLink($tagFormLi) {
-            var $removeFormA = $('<a href="#" class="btn btn-sm"><i class="fa fa-eraser"></i></a>');
+            var $removeFormA = $('<a href="#" class="btn btn-xs btn-danger"><i class="fa fa-eraser"></i></a>');
             $tagFormLi.append($removeFormA);
 
             $removeFormA.on('click', function(e) {

@@ -3,9 +3,12 @@
 namespace TS\CYABundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use TS\CYABundle\Entity\Lodging;
 
 class LodgingType extends AbstractType
 {
@@ -17,8 +20,16 @@ class LodgingType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('type')
-            ->add('price_per_week')
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    Lodging::SIMPLE => Lodging::SIMPLE,
+                    Lodging::DOUBLE => Lodging::DOUBLE,
+                    Lodging::TRIPLE => Lodging::TRIPLE,
+                ]
+            ])
+            ->add('price_per_week', MoneyType::class, [
+                'currency' => 'USD'
+            ])
             ->add('description')
             ->add('headquarter', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Headquarter',

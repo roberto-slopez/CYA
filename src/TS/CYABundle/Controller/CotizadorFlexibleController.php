@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use TS\CYABundle\Entity\Client;
-use TS\CYABundle\Entity\OptionalService;
+use TS\CYABundle\Entity\DiscretionarySpending;
 use TS\CYABundle\Entity\Quotation;
 use TS\CYABundle\Form\QuotationType;
 
@@ -57,8 +57,8 @@ class CotizadorFlexibleController extends BaseController
             ->getByUser($user->getId());
 
         $quotation = new Quotation();
-        $quotation->addClient(new Client());
-        $quotation->addOptionalService(new OptionalService());
+        $quotation->setClient(new Client());
+        //$quotation->addDiscretionarySpending(new DiscretionarySpending());
         $quotation->setSeller($seller);
         $quotation->setType(Quotation::FLEXIBLE);
 

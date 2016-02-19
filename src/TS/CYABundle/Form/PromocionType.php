@@ -3,6 +3,7 @@
 namespace TS\CYABundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,8 @@ class PromocionType extends AbstractType
         $builder
             ->add('name')
             ->add('code')
-            ->add('percentage')
+            ->add('percentage', PercentType::class)
+            ->add('enable')
         ;
     }
     

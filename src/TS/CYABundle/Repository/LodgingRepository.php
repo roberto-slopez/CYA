@@ -17,5 +17,16 @@ use Doctrine\ORM\Query;
  */
 class LodgingRepository extends EntityRepository
 {
+    /**
+     * @param $headquartersId
+     * @return array
+     */
+    public function getByHeadquartersId($headquartersId)
+    {
+        $qb = $this->createQueryBuilder('lodging');
+        $qb->where('lodging.headquarters_id=:headquartersId')
+            ->setParameter('headquartersId', $headquartersId);
 
+        return $qb->getQuery()->getArrayResult();
+    }
 }

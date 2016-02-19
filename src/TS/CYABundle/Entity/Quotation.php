@@ -12,7 +12,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
  * TS\CYABundle\Entity\Quotation
  *
  * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\QuotationRepository")
- * @ORM\Table(name="Quotation", indexes={@ORM\Index(name="fk_Flexible_Country1_idx", columns={"country_id"}), @ORM\Index(name="fk_Flexible_City1_idx", columns={"city_id"}), @ORM\Index(name="fk_Flexible_headquarters1_idx", columns={"headquarters_id"}), @ORM\Index(name="fk_Flexible_Client1_idx", columns={"client_id"}), @ORM\Index(name="fk_Flexible_Seller1_idx", columns={"seller_id"}), @ORM\Index(name="fk_Flexible_Lodging1_idx", columns={"lodging_id"}), @ORM\Index(name="fk_Flexible_Service1_idx", columns={"service_id"}), @ORM\Index(name="fk_Flexible_OptionalService1_idx", columns={"optionalService_id"}), @ORM\Index(name="fk_Flexible_Course1_idx", columns={"course_id"}), @ORM\Index(name="fk_Quotation_Promociones1_idx", columns={"promociones_id"}), @ORM\Index(name="fk_Quotation_Package1_idx", columns={"package_id"})})
+ * @ORM\Table(name="Quotation", indexes={@ORM\Index(name="fk_Flexible_Country1_idx", columns={"country_id"}), @ORM\Index(name="fk_Flexible_City1_idx", columns={"city_id"}), @ORM\Index(name="fk_Flexible_headquarters1_idx", columns={"headquarters_id"}), @ORM\Index(name="fk_Flexible_Client1_idx", columns={"client_id"}), @ORM\Index(name="fk_Flexible_Seller1_idx", columns={"seller_id"}), @ORM\Index(name="fk_Flexible_Lodging1_idx", columns={"lodging_id"}), @ORM\Index(name="fk_Flexible_Service1_idx", columns={"service_id"}), @ORM\Index(name="fk_Flexible_OptionalService1_idx", columns={"discretionarySpending_id"}), @ORM\Index(name="fk_Flexible_Course1_idx", columns={"course_id"}), @ORM\Index(name="fk_Quotation_Promociones1_idx", columns={"promociones_id"}), @ORM\Index(name="fk_Quotation_Package1_idx", columns={"package_id"})})
  */
 class Quotation
 {
@@ -21,6 +21,8 @@ class Quotation
 
     const FLEXIBLE = 'FLEXIBLE';
     const PACKAGE = 'PACKAGE';
+    const EXAM = 'EXAM';
+
     /**
      * @ORM\Column(type="guid")
      * @ORM\Id
@@ -62,11 +64,6 @@ class Quotation
      * @ORM\Column(type="string")
      */
     protected $service_id;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $optionalService_id;
 
     /**
      * @ORM\Column(type="string")
@@ -141,10 +138,10 @@ class Quotation
     protected $service;
 
     /**
-     * @ORM\ManyToOne(targetEntity="OptionalService", inversedBy="quotations")
-     * @ORM\JoinColumn(name="optionalService_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="DiscretionarySpending", inversedBy="quotations")
+     * @ORM\JoinColumn(name="discretionarySpending_id", referencedColumnName="id", nullable=false)
      */
-    protected $optionalService;
+    protected $discretionarySpending;
 
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="quotations")
@@ -172,8 +169,7 @@ class Quotation
 
     public function __construct()
     {
-        $this->client =  new ArrayCollection();
-        $this->optionalService = new ArrayCollection();
+        $this->discretionarySpending = new ArrayCollection();
     }
 
     /**
@@ -358,29 +354,6 @@ class Quotation
     public function getServiceId()
     {
         return $this->service_id;
-    }
-
-    /**
-     * Set the value of optionalService_id.
-     *
-     * @param integer $optionalService_id
-     * @return \TS\CYABundle\Entity\Quotation
-     */
-    public function setOptionalServiceId($optionalService_id)
-    {
-        $this->optionalService_id = $optionalService_id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of optionalService_id.
-     *
-     * @return integer
-     */
-    public function getOptionalServiceId()
-    {
-        return $this->optionalService_id;
     }
 
     /**
@@ -594,20 +567,9 @@ class Quotation
      * @param \TS\CYABundle\Entity\Client $client
      * @return $this
      */
-    public function addClient(Client $client)
+    public function setClient(Client $client)
     {
-        $this->client->add($client);
-
-        return $this;
-    }
-
-    /**
-     * @param \TS\CYABundle\Entity\Client $client
-     * @return $this
-     */
-    public function removeQuotation(Client $client)
-    {
-        $this->client->removeElement($client);
+        $this->client = $client;
 
         return $this;
     }
@@ -692,23 +654,23 @@ class Quotation
     }
 
     /**
-     * @param OptionalService $optionalService
+     * @param DiscretionarySpending $discretionarySpending
      * @return $this
      */
-    public function addOptionalService(OptionalService $optionalService)
+    public function addDiscretionarySpending(DiscretionarySpending $discretionarySpending)
     {
-        $this->optionalService[] = $optionalService;
+        $this->discretionarySpending[] = $discretionarySpending;
 
         return $this;
     }
 
     /**
-     * @param OptionalService $optionalService
+     * @param DiscretionarySpending $discretionarySpending
      * @return $this
      */
-    public function removeOptionalService(OptionalService $optionalService)
+    public function removeDiscretionarySpending(DiscretionarySpending $discretionarySpending)
     {
-        $this->optionalService->removeElement($optionalService);
+        $this->discretionarySpending->removeElement($discretionarySpending);
 
         return $this;
     }
@@ -716,9 +678,9 @@ class Quotation
     /**
      * @return ArrayCollection
      */
-    public function getOptionalService()
+    public function getDiscretionarySpending()
     {
-        return $this->optionalService;
+        return $this->discretionarySpending;
     }
 
     /**
@@ -808,6 +770,6 @@ class Quotation
 
     public function __sleep()
     {
-        return array('id', 'country_id', 'city_id', 'headquarters_id', 'client_id', 'seller_id', 'lodging_id', 'service_id', 'optionalService_id', 'course_id', 'semanas', 'note', 'type', 'promociones_id', 'package_id');
+        return array('id', 'country_id', 'city_id', 'headquarters_id', 'client_id', 'seller_id', 'lodging_id', 'service_id', 'discretionarySpending_id', 'course_id', 'semanas', 'note', 'type', 'promociones_id', 'package_id');
     }
 }

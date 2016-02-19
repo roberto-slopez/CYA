@@ -21,7 +21,7 @@ Headquarters: Sedes
 Date: Fecha
 Local: Local
 SIMPLE: Simple
-DOBLE: Doble
+DOUBLE: Doble
 TRIPLE: Triple
 Price per week: Precio por semana
 Actions: Acciones
@@ -56,3 +56,10 @@ Choose an option: Seleccionar opción
 SCHOOL: Colegio
 COLLEGE: Universidad
 OTHERS: Otros
+Amount: Monto
+Abbreviation: Abreviatura
+OPTIONAL: Opcional
+REQUIRED: Obligatorio
+Percentage: Porcentaje
+Course price: Precio curso
+Discretionary spending: Gastos opcionales

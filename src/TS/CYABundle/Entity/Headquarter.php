@@ -63,12 +63,6 @@ class Headquarter
     protected $lodgings;
 
     /**
-     * @ORM\OneToMany(targetEntity="OptionalService", mappedBy="headquarter")
-     * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
-     */
-    protected $optionalServices;
-
-    /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="headquarter")
      * @ORM\JoinColumn(name="id", referencedColumnName="headquarters_id", nullable=false)
      */
@@ -86,12 +80,17 @@ class Headquarter
      */
     protected $city;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Package", mappedBy="headquarter")
+     * @ORM\JoinColumn(name="id", referencedColumnName="headquarter_id", nullable=false)
+     */
+    protected $package;
+
     public function __construct()
     {
         $this->exam = new ArrayCollection();
         $this->courses = new ArrayCollection();
         $this->lodgings = new ArrayCollection();
-        $this->optionalServices = new ArrayCollection();
         $this->quotations = new ArrayCollection();
         $this->services = new ArrayCollection();
     }
@@ -117,6 +116,25 @@ class Headquarter
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPackage()
+    {
+        return $this->package;
+    }
+
+    /**
+     * @param $package
+     * @return $this
+     */
+    public function setPackage($package)
+    {
+        $this->package = $package;
+
+        return $this;
     }
 
     /**
@@ -294,42 +312,6 @@ class Headquarter
     public function getLodgings()
     {
         return $this->lodgings;
-    }
-
-    /**
-     * Add OptionalService entity to collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\OptionalService $optionalService
-     * @return \TS\CYABundle\Entity\Headquarter
-     */
-    public function addOptionalService(OptionalService $optionalService)
-    {
-        $this->optionalServices[] = $optionalService;
-
-        return $this;
-    }
-
-    /**
-     * Remove OptionalService entity from collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\OptionalService $optionalService
-     * @return \TS\CYABundle\Entity\Headquarter
-     */
-    public function removeOptionalService(OptionalService $optionalService)
-    {
-        $this->optionalServices->removeElement($optionalService);
-
-        return $this;
-    }
-
-    /**
-     * Get OptionalService entity collection (one to many).
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOptionalServices()
-    {
-        return $this->optionalServices;
     }
 
     /**

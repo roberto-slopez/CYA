@@ -13,17 +13,15 @@
         {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Percentage</th>
-                <th>Actions</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Code{% endtrans %}</th>
+                <th>{% trans %}Percentage{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
         {% for promocion in promocions %}
             <tr>
-                <td><a href="{{ path('admin_promocion_show', { 'id': promocion.id }) }}">{{ promocion.id }}</a></td>
                 <td>{{ promocion.name }}</td>
                 <td>{{ promocion.code }}</td>
                 <td>{{ promocion.percentage }}</td>

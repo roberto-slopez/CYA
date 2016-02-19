@@ -10,10 +10,16 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TS\CYABundle\Form\EventListener\AddCityFieldSubscriber;
+use TS\CYABundle\Form\EventListener\AddCourseFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddHeadquarterFieldSubscriber;
 use TS\CYABundle\Form\ClientType;
-use TS\CYABundle\Form\OptionalServiceType;
+use TS\CYABundle\Form\EventListener\AddLodgingFieldSubscriber;
+use TS\CYABundle\Form\EventListener\AddServiceFieldSubscriber;
 
+/**
+ * Class QuotationType
+ * @package TS\CYABundle\Form
+ */
 class QuotationType extends AbstractType
 {
     /**
@@ -24,38 +30,23 @@ class QuotationType extends AbstractType
     {
         $builder->addEventSubscriber(new AddCityFieldSubscriber('city'));
         $builder->addEventSubscriber(new AddHeadquarterFieldSubscriber('headquarter'));
+
+        $builder->addEventSubscriber(new AddLodgingFieldSubscriber('lodging'));
+        $builder->addEventSubscriber(new AddCourseFieldSubscriber('course'));
+        $builder->addEventSubscriber(new AddServiceFieldSubscriber('service'));
         $builder
             ->add('country', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Country',
                 'choice_label' => 'name',
                 'placeholder' => 'Choose an option',
-                'attr' => ['class' => 'country_selector']
+                'attr' => ['class' => 'country_selector select-select2']
             ])
-            ->add('client', CollectionType::class, [
-                'entry_type' => ClientType::class,
-                'allow_add' => true
-            ])
-            ->add('lodging', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\Lodging',
-                'choice_label' => 'name'
-            ])
-            ->add('service', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\Service',
-                'choice_label' => 'name'
-            ])
-            ->add('optionalService', CollectionType::class, [
-                'entry_type' => OptionalServiceType::class,
+            ->add('client', ClientType::class)
+            ->add('discretionarySpending', CollectionType::class, [
+                'entry_type' => DiscretionarySpendingType::class,
                 'allow_add' => true,
                 'by_reference' => false,
                 'allow_delete' => true
-            ])
-            ->add('course', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\Course',
-                'choice_label' => 'name'
-            ])
-            ->add('exam', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\Exam',
-                'choice_label' => 'name'
             ])
             ->add('semanas', IntegerType::class, [
                 'label' => 'Weeks'
@@ -63,7 +54,7 @@ class QuotationType extends AbstractType
             ->add('note')
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
