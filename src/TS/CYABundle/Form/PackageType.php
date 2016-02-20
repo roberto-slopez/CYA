@@ -4,10 +4,12 @@ namespace TS\CYABundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use TS\CYABundle\Form\EventListener\AddCourseFieldSubscriber;
 
 class PackageType extends AbstractType
 {
@@ -17,10 +19,14 @@ class PackageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->addEventSubscriber(new AddCourseFieldSubscriber('course'));
         $builder
             ->add('name')
-            ->add('lodging_price', MoneyType::class, [
-                'currency' => 'USD'
+            ->add('headquarter', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Headquarter',
+                'choice_label' => 'name',
+                'placeholder' => 'Choose an option',
+                'attr' => ['class' => 'headquarter_selector select-select2']
             ])
             ->add('course_price', MoneyType::class, [
                 'currency' => 'USD'
@@ -28,13 +34,11 @@ class PackageType extends AbstractType
             ->add('semanas', IntegerType::class, [
                 'label' => 'Weeks'
             ])
-            ->add('headquarter', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\Headquarter',
-                'choice_label' => 'name'
-            ])
-            ->add('course', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\Course',
-                'choice_label' => 'name'
+            ->add('packageLodging', CollectionType::class, [
+                'entry_type' => PackageLodgingType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' => true
             ])
         ;
     }

@@ -4,7 +4,7 @@
 <!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>Administrador | TS</title>
+    <title>CYA</title>
     <meta name="description" content="Administrador de cotizador">
     <meta name="author" content="tscompany">
     <meta name="robots" content="noindex, nofollow">
@@ -89,7 +89,7 @@
                             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Cotizadores</span></a>
                             <ul>
                                 <li>
-                                    <a onclick="navSwitch(this)" href="{{ url('cotizador_flexible_index') }}">{% trans %} Flexible quotation {% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url('cotizador_index') }}">{% trans %} Quotation {% endtrans %}</a>
                                 </li>
                             </ul>
                         </li>
@@ -127,10 +127,13 @@
                                     <a onclick="navSwitch(this)" href="{{ url("admin_seller_index") }}">{% trans %}Seller{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_promocion_index") }}">{% trans %}Promocion{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_package_index") }}">{% trans %}Package{% endtrans %}</a>
                                 </li>
                                 <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_package_index") }}">{% trans %}Package{% endtrans %}</a>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_exam_index") }}">{% trans %}Exam{% endtrans %}</a>
+                                </li>
+                                <li>
+                                    <a onclick="navSwitch(this)" href="{{ url("admin_promocion_index") }}">{% trans %}Promocion{% endtrans %}</a>
                                 </li>
                             </ul>
                         </li>
@@ -249,7 +252,7 @@
                     Crafted with <i class="fa fa-heart text-danger"></i> by <a href="https://twitter.com/roberto_slopez" target="_blank">@roberto-slopez</a>
                 </div>
                 <div class="pull-left">
-                    <span id="year-copy"></span> &copy; <a href="https://tscompany.org" target="_blank">TSCompany</a>
+                    <span id="year-copy"></span> &copy; <a href="http://denetz.net" target="_blank">Denetz</a>
                 </div>
             </footer>
         </div>

@@ -76,35 +76,50 @@ class BaseController extends Controller
      */
     public function calculateValues(Quotation $quotation, $type)
     {
+        $totalService = 0;
+        foreach ($quotation->getService() as $service) {
+            $totalService = $service->getPrice();
+        }
+        $quotation->setAmountService(round($totalService, 2));
+        $idCoin = $quotation->getCountry()->getCoin()->getId();
+        $current = $this->getDoctrine()->getManager()
+            ->getRepository('TSCYABundle:ExchangeRateUSD')
+            ->getCurrentExchangeRateUSDByCoinId($idCoin);
+
+        $localCountryValue = $this->getDoctrine()->getManager()
+            ->getRepository('TSCYABundle:ExchangeRateUSD')
+            ->getLocalCountryValue();
+
         if ($type == Quotation::FLEXIBLE) {
-            $quotation->setAmountLodging(
-                round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2)
-            );
-
+            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
+            $quotation->setAmountLodging($lodgingAmount);
             $quotation->setAmountCourse(round($quotation->getCourse()->getPrice() * $quotation->getSemanas(), 2));
-            $totalService = 0;
-            foreach ($quotation->getService() as $service) {
-                $totalService = $service->getPrice();
-            }
+        } elseif (Quotation::PACKAGE) {
+            $quotation->setSemanas($quotation->getPackage()->getSemanas());
+            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
 
-            $quotation->setAmountService(round($totalService, 2));
-            $totalLocal = $quotation->getAmountCourse() + $quotation->getAmountLodging() + $quotation->getAmountService(
-                );
+            $packageLodging = $this->getDoctrine()->getManager()
+                ->getRepository('TSCYABundle:PackageLodging')
+                ->getPriceLodgingById($quotation->getLodging()->getId())
+            ;
 
-            $quotation->setTotalLocal($totalLocal);
-            $idCoin = $quotation->getCountry()->getCoin()->getId();
-            $current = $this->getDoctrine()->getManager()
-                ->getRepository('TSCYABundle:ExchangeRateUSD')
-                ->getCurrentExchangeRateUSDByCoinId($idCoin);
+            $lodgingPrice = $packageLodging->getLodgingPrice();
+            $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;
 
-            $localCountryValue = $this->getDoctrine()->getManager()
-                ->getRepository('TSCYABundle:ExchangeRateUSD')
-                ->getLocalCountryValue();
-
-            $quotation->setTotalUSD(round($totalLocal * $current, 2));
-            $quotation->setTotalLocalCountry(round($quotation->getTotalUSD() * $localCountryValue, 2));
+            $quotation->setAmountLodging(round($amountLodging, 2));
+            $quotation->setAmountCourse(round($quotation->getPackage()->getCoursePrice(), 2));
+            $quotation->setCourse($quotation->getPackage()->getCourse());
+        } elseif (Quotation::EXAM) {
 
         }
+
+        $totalLocal = $quotation->getAmountCourse() +
+            $quotation->getAmountLodging() +
+            $quotation->getAmountService();
+
+        $quotation->setTotalLocal($totalLocal);
+        $quotation->setTotalUSD(round($totalLocal * $current, 2));
+        $quotation->setTotalLocalCountry(round($quotation->getTotalUSD() * $localCountryValue, 2));
 
         return $quotation;
     }

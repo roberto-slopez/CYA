@@ -20,14 +20,17 @@ class QuotationRepository extends EntityRepository
 {
     /**
      * @param $limit
-     * @param string $type
+     * @param null $type
      * @return array
      */
-    public function getLastRecords($limit, $type = Quotation::FLEXIBLE) {
+    public function getLastRecords($limit, $type = null)
+    {
         $qb = $this->createQueryBuilder('quotation');
-        $qb->where('quotation.type =:typeQuotation')
-            ->setParameter('typeQuotation', $type)
-        ;
+
+        if ($type) {
+            $qb->where('quotation.type =:typeQuotation')->setParameter('typeQuotation', $type);
+        }
+        $qb->orderBy('quotation.updatedAt', 'desc');
         $qb->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();

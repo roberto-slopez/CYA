@@ -1,18 +1,18 @@
 {% extends '::base.html.twig' %}
 {% block iconHead %}
-    <i class="gi gi-pencil"></i>
+    <i class="gi gi-package"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
     Cotizador
 {% endblock pageTitle %}
 {% block subtitle %}
-    Flexible
+    Paquete
 {% endblock subtitle %}
 
 {% block action %}
     <div class="block-options pull-right">
-        <a data-original-title="Regresar" href="{{ url('cotizador_flexible_index') }}" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title=""><i class="fa fa-chevron-left"></i></a>
+        <a data-original-title="Regresar" href="{{ url('cotizador_index') }}" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title=""><i class="fa fa-chevron-left"></i></a>
     </div>
 {% endblock action %}
 
@@ -33,7 +33,7 @@
     {{ form_row(form.city) }}
     {{ form_row(form.headquarter) }}
     {{ form_row(form.lodging) }}
-    {{ form_row(form.course) }}
+    {{ form_row(form.package) }}
     {{ form_row(form.service) }}
     <ul class="item list list-unstyled form-inline text-center" data-prototype="{{ form_widget(form.discretionarySpending.vars.prototype)|e }}">
 
@@ -139,5 +139,5 @@
     </script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/tscya/js/requestCotizadorFlexible.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/tscya/js/requestCotizadorPackage.js') }}"></script>
 {% endblock extraJS %}

@@ -17,5 +17,17 @@ use Doctrine\ORM\Query;
  */
 class PackageRepository extends EntityRepository
 {
+    /**
+     * @param $headquartersId
+     * @return array
+     */
+    public function getByHeadquarter($headquartersId)
+    {
+        $qb = $this->createQueryBuilder('package');
+        $qb->leftJoin('package.headquarter', 'headquarter')
+            ->where('headquarter.id=:headquartersId')
+            ->setParameter('headquartersId', $headquartersId);
 
+        return $qb->getQuery()->getArrayResult();
+    }
 }

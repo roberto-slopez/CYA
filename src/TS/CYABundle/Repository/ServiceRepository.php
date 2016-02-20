@@ -21,7 +21,7 @@ class ServiceRepository extends EntityRepository
      * @param $headquartersId
      * @return array
      */
-    public function getByHeadquartersId($headquartersId)
+    public function getByHeadquarter($headquartersId)
     {
         $qb = $this->createQueryBuilder('service');
         $qb->where('service.headquarters_id=:headquartersId')

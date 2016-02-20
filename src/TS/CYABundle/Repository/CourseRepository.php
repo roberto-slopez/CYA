@@ -21,7 +21,7 @@ class CourseRepository extends EntityRepository
      * @param $headquartersId
      * @return array
      */
-    public function getByHeadquartersId($headquartersId)
+    public function getByHeadquarter($headquartersId)
     {
         $qb = $this->createQueryBuilder('course');
         $qb->where('course.headquarters_id=:headquartersId')

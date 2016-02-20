@@ -54,6 +54,7 @@ class AddCourseFieldSubscriber implements EventSubscriberInterface
         $formOptions = [
             'class' => 'TS\CYABundle\Entity\Course',
             'placeholder' => 'Choose an option',
+            'choice_label' => 'name',
             'label' => 'Course',
             'attr' => ['class' => 'course_selector select-select2'],
             'query_builder' => function (EntityRepository $repository) use ($headquarter) {

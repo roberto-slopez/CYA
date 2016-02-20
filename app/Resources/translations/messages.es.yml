@@ -49,9 +49,9 @@ ROLE_ADMIN: Administrador
 ROLE_USER: Usuario
 ROLE_SELLER: Vendedor
 Roles: Roles
-Flexible quotation: Cotizador flexible
+Quotation: Cotizador
 Optional service: Servicio opcional
-Exam: Examen
+Exam: Exámen
 Choose an option: Seleccionar opción
 SCHOOL: Colegio
 COLLEGE: Universidad
@@ -64,3 +64,4 @@ Percentage: Porcentaje
 Course price: Precio curso
 Discretionary spending: Gastos opcionales
 Is local country: Es moneda local
+Package lodging: Asignacion alojamiento

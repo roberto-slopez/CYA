@@ -26,11 +26,6 @@ class Package
     protected $id;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    protected $lodging_price;
-
-    /**
      * @ORM\Column(name="`name`", type="string", length=250)
      */
     protected $name;
@@ -49,6 +44,11 @@ class Package
      * @ORM\Column(type="string")
      */
     protected $course_id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PackageLodging", mappedBy="package", cascade={"persist"})
+     */
+    protected $packageLodging;
 
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="package")
@@ -71,6 +71,7 @@ class Package
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
+        $this->packageLodging = new ArrayCollection();
     }
 
     /**
@@ -154,29 +155,6 @@ class Package
     }
 
     /**
-     * Set the value of lodging_price.
-     *
-     * @param float $lodging_price
-     * @return \TS\CYABundle\Entity\Package
-     */
-    public function setLodgingPrice($lodging_price)
-    {
-        $this->lodging_price = $lodging_price;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of lodging_price.
-     *
-     * @return float
-     */
-    public function getLodgingPrice()
-    {
-        return $this->lodging_price;
-    }
-
-    /**
      * Set the value of name.
      *
      * @param string $name
@@ -256,6 +234,48 @@ class Package
     public function getQuotations()
     {
         return $this->quotations;
+    }
+
+
+    /**
+     * @param PackageLodging $packageLodging
+     * @return $this
+     */
+    public function addPackageLodging(PackageLodging $packageLodging)
+    {
+        $packageLodging->setPackage($this);
+        $this->packageLodging->add($packageLodging);
+
+        return $this;
+    }
+
+    /**
+     * @param PackageLodging $packageLodging
+     * @return $this
+     */
+    public function removePackageLodging(PackageLodging $packageLodging)
+    {
+        $this->packageLodging->removeElement($packageLodging);
+
+        return $this;
+    }
+
+    /**
+     * Get Quotation entity collection (one to many).
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPackageLodging()
+    {
+        return $this->packageLodging;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) 'Package' . $this->getId();
     }
 
     public function __sleep()

@@ -66,7 +66,7 @@ class Quotation
     protected $course_id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $semanas;
 
@@ -158,7 +158,7 @@ class Quotation
 
     /**
      * @ORM\ManyToMany(targetEntity="Service", mappedBy="quotations")
-     * @ORM\JoinColumn(name="service_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="service_id", referencedColumnName="id", nullable=true)
      */
     protected $service;
 
@@ -169,7 +169,7 @@ class Quotation
 
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="quotations")
-     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=true)
      */
     protected $course;
 

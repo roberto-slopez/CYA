@@ -67,7 +67,7 @@ class MainController extends BaseController
     {
         $headquarterId = $request->request->get('headquarterId');
         $em = $this->getDoctrine()->getManager();
-        $services = $em->getRepository('TSCYABundle:Service')->getByHeadquartersId($headquarterId);
+        $services = $em->getRepository('TSCYABundle:Service')->getByHeadquarter($headquarterId);
 
         return new JsonResponse($services);
     }
@@ -82,7 +82,7 @@ class MainController extends BaseController
     {
         $headquarterId = $request->request->get('headquarterId');
         $em = $this->getDoctrine()->getManager();
-        $courses = $em->getRepository('TSCYABundle:Course')->getByHeadquartersId($headquarterId);
+        $courses = $em->getRepository('TSCYABundle:Course')->getByHeadquarter($headquarterId);
 
         return new JsonResponse($courses);
     }
@@ -97,7 +97,37 @@ class MainController extends BaseController
     {
         $headquarterId = $request->request->get('headquarterId');
         $em = $this->getDoctrine()->getManager();
-        $lodging = $em->getRepository('TSCYABundle:Lodging')->getByHeadquartersId($headquarterId);
+        $lodging = $em->getRepository('TSCYABundle:Lodging')->getByHeadquarter($headquarterId);
+
+        return new JsonResponse($lodging);
+    }
+
+    /**
+     * @Route("/packages", name="select_packages", options={"expose"=true})
+     * @Method("POST")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function packageAction(Request $request)
+    {
+        $headquarterId = $request->request->get('headquarterId');
+        $em = $this->getDoctrine()->getManager();
+        $lodging = $em->getRepository('TSCYABundle:Package')->getByHeadquarter($headquarterId);
+
+        return new JsonResponse($lodging);
+    }
+
+    /**
+     * @Route("/exams", name="select_exams", options={"expose"=true})
+     * @Method("POST")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function examAction(Request $request)
+    {
+        $headquarterId = $request->request->get('headquarterId');
+        $em = $this->getDoctrine()->getManager();
+        $lodging = $em->getRepository('TSCYABundle:Exam')->getByHeadquarter($headquarterId);
 
         return new JsonResponse($lodging);
     }

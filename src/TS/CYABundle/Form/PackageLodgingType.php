@@ -4,11 +4,10 @@ namespace TS\CYABundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ExamType extends AbstractType
+class PackageLodgingType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,18 +16,14 @@ class ExamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('price', MoneyType::class, [
-                'currency' => 'USD'
-            ])
-            ->add('enable')
-            ->add('headquarter', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\Headquarter',
-                'choice_label' => 'name',
+            ->add('lodging', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Lodging',
+                'choice_label' => 'Label',
+                'label' => 'Lodging',
                 'placeholder' => 'Choose an option',
-                'attr' => ['class' => 'headquarter_selector select-select2']
+                'attr' => ['class' => 'lodging_selector select-select2'],
             ])
+            ->add('lodging_price')
         ;
     }
     
@@ -38,7 +33,7 @@ class ExamType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TS\CYABundle\Entity\Exam'
+            'data_class' => 'TS\CYABundle\Entity\PackageLodging'
         ));
     }
 }

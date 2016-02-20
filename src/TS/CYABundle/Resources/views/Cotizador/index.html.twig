@@ -12,7 +12,16 @@
 
 {% block action %}
     <div class="block-options pull-right">
-        <a data-original-title="Nueva cotización" href="{{ url('cotizador_flexible_new') }}" class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
+        <div class="btn-group btn-group-sm">
+            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Cotizar"><span class="caret"></span></a>
+            <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                <li>
+                    <a href="{{ url('cotizador_flexible_new') }}"><i class="pull-right gi gi-pen"></i> Flexible</a>
+                    <a href="{{ url('cotizador_paquete_new') }}"><i class="pull-right gi gi-package"></i> Paquete</a>
+                    <a href="{{ url('cotizador_examen_new') }}"><i class="pull-right gi gi-notes"></i> Examen</a>
+                </li>
+            </ul>
+        </div>
     </div>
 {% endblock action %}
 {% block titlePanel %}Lista{% endblock titlePanel %}
@@ -33,7 +42,7 @@
                 <td>{{ quotation.client.fullName }}</td>
                 <td>{{ quotation.semanas }}</td>
                 <td>
-                    Editar
+                    Delete
                 </td>
             </tr>
         {% endfor %}

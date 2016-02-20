@@ -94,6 +94,9 @@ class Lodging
         return $this->id;
     }
 
+    public function getLabel() {
+        return $this->getName().'-'.$this->getHeadquarter()->getName();
+    }
     /**
      * Set the value of name.
      *
