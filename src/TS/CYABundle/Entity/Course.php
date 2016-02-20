@@ -306,6 +306,15 @@ class Course
     {
         return $this->package;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getName() . $this->getId();
+    }
+
     public function __sleep()
     {
         return array('id', 'name', 'price', 'description', 'enable', 'headquarters_id');

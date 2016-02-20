@@ -279,6 +279,14 @@ class Country
         return $this->coin;
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getName() . $this->getId();
+    }
+
     public function __sleep()
     {
         return array('id', 'code', 'name', 'description', 'coin_id');

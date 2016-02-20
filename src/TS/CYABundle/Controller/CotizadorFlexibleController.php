@@ -63,18 +63,15 @@ class CotizadorFlexibleController extends BaseController
         $form = $this->createForm(QuotationType::class, $quotation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            \ChromePhp::info($quotation->getLodging());
+        if ($form->isSubmitted() && $form->isValid()) {
             $quotation = $this->calculateValues($quotation, Quotation::FLEXIBLE);
-            \ChromePhp::info($quotation);
-
-            /*$em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($quotation);
-            $em->flush();*/
-/*
-            $this->setFlashAviso('Registro agregado correctamente');
+            $em->flush();
 
-            return $this->redirectToRoute('cotizador_flexible_index');*/
+            $this->setFlashInfo('Registro agregado correctamente');
+
+            return $this->redirectToRoute('cotizador_flexible_index');
         }
 
         return [

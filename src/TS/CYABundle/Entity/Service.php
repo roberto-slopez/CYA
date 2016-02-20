@@ -262,6 +262,14 @@ class Service
         return $this->headquarter;
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getName() . $this->getId();
+    }
+
     public function __sleep()
     {
         return array('id', 'name', 'description', 'price', 'headquarters_id');

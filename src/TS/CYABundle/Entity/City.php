@@ -279,6 +279,17 @@ class City
         return $this->country;
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getName() . $this->getId();
+    }
+
+    /**
+     * @return array
+     */
     public function __sleep()
     {
         return array('id', 'code', 'name', 'description', 'country_id');

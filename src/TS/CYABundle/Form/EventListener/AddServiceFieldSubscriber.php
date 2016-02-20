@@ -89,9 +89,6 @@ class AddServiceFieldSubscriber implements EventSubscriberInterface
             $headquartersId = ($service) ? $service->getHeadquartersId() : null;
         }
 
-        /*if (null === $headquartersId) {
-            return;
-        }*/
         $this->addServiceForm($form, $headquartersId);
     }
 

@@ -12,7 +12,7 @@ use TS\CYABundle\Doctrine\Behaviors\Loggable\Loggable as MoocAdminBundleLoggable
  * TS\CYABundle\Entity\Quotation
  *
  * @ORM\Entity(repositoryClass="TS\CYABundle\Repository\QuotationRepository")
- * @ORM\Table(name="Quotation", indexes={@ORM\Index(name="fk_Flexible_Country1_idx", columns={"country_id"}), @ORM\Index(name="fk_Flexible_City1_idx", columns={"city_id"}), @ORM\Index(name="fk_Flexible_headquarters1_idx", columns={"headquarters_id"}), @ORM\Index(name="fk_Flexible_Client1_idx", columns={"client_id"}), @ORM\Index(name="fk_Flexible_Seller1_idx", columns={"seller_id"}), @ORM\Index(name="fk_Flexible_Lodging1_idx", columns={"lodging_id"}), @ORM\Index(name="fk_Flexible_OptionalService1_idx", columns={"discretionarySpending_id"}), @ORM\Index(name="fk_Flexible_Course1_idx", columns={"course_id"}), @ORM\Index(name="fk_Quotation_Promociones1_idx", columns={"promociones_id"}), @ORM\Index(name="fk_Quotation_Package1_idx", columns={"package_id"})})
+ * @ORM\Table(name="Quotation", indexes={@ORM\Index(name="fk_Flexible_Country1_idx", columns={"country_id"}), @ORM\Index(name="fk_Flexible_City1_idx", columns={"city_id"}), @ORM\Index(name="fk_Flexible_headquarters1_idx", columns={"headquarters_id"}), @ORM\Index(name="fk_Flexible_Client1_idx", columns={"client_id"}), @ORM\Index(name="fk_Flexible_Seller1_idx", columns={"seller_id"}), @ORM\Index(name="fk_Flexible_Lodging1_idx", columns={"lodging_id"}), @ORM\Index(name="fk_Flexible_Course1_idx", columns={"course_id"}), @ORM\Index(name="fk_Quotation_Promociones1_idx", columns={"promociones_id"}), @ORM\Index(name="fk_Quotation_Package1_idx", columns={"package_id"})})
  */
 class Quotation
 {
@@ -139,7 +139,7 @@ class Quotation
     protected $headquarter;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="quotations")
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="quotations", cascade={"persist"})
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
      */
     protected $client;
@@ -163,8 +163,7 @@ class Quotation
     protected $service;
 
     /**
-     * @ORM\ManyToOne(targetEntity="DiscretionarySpending", inversedBy="quotations", cascade={"persist"})
-     * @ORM\JoinColumn(name="discretionarySpending_id", referencedColumnName="id", nullable=false)
+     * @ORM\OneToMany(targetEntity="DiscretionarySpending", mappedBy="quotations", cascade={"persist"})
      */
     protected $discretionarySpending;
 
@@ -188,7 +187,7 @@ class Quotation
 
     /**
      * @ORM\ManyToOne(targetEntity="Exam", inversedBy="quotations")
-     * @ORM\JoinColumn(name="exam_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="exam_id", referencedColumnName="id", nullable=true)
      */
     protected $exam;
 
@@ -780,7 +779,8 @@ class Quotation
      */
     public function addDiscretionarySpending(DiscretionarySpending $discretionarySpending)
     {
-        $this->discretionarySpending[] = $discretionarySpending;
+        $discretionarySpending->setQuotations($this);
+        $this->discretionarySpending->add($discretionarySpending);
 
         return $this;
     }
@@ -891,6 +891,6 @@ class Quotation
 
     public function __sleep()
     {
-        return array('id', 'country_id', 'city_id', 'headquarters_id', 'client_id', 'seller_id', 'lodging_id', 'service_id', 'discretionarySpending_id', 'course_id', 'semanas', 'note', 'type', 'promociones_id', 'package_id');
+        return array('id', 'country_id', 'city_id', 'headquarters_id', 'client_id', 'seller_id', 'lodging_id', 'service_id', 'course_id', 'semanas', 'note', 'type', 'promociones_id', 'package_id');
     }
 }

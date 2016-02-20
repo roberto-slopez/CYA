@@ -37,6 +37,7 @@ class ExchangeRateUSDRepository extends EntityRepository
             ->setParameter('isLocalCountry', true)
             ->setMaxResults(1);
 
-        return $qb->getQuery()->getResult()[0]->getLocal();
+        $result = $qb->getQuery()->getResult();
+        return $result[0]->getLocal();
     }
 }

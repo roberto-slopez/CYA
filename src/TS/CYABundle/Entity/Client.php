@@ -270,6 +270,14 @@ class Client
         return $this->quotations;
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) 'client' . $this->getId();
+    }
+
     public function __sleep()
     {
         return array('id', 'first_name', 'last_name', 'indentification', 'telephone', 'adress', 'notes');

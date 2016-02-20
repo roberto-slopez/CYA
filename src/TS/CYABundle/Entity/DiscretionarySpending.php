@@ -42,14 +42,13 @@ class DiscretionarySpending
     protected $price;
 
     /**
-     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="discretionarySpending")
-     * @ORM\JoinColumn(name="id", referencedColumnName="discretionarySpending_id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Quotation", inversedBy="discretionarySpending")
+     * @ORM\JoinColumn(name="quotation_id", referencedColumnName="id", nullable=false)
      */
     protected $quotations;
 
     public function __construct()
     {
-        $this->quotations = new ArrayCollection();
     }
 
     /**
@@ -145,39 +144,30 @@ class DiscretionarySpending
     }
 
     /**
-     * Add Quotation entity to collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\DiscretionarySpending
-     */
-    public function addQuotation(Quotation $quotation)
-    {
-        $this->quotations[] = $quotation;
-
-        return $this;
-    }
-
-    /**
-     * Remove Quotation entity from collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\Quotation $quotation
-     * @return \TS\CYABundle\Entity\DiscretionarySpending
-     */
-    public function removeQuotation(Quotation $quotation)
-    {
-        $this->quotations->removeElement($quotation);
-
-        return $this;
-    }
-
-    /**
-     * Get Quotation entity collection (one to many).
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return mixed
      */
     public function getQuotations()
     {
         return $this->quotations;
+    }
+
+    /**
+     * @param $quotations
+     * @return $this
+     */
+    public function setQuotations($quotations)
+    {
+        $this->quotations = $quotations;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getName() . $this->getId();
     }
 
     public function __sleep()

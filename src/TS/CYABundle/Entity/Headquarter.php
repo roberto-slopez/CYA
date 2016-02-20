@@ -409,6 +409,14 @@ class Headquarter
         return $this->city;
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getName() . $this->getId();
+    }
+
     public function __sleep()
     {
         return array('id', 'name', 'description', 'type', 'city_id');

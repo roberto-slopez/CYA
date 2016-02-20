@@ -102,7 +102,7 @@ class BaseController extends Controller
                 ->getLocalCountryValue();
 
             $quotation->setTotalUSD(round($totalLocal * $current, 2));
-            $quotation->setTotalLocalCountry(round($quotation->getTotalUSD() / $localCountryValue, 2));
+            $quotation->setTotalLocalCountry(round($quotation->getTotalUSD() * $localCountryValue, 2));
 
         }
 

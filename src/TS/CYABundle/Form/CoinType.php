@@ -19,6 +19,7 @@ class CoinType extends AbstractType
             ->add('symbol')
             ->add('name')
             ->add('description')
+            ->add('isLocalCountry')
         ;
     }
     
