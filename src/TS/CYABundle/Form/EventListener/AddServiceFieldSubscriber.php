@@ -83,9 +83,16 @@ class AddServiceFieldSubscriber implements EventSubscriberInterface
         }
 
         $accessor = PropertyAccess::createPropertyAccessor();
-        $service = $accessor->getValue($data, $this->propertyPathToService);
-        $service = ($service) ? $service->getHeadquartersId() : null;
-        $this->addServiceForm($form, $service);
+        $services = $accessor->getValue($data, $this->propertyPathToService);
+        $headquartersId = null;
+        foreach ($services as $service) {
+            $headquartersId = ($service) ? $service->getHeadquartersId() : null;
+        }
+
+        /*if (null === $headquartersId) {
+            return;
+        }*/
+        $this->addServiceForm($form, $headquartersId);
     }
 
     /**
@@ -96,7 +103,7 @@ class AddServiceFieldSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        $service = array_key_exists('headquarter', $data) ? $data['headquarter'] : null;
-        $this->addServiceForm($form, $service);
+        $headquartersId = array_key_exists('headquarter', $data) ? $data['headquarter'] : null;
+        $this->addServiceForm($form, $headquartersId);
     }
 }

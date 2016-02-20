@@ -17,5 +17,26 @@ use Doctrine\ORM\Query;
  */
 class ExchangeRateUSDRepository extends EntityRepository
 {
+    public function getCurrentExchangeRateUSDByCoinId($coindId)
+    {
+        $qb = $this->createQueryBuilder('exchange_rate_usd');
+        $qb->join('exchange_rate_usd.coin', 'coin')
+            ->where('coin.id =:coindId')
+            ->setParameter('coindId', $coindId)
+            ->orderBy('exchange_rate_usd.date', 'asc')
+        ->setMaxResults(1);
 
+        return $qb->getQuery()->getResult()[0]->getLocal();
+    }
+
+    public function getLocalCountryValue() {
+        //$isLocalCountry
+        $qb = $this->createQueryBuilder('exchange_rate_usd');
+        $qb->join('exchange_rate_usd.coin', 'coin')
+            ->where('coin.isLocalCountry =:isLocalCountry')
+            ->setParameter('isLocalCountry', true)
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getResult()[0]->getLocal();
+    }
 }

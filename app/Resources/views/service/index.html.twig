@@ -14,7 +14,7 @@
         <thead>
             <tr>
                 <th>{% trans %}Name{% endtrans %}</th>
-                <th>{% trans %}Description{% endtrans %}</th>
+                <th>{% trans %}Type{% endtrans %}</th>
                 <th>{% trans %}Price{% endtrans %}</th>
                 <th>{% trans %}Headquarter{% endtrans %}</th>
                 <th>{% trans %}Actions{% endtrans %}</th>
@@ -24,7 +24,9 @@
         {% for service in services %}
             <tr>
                 <td>{{ service.name }}</td>
-                <td>{{ service.description }}</td>
+                <td>
+                    {% if service.type == 'REQUIRED' %}<span class="label label-danger">Requerido</span>{% else %}<span class="label label-success">Opcional</span>{% endif %}
+                </td>
                 <td>{{ service.price }}</td>
                 <td>{{ service.headquarter.name }}</td>
                 <td>                        <div class="btn-group">

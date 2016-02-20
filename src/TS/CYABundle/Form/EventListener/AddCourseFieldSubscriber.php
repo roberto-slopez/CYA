@@ -82,8 +82,8 @@ class AddCourseFieldSubscriber implements EventSubscriberInterface
 
         $accessor = PropertyAccess::createPropertyAccessor();
         $course = $accessor->getValue($data, $this->propertyPathToCuorse);
-        $course = ($course) ? $course->getHeadquartersId() : null;
-        $this->addCourseForm($form, $course);
+        $headquartersId = ($course) ? $course->getHeadquartersId() : null;
+        $this->addCourseForm($form, $headquartersId);
     }
 
     /**
@@ -94,7 +94,7 @@ class AddCourseFieldSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        $course = array_key_exists('headquarter', $data) ? $data['headquarter'] : null;
-        $this->addCourseForm($form, $course);
+        $headquartersId = array_key_exists('headquarter', $data) ? $data['headquarter'] : null;
+        $this->addCourseForm($form, $headquartersId);
     }
 }

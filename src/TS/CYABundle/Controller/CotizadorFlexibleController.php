@@ -42,14 +42,13 @@ class CotizadorFlexibleController extends BaseController
     /**
      * @Route("/new", name="cotizador_flexible_new")
      * @Template()
-     * @Method({"GET", "POST"})
      *
      * @param Request $request
      * @return array
      */
     public function newAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getCurrenUser();
 
         $seller = $this->getDoctrine()
             ->getManager()
@@ -58,21 +57,24 @@ class CotizadorFlexibleController extends BaseController
 
         $quotation = new Quotation();
         $quotation->setClient(new Client());
-        //$quotation->addDiscretionarySpending(new DiscretionarySpending());
         $quotation->setSeller($seller);
         $quotation->setType(Quotation::FLEXIBLE);
 
         $form = $this->createForm(QuotationType::class, $quotation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($quotation);
-            $em->flush();
+        if ($form->isSubmitted()) {
+            \ChromePhp::info($quotation->getLodging());
+            $quotation = $this->calculateValues($quotation, Quotation::FLEXIBLE);
+            \ChromePhp::info($quotation);
 
+            /*$em = $this->getDoctrine()->getManager();
+            $em->persist($quotation);
+            $em->flush();*/
+/*
             $this->setFlashAviso('Registro agregado correctamente');
 
-            return $this->redirectToRoute('cotizador_flexible_index');
+            return $this->redirectToRoute('cotizador_flexible_index');*/
         }
 
         return [

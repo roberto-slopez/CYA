@@ -53,8 +53,8 @@ class Service
     protected $headquarters_id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Quotation", mappedBy="service")
-     * @ORM\JoinColumn(name="id", referencedColumnName="Service_id", nullable=false)
+     * @ORM\ManyToMany(targetEntity="Quotation", inversedBy="service")
+     * @ORM\JoinColumn(name="id", referencedColumnName="service_id", nullable=false)
      */
     protected $quotations;
 
@@ -211,7 +211,7 @@ class Service
      */
     public function addQuotation(Quotation $quotation)
     {
-        $this->quotations[] = $quotation;
+        $this->quotations->add($quotation);
 
         return $this;
     }

@@ -46,6 +46,11 @@ class Coin
     protected $description;
 
     /**
+     * @ORM\Column(name="`is_local_country`", type="boolean")
+     */
+    protected $isLocalCountry;
+
+    /**
      * @ORM\OneToMany(targetEntity="Country", mappedBy="coin")
      * @ORM\JoinColumn(name="id", referencedColumnName="coin_id", nullable=false)
      */
@@ -84,6 +89,25 @@ class Coin
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsLocalCountry()
+    {
+        return $this->isLocalCountry;
+    }
+
+    /**
+     * @param $isLocalCountry
+     * @return $this
+     */
+    public function setIsLocalCountry($isLocalCountry)
+    {
+        $this->isLocalCountry = $isLocalCountry;
+
+        return $this;
     }
 
     /**

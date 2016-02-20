@@ -75,6 +75,7 @@ class AddLodgingFieldSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $data = $event->getData();
+        \ChromePhp::info($data);
         $form = $event->getForm();
         if (null === $data) {
             return;
@@ -82,8 +83,8 @@ class AddLodgingFieldSubscriber implements EventSubscriberInterface
 
         $accessor = PropertyAccess::createPropertyAccessor();
         $lodging = $accessor->getValue($data, $this->propertyPathToLodging);
-        $lodging = ($lodging) ? $lodging->getHeadquartersId() : null;
-        $this->addLodgingForm($form, $lodging);
+        $headquartersId = ($lodging) ? $lodging->getHeadquartersId() : null;
+        $this->addLodgingForm($form, $headquartersId);
     }
 
     /**
@@ -94,7 +95,7 @@ class AddLodgingFieldSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        $lodging = array_key_exists('headquarter', $data) ? $data['headquarter'] : null;
-        $this->addLodgingForm($form, $lodging);
+        $headquartersId = array_key_exists('headquarter', $data) ? $data['headquarter'] : null;
+        $this->addLodgingForm($form, $headquartersId);
     }
 }

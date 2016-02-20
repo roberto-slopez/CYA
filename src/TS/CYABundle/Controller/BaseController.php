@@ -4,6 +4,8 @@ namespace TS\CYABundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Doctrine\ORM\Query;
+use TS\CYABundle\Entity\Quotation;
+use TS\CYABundle\Entity\Usuario;
 
 /**
  * Class BaseController
@@ -11,6 +13,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
  */
 class BaseController extends Controller
 {
+    /**
+     * @return Usuario
+     */
+    public function getCurrenUser()
+    {
+        return $this->get('security.token_storage')->getToken()->getUser();
+    }
+
     /**
      * @param $message
      * @return mixed
@@ -57,6 +67,46 @@ class BaseController extends Controller
         $date = date('Y-m-d', $time);
 
         return new \DateTime($date);
+    }
+
+    /**
+     * @param Quotation $quotation
+     * @param $type
+     * @return Quotation
+     */
+    public function calculateValues(Quotation $quotation, $type)
+    {
+        if ($type == Quotation::FLEXIBLE) {
+            $quotation->setAmountLodging(
+                round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2)
+            );
+
+            $quotation->setAmountCourse(round($quotation->getCourse()->getPrice() * $quotation->getSemanas(), 2));
+            $totalService = 0;
+            foreach ($quotation->getService() as $service) {
+                $totalService = $service->getPrice();
+            }
+
+            $quotation->setAmountService(round($totalService, 2));
+            $totalLocal = $quotation->getAmountCourse() + $quotation->getAmountLodging() + $quotation->getAmountService(
+                );
+
+            $quotation->setTotalLocal($totalLocal);
+            $idCoin = $quotation->getCountry()->getCoin()->getId();
+            $current = $this->getDoctrine()->getManager()
+                ->getRepository('TSCYABundle:ExchangeRateUSD')
+                ->getCurrentExchangeRateUSDByCoinId($idCoin);
+
+            $localCountryValue = $this->getDoctrine()->getManager()
+                ->getRepository('TSCYABundle:ExchangeRateUSD')
+                ->getLocalCountryValue();
+
+            $quotation->setTotalUSD(round($totalLocal * $current, 2));
+            $quotation->setTotalLocalCountry(round($quotation->getTotalUSD() / $localCountryValue, 2));
+
+        }
+
+        return $quotation;
     }
 
     /**
