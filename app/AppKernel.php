@@ -19,6 +19,7 @@ class AppKernel extends Kernel
 
             // Extra fuctions
             new FOS\UserBundle\FOSUserBundle(),
+            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             // JMS SecurityExtraBundle
