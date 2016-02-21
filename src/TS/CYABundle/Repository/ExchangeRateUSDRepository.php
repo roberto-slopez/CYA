@@ -10,6 +10,7 @@ namespace TS\CYABundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use TS\CYABundle\Entity\ExchangeRateUSD;
 
 /**
  * Class ExchangeRateUSDRepository
@@ -27,7 +28,7 @@ class ExchangeRateUSDRepository extends EntityRepository
         $qb->join('exchange_rate_usd.coin', 'coin')
             ->where('coin.id =:coindId')
             ->setParameter('coindId', $coindId)
-            ->orderBy('exchange_rate_usd.date', 'asc')
+            ->orderBy('exchange_rate_usd.date', 'desc')
             ->setMaxResults(1);
 
         return $qb->getQuery()->getResult()[0]->getLocal();
@@ -42,6 +43,7 @@ class ExchangeRateUSDRepository extends EntityRepository
         $qb->join('exchange_rate_usd.coin', 'coin')
             ->where('coin.isLocalCountry =:isLocalCountry')
             ->setParameter('isLocalCountry', true)
+            ->orderBy('exchange_rate_usd.date', 'desc')
             ->setMaxResults(1);
 
         $result = $qb->getQuery()->getResult();
@@ -50,27 +52,25 @@ class ExchangeRateUSDRepository extends EntityRepository
     }
 
     /**
-     * @param \DateTime $today
      * @return mixed
      */
-    public function getExchangeRateToday(\DateTime $today)
+    public function getExchangeRateCount()
     {
         $qb = $this->createQueryBuilder('exchange_rate_usd')
             ->select('count(exchange_rate_usd.id)')
-            ->where('exchange_rate_usd.date = :today')
-            ->setParameter('today', $today->format('Y-m-d'));
+            ->where('exchange_rate_usd.enable = 1');
 
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
-     * @param \DateTime $today
-     * @return mixed
+     * @return array
      */
-    public function getAllExchangeRateToday(\DateTime $today)
+    public function getAllExpiration()
     {
+        $today = new \DateTime('today');
         $qb = $this->createQueryBuilder('exchange_rate_usd')
-            ->where('exchange_rate_usd.date = :today')
+            ->where('exchange_rate_usd.date < :today')
             ->setParameter('today', $today->format('Y-m-d'));
 
         return $qb->getQuery()->getResult();

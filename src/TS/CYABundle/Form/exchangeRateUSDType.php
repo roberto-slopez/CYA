@@ -9,6 +9,10 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class exchangeRateUSDType
+ * @package TS\CYABundle\Form
+ */
 class exchangeRateUSDType extends AbstractType
 {
     /**
@@ -28,6 +32,9 @@ class exchangeRateUSDType extends AbstractType
                 'label' => 'Amount'
             ])
             ->add('date', DateType::class, [
+                'data' => new \DateTime('today'),
+            ])
+            ->add('expiration', DateType::class, [
                 'data' => new \DateTime('today'),
             ])
         ;

@@ -23,26 +23,26 @@ class MainController extends BaseController
      */
     public function indexAction()
     {
-        $lodging = $this->getDoctrine()->getManager()
-            ->getRepository('TSCYABundle:Lodging')->getCount();
+        $em = $this->getDoctrine()->getManager();
+        $exchangeRateDisable = $em->getRepository('TSCYABundle:ExchangeRateUSD')->getAllExpiration();
 
-        $headquarter = $this->getDoctrine()->getManager()
-            ->getRepository('TSCYABundle:Headquarter')->getCount();
+        foreach ($exchangeRateDisable as $item) {
+            $item->setEnable(false);
+            $this->saveChangeEntity($item);
+        }
 
-        $course = $this->getDoctrine()->getManager()
-            ->getRepository('TSCYABundle:Course')->getCount();
+        $lodging = $em->getRepository('TSCYABundle:Lodging')->getCount();
 
-        $package = $this->getDoctrine()->getManager()
-            ->getRepository('TSCYABundle:Package')->getCount();
+        $headquarter = $em->getRepository('TSCYABundle:Headquarter')->getCount();
 
-        $today = new \DateTime('today');
+        $course = $em->getRepository('TSCYABundle:Course')->getCount();
 
-        $exchangeRate = $this->getDoctrine()->getManager()
-            ->getRepository('TSCYABundle:ExchangeRateUSD')
-            ->getExchangeRateToday($today);
+        $package = $em->getRepository('TSCYABundle:Package')->getCount();
 
-        $coin = $this->getDoctrine()->getManager()
-            ->getRepository('TSCYABundle:Coin')->getCount('USD');
+        $exchangeRate = $em->getRepository('TSCYABundle:ExchangeRateUSD')
+            ->getExchangeRateCount();
+
+        $coin = $em->getRepository('TSCYABundle:Coin')->getCount('USD');
 
         if (intval($exchangeRate) < intval($coin) ) {
             if (intval($exchangeRate) == 0) {

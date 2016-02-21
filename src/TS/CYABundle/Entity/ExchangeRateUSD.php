@@ -35,6 +35,16 @@ class ExchangeRateUSD
     protected $date;
 
     /**
+     * @ORM\Column(name="`expiration`", type="date")
+     */
+    protected $expiration;
+
+    /**
+     * @ORM\Column(name="`enable`", type="boolean", options={"default": 1})
+     */
+    protected $enable;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      */
     protected $coin_id;
@@ -162,6 +172,44 @@ class ExchangeRateUSD
     public function getCoin()
     {
         return $this->coin;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnable()
+    {
+        return $this->enable;
+    }
+
+    /**
+     * @param $enable
+     * @return $this
+     */
+    public function setEnable($enable)
+    {
+        $this->enable = $enable;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpiration()
+    {
+        return $this->expiration;
+    }
+
+    /**
+     * @param $expiration
+     * @return $this
+     */
+    public function setExpiration($expiration)
+    {
+        $this->expiration = $expiration;
+
+        return $this;
     }
 
     public function __sleep()
