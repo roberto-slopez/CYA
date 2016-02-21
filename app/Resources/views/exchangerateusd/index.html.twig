@@ -14,10 +14,11 @@ exchangeRateUSD
 <table id="example-datatable" class="table table-vcenter table-condensed table-bordered" style="">
     <thead>
         <tr>
-            <th>Local</th>
-            <th>Date</th>
-            <th>Coin</th>
-            <th>Actions</th>
+            <th>{% trans %}Local{% endtrans %}</th>
+            <th>{% trans %}Date{% endtrans %}</th>
+            <th>{% trans %}Expiration{% endtrans %}</th>
+            <th>{% trans %}Coin{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@ exchangeRateUSD
         <tr>
             <td>{{ exchangeRateUSD.local |number_format(4, '.', ',') }}</td>
             <td>{% if exchangeRateUSD.date %}{{ exchangeRateUSD.date|date('Y-m-d') }}{% endif %}</td>
+            <td>{% if exchangeRateUSD.expiration %}{{ exchangeRateUSD.expiration|date('Y-m-d') }}{% endif %}</td>
             <td>{{ exchangeRateUSD.coin.name }}</td>
             <td>
                 <div class="btn-group">
