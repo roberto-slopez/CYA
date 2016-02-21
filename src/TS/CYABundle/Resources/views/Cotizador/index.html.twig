@@ -38,7 +38,12 @@
         <tbody>
         {% for quotation in quotations %}
             <tr>
-                <td>{{ quotation.course.name }}</td>
+                <td>{% if (quotation.course) %}
+                    {{ quotation.course.name }}
+                    {% else %}
+                        {{ quotation.exam.name }}
+                    {% endif %}
+                </td>
                 <td>{{ quotation.client.fullName }}</td>
                 <td>{{ quotation.semanas }}</td>
                 <td>

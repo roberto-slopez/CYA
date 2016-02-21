@@ -94,7 +94,7 @@ class BaseController extends Controller
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             $quotation->setAmountLodging($lodgingAmount);
             $quotation->setAmountCourse(round($quotation->getCourse()->getPrice() * $quotation->getSemanas(), 2));
-        } elseif (Quotation::PACKAGE) {
+        } elseif ($type == Quotation::PACKAGE) {
             $quotation->setSemanas($quotation->getPackage()->getSemanas());
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
 
@@ -109,8 +109,10 @@ class BaseController extends Controller
             $quotation->setAmountLodging(round($amountLodging, 2));
             $quotation->setAmountCourse(round($quotation->getPackage()->getCoursePrice(), 2));
             $quotation->setCourse($quotation->getPackage()->getCourse());
-        } elseif (Quotation::EXAM) {
-
+        } elseif ($type == Quotation::EXAM) {
+            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
+            $quotation->setAmountLodging($lodgingAmount);
+            $quotation->setAmountCourse(round($quotation->getExam()->getPrice() * $quotation->getSemanas(), 2));
         }
 
         $totalLocal = $quotation->getAmountCourse() +
