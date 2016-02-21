@@ -28,7 +28,8 @@ class HeadquarterType extends AbstractType
             ])
             ->add('city',  EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\City',
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => ['class' => 'select-select2']
             ])
         ;
     }

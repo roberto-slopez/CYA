@@ -21,7 +21,8 @@ class CourseType extends AbstractType
         $builder
             ->add('headquarter', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Headquarter',
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => ['class' => 'select-select2']
             ])
             ->add('name')
             ->add('price', MoneyType::class, [

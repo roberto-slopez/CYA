@@ -24,7 +24,8 @@ class CityType extends AbstractType
             ->add('description')
             ->add('country', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Country',
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => ['class' => 'select-select2']
             ])
         ;
     }

@@ -32,7 +32,8 @@ class ServiceType extends AbstractType
             ])
             ->add('headquarter', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Headquarter',
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => ['class' => 'select-select2']
             ])
         ;
     }

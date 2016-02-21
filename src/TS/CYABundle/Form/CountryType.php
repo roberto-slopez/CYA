@@ -21,7 +21,8 @@ class CountryType extends AbstractType
             ->add('description')
             ->add('coin', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Coin',
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => ['class' => 'select-select2']
             ])
         ;
     }
