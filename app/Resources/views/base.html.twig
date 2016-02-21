@@ -70,9 +70,9 @@
                         </div>
                         <div class="sidebar-user-name">{{ app.user.username|capitalize }}</div>
                         <div class="sidebar-user-links">
-                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="gi gi-user"></i></a>
+                            {#<a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="gi gi-user"></i></a>
                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="gi gi-envelope"></i></a>
-                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="gi gi-cogwheel"></i></a>
+                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="gi gi-cogwheel"></i></a>#}
                             <a href="{{ path('fos_user_security_logout') }}" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
                         </div>
                     </div>
@@ -85,6 +85,7 @@
                                 </span>
                             </a>
                         </li>
+                        {% if is_granted('ROLE_SELLER') %}
                         <li>
                             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Cotizadores</span></a>
                             <ul>
@@ -93,6 +94,8 @@
                                 </li>
                             </ul>
                         </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
                         <li>
                             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-cogwheel sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Catálogos</span></a>
                             <ul>
@@ -137,6 +140,7 @@
                                 </li>
                             </ul>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -163,22 +167,19 @@
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('bundles/tscya/img/placeholders/avatars/avatar.jpg') }}" alt="avatar"> <i class="fa fa-angle-down"></i>
                         </a>
+                        {% if is_granted('ROLE_ADMIN') %}
                         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                             <li class="dropdown-header text-center">Admin config</li>
                             <li>
                                 <a href="{{ url("lista_usuario") }}">
                                     <i class="fa fa-clock-o fa-fw pull-right"></i>
-                                    <span class="badge pull-right">1</span>
+                                    {#<span class="badge pull-right">1</span>#}
                                     Usuarios
-                                </a>
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-envelope-o fa-fw pull-right"></i>
-                                    <span class="badge pull-right">5</span>
-                                    Mas
                                 </a>
                             </li>
                             <li class="divider"></li>
                         </ul>
+                        {% endif %}
                     </li>
                 </ul>
             </header>
