@@ -42,7 +42,7 @@ class ExchangeRateUSD
     /**
      * @ORM\Column(name="`enable`", type="boolean", options={"default": 1})
      */
-    protected $enable;
+    protected $enable = 1;
 
     /**
      * @ORM\Column(type="string", nullable=true)
