@@ -57,9 +57,22 @@ class ExchangeRateUSDRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('exchange_rate_usd')
             ->select('count(exchange_rate_usd.id)')
-            ->where('exchange_rate_usd.date =:today')
+            ->where('exchange_rate_usd.date = :today')
             ->setParameter('today', $today->format('Y-m-d'));
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param \DateTime $today
+     * @return mixed
+     */
+    public function getAllExchangeRateToday(\DateTime $today)
+    {
+        $qb = $this->createQueryBuilder('exchange_rate_usd')
+            ->where('exchange_rate_usd.date = :today')
+            ->setParameter('today', $today->format('Y-m-d'));
+
+        return $qb->getQuery()->getResult();
     }
 }
