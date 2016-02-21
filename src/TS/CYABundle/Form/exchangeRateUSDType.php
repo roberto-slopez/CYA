@@ -24,6 +24,7 @@ class exchangeRateUSDType extends AbstractType
             ])
             ->add('local', MoneyType::class, [
                 'currency' => 'USD',
+                'scale' => 4,
                 'label' => 'Amount'
             ])
             ->add('date', DateType::class, [

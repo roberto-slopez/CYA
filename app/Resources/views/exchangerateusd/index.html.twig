@@ -23,7 +23,7 @@ exchangeRateUSD
     <tbody>
         {% for exchangeRateUSD in exchangeRateUSDs %}
         <tr>
-            <td>{{ exchangeRateUSD.local |number_format(2, '.', ',') }}</td>
+            <td>{{ exchangeRateUSD.local |number_format(4, '.', ',') }}</td>
             <td>{% if exchangeRateUSD.date %}{{ exchangeRateUSD.date|date('Y-m-d') }}{% endif %}</td>
             <td>{{ exchangeRateUSD.coin.name }}</td>
             <td>
