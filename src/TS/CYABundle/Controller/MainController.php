@@ -23,7 +23,44 @@ class MainController extends BaseController
      */
     public function indexAction()
     {
+        $lodging = $this->getDoctrine()->getManager()
+            ->getRepository('TSCYABundle:Lodging')->getCount();
+
+        $headquarter = $this->getDoctrine()->getManager()
+            ->getRepository('TSCYABundle:Headquarter')->getCount();
+
+        $course = $this->getDoctrine()->getManager()
+            ->getRepository('TSCYABundle:Course')->getCount();
+
+        $package = $this->getDoctrine()->getManager()
+            ->getRepository('TSCYABundle:Package')->getCount();
+
+        $today = new \DateTime('today');
+
+        $exchangeRate = $this->getDoctrine()->getManager()
+            ->getRepository('TSCYABundle:ExchangeRateUSD')
+            ->getExchangeRateToday($today);
+
+        $coin = $this->getDoctrine()->getManager()
+            ->getRepository('TSCYABundle:Coin')->getCount('USD');
+
+        if (intval($exchangeRate) < intval($coin) ) {
+            if (intval($exchangeRate) == 0) {
+                $this->setFlashError('¡No hay ninguna tasa de cambio, ingresada para hoy!');
+            } else {
+                $this->setFlashAviso(
+                    sprintf('¡Aún faltan tasas de cambio por ingresar %s/%s!', (string)$exchangeRate, (string)$coin)
+                );
+            }
+        } else {
+            $this->setFlashInfo('Todas las tasas de cambio estan actualizadas');
+        }
+
         return [
+            'lodgings' => $lodging,
+            'headquarters' => $headquarter,
+            'courses' => $course,
+            'packages' => $package,
         ];
     }
 

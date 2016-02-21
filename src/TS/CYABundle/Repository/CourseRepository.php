@@ -29,4 +29,14 @@ class CourseRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCount()
+    {
+        return $this->createQueryBuilder('course')
+            ->select('count(course.id)')
+            ->getQuery()->getSingleScalarResult();
+    }
 }

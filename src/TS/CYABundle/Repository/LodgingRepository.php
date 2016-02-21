@@ -29,4 +29,14 @@ class LodgingRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCount()
+    {
+        return $this->createQueryBuilder('lodging')
+            ->select('count(lodging.id)')
+            ->getQuery()->getSingleScalarResult();
+    }
 }

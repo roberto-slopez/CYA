@@ -30,4 +30,15 @@ class PackageRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getCount()
+    {
+        return $this->createQueryBuilder('package')
+            ->select('count(package.id)')
+            ->getQuery()->getSingleScalarResult();
+    }
 }

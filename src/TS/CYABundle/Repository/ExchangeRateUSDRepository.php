@@ -17,6 +17,10 @@ use Doctrine\ORM\Query;
  */
 class ExchangeRateUSDRepository extends EntityRepository
 {
+    /**
+     * @param $coindId
+     * @return mixed
+     */
     public function getCurrentExchangeRateUSDByCoinId($coindId)
     {
         $qb = $this->createQueryBuilder('exchange_rate_usd');
@@ -24,13 +28,16 @@ class ExchangeRateUSDRepository extends EntityRepository
             ->where('coin.id =:coindId')
             ->setParameter('coindId', $coindId)
             ->orderBy('exchange_rate_usd.date', 'asc')
-        ->setMaxResults(1);
+            ->setMaxResults(1);
 
         return $qb->getQuery()->getResult()[0]->getLocal();
     }
 
-    public function getLocalCountryValue() {
-        //$isLocalCountry
+    /**
+     * @return mixed
+     */
+    public function getLocalCountryValue()
+    {
         $qb = $this->createQueryBuilder('exchange_rate_usd');
         $qb->join('exchange_rate_usd.coin', 'coin')
             ->where('coin.isLocalCountry =:isLocalCountry')
@@ -38,6 +45,21 @@ class ExchangeRateUSDRepository extends EntityRepository
             ->setMaxResults(1);
 
         $result = $qb->getQuery()->getResult();
+
         return $result[0]->getLocal();
+    }
+
+    /**
+     * @param \DateTime $today
+     * @return mixed
+     */
+    public function getExchangeRateToday(\DateTime $today)
+    {
+        $qb = $this->createQueryBuilder('exchange_rate_usd')
+            ->select('count(exchange_rate_usd.id)')
+            ->where('exchange_rate_usd.date =:today')
+            ->setParameter('today', $today->format('Y-m-d'));
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

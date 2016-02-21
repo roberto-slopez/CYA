@@ -45,7 +45,7 @@
 <div id="page-wrapper">
     {% block preloader %}
     <div class="preloader themed-background">
-        <h1 class="push-top-bottom text-light text-center"><strong>Admin</strong>TS</h1>
+        <h1 class="push-top-bottom text-light text-center"><strong>Admin</strong>CYA</h1>
         <div class="inner">
             <h3 class="text-light visible-lt-ie9 visible-lt-ie10"><strong>Loading..</strong></h3>
             <div class="preloader-spinner hidden-lt-ie9 hidden-lt-ie10"></div>
@@ -185,6 +185,7 @@
             </header>
 
             <div id="page-content">
+                {% block contentHeader %}
                 <div class="content-header">
                     <div class="header-section">
                         <h1>
@@ -197,6 +198,7 @@
                         <br/>
                     </div>
                 </div>
+                {% endblock contentHeader %}
                 {% for flashMessage in app.session.flashbag.get('exito') %}
                     <div class="alert alert-success alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -221,6 +223,7 @@
                         <h4><i class="fa fa-times-circle"></i> Error</h4> {{ flashMessage }}!
                     </div>
                 {% endfor %}
+                {% block pageContent %}
                 <div class="block">
                     <div class="block-title">
                         {% block action %}
@@ -246,6 +249,7 @@
                         <p>Inicio</p>
                     {% endblock bodyPanel %}
                 </div>
+                {% endblock pageContent %}
             </div>
 
             <footer class="clearfix">

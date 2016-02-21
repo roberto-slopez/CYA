@@ -17,5 +17,19 @@ use Doctrine\ORM\Query;
  */
 class CoinRepository extends EntityRepository
 {
+    /**
+     * @param null $exception code coin
+     * @return mixed
+     */
+    public function getCount($exception = null)
+    {
+        $qb = $this->createQueryBuilder('coin')
+            ->select('count(coin.id)');
 
+        if ($exception) {
+            $qb->where('coin.code != :code')->setParameter('code', $exception);
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

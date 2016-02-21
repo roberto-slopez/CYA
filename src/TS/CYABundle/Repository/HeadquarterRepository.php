@@ -30,4 +30,14 @@ class HeadquarterRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCount()
+    {
+        return $this->createQueryBuilder('headquarter')
+            ->select('count(headquarter.id)')
+            ->getQuery()->getSingleScalarResult();
+    }
 }

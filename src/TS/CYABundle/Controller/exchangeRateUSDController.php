@@ -25,8 +25,8 @@ class exchangeRateUSDController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $exchangeRateUSDs = $em->getRepository('TSCYABundle:ExchangeRateUSD')->findAll();
+        $today = new \DateTime('today');
+        $exchangeRateUSDs = $em->getRepository('TSCYABundle:ExchangeRateUSD')->getExchangeRateToday($today);
 
         return $this->render('exchangerateusd/index.html.twig', array(
             'exchangeRateUSDs' => $exchangeRateUSDs,
