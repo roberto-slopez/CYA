@@ -30,7 +30,6 @@
         {# iterate over each existing tag and render its only field: name #}
         {% for courseRangeWeeks in form.courseRangeWeeks %}
             <li class="bg-info">
-                {{ form_row(courseRangeWeeks.name) }}
                 {{ form_row(courseRangeWeeks.price) }}
                 {{ form_row(courseRangeWeeks.min) }}
                 {{ form_row(courseRangeWeeks.max) }}

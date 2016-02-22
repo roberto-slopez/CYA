@@ -41,17 +41,17 @@ class CourseRangeWeeks
     protected $price;
 
     /**
-     * @ORM\Column(type="integer", type="integer", options={"default": 0})
+     * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
     protected $min = 0;
 
     /**
-     * @ORM\Column(type="integer", type="integer", options={"default": 0})
+     * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
     protected $max = 0;
 
     /**
-     * @ORM\Column(name="greater_than", type="integer", options={"default": 0})
+     * @ORM\Column(name="greater_than", nullable=true, type="integer", options={"default": 0})
      */
     protected $greaterThan = 0;
 
@@ -60,6 +60,13 @@ class CourseRangeWeeks
      * @ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=true)
      */
     protected $course;
+
+    public function __construct()
+    {
+        $this->min = 0;
+        $this->max = 0;
+        $this->greaterThan = 0;
+    }
 
     /**
      * @return mixed

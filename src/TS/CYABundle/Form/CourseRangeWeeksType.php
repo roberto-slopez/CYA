@@ -22,15 +22,12 @@ class CourseRangeWeeksType extends AbstractType
             ])
             ->add('min', IntegerType::class, [
                 'required' => false,
-                'data' => 0
             ])
             ->add('max', IntegerType::class, [
-                'required' => false,
-                'data' => 0
+                'required' => false
             ])
             ->add('greaterThan', IntegerType::class, [
                 'required' => false,
-                'data' => 0
             ])
         ;
     }
