@@ -40,11 +40,6 @@ class Course
     protected $description;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    protected $price;
-
-    /**
      * @ORM\Column(name="`enable`", type="boolean")
      */
     protected $enable;
@@ -72,10 +67,16 @@ class Course
      */
     protected $headquarter;
 
+    /**
+     * @ORM\OneToMany(targetEntity="CourseRangeWeeks", mappedBy="course", cascade={"persist"})
+     */
+    protected $courseRangeWeeks;
+
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
         $this->package = new ArrayCollection();
+        $this->courseRangeWeeks = new ArrayCollection();
     }
 
     /**
@@ -253,25 +254,6 @@ class Course
     }
 
     /**
-     * @return mixed
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param $price
-     * @return $this
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
      * Add Course entity to collection (one to many).
      *
      * @param \TS\CYABundle\Entity\Package $package
@@ -308,13 +290,49 @@ class Course
     }
 
     /**
+     * @param CourseRangeWeeks $courseRangeWeeks
+     * @return $this
+     */
+    public function addCourseRangeWeek(CourseRangeWeeks $courseRangeWeeks)
+    {
+        $courseRangeWeeks->setCourse($this);
+        $this->courseRangeWeeks->add($courseRangeWeeks);
+
+        return $this;
+    }
+
+    /**
+     * @param CourseRangeWeeks $courseRangeWeeks
+     * @return $this
+     */
+    public function removeCourseRangeWeek(CourseRangeWeeks $courseRangeWeeks)
+    {
+        $this->courseRangeWeeks->removeElement($courseRangeWeeks);
+
+        return $this;
+    }
+
+    /**
+     * Get Quotation entity collection (one to many).
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCourseRangeWeeks()
+    {
+        return $this->courseRangeWeeks;
+    }
+
+    /**
      * @return string
      */
     public function __toString()
     {
-        return (string) $this->getName() . $this->getId();
+        return (string)$this->getName().$this->getId();
     }
 
+    /**
+     * @return array
+     */
     public function __sleep()
     {
         return array('id', 'name', 'price', 'description', 'enable', 'headquarters_id');

@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use TS\CYABundle\Form\CoursePriceType;
+use TS\CYABundle\Form\CourseRangeWeeksType;
 
 class CourseType extends AbstractType
 {
@@ -25,8 +25,11 @@ class CourseType extends AbstractType
                 'attr' => ['class' => 'select-select2']
             ])
             ->add('name')
-            ->add('price', MoneyType::class, [
-                'currency' => 'USD'
+            ->add('courseRangeWeeks', CollectionType::class, [
+                'entry_type' => CourseRangeWeeksType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' => true
             ])
             ->add('description')
             ->add('enable')
