@@ -25,6 +25,9 @@ class MainController extends BaseController
     {
         $em = $this->getDoctrine()->getManager();
         $exchangeRateDisable = $em->getRepository('TSCYABundle:ExchangeRateUSD')->getAllExpiration();
+        $exchangeRateUSDs = $em->getRepository('TSCYABundle:ExchangeRateUSD')->findBy([
+            'enable' => true
+        ]);
 
         foreach ($exchangeRateDisable as $item) {
             $item->setEnable(false);
@@ -61,6 +64,7 @@ class MainController extends BaseController
             'headquarters' => $headquarter,
             'courses' => $course,
             'packages' => $package,
+            'exchangeRateUSDs' => $exchangeRateUSDs,
         ];
     }
 
