@@ -1,48 +1,48 @@
 {% extends 'base.html.twig' %}
 {% block iconHead %}
-<i class="fa fa-eye"></i>
+    <i class="fa fa-eye"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
-Package
+    {% trans %}Package{% endtrans %}
 {% endblock pageTitle %}
 {% block subtitle %}
-Visualizar
+    Visualizar
 {% endblock subtitle %}
 {% block titlePanel %}
-Package
+    {% trans %}Package{% endtrans %}
 {% endblock titlePanel %}
 {% block action %}
-        <div class="form-group form-actions">
+    <div class="form-group form-actions">
     <div class="col-md-12 col-md-offset-6">
         <a href="{{ path('admin_package_index') }}" class="btn btn-sm btn-primary">
             <i class="hi hi-chevron-left"></i>
             Regresar
-        </a>            <a href="{{ path('admin_package_edit', { 'id': package.id }) }}" class="btn btn-sm btn-warning">
-                <i class="gi gi-edit"></i>
-                Edit
-            </a>    </div>
-</div>{% endblock action %}
+        </a> <a href="{{ path('admin_package_edit', { 'id': package.id }) }}" class="btn btn-sm btn-warning">
+            <i class="gi gi-edit"></i>
+            Edit
+        </a></div>
+    </div>{% endblock action %}
 {% block bodyPanel %}
     <div class="table-responsive">
         <table class="table table-vcenter table-striped">
             <tbody>
-                <tr>
-                    <th>{% trans %}Name{% endtrans %}</th>
-                        <td>{{ package.name }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Weeks{% endtrans %}</th>
-                        <td>{{ package.semanas }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Headquarter{% endtrans %}</th>
-                    <td>{{ package.headquarter.name }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Course{% endtrans %}</th>
-                    <td>{{ package.course.name }}</td>
-                </tr>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ package.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Weeks{% endtrans %}</th>
+                <td>{{ package.semanas }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Headquarter{% endtrans %}</th>
+                <td>{{ package.headquarter.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Course{% endtrans %}</th>
+                <td>{{ package.course.name }}</td>
+            </tr>
             </tbody>
         </table>
     </div>

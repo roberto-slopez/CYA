@@ -1,64 +1,64 @@
 {% extends 'base.html.twig' %}
 {% block iconHead %}
-<i class="fa fa-eye"></i>
+    <i class="fa fa-eye"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
-Seller
+    {% trans %}Seller{% endtrans %}
 {% endblock pageTitle %}
 {% block subtitle %}
-Visualizar
+    Visualizar
 {% endblock subtitle %}
 {% block titlePanel %}
-Seller
+    {% trans %}Seller{% endtrans %}
 {% endblock titlePanel %}
 {% block action %}
-        <div class="form-group form-actions">
+    <div class="form-group form-actions">
     <div class="col-md-12 col-md-offset-6">
         <a href="{{ path('admin_seller_index') }}" class="btn btn-sm btn-primary">
             <i class="hi hi-chevron-left"></i>
             Regresar
-        </a>            <a href="{{ path('admin_seller_edit', { 'id': seller.id }) }}" class="btn btn-sm btn-warning">
-                <i class="gi gi-edit"></i>
-                Edit
-            </a>    </div>
-</div>{% endblock action %}
+        </a> <a href="{{ path('admin_seller_edit', { 'id': seller.id }) }}" class="btn btn-sm btn-warning">
+            <i class="gi gi-edit"></i>
+            Edit
+        </a></div>
+    </div>{% endblock action %}
 {% block bodyPanel %}
     <div class="table-responsive">
         <table class="table table-vcenter table-striped">
             <tbody>
-                <tr>
-                    <th>{% trans %}First name{% endtrans %}</th>
-                        <td>{{ seller.firstname }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Last name{% endtrans %}</th>
-                        <td>{{ seller.lastname }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Indentification{% endtrans %}</th>
-                        <td>{{ seller.indentification }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Telephone{% endtrans %}</th>
-                        <td>{{ seller.telephone }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Adress{% endtrans %}</th>
-                        <td>{{ seller.adress }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Notes{% endtrans %}</th>
-                        <td>{{ seller.notes }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}User seller{% endtrans %}</th>
-                    <td>{{ seller.userSeller.nombreImpresion }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Enable{% endtrans %}</th>
-                        <td>{% if seller.enable %}Yes{% else %}No{% endif %}</td>
-                </tr>
+            <tr>
+                <th>{% trans %}First name{% endtrans %}</th>
+                <td>{{ seller.firstname }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Last name{% endtrans %}</th>
+                <td>{{ seller.lastname }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Indentification{% endtrans %}</th>
+                <td>{{ seller.indentification }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Telephone{% endtrans %}</th>
+                <td>{{ seller.telephone }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Adress{% endtrans %}</th>
+                <td>{{ seller.adress }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Notes{% endtrans %}</th>
+                <td>{{ seller.notes }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}User seller{% endtrans %}</th>
+                <td>{{ seller.userSeller.nombreImpresion }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Enable{% endtrans %}</th>
+                <td>{% if seller.enable %}Yes{% else %}No{% endif %}</td>
+            </tr>
             </tbody>
         </table>
     </div>

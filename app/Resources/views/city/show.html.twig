@@ -1,48 +1,48 @@
 {% extends 'base.html.twig' %}
 {% block iconHead %}
-<i class="fa fa-eye"></i>
+    <i class="fa fa-eye"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
-City
+    {% trans %}City{% endtrans %}
 {% endblock pageTitle %}
 {% block subtitle %}
-Visualizar
+    Visualizar
 {% endblock subtitle %}
 {% block titlePanel %}
-City
+    {% trans %}City{% endtrans %}
 {% endblock titlePanel %}
 {% block action %}
-        <div class="form-group form-actions">
+    <div class="form-group form-actions">
     <div class="col-md-12 col-md-offset-6">
         <a href="{{ path('admin_city_index') }}" class="btn btn-sm btn-primary">
             <i class="hi hi-chevron-left"></i>
             Regresar
-        </a>            <a href="{{ path('admin_city_edit', { 'id': city.id }) }}" class="btn btn-sm btn-warning">
-                <i class="gi gi-edit"></i>
-                Edit
-            </a>    </div>
-</div>{% endblock action %}
+        </a> <a href="{{ path('admin_city_edit', { 'id': city.id }) }}" class="btn btn-sm btn-warning">
+            <i class="gi gi-edit"></i>
+            Edit
+        </a></div>
+    </div>{% endblock action %}
 {% block bodyPanel %}
     <div class="table-responsive">
         <table class="table table-vcenter table-striped">
             <tbody>
-                <tr>
-                    <th>{% trans %}Code{% endtrans %}</th>
-                        <td>{{ city.code }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Name{% endtrans %}</th>
-                        <td>{{ city.name }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Description{% endtrans %}</th>
-                        <td>{{ city.description }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Country{% endtrans %}</th>
-                        <td>{{ city.country.name }}</td>
-                </tr>
+            <tr>
+                <th>{% trans %}Code{% endtrans %}</th>
+                <td>{{ city.code }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ city.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Description{% endtrans %}</th>
+                <td>{{ city.description }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Country{% endtrans %}</th>
+                <td>{{ city.country.name }}</td>
+            </tr>
             </tbody>
         </table>
     </div>

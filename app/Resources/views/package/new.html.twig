@@ -4,14 +4,14 @@
 {% endblock iconHead %}
 
 {% block pageTitle %}
-    Package
+    {% trans %}Package{% endtrans %}
 {% endblock pageTitle %}
 {% block subtitle %}
     Crear
 {% endblock subtitle %}
 
 {% block titlePanel %}
-    Ingreso Package
+    Ingreso {% trans %}Package{% endtrans %}
 {% endblock titlePanel %}
 {% block action %}{% endblock action %}
 {% block bodyPanel %}
@@ -23,7 +23,7 @@
 
         <h3>Alojamiento</h3>
         <style>
-            li > div > div.form-group>select,li > div > div.form-group>input {
+            li > div > div.form-group > select, li > div > div.form-group > input {
                 width: 100%;
             }
         </style>

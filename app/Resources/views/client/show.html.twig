@@ -1,56 +1,56 @@
 {% extends 'base.html.twig' %}
 {% block iconHead %}
-<i class="fa fa-eye"></i>
+    <i class="fa fa-eye"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
-Client
+    {% trans %}Client{% endtrans %}
 {% endblock pageTitle %}
 {% block subtitle %}
-Visualizar
+    Visualizar
 {% endblock subtitle %}
 {% block titlePanel %}
-Client
+    {% trans %}Client{% endtrans %}
 {% endblock titlePanel %}
 {% block action %}
-        <div class="form-group form-actions">
+    <div class="form-group form-actions">
     <div class="col-md-12 col-md-offset-6">
         <a href="{{ path('admin_client_index') }}" class="btn btn-sm btn-primary">
             <i class="hi hi-chevron-left"></i>
             Regresar
-        </a>            <a href="{{ path('admin_client_edit', { 'id': client.id }) }}" class="btn btn-sm btn-warning">
-                <i class="gi gi-edit"></i>
-                Edit
-            </a>    </div>
-</div>{% endblock action %}
+        </a> <a href="{{ path('admin_client_edit', { 'id': client.id }) }}" class="btn btn-sm btn-warning">
+            <i class="gi gi-edit"></i>
+            Edit
+        </a></div>
+    </div>{% endblock action %}
 {% block bodyPanel %}
     <div class="table-responsive">
         <table class="table table-vcenter table-striped">
             <tbody>
-                <tr>
-                    <th>{% trans %}First name{% endtrans %}</th>
-                        <td>{{ client.firstname }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Last name{% endtrans %}</th>
-                        <td>{{ client.lastname }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Indentification{% endtrans %}</th>
-                        <td>{{ client.indentification }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Telephone{% endtrans %}</th>
-                        <td>{{ client.telephone }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Adress{% endtrans %}</th>
-                        <td>{{ client.adress }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Notes{% endtrans %}</th>
-                        <td>{{ client.notes }}</td>
-                </tr>
+            <tr>
+                <th>{% trans %}First name{% endtrans %}</th>
+                <td>{{ client.firstname }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Last name{% endtrans %}</th>
+                <td>{{ client.lastname }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Indentification{% endtrans %}</th>
+                <td>{{ client.indentification }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Telephone{% endtrans %}</th>
+                <td>{{ client.telephone }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Adress{% endtrans %}</th>
+                <td>{{ client.adress }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Notes{% endtrans %}</th>
+                <td>{{ client.notes }}</td>
+            </tr>
             </tbody>
         </table>
     </div>

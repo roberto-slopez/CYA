@@ -1,52 +1,52 @@
 {% extends 'base.html.twig' %}
 {% block iconHead %}
-<i class="fa fa-eye"></i>
+    <i class="fa fa-eye"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
-Lodging
+    {% trans %}Lodging{% endtrans %}
 {% endblock pageTitle %}
 {% block subtitle %}
-Visualizar
+    Visualizar
 {% endblock subtitle %}
 {% block titlePanel %}
-Lodging
+    {% trans %}Lodging{% endtrans %}
 {% endblock titlePanel %}
 {% block action %}
-        <div class="form-group form-actions">
+    <div class="form-group form-actions">
     <div class="col-md-12 col-md-offset-6">
         <a href="{{ path('admin_lodging_index') }}" class="btn btn-sm btn-primary">
             <i class="hi hi-chevron-left"></i>
             Regresar
-        </a>            <a href="{{ path('admin_lodging_edit', { 'id': lodging.id }) }}" class="btn btn-sm btn-warning">
-                <i class="gi gi-edit"></i>
-                Edit
-            </a>    </div>
-</div>{% endblock action %}
+        </a> <a href="{{ path('admin_lodging_edit', { 'id': lodging.id }) }}" class="btn btn-sm btn-warning">
+            <i class="gi gi-edit"></i>
+            Edit
+        </a></div>
+    </div>{% endblock action %}
 {% block bodyPanel %}
     <div class="table-responsive">
         <table class="table table-vcenter table-striped">
             <tbody>
-                <tr>
-                    <th>{% trans %}Name{% endtrans %}</th>
-                        <td>{{ lodging.name }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Type{% endtrans %}</th>
-                        <td>{{ lodging.type }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Price per week{% endtrans %}</th>
-                        <td>{{ lodging.priceperweek }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Description{% endtrans %}</th>
-                        <td>{{ lodging.description }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Headquarters{% endtrans %}</th>
-                        <td>{{ lodging.headquarter.name }}</td>
-                </tr>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ lodging.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Type{% endtrans %}</th>
+                <td>{{ lodging.type }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Price per week{% endtrans %}</th>
+                <td>{{ lodging.priceperweek }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Description{% endtrans %}</th>
+                <td>{{ lodging.description }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Headquarters{% endtrans %}</th>
+                <td>{{ lodging.headquarter.name }}</td>
+            </tr>
             </tbody>
         </table>
     </div>

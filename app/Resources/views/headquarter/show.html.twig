@@ -1,32 +1,32 @@
 {% extends 'base.html.twig' %}
 {% block iconHead %}
-<i class="fa fa-eye"></i>
+    <i class="fa fa-eye"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
-Headquarter
+    {% trans %}Headquarter{% endtrans %}
 {% endblock pageTitle %}
 {% block subtitle %}
-Visualizar
+    Visualizar
 {% endblock subtitle %}
 {% block titlePanel %}
-Headquarter
+    {% trans %}Headquarter{% endtrans %}
 {% endblock titlePanel %}
 {% block action %}
-<div class="form-group form-actions">
+    <div class="form-group form-actions">
     <div class="col-md-12 col-md-offset-6">
         <a href="{{ path('admin_headquarter_index') }}" class="btn btn-sm btn-primary">
             <i class="hi hi-chevron-left"></i>
             Regresar
-        </a>            <a href="{{ path('admin_headquarter_edit', { 'id': headquarter.id }) }}" class="btn btn-sm btn-warning">
+        </a> <a href="{{ path('admin_headquarter_edit', { 'id': headquarter.id }) }}" class="btn btn-sm btn-warning">
             <i class="gi gi-edit"></i>
             Edit
-        </a>    </div>
+        </a></div>
     </div>{% endblock action %}
     {% block bodyPanel %}
-    <div class="table-responsive">
-        <table class="table table-vcenter table-striped">
-            <tbody>
+        <div class="table-responsive">
+            <table class="table table-vcenter table-striped">
+                <tbody>
                 <tr>
                     <th>{% trans %}Name{% endtrans %}</th>
                     <td>{{ headquarter.name }}</td>
@@ -43,7 +43,7 @@ Headquarter
                     <th>{% trans %}City{% endtrans %}</th>
                     <td>{{ headquarter.city.name }}</td>
                 </tr>
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
     {% endblock bodyPanel %}
