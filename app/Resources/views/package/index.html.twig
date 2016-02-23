@@ -9,28 +9,39 @@
             <a href="{{ path('admin_package_new') }}" data-original-title="Create a new entry"
                class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
         </div>
-        {% endblock action %}
-        {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
-        <thead>
-            <tr>
-                <th>{% trans %}Name{% endtrans %}</th>
-                <th>{% trans %}Weeks{% endtrans %}</th>
-                <th>{% trans %}Actions{% endtrans %}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for package in packages %}
-            <tr>
-                <td>{{ package.name }}</td>
-                <td>{{ package.semanas }}</td>
-                <td>                        <div class="btn-group">
-                            <a href="{{ path('admin_package_show', { 'id': package.id }) }}" class="btn btn-xs btn-primary">show</a>
-                        </div>                        <div class="btn-group">
-                            <a href="{{ path('admin_package_edit', { 'id': package.id }) }}" class="btn btn-xs btn-primary">edit</a>
-                        </div>                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endblock bodyPanel %}
-{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script> {% endblock extraJS %}
+    {% endblock action %}
+        {% block titlePanel %}paquetes registrados{% endblock titlePanel %}
+        {% block bodyPanel %}
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th>{% trans %}Name{% endtrans %}</th>
+                    <th>{% trans %}Weeks{% endtrans %}</th>
+                    <th>{% trans %}Actions{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for package in packages %}
+                    <tr>
+                        <td>{{ package.name }}</td>
+                        <td>{{ package.semanas }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_package_show', { 'id': package.id }) }}"
+                                   class="btn btn-xs btn-primary">show</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_package_edit', { 'id': package.id }) }}"
+                                   class="btn btn-xs btn-primary">edit</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endblock bodyPanel %}
+{% block extraJS %}
+    <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script>
+    <script>$(function () {
+            TablesDatatables.init();
+        });</script> {% endblock extraJS %}

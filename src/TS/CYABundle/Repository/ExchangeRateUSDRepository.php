@@ -70,7 +70,7 @@ class ExchangeRateUSDRepository extends EntityRepository
     {
         $today = new \DateTime('today');
         $qb = $this->createQueryBuilder('exchange_rate_usd')
-            ->where('exchange_rate_usd.date < :today')
+            ->where('exchange_rate_usd.date > :today')
             ->setParameter('today', $today->format('Y-m-d'));
 
         return $qb->getQuery()->getResult();

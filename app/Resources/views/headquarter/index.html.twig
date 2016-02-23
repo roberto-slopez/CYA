@@ -1,17 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block iconHead %} <i class="gi gi-list"></i>{% endblock iconHead %}
 {% block pageTitle %}
-Headquarter
+    Headquarter
 {% endblock pageTitle %}
 {% block subtitle %} Lista {% endblock subtitle %}
 {% block action %}
-<div class="block-options pull-right">
-    <a href="{{ path('admin_headquarter_new') }}" data-original-title="Create a new entry"
-    class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
-</div>
+    <div class="block-options pull-right">
+        <a href="{{ path('admin_headquarter_new') }}" data-original-title="Create a new entry"
+           class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
+    </div>
 {% endblock action %}
-{% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
-    <thead>
+{% block titlePanel %}Sedes registradas{% endblock titlePanel %}
+{% block bodyPanel %}
+    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <thead>
         <tr>
             <th>{% trans %}Name{% endtrans %}</th>
             <th>{% trans %}Description{% endtrans %}</th>
@@ -19,25 +21,30 @@ Headquarter
             <th>{% trans %}City{% endtrans %}</th>
             <th>{% trans %}Actions{% endtrans %}</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         {% for headquarter in headquarters %}
-        <tr>
-            <td>{{ headquarter.name }}</td>
-            <td>{{ headquarter.description }}</td>
-            <td>{{ headquarter.type }}</td>
-            <td>{{ headquarter.city.name }}</td>
-            <td>
-                <div class="btn-group">
-                    <a href="{{ path('admin_headquarter_show', { 'id': headquarter.id }) }}" class="btn btn-xs btn-primary">show</a>
-                    <a href="{{ path('admin_headquarter_edit', { 'id': headquarter.id }) }}" class="btn btn-xs btn-primary">edit</a>
-                </div>
-            </td>
-        </tr>
+            <tr>
+                <td>{{ headquarter.name }}</td>
+                <td>{{ headquarter.description }}</td>
+                <td>{{ headquarter.type }}</td>
+                <td>{{ headquarter.city.name }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{{ path('admin_headquarter_show', { 'id': headquarter.id }) }}"
+                           class="btn btn-xs btn-primary">show</a>
+                        <a href="{{ path('admin_headquarter_edit', { 'id': headquarter.id }) }}"
+                           class="btn btn-xs btn-primary">edit</a>
+                    </div>
+                </td>
+            </tr>
         {% endfor %}
-    </tbody>
-</table>
+        </tbody>
+    </table>
 {% endblock bodyPanel %}
 {% block extraJS %}
-<script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script>
+    <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script>
+    <script>$(function () {
+            TablesDatatables.init();
+        });</script>
 {% endblock extraJS %}

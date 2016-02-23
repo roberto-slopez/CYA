@@ -9,36 +9,47 @@
             <a href="{{ path('admin_seller_new') }}" data-original-title="Create a new entry"
                class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
         </div>
-        {% endblock action %}
-        {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
-        <thead>
-            <tr>
-                <th>{% trans %}Seller{% endtrans %}</th>
-                <th>{% trans %}Indentification{% endtrans %}</th>
-                <th>{% trans %}Telephone{% endtrans %}</th>
-                <th>{% trans %}Notes{% endtrans %}</th>
-                <th>{% trans %}User seller{% endtrans %}</th>
-                <th>{% trans %}Enable{% endtrans %}</th>
-                <th>{% trans %}Actions{% endtrans %}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for seller in sellers %}
-            <tr>
-                <td>{{ seller.firstname }} {{ seller.lastname }}</td>
-                <td>{{ seller.indentification }}</td>
-                <td>{{ seller.telephone }}</td>
-                <td>{{ seller.notes }}</td>
-                <td><span class="label label-primary">{{ seller.userSeller.nombreImpresion }}</span></td>
-                <td>{% if seller.enable %}Si{% else %}No{% endif %}</td>
-                <td>                        <div class="btn-group">
-                            <a href="{{ path('admin_seller_show', { 'id': seller.id }) }}" class="btn btn-xs btn-primary">show</a>
-                        </div>                        <div class="btn-group">
-                            <a href="{{ path('admin_seller_edit', { 'id': seller.id }) }}" class="btn btn-xs btn-primary">edit</a>
-                        </div>                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endblock bodyPanel %}
-{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script {% endblock extraJS %}
+    {% endblock action %}
+        {% block titlePanel %}vendedores registrados{% endblock titlePanel %}
+        {% block bodyPanel %}
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th>{% trans %}Seller{% endtrans %}</th>
+                    <th>{% trans %}Indentification{% endtrans %}</th>
+                    <th>{% trans %}Telephone{% endtrans %}</th>
+                    <th>{% trans %}Notes{% endtrans %}</th>
+                    <th>{% trans %}User seller{% endtrans %}</th>
+                    <th>{% trans %}Enable{% endtrans %}</th>
+                    <th>{% trans %}Actions{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for seller in sellers %}
+                    <tr>
+                        <td>{{ seller.firstname }} {{ seller.lastname }}</td>
+                        <td>{{ seller.indentification }}</td>
+                        <td>{{ seller.telephone }}</td>
+                        <td>{{ seller.notes }}</td>
+                        <td><span class="label label-primary">{{ seller.userSeller.nombreImpresion }}</span></td>
+                        <td>{% if seller.enable %}Si{% else %}No{% endif %}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_seller_show', { 'id': seller.id }) }}"
+                                   class="btn btn-xs btn-primary">show</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_seller_edit', { 'id': seller.id }) }}"
+                                   class="btn btn-xs btn-primary">edit</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endblock bodyPanel %}
+{% block extraJS %}
+    <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script>
+    <script>$(function () {
+            TablesDatatables.init();
+        });</script {% endblock extraJS %}
