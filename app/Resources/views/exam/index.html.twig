@@ -9,34 +9,45 @@
             <a href="{{ path('admin_exam_new') }}" data-original-title="Create a new entry"
                class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
         </div>
-        {% endblock action %}
-        {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
-        <thead>
-            <tr>
-                <th>{% trans %}Name{% endtrans %}</th>
-                <th>{% trans %}Description{% endtrans %}</th>
-                <th>{% trans %}Price{% endtrans %}</th>
-                <th>{% trans %}Enable{% endtrans %}</th>
-                <th>{% trans %}Headquarter{% endtrans %}</th>
-                <th>{% trans %}Actions{% endtrans %}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for exam in exams %}
-            <tr>
-                <td>{{ exam.name }}</td>
-                <td>{{ exam.description }}</td>
-                <td>{{ exam.price }}</td>
-                <td>{% if exam.enable %}Si{% else %}No{% endif %}</td>
-                <td>{{ exam.headquarter.name }}</td>
-                <td>                        <div class="btn-group">
-                            <a href="{{ path('admin_exam_show', { 'id': exam.id }) }}" class="btn btn-xs btn-primary">show</a>
-                        </div>                        <div class="btn-group">
-                            <a href="{{ path('admin_exam_edit', { 'id': exam.id }) }}" class="btn btn-xs btn-primary">edit</a>
-                        </div>                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endblock bodyPanel %}
-{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script> {% endblock extraJS %}
+    {% endblock action %}
+        {% block titlePanel %}Examenes registrados{% endblock titlePanel %}
+        {% block bodyPanel %}
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th>{% trans %}Name{% endtrans %}</th>
+                    <th>{% trans %}Description{% endtrans %}</th>
+                    <th>{% trans %}Price{% endtrans %}</th>
+                    <th>{% trans %}Enable{% endtrans %}</th>
+                    <th>{% trans %}Headquarter{% endtrans %}</th>
+                    <th>{% trans %}Actions{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for exam in exams %}
+                    <tr>
+                        <td>{{ exam.name }}</td>
+                        <td>{{ exam.description }}</td>
+                        <td>{{ exam.price }}</td>
+                        <td>{% if exam.enable %}Si{% else %}No{% endif %}</td>
+                        <td>{{ exam.headquarter.name }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_exam_show', { 'id': exam.id }) }}"
+                                   class="btn btn-xs btn-primary">show</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_exam_edit', { 'id': exam.id }) }}"
+                                   class="btn btn-xs btn-primary">edit</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endblock bodyPanel %}
+{% block extraJS %}
+    <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script>
+    <script>$(function () {
+            TablesDatatables.init();
+        });</script> {% endblock extraJS %}

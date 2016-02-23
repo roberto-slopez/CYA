@@ -68,7 +68,7 @@ class Course
     protected $headquarter;
 
     /**
-     * @ORM\OneToMany(targetEntity="CourseRangeWeeks", mappedBy="course", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="CourseRangeWeeks", mappedBy="course", cascade={"persist", "remove"})
      */
     protected $courseRangeWeeks;
 

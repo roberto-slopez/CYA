@@ -46,7 +46,7 @@ class Package
     protected $course_id;
 
     /**
-     * @ORM\OneToMany(targetEntity="PackageLodging", mappedBy="package", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="PackageLodging", mappedBy="package", cascade={"persist", "remove"})
      */
     protected $packageLodging;
 

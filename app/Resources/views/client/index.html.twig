@@ -9,36 +9,47 @@
             <a href="{{ path('admin_client_new') }}" data-original-title="Create a new entry"
                class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
         </div>
-        {% endblock action %}
-        {% block bodyPanel %}    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
-        <thead>
-            <tr>
-                <th>{% trans %}First name{% endtrans %}</th>
-                <th>{% trans %}Last name{% endtrans %}</th>
-                <th>{% trans %}Indentification{% endtrans %}</th>
-                <th>{% trans %}Telephone{% endtrans %}</th>
-                <th>{% trans %}Adress{% endtrans %}</th>
-                <th>{% trans %}Notes{% endtrans %}</th>
-                <th>{% trans %}Actions{% endtrans %}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for client in clients %}
-            <tr>
-                <td>{{ client.firstname }}</td>
-                <td>{{ client.lastname }}</td>
-                <td>{{ client.indentification }}</td>
-                <td>{{ client.telephone }}</td>
-                <td>{{ client.adress }}</td>
-                <td>{{ client.notes }}</td>
-                <td>                        <div class="btn-group">
-                            <a href="{{ path('admin_client_show', { 'id': client.id }) }}" class="btn btn-xs btn-primary">show</a>
-                        </div>                        <div class="btn-group">
-                            <a href="{{ path('admin_client_edit', { 'id': client.id }) }}" class="btn btn-xs btn-primary">edit</a>
-                        </div>                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endblock bodyPanel %}
-{% block extraJS %} <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script> <script>$(function(){ TablesDatatables.init(); });</script> {% endblock extraJS %}
+    {% endblock action %}
+        {% block titlePanel %}clientes registrados{% endblock titlePanel %}
+        {% block bodyPanel %}
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th>{% trans %}First name{% endtrans %}</th>
+                    <th>{% trans %}Last name{% endtrans %}</th>
+                    <th>{% trans %}Indentification{% endtrans %}</th>
+                    <th>{% trans %}Telephone{% endtrans %}</th>
+                    <th>{% trans %}Adress{% endtrans %}</th>
+                    <th>{% trans %}Notes{% endtrans %}</th>
+                    <th>{% trans %}Actions{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.firstname }}</td>
+                        <td>{{ client.lastname }}</td>
+                        <td>{{ client.indentification }}</td>
+                        <td>{{ client.telephone }}</td>
+                        <td>{{ client.adress }}</td>
+                        <td>{{ client.notes }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_client_show', { 'id': client.id }) }}"
+                                   class="btn btn-xs btn-primary">show</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_client_edit', { 'id': client.id }) }}"
+                                   class="btn btn-xs btn-primary">edit</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endblock bodyPanel %}
+{% block extraJS %}
+    <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script>
+    <script>$(function () {
+            TablesDatatables.init();
+        });</script> {% endblock extraJS %}

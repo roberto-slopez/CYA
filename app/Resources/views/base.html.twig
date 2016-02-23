@@ -42,230 +42,231 @@
     {% endblock scriptHead %}
 </head>
 <body>
+{% block page_wrapper %}
 <div id="page-wrapper">
     {% block preloader %}
-    <div class="preloader themed-background">
-        <h1 class="push-top-bottom text-light text-center"><strong>Admin</strong>CYA</h1>
-        <div class="inner">
-            <h3 class="text-light visible-lt-ie9 visible-lt-ie10"><strong>Loading..</strong></h3>
-            <div class="preloader-spinner hidden-lt-ie9 hidden-lt-ie10"></div>
+        <div class="preloader themed-background">
+            <h1 class="push-top-bottom text-light text-center"><strong>Admin</strong>CYA</h1>
+            <div class="inner">
+                <h3 class="text-light visible-lt-ie9 visible-lt-ie10"><strong>Loading..</strong></h3>
+                <div class="preloader-spinner hidden-lt-ie9 hidden-lt-ie10"></div>
+            </div>
         </div>
-    </div>
     {% endblock preloader %}
     {% block body %}
-    <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
-        {% block sidebar %}
-        <div id="sidebar">
-            <div id="sidebar-scroll">
-                <div class="sidebar-content">
-                    <a href="{{ url("main") }}" class="sidebar-brand">
-                        <img src="{{asset("bundles/tscya/img/logo.png")}}" class="img-responsive"/>
-                    </a>
-
-                    <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
-                        <div class="sidebar-user-avatar">
-                            <a href="{{ url("main") }}">
-                                <img src="{{ asset("bundles/tscya/img/placeholders/avatars/avatar.jpg") }}" alt="avatar">
+        <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+            {% block sidebar %}
+                <div id="sidebar">
+                    <div id="sidebar-scroll">
+                        <div class="sidebar-content">
+                            <a href="{{ url("main") }}" class="sidebar-brand">
+                                <img src="{{asset("bundles/tscya/img/logo.png")}}" class="img-responsive"/>
                             </a>
-                        </div>
-                        <div class="sidebar-user-name">{{ app.user.username|capitalize }}</div>
-                        <div class="sidebar-user-links">
-                            {#<a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="gi gi-user"></i></a>
-                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="gi gi-envelope"></i></a>
-                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="gi gi-cogwheel"></i></a>#}
-                            <a href="{{ path('fos_user_security_logout') }}" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
-                        </div>
-                    </div>
-                    <ul class="sidebar-nav">
-                        <li>
-                            <a href="{{ url("main") }}" onclick="navSwitch(this)">
-                                <i class="gi gi-stopwatch sidebar-nav-icon"></i>
+
+                            <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
+                                <div class="sidebar-user-avatar">
+                                    <a href="{{ url("main") }}">
+                                        <img src="{{ asset("bundles/tscya/img/placeholders/avatars/avatar.jpg") }}" alt="avatar">
+                                    </a>
+                                </div>
+                                <div class="sidebar-user-name">{{ app.user.username|capitalize }}</div>
+                                <div class="sidebar-user-links">
+                                    {#<a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="gi gi-user"></i></a>
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="gi gi-envelope"></i></a>
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="gi gi-cogwheel"></i></a>#}
+                                    <a href="{{ path('fos_user_security_logout') }}" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+                                </div>
+                            </div>
+                            <ul class="sidebar-nav">
+                                <li>
+                                    <a href="{{ url("main") }}" onclick="navSwitch(this)">
+                                        <i class="gi gi-stopwatch sidebar-nav-icon"></i>
                                 <span class="sidebar-nav-mini-hide">
                                     {% trans %} Dashboard {% endtrans %}
                                 </span>
+                                    </a>
+                                </li>
+                                {% if is_granted('ROLE_SELLER') %}
+                                    <li>
+                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Cotizadores</span></a>
+                                        <ul>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url('cotizador_index') }}">{% trans %} Quotation {% endtrans %}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li>
+                                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-cogwheel sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Catálogos</span></a>
+                                        <ul>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_exchangeRateUSD_index") }}">{% trans %} Exchange Rate {% endtrans %} USD</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_coin_index") }}">{% trans %} Coin {% endtrans %}</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_country_index") }}">{% trans %}Country{% endtrans %}</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_city_index") }}">{% trans %}City{% endtrans %}</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_headquarter_index") }}">{% trans %}Headquarter{% endtrans %}</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_lodging_index") }}">{% trans %}Lodging{% endtrans %}</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_service_index") }}">{% trans %}Service{% endtrans %}</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_course_index") }}">{% trans %}Course{% endtrans %}</a>
+                                            </li>
+                                            {#<li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_client_index") }}">{% trans %}Client{% endtrans %}</a>
+                                            </li>#}
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_package_index") }}">{% trans %}Package{% endtrans %}</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_exam_index") }}">{% trans %}Exam{% endtrans %}</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url("admin_promocion_index") }}">{% trans %}Promocion{% endtrans %}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endblock sidebar %}
+            <div id="main-container">
+                <header class="navbar navbar-default">
+                    <ul class="nav navbar-nav-custom">
+                        <li>
+                            <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+                                <i class="fa fa-bars fa-fw"></i>
                             </a>
                         </li>
-                        {% if is_granted('ROLE_SELLER') %}
-                        <li>
-                            <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Cotizadores</span></a>
-                            <ul>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url('cotizador_index') }}">{% trans %} Quotation {% endtrans %}</a>
-                                </li>
-                            </ul>
-                        </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                        <li>
-                            <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-cogwheel sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Catálogos</span></a>
-                            <ul>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_exchangeRateUSD_index") }}">{% trans %} Exchange Rate {% endtrans %} USD</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_coin_index") }}">{% trans %} Coin {% endtrans %}</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_country_index") }}">{% trans %}Country{% endtrans %}</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_city_index") }}">{% trans %}City{% endtrans %}</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_headquarter_index") }}">{% trans %}Headquarter{% endtrans %}</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_lodging_index") }}">{% trans %}Lodging{% endtrans %}</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_service_index") }}">{% trans %}Service{% endtrans %}</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_course_index") }}">{% trans %}Course{% endtrans %}</a>
-                                </li>
-                                {#<li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_client_index") }}">{% trans %}Client{% endtrans %}</a>
-                                </li>#}
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_package_index") }}">{% trans %}Package{% endtrans %}</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_exam_index") }}">{% trans %}Exam{% endtrans %}</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_promocion_index") }}">{% trans %}Promocion{% endtrans %}</a>
-                                </li>
-                            </ul>
-                        </li>
-                        {% endif %}
                     </ul>
-                </div>
-            </div>
-        </div>
-        {% endblock sidebar %}
-        <div id="main-container">
-            <header class="navbar navbar-default">
-                <ul class="nav navbar-nav-custom">
-                    <li>
-                        <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
-                            <i class="fa fa-bars fa-fw"></i>
-                        </a>
-                    </li>
-                </ul>
 
-                <form action="#{#search#}" method="post" class="navbar-form-custom">
-                    <div class="form-group">
-                        <input type="text" id="top-search" name="top-search" class="form-control" placeholder="{% trans %}Search{% endtrans %}...">
-                    </div>
-                </form>
+                    <form action="#{#search#}" method="post" class="navbar-form-custom">
+                        <div class="form-group">
+                            <input type="text" id="top-search" name="top-search" class="form-control" placeholder="{% trans %}Search{% endtrans %}...">
+                        </div>
+                    </form>
 
-                <ul class="nav navbar-nav-custom pull-right">
-                    <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('bundles/tscya/img/placeholders/avatars/avatar.jpg') }}" alt="avatar"> <i class="fa fa-angle-down"></i>
-                        </a>
-                        {% if is_granted('ROLE_ADMIN') %}
-                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                            <li class="dropdown-header text-center">Admin config</li>
-                            <li>
-                                <a href="{{ url("lista_usuario") }}">
-                                    <i class="fa fa-users fa-fw pull-right"></i>
-                                    {#<span class="badge pull-right">1</span>#}
-                                    Usuarios
-                                </a>
-                                <a href="{{ url("admin_seller_index") }}">
-                                    <i class="fa fa-user fa-fw pull-right"></i>
-                                    {% trans %}Seller{% endtrans %}
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                        </ul>
-                        {% endif %}
-                    </li>
-                </ul>
-            </header>
+                    <ul class="nav navbar-nav-custom pull-right">
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('bundles/tscya/img/placeholders/avatars/avatar.jpg') }}" alt="avatar"> <i class="fa fa-angle-down"></i>
+                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                                    <li class="dropdown-header text-center">Admin config</li>
+                                    <li>
+                                        <a href="{{ url("lista_usuario") }}">
+                                            <i class="fa fa-users fa-fw pull-right"></i>
+                                            {#<span class="badge pull-right">1</span>#}
+                                            Usuarios
+                                        </a>
+                                        <a href="{{ url("admin_seller_index") }}">
+                                            <i class="fa fa-user fa-fw pull-right"></i>
+                                            {% trans %}Seller{% endtrans %}
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                </ul>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </header>
 
-            <div id="page-content">
-                {% block contentHeader %}
-                <div class="content-header">
-                    <div class="header-section">
-                        <h1>
-                            {% block iconHead %}
-                                <i class="gi gi-book"></i>
-                            {% endblock iconHead %}
-                            {% block pageTitle %}{% endblock pageTitle %}<br>
-                            <small>{% block subtitle %}{% endblock subtitle %}</small>
-                        </h1>
-                        <br/>
-                    </div>
-                </div>
-                {% endblock contentHeader %}
-                {% for flashMessage in app.session.flashbag.get('exito') %}
-                    <div class="alert alert-success alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="fa fa-check-circle"></i> Success</h4> {{ flashMessage }}!
-                    </div>
-                {% endfor %}
-                {% for flashMessage in app.session.flashbag.get('info') %}
-                    <div class="alert alert-info alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="fa fa-info-circle"></i> Info</h4> {{ flashMessage }}!
-                    </div>
-                {% endfor %}
-                {% for flashMessage in app.session.flashbag.get('aviso') %}
-                    <div class="alert alert-warning alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="fa fa-exclamation-circle"></i> Warning</h4> {{ flashMessage }}!
-                    </div>
-                {% endfor %}
-                {% for flashMessage in app.session.flashbag.get('error') %}
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="fa fa-times-circle"></i> Error</h4> {{ flashMessage }}!
-                    </div>
-                {% endfor %}
-                {% block pageContent %}
-                <div class="block">
-                    <div class="block-title">
-                        {% block action %}
-                            <div class="block-options pull-right">
-                                <div class="btn-group btn-group-sm">
-                                    <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Options"><span class="caret"></span></a>
-                                    <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                                        <li>
-                                            <a href="javascript:void(0)"><i class="gi gi-cloud pull-right"></i>Simple Action</a>
-                                            <a href="javascript:void(0)"><i class="gi gi-airplane pull-right"></i>Another Action</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)"><i class="fa fa-wrench fa-fw pull-right"></i>Separated Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                <div id="page-content">
+                    {% block contentHeader %}
+                        <div class="content-header">
+                            <div class="header-section">
+                                <h1>
+                                    {% block iconHead %}
+                                        <i class="gi gi-book"></i>
+                                    {% endblock iconHead %}
+                                    {% block pageTitle %}{% endblock pageTitle %}<br>
+                                    <small>{% block subtitle %}{% endblock subtitle %}</small>
+                                </h1>
+                                <br/>
                             </div>
-                        {% endblock action %}
-                        <h2>{% block titlePanel %}CRUD{% endblock titlePanel %}</h2>
-                    </div>
-                    {% block bodyPanel %}
-                        <p>Inicio</p>
-                    {% endblock bodyPanel %}
+                        </div>
+                    {% endblock contentHeader %}
+                    {% for flashMessage in app.session.flashbag.get('exito') %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="fa fa-check-circle"></i> Success</h4> {{ flashMessage }}!
+                        </div>
+                    {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('info') %}
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="fa fa-info-circle"></i> Info</h4> {{ flashMessage }}!
+                        </div>
+                    {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('aviso') %}
+                        <div class="alert alert-warning alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="fa fa-exclamation-circle"></i> Warning</h4> {{ flashMessage }}!
+                        </div>
+                    {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('error') %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="fa fa-times-circle"></i> Error</h4> {{ flashMessage }}!
+                        </div>
+                    {% endfor %}
+                    {% block pageContent %}
+                        <div class="block">
+                            <div class="block-title">
+                                {% block action %}
+                                    <div class="block-options pull-right">
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Options"><span class="caret"></span></a>
+                                            <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                                                <li>
+                                                    <a href="javascript:void(0)"><i class="gi gi-cloud pull-right"></i>Simple Action</a>
+                                                    <a href="javascript:void(0)"><i class="gi gi-airplane pull-right"></i>Another Action</a>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li>
+                                                    <a href="javascript:void(0)"><i class="fa fa-wrench fa-fw pull-right"></i>Separated Action</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endblock action %}
+                                <h2>{% block titlePanel %}CRUD{% endblock titlePanel %}</h2>
+                            </div>
+                            {% block bodyPanel %}
+                                <p>Inicio</p>
+                            {% endblock bodyPanel %}
+                        </div>
+                    {% endblock pageContent %}
                 </div>
-                {% endblock pageContent %}
-            </div>
 
-            <footer class="clearfix">
-                <div class="pull-right">
-                    {#Crafted with <i class="fa fa-heart text-danger"></i> by <a href="https://twitter.com/roberto_slopez" target="_blank">@roberto-slopez</a>#}
-                </div>
-                <div class="pull-left">
-                    <span id="year-copy"></span> &copy; <a href="http://denetz.net" target="_blank">Denetz</a>
-                </div>
-            </footer>
+                <footer class="clearfix">
+                    <div class="pull-right">
+                        {#Crafted with <i class="fa fa-heart text-danger"></i> by <a href="https://twitter.com/roberto_slopez" target="_blank">@roberto-slopez</a>#}
+                    </div>
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://denetz.net" target="_blank">Denetz</a>
+                    </div>
+                </footer>
+            </div>
         </div>
-    </div>
     {% endblock body %}
 </div>
-
+{% endblock page_wrapper %}
 {% block js %}
 <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
 <!--[if IE 8]><script src="{{ asset('bundles/tscya/js/helpers/excanvas.min.js') }}"></script><![endif]-->
