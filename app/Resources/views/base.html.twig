@@ -59,7 +59,7 @@
             <div id="sidebar-scroll">
                 <div class="sidebar-content">
                     <a href="{{ url("main") }}" class="sidebar-brand">
-                        <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Admin</strong>cotizador</span>
+                        <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Admin</strong>CYA</span>
                     </a>
 
                     <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
@@ -123,12 +123,9 @@
                                 <li>
                                     <a onclick="navSwitch(this)" href="{{ url("admin_course_index") }}">{% trans %}Course{% endtrans %}</a>
                                 </li>
-                                <li>
+                                {#<li>
                                     <a onclick="navSwitch(this)" href="{{ url("admin_client_index") }}">{% trans %}Client{% endtrans %}</a>
-                                </li>
-                                <li>
-                                    <a onclick="navSwitch(this)" href="{{ url("admin_seller_index") }}">{% trans %}Seller{% endtrans %}</a>
-                                </li>
+                                </li>#}
                                 <li>
                                     <a onclick="navSwitch(this)" href="{{ url("admin_package_index") }}">{% trans %}Package{% endtrans %}</a>
                                 </li>
@@ -172,9 +169,13 @@
                             <li class="dropdown-header text-center">Admin config</li>
                             <li>
                                 <a href="{{ url("lista_usuario") }}">
-                                    <i class="fa fa-clock-o fa-fw pull-right"></i>
+                                    <i class="fa fa-users fa-fw pull-right"></i>
                                     {#<span class="badge pull-right">1</span>#}
                                     Usuarios
+                                </a>
+                                <a href="{{ url("admin_seller_index") }}">
+                                    <i class="fa fa-user fa-fw pull-right"></i>
+                                    {% trans %}Seller{% endtrans %}
                                 </a>
                             </li>
                             <li class="divider"></li>
@@ -254,7 +255,7 @@
 
             <footer class="clearfix">
                 <div class="pull-right">
-                    Crafted with <i class="fa fa-heart text-danger"></i> by <a href="https://twitter.com/roberto_slopez" target="_blank">@roberto-slopez</a>
+                    {#Crafted with <i class="fa fa-heart text-danger"></i> by <a href="https://twitter.com/roberto_slopez" target="_blank">@roberto-slopez</a>#}
                 </div>
                 <div class="pull-left">
                     <span id="year-copy"></span> &copy; <a href="http://denetz.net" target="_blank">Denetz</a>
