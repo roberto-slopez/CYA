@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+{% block page-wrapper %}
+<div id="error-container">
+    <div class="error-options">
+        <h3><i class="fa fa-chevron-circle-left text-muted"></i> <a href="{{ url('main') }}">Go Back</a></h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <h1 class="animation-pulse"><i class="fa fa-exclamation-circle text-warning"></i> 405</h1>
+            <h2 class="h3">Oops, Method Not Allowed..<br>But do not worry, we will have a look into it..</h2>
+        </div>
+    </div>
+</div>
+{% endblock page-wrapper %}
+{% block js %}
+{% endblock js %}
