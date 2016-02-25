@@ -18,7 +18,7 @@ class PackageLodgingType extends AbstractType
         $builder
             ->add('lodging', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Lodging',
-                'choice_label' => 'Label',
+                'choice_label' => 'nameWithType',
                 'label' => 'Lodging',
                 'placeholder' => 'Choose an option',
                 'attr' => ['class' => 'lodging_selector select-select2'],

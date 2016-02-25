@@ -31,8 +31,8 @@
                 <td>{{ country.coin.name }}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{ path('admin_country_show', { 'id': country.id }) }}" class="btn btn-xs btn-primary">show</a>
-                        <a href="{{ path('admin_country_edit', { 'id': country.id }) }}" class="btn btn-xs btn-primary">edit</a>
+                        <a href="{{ path('admin_country_show', { 'id': country.id }) }}" class="btn btn-xs btn-primary">{% trans %}show{% endtrans %}</a>
+                        <a href="{{ path('admin_country_edit', { 'id': country.id }) }}" class="btn btn-xs btn-primary">{% trans %}edit{% endtrans %}</a>
                     </div>
                 </td>
             </tr>

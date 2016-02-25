@@ -56,7 +56,7 @@
                         <h3 class="widget-content text-right animation-pullDown">
                             Fecha de expiración
                             <strong class="text-danger">{{ item.expiration| date('d/m/Y') }}</strong><br>
-                            <small><strong>{{ item.coin.name }} </strong>{{ item.local |number_format(4, '.', ',') }}</small>
+                            <small><i>{{ item.coin.name }} </i> <strong>{{ item.coin.code }}</strong>{{ item.local |number_format(4, '.', ',') }}</small>
                         </h3>
                     </div>
                 </a>

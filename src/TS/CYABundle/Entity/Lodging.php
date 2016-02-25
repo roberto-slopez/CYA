@@ -94,9 +94,22 @@ class Lodging
         return $this->id;
     }
 
-    public function getLabel() {
+    /**
+     * @return string
+     */
+    public function getNameWithType()
+    {
+        return sprintf('%s %s - %s', $this->getName(), $this->getType(), $this->getHeadquarter()->getName());
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
         return $this->getName().'-'.$this->getHeadquarter()->getName();
     }
+
     /**
      * Set the value of name.
      *
@@ -270,12 +283,13 @@ class Lodging
     {
         return $this->headquarter;
     }
+
     /**
      * @return string
      */
     public function __toString()
     {
-        return (string) $this->getName() . $this->getId();
+        return (string)$this->getName().$this->getId();
     }
 
     public function __sleep()

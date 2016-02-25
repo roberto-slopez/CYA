@@ -56,7 +56,7 @@ $(".headquarter_selector").change(function(){
             $lodging_selector.html('<option>Seleccionar opción</option>');
 
             for (var i=0, total = data.length; i < total; i++) {
-                $lodging_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                $lodging_selector.append('<option value="' + data[i].id + '">' + data[i].name +' '+ data[i].type +' - '+ data[i].headquarter_name + '</option>');
             }
         }
     });

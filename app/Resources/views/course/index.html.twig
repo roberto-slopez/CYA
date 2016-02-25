@@ -32,11 +32,11 @@
                         <td>
                             <div class="btn-group">
                                 <a href="{{ path('admin_course_show', { 'id': course.id }) }}"
-                                   class="btn btn-xs btn-primary">show</a>
+                                   class="btn btn-xs btn-primary">{% trans %}show{% endtrans %}</a>
                             </div>
                             <div class="btn-group">
                                 <a href="{{ path('admin_course_edit', { 'id': course.id }) }}"
-                                   class="btn btn-xs btn-primary">edit</a>
+                                   class="btn btn-xs btn-primary">{% trans %}edit{% endtrans %}</a>
                             </div>
                         </td>
                     </tr>

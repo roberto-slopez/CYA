@@ -139,6 +139,9 @@ class MainController extends BaseController
         $headquarterId = $request->request->get('headquarterId');
         $em = $this->getDoctrine()->getManager();
         $lodging = $em->getRepository('TSCYABundle:Lodging')->getByHeadquarter($headquarterId);
+        $headquarter = $em->getRepository('TSCYABundle:Headquarter')->find($headquarterId);
+
+        $lodging[0]['headquarter_name'] = $headquarter->getName();
 
         return new JsonResponse($lodging);
     }

@@ -35,6 +35,24 @@
                 <th>{% trans %}Description{% endtrans %}</th>
                 <td>{{ course.description }}</td>
             </tr>
+            {% for item in course.courseRangeWeeks  %}
+                <tr>
+                    <th>{% trans %}Price{% endtrans %}</th>
+                    <td>{{ item.price |number_format(2, '.', ',')}}</td>
+                </tr>
+                <tr>
+                    <th>{% trans %}Min{% endtrans %}</th>
+                    <td>{{ item.min }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans %}Max{% endtrans %}</th>
+                    <td>{{ item.max }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans %}Greater than{% endtrans %}</th>
+                    <td>{{ item.greaterThan }}</td>
+                </tr>
+            {% endfor %}
             <tr>
                 <th>{% trans %}Enable{% endtrans %}</th>
                 <td>{% if course.enable %}Yes{% else %}No{% endif %}</td>

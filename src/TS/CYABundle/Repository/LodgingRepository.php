@@ -8,6 +8,7 @@
 
 namespace TS\CYABundle\Repository;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -24,10 +25,11 @@ class LodgingRepository extends EntityRepository
     public function getByHeadquarter($headquartersId)
     {
         $qb = $this->createQueryBuilder('lodging');
-        $qb->where('lodging.headquarters_id=:headquartersId')
-            ->setParameter('headquartersId', $headquartersId);
+        $qb->innerJoin('lodging.headquarter', 'headquarter')
+            ->where('headquarter.id = :headquarter_id')
+            ->setParameter('headquarter_id', $headquartersId);
 
-        return $qb->getQuery()->getArrayResult();
+        return $qb->getQuery()->getResult(AbstractQuery::HYDRATE_ARRAY);
     }
 
     /**
