@@ -91,7 +91,13 @@
                                         <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-notes_2 sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Cotizadores</span></a>
                                         <ul>
                                             <li>
-                                                <a onclick="navSwitch(this)" href="{{ url('cotizador_index') }}">{% trans %} Quotation {% endtrans %}</a>
+                                                <a onclick="navSwitch(this)" href="{{ url('cotizador_flexible_new') }}">Flexible</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url('cotizador_paquete_new') }}">Paquete</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="navSwitch(this)" href="{{ url('cotizador_examen_new') }}">Exámen</a>
                                             </li>
                                         </ul>
                                     </li>
