@@ -1,44 +1,44 @@
 {% extends 'base.html.twig' %}
 {% block iconHead %}
-<i class="fa fa-eye"></i>
+    <i class="fa fa-eye"></i>
 {% endblock iconHead %}
 
 {% block pageTitle %}
     {% trans %}Promotion{% endtrans %}
 {% endblock pageTitle %}
 {% block subtitle %}
-Visualizar
+    Visualizar
 {% endblock subtitle %}
 {% block titlePanel %}
     {% trans %}Promotion{% endtrans %}
 {% endblock titlePanel %}
 {% block action %}
-        <div class="form-group form-actions">
+    <div class="form-group form-actions">
     <div class="col-md-12 col-md-offset-6">
         <a href="{{ path('admin_promocion_index') }}" class="btn btn-sm btn-primary">
             <i class="hi hi-chevron-left"></i>
             Regresar
-        </a>            <a href="{{ path('admin_promocion_edit', { 'id': promocion.id }) }}" class="btn btn-sm btn-warning">
-                <i class="gi gi-edit"></i>
-                Edit
-            </a>    </div>
-</div>{% endblock action %}
+        </a> <a href="{{ path('admin_promocion_edit', { 'id': promocion.id }) }}" class="btn btn-sm btn-warning">
+            <i class="gi gi-edit"></i>
+            {% trans %}Edit{% endtrans %}
+        </a></div>
+    </div>{% endblock action %}
 {% block bodyPanel %}
     <div class="table-responsive">
         <table class="table table-vcenter table-striped">
             <tbody>
-                <tr>
-                    <th>{% trans %}Name{% endtrans %}</th>
-                        <td>{{ promocion.name }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Code{% endtrans %}</th>
-                        <td>{{ promocion.code }}</td>
-                </tr>
-                <tr>
-                    <th>{% trans %}Percentage{% endtrans %}</th>
-                        <td>{{ promocion.percentage }}</td>
-                </tr>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ promocion.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Code{% endtrans %}</th>
+                <td>{{ promocion.code }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Percentage{% endtrans %}</th>
+                <td>{{ promocion.percentage }}</td>
+            </tr>
             </tbody>
         </table>
     </div>

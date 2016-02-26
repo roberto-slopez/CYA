@@ -20,7 +20,7 @@
             Regresar
         </a> <a href="{{ path('admin_seller_edit', { 'id': seller.id }) }}" class="btn btn-sm btn-warning">
             <i class="gi gi-edit"></i>
-            Edit
+            {% trans %}Edit{% endtrans %}
         </a></div>
     </div>{% endblock action %}
 {% block bodyPanel %}
