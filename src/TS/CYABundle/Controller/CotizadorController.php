@@ -73,7 +73,7 @@ class CotizadorController extends BaseController
 
             $this->setFlashInfo('Registro agregado correctamente');
 
-            return $this->redirectToRoute('cotizador_index');
+            return $this->redirectToRoute('main');
         }
 
         return [
@@ -90,30 +90,37 @@ class CotizadorController extends BaseController
      */
     public function newPaqueteAction(Request $request)
     {
-        $user = $this->getCurrenUser();
+        try {
+            $user = $this->getCurrenUser();
 
-        $seller = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('TSCYABundle:Seller')
-            ->getByUser($user->getId());
+            $seller = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('TSCYABundle:Seller')
+                ->getByUser($user->getId());
 
-        $quotation = new Quotation();
-        $quotation->setClient(new Client());
-        $quotation->setSeller($seller);
-        $quotation->setType(Quotation::PACKAGE);
+            $quotation = new Quotation();
+            $quotation->setClient(new Client());
+            $quotation->setSeller($seller);
+            $quotation->setType(Quotation::PACKAGE);
 
-        $form = $this->createForm(QuotationPackageType::class, $quotation);
-        $form->handleRequest($request);
+            $form = $this->createForm(QuotationPackageType::class, $quotation);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $quotation = $this->calculateValues($quotation, Quotation::PACKAGE);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($quotation);
-            $em->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $quotation = $this->calculateValues($quotation, Quotation::PACKAGE);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($quotation);
+                $em->flush();
 
+                $this->setFlashInfo('Registro agregado correctamente');
+
+                return $this->redirectToRoute('main');
+            }
+        } catch (\Exception $e) {
+            $this->setFlashError(sprintf("Error: %s", $e->getMessage()));
             $this->setFlashInfo('Registro agregado correctamente');
 
-            return $this->redirectToRoute('cotizador_index');
+            return $this->redirectToRoute('main');
         }
 
         return [
@@ -153,7 +160,7 @@ class CotizadorController extends BaseController
 
             $this->setFlashInfo('Registro agregado correctamente');
 
-            return $this->redirectToRoute('cotizador_index');
+            return $this->redirectToRoute('main');
         }
 
         return [
