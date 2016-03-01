@@ -45,7 +45,7 @@ class MainController extends BaseController
         $exchangeRate = $em->getRepository('TSCYABundle:ExchangeRateUSD')
             ->getExchangeRateCount();
 
-        $coin = $em->getRepository('TSCYABundle:Coin')->getCount('USD');
+        $coin = $em->getRepository('TSCYABundle:Coin')->findAll();
 
         if (intval($exchangeRate) < intval($coin) ) {
             if (intval($exchangeRate) == 0) {
