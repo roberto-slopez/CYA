@@ -33,7 +33,7 @@ class Package
     /**
      * @ORM\Column(type="float")
      */
-    protected $course_price;
+    protected $price;
 
     /**
      * @ORM\Column(type="integer")
@@ -41,20 +41,9 @@ class Package
     protected $semanas;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    protected $course_id;
-
-    /**
      * @ORM\OneToMany(targetEntity="PackageLodging", mappedBy="package", cascade={"persist", "remove"})
      */
     protected $packageLodging;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Course", inversedBy="package")
-     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=false)
-     */
-    protected $course;
 
     /**
      * @ORM\ManyToOne(targetEntity="Headquarter", inversedBy="package")
@@ -77,37 +66,18 @@ class Package
     /**
      * @return mixed
      */
-    public function getCoursePrice()
+    public function getPrice()
     {
-        return $this->course_price;
+        return $this->price;
     }
 
     /**
-     * @param $course_price
+     * @param $price
      * @return $this
      */
-    public function setCoursePrice($course_price)
+    public function setPrice($price)
     {
-        $this->course_price = $course_price;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCourse()
-    {
-        return $this->course;
-    }
-
-    /**
-     * @param $course
-     * @return $this
-     */
-    public function setCourse($course)
-    {
-        $this->course = $course;
+        $this->price = $price;
 
         return $this;
     }
@@ -280,6 +250,6 @@ class Package
 
     public function __sleep()
     {
-        return array('id', 'lodging_price', 'name', 'semanas');
+        return array('id', 'price', 'name', 'semanas');
     }
 }

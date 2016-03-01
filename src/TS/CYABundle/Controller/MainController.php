@@ -175,4 +175,13 @@ class MainController extends BaseController
 
         return new JsonResponse($lodging);
     }
+
+    /**
+     * @Route("/invoice", name="invoice")
+     * @Method("GET")
+     * @Template()
+     */
+    public function invoiceAction() {
+        return [];
+    }
 }

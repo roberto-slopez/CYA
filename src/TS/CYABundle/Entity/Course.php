@@ -50,12 +50,6 @@ class Course
     protected $headquarters_id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Package", mappedBy="course")
-     * @ORM\JoinColumn(name="id", referencedColumnName="course_id", nullable=false)
-     */
-    protected $package;
-
-    /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="course")
      * @ORM\JoinColumn(name="id", referencedColumnName="course_id", nullable=false)
      */
@@ -75,7 +69,6 @@ class Course
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
-        $this->package = new ArrayCollection();
         $this->courseRangeWeeks = new ArrayCollection();
     }
 
@@ -251,42 +244,6 @@ class Course
     public function getHeadquarter()
     {
         return $this->headquarter;
-    }
-
-    /**
-     * Add Course entity to collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\Package $package
-     * @return \TS\CYABundle\Entity\Headquarter
-     */
-    public function addPackage(Package $package)
-    {
-        $this->package[] = $package;
-
-        return $this;
-    }
-
-    /**
-     * Remove package entity from collection (one to many).
-     *
-     * @param \TS\CYABundle\Entity\Package $package
-     * @return \TS\CYABundle\Entity\Headquarter
-     */
-    public function removePackage(Package $package)
-    {
-        $this->package->removeElement($package);
-
-        return $this;
-    }
-
-    /**
-     * Get Course entity collection (one to many).
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPackege()
-    {
-        return $this->package;
     }
 
     /**

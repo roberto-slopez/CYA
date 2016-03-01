@@ -19,7 +19,6 @@ class PackageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber(new AddCourseFieldSubscriber('course'));
         $builder
             ->add('name')
             ->add('headquarter', EntityType::class, [
@@ -28,7 +27,7 @@ class PackageType extends AbstractType
                 'placeholder' => 'Choose an option',
                 'attr' => ['class' => 'headquarter_selector select-select2']
             ])
-            ->add('course_price', MoneyType::class, [
+            ->add('price', MoneyType::class, [
                 'currency' => 'USD'
             ])
             ->add('semanas', IntegerType::class, [

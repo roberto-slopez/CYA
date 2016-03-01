@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="{{ asset('bundles/tscya/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/tscya/css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/tscya/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/tscya/css/themes.css') }}">
+    <script src="{{ asset('bundles/tscya/js/vendor/modernizr-respond.min.js') }}"></script>
+</head>
+<body>
+
+<div id="page-content">
+    <div class="block full">
+        <div class="row block-section">
+            <div class="col-md-12 text-center">
+                <img height="50px" src="{{ asset('bundles/tscya/img/logo.png') }}" style="-webkit-filter: invert(1);filter: invert(1);display: block;margin: 0 auto;">
+                <img height="150px" src="{{ asset('bundles/tscya/img/fullsize.png') }}" style="display: block;margin: 0 auto;">
+            </div>
+            <div class="col-md-6">
+                <h3>COTIZACIÓN</h3>
+                <h4>Promoción valida hasta: {fecha}</h4>
+                <address>
+                    Destino: {ciudad/pais}<br>
+                    Tipo curso: {curso}<br>
+                    Fecha inicio: {inici}<br>
+                    N° Semanas: {'#'semanas}<br>
+                </address>
+            </div>
+            <div class="col-md-6 text-right">
+                <address>
+                    Fecha: {Fecha}<br>
+                    Asesora: {Asesora}<br>
+                    <i class="fa fa-phone"></i> (000) 000-0000<br>
+                    <i class="fa fa-envelope-o"></i> <a href="javascript:void(0)">example@example.com</a>
+                </address>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-vcenter">
+                <thead>
+                <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Moneda</th>
+                    <th class="text-center">Monto</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="text-center" colspan="4">
+                        Detalles del curso Kaplan (costos en {moneda}).
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center" colspan="4">
+                        Inscripción abonable GBP 100 (costos en {moneda}). No reembolsable
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left"><strong>Curso</strong></td>
+                    <td class="text-left"><strong>Londres</strong> GBP 2400 - 20% de descuento.</td>
+                    <td class="text-right">{simbolo}</td>
+                    <td class="text-right"><span class="label label-primary"><strong>$ 1.000.00</strong></span></td>
+                </tr>
+                <tr>
+                    <td class="text-left"><strong>Alojamiento</strong></td>
+                    <td class="text-left">4 Semanas Casa Anfitriona Zona 3 y 4 - Acc. Doble - Desayunos y cenas</td>
+                    <td class="text-right">{simbolo}</td>
+                    <td class="text-right"><span class="label label-primary">$ 1.000</span></td>
+                </tr>
+                <tr>
+                    <td class="text-left"><strong>{Servicio(obigatorio)}</strong></td>
+                    <td class="text-left">{Descripcion de servicio obligatorio}</td>
+                    <td class="text-right">{simbolo}</td>
+                    <td class="text-right"><span class="label label-primary"><strong>$ 1.000.00</strong></span></td>
+                </tr>
+                <tr>
+                    <td class="text-left"><strong>Total</strong></td>
+                    <td class="text-left">Moneda local ({moneda}).</td>
+                    <td class="text-right">{simbolo}</td>
+                    <td class="text-right"><span class="label label-primary"><strong>$ 1.000.00</strong></span></td>
+                </tr>
+                <tr>
+                    <td class="text-left"><strong>Total en pesos</strong></td>
+                    <td class="text-left">Cambio GBP a COP {valor de cambio} - Tasa hasta el { fecha expiracion cambio}</td>
+                    <td class="text-right">{simbolo}</td>
+                    <td class="text-right"><span class="label label-primary"><strong>$ 1.000.00</strong></span></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background-color: #1e68b4"></td>
+                </tr>
+                <tr>
+                    <td class="text-left" colspan="2"><strong>{gastos descripcion}</strong></td>
+                    <td class="text-right">{simbolo}</td>
+                    <td class="text-right"><span class="label label-primary"><strong>$ {monto}</strong></span></td>
+                </tr>
+                <tr>
+                    <td class="text-center" style="background-color: #1e68b4; color: white;" colspan="4">OBSERVACIONES</td>
+                </tr>
+                <tr>
+                    <td class="text-center" colspan="4">
+                        • Promoción válida para viajar hasta diciembre 31 de 2016.<br/>
+                        • Por favor verificar la tasa de Kaplan antes de realizar cualquier pago.<br/>
+                        • El valor que se congela como parte de la promoción, es en la moneda local del país al que se va a viajar; Kaplan no congela tasas ni valores en pesos colombianos (COP).<br/>
+                        • El valor que se muestra en pesos colombianos (COP) es indicativo y se calcula según la tasa Kaplan del mes en el que el estudiante realice los pagos.<br/>
+                        • El alojamiento estará sujeto a disponibilidad.<br/>
+                        • Si el alojamiento se toma entre el 18 de junio hasta el 20 de agosto, o en Navidad, se cobrará un cargo adicional, por favor consulta fechas con tu asesor(a).<br/>
+                        • Precios sujetos a verificación después de confirmar disponibilidad con la escuela, duración cotizada, tasas y adicionales.<br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center" style="background-color: #1e68b4; color: white;" colspan="4">Avenida 19 No 103 - 75 PBX: 6110942 Bogotá</td>
+                </tr>
+                <tr>
+                    <td class="text-center" colspan="4">http://www.kaplaninternational.com/co</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
