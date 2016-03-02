@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block MenuCatalog %} class="sidebar-nav-menu open" {% endblock MenuCatalog %}
+{% block MenuCity %} class="active" {% endblock MenuCity %}
+{% block ulCatalog %} style="display: block;" {% endblock ulCatalog %}
+
 {% block iconHead %} <i class="gi gi-list"></i>{% endblock iconHead %}
 {% block pageTitle %}
     {% trans %}City{% endtrans %}

@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block MenuCatalog %} class="sidebar-nav-menu open" {% endblock MenuCatalog %}
+{% block MenuHeadquarter %} class="active" {% endblock MenuHeadquarter %}
+{% block ulCatalog %} style="display: block;" {% endblock ulCatalog %}
+
 {% block iconHead %} <i class="gi gi-list"></i>{% endblock iconHead %}
 {% block pageTitle %}
     {% trans %}Headquarter{% endtrans %}
