@@ -42,6 +42,8 @@ class MainController extends BaseController
 
         $package = $em->getRepository('TSCYABundle:Package')->getCount();
 
+        $exam = $em->getRepository('TSCYABundle:Exam')->getCount();
+
         $exchangeRate = $em->getRepository('TSCYABundle:ExchangeRateUSD')
             ->getExchangeRateCount();
 
@@ -61,6 +63,7 @@ class MainController extends BaseController
 
         return [
             'lodgings' => $lodging,
+            'exams' => $exam,
             'headquarters' => $headquarter,
             'courses' => $course,
             'packages' => $package,

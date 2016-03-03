@@ -21,6 +21,7 @@
                 <tr>
                     <th>{% trans %}Name{% endtrans %}</th>
                     <th>{% trans %}Weeks{% endtrans %}</th>
+                    <th>{% trans %}Headquarter{% endtrans %}</th>
                     <th>{% trans %}Actions{% endtrans %}</th>
                 </tr>
                 </thead>
@@ -29,6 +30,7 @@
                     <tr>
                         <td>{{ package.name }}</td>
                         <td>{{ package.semanas }}</td>
+                        <td>{{ package.headquarter.name }}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="{{ path('admin_package_show', { 'id': package.id }) }}"

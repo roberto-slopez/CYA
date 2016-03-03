@@ -21,7 +21,6 @@
                 <tr>
                     <th>{% trans %}Name{% endtrans %}</th>
                     <th>{% trans %}Description{% endtrans %}</th>
-                    <th>{% trans %}Price{% endtrans %}</th>
                     <th>{% trans %}Enable{% endtrans %}</th>
                     <th>{% trans %}Headquarter{% endtrans %}</th>
                     <th>{% trans %}Actions{% endtrans %}</th>
@@ -32,7 +31,6 @@
                     <tr>
                         <td>{{ exam.name }}</td>
                         <td>{{ exam.description }}</td>
-                        <td>{{ exam.price }}</td>
                         <td>{% if exam.enable %}Si{% else %}No{% endif %}</td>
                         <td>{{ exam.headquarter.name }}</td>
                         <td>

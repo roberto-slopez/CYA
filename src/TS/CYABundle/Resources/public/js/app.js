@@ -48,7 +48,7 @@ var App = function() {
 
         // Add the correct copyright year at the footer
         var yearCopy = $('#year-copy'), d = new Date();
-        if (d.getFullYear() === 2014) { yearCopy.html('2014'); } else { yearCopy.html('2014-' + d.getFullYear().toString().substr(2,2)); }
+        if (d.getFullYear() === 2016) { yearCopy.html('2016'); } else { yearCopy.html('2016-' + d.getFullYear().toString().substr(2,2)); }
 
         // Initialize chat demo functionality (in sidebar)
         chatUi();

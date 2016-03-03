@@ -43,11 +43,6 @@ class Exam
     protected $description;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    protected $price;
-
-    /**
      * @ORM\Column(name="`enable`", type="boolean")
      */
     protected $enable;
@@ -70,11 +65,17 @@ class Exam
     protected $headquarter;
 
     /**
+     * @ORM\OneToMany(targetEntity="ExamRangeWeeks", mappedBy="exam", cascade={"persist", "remove"})
+     */
+    protected $examRangeWeeks;
+
+    /**
      * Exam constructor.
      */
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
+        $this->examRangeWeeks = new ArrayCollection();
     }
 
 
@@ -99,6 +100,39 @@ class Exam
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param ExamRangeWeeks $examRangeWeeks
+     * @return $this
+     */
+    public function addExamRangeWeek(ExamRangeWeeks $examRangeWeeks)
+    {
+        $examRangeWeeks->setExam($this);
+        $this->examRangeWeeks->add($examRangeWeeks);
+
+        return $this;
+    }
+
+    /**
+     * @param ExamRangeWeeks $examRangeWeeks
+     * @return $this
+     */
+    public function removeExamRangeWeek(ExamRangeWeeks $examRangeWeeks)
+    {
+        $this->examRangeWeeks->removeElement($examRangeWeeks);
+
+        return $this;
+    }
+
+    /**
+     * Get Quotation entity collection (one to many).
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExamRangeWeeks()
+    {
+        return $this->examRangeWeeks;
     }
 
     /**
@@ -250,25 +284,6 @@ class Exam
     public function getHeadquarter()
     {
         return $this->headquarter;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param $price
-     * @return $this
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
     }
 
     public function __sleep()

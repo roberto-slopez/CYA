@@ -4,6 +4,7 @@ namespace TS\CYABundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,15 +20,18 @@ class ExamType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('price', MoneyType::class, [
-                'currency' => 'USD'
-            ])
             ->add('enable')
             ->add('headquarter', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Headquarter',
                 'choice_label' => 'name',
                 'placeholder' => 'Choose an option',
                 'attr' => ['class' => 'headquarter_selector select-select2']
+            ])
+            ->add('examRangeWeeks', CollectionType::class, [
+                'entry_type' => ExamRangeWeeksType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' => true
             ])
         ;
     }
