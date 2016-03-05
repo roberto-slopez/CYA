@@ -2,6 +2,7 @@
 
 namespace TS\CYABundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,6 +29,11 @@ class HeadquarterType extends AbstractType
             ])
             ->add('city',  EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\City',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('city')
+                        ->orderBy('city.name', 'ASC');
+                    return $qb;
+                },
                 'choice_label' => 'name',
                 'attr' => ['class' => 'select-select2']
             ])

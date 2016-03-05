@@ -2,6 +2,7 @@
 
 namespace TS\CYABundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -23,6 +24,11 @@ class PackageType extends AbstractType
             ->add('name')
             ->add('headquarter', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Headquarter',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('headquarter')
+                        ->orderBy('headquarter.name', 'ASC');
+                    return $qb;
+                },
                 'choice_label' => 'name',
                 'placeholder' => 'Choose an option',
                 'attr' => ['class' => 'headquarter_selector select-select2']

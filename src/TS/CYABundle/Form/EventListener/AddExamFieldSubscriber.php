@@ -60,7 +60,8 @@ class AddExamFieldSubscriber implements EventSubscriberInterface
                 $qb = $repository->createQueryBuilder('exam')
                     ->innerJoin('exam.headquarter', 'headquarter')
                     ->where('headquarter.id = :headquarter_id')
-                    ->setParameter('headquarter_id', $headquarter);
+                    ->setParameter('headquarter_id', $headquarter)
+                    ->orderBy('exam.name', 'ASC');
 
                 return $qb;
             },

@@ -61,7 +61,8 @@ class AddCourseFieldSubscriber implements EventSubscriberInterface
                 $qb = $repository->createQueryBuilder('course')
                     ->innerJoin('course.headquarter', 'headquarter')
                     ->where('headquarter.id = :headquarter_id')
-                    ->setParameter('headquarter_id', $headquarter);
+                    ->setParameter('headquarter_id', $headquarter)
+                    ->orderBy('course.name', 'ASC');
 
                 return $qb;
             },

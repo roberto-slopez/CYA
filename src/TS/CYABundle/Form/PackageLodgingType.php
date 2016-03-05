@@ -2,6 +2,7 @@
 
 namespace TS\CYABundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,6 +19,11 @@ class PackageLodgingType extends AbstractType
         $builder
             ->add('lodging', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Lodging',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('lodging')
+                        ->orderBy('lodging.name', 'ASC');
+                    return $qb;
+                },
                 'choice_label' => 'nameWithType',
                 'label' => 'Lodging',
                 'placeholder' => 'Choose an option',

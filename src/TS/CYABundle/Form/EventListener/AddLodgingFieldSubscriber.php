@@ -61,7 +61,8 @@ class AddLodgingFieldSubscriber implements EventSubscriberInterface
                 $qb = $repository->createQueryBuilder('lodging')
                     ->innerJoin('lodging.headquarter', 'headquarter')
                     ->where('headquarter.id = :headquarter_id')
-                    ->setParameter('headquarter_id', $headquarter);
+                    ->setParameter('headquarter_id', $headquarter)
+                    ->orderBy('lodging.name', 'ASC');
 
                 return $qb;
             },

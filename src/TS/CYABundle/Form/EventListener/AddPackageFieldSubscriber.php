@@ -60,7 +60,8 @@ class AddPackageFieldSubscriber implements EventSubscriberInterface
                 $qb = $repository->createQueryBuilder('package')
                     ->innerJoin('package.headquarter', 'headquarter')
                     ->where('headquarter.id = :headquarter_id')
-                    ->setParameter('headquarter_id', $headquarter);
+                    ->setParameter('headquarter_id', $headquarter)
+                    ->orderBy('package.name', 'ASC');
 
                 return $qb;
             },
@@ -75,7 +76,6 @@ class AddPackageFieldSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $data = $event->getData();
-        \ChromePhp::info($data);
         $form = $event->getForm();
         if (null === $data) {
             return;

@@ -62,7 +62,8 @@ class AddServiceFieldSubscriber implements EventSubscriberInterface
                 $qb = $repository->createQueryBuilder('service')
                     ->innerJoin('service.headquarter', 'headquarter')
                     ->where('headquarter.id = :headquarter_id')
-                    ->setParameter('headquarter_id', $headquarter);
+                    ->setParameter('headquarter_id', $headquarter)
+                    ->orderBy('service.name', 'ASC');
 
                 return $qb;
             },

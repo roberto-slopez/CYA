@@ -2,6 +2,7 @@
 
 namespace TS\CYABundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -24,6 +25,11 @@ class exchangeRateUSDType extends AbstractType
         $builder
             ->add('coin', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Coin',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('coin')
+                        ->orderBy('coin.name', 'ASC');
+                    return $qb;
+                },
                 'choice_label' => 'name'
             ])
             ->add('local', MoneyType::class, [

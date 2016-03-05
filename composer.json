@@ -32,8 +32,6 @@
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "jms/serializer-bundle": "dev-master",
-        "liuggio/excelbundle": "^2.0",
-        "ccampbell/chromephp": "^4.1",
         "mpdf/mpdf": "^6.0"
     },
     "require-dev": {

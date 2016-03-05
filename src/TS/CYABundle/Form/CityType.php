@@ -2,6 +2,7 @@
 
 namespace TS\CYABundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,6 +25,11 @@ class CityType extends AbstractType
             ->add('description')
             ->add('country', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Country',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('country')
+                        ->orderBy('country.name', 'ASC');
+                    return $qb;
+                },
                 'choice_label' => 'name',
                 'attr' => ['class' => 'select-select2']
             ])

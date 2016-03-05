@@ -2,6 +2,7 @@
 
 namespace TS\CYABundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -33,6 +34,11 @@ class LodgingType extends AbstractType
             ->add('description')
             ->add('headquarter', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Headquarter',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('headquarter')
+                        ->orderBy('headquarter.name', 'ASC');
+                    return $qb;
+                },
                 'choice_label' => 'name',
                 'attr' => ['class' => 'select-select2']
             ])

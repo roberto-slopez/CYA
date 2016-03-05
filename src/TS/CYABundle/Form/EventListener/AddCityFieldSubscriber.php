@@ -59,7 +59,8 @@ class AddCityFieldSubscriber implements EventSubscriberInterface
             'query_builder' => function (EntityRepository $repository) use ($country) {
                 $qb = $repository->createQueryBuilder('city')
                     ->where('city.country_id = :country')
-                    ->setParameter('country', $country);
+                    ->setParameter('country', $country)
+                    ->orderBy('city.name', 'ASC');
 
                 return $qb;
             },

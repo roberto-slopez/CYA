@@ -61,7 +61,8 @@ class AddHeadquarterFieldSubscriber implements  EventSubscriberInterface
                 $qb = $repository->createQueryBuilder('headquarter')
                     ->innerJoin('headquarter.city', 'city')
                     ->where('city.id = :city_id')
-                    ->setParameter('city_id', $city);
+                    ->setParameter('city_id', $city)
+                    ->orderBy('headquarter.name', 'ASC');
 
                 return $qb;
             },

@@ -8,6 +8,7 @@
 
 namespace TS\CYABundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -44,6 +45,11 @@ class QuotationExamType extends AbstractType
         $builder
             ->add('country', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Country',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('country')
+                        ->orderBy('country.name', 'ASC');
+                    return $qb;
+                },
                 'choice_label' => 'name',
                 'placeholder' => 'Choose an option',
                 'attr' => ['class' => 'country_selector select-select2']

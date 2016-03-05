@@ -60,6 +60,7 @@ class City
     /**
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="cities")
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=false)
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     protected $country;
 
