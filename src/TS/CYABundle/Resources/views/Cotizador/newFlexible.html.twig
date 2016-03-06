@@ -1,4 +1,11 @@
 {% extends '::base.html.twig' %}
+{% macro discretionarySpendingCollectionItem(discretionarySpending) %}
+    <span class="form-inline text-center">
+        {{ form_widget(discretionarySpending.description) }}
+        {{ form_widget(discretionarySpending.price) }}
+        {{ form_widget(discretionarySpending.coin) }}
+    </span>
+{% endmacro %}
 {% block MenuCotizadores %} class="sidebar-nav-menu open" {% endblock MenuCotizadores %}
 {% block MenuFlexible %} class="active" {% endblock MenuFlexible %}
 {% block ulCotizador %} style="display: block;" {% endblock ulCotizador %}
@@ -39,7 +46,7 @@
     {{ form_row(form.lodging) }}
     {{ form_row(form.service) }}
     {{ form_row(form.semanas) }}
-    <ul class="item list list-unstyled form-inline text-center" data-prototype="{{ form_widget(form.discretionarySpending.vars.prototype)|e }}">
+    <ul class="item list list-unstyled text-center" data-prototype="{{ _self.discretionarySpendingCollectionItem(form.discretionarySpending.vars.prototype)|e }}">
 
         <h3>Gastos opcionales</h3>
         <style>
@@ -47,10 +54,9 @@
                 width: 100%;
             }
         </style>
-        {# iterate over each existing tag and render its only field: name #}
         {% for discretionarySpending in form.discretionarySpending %}
             <li class="bg-info">
-                {{ form_row(discretionarySpending.description) }}
+                {{ _self.tagCollectionItem(discretionarySpending) }}
             </li>
         {% endfor %}
     </ul>
@@ -89,6 +95,7 @@
 
                 // add a new tag form (see code block below)
                 addTagForm($collectionHolder, $newLinkLi);
+                $('.select-select2').select2();
             });
 
 

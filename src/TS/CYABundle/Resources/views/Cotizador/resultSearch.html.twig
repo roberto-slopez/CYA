@@ -1,0 +1,66 @@
+{% extends '::base.html.twig' %}
+{% block iconHead %}
+    <i class="gi gi-search"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+    Cotizador
+{% endblock pageTitle %}
+{% block subtitle %}
+    Resultados
+{% endblock subtitle %}
+
+{% block action %}
+{% endblock action %}
+
+{% block titlePanel %}
+    Lista
+{% endblock titlePanel %}
+
+{% block bodyPanel %}
+    <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>País</th>
+            <th>Ciudad</th>
+            <th>Sede</th>
+            <th>Alojamiento</th>
+            <th>Fecha</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for quotation in quotations %}
+            <tr>
+                <td>
+                    {% if (quotation.type == 'FLEXIBLE') %}
+                        <span class="label label-info">Flexible</span>
+                    {% elseif (quotation.type == 'EXAM') %}
+                        <span class="label label-info">Exámen</span>
+                    {% elseif (quotation.type == 'PACKAGE') %}
+                        <span class="label label-info">Paquete</span>
+                    {% endif %}
+                </td>
+                <td>{{ quotation.country.name }}</td>
+                <td>{{ quotation.city.name }}</td>
+                <td>{{ quotation.headquarter.name }}</td>
+                <td>{{ quotation.lodging.name }}</td>
+                <td>{{ quotation.createdAt | date('d/m/Y') }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{#{{ path('admin_city_show', { 'id': city.id }) }}#}"
+                           class="btn btn-xs btn-primary">{% trans %}show{% endtrans %}</a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock bodyPanel %}
+{% block extraJS %}
+    <script src="{{ asset('bundles/tscya/js/pages/tablesDatatables.js') }}"></script>
+    <script>$(function () {
+            TablesDatatables.init();
+        });</script>
+{% endblock extraJS %}

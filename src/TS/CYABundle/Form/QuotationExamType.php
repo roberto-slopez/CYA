@@ -57,6 +57,7 @@ class QuotationExamType extends AbstractType
             ->add('client', ClientType::class)
             ->add('discretionarySpending', CollectionType::class, [
                 'entry_type' => DiscretionarySpendingType::class,
+                'label' => ' ',
                 'allow_add' => true,
                 'by_reference' => false,
                 'allow_delete' => true

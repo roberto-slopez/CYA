@@ -41,6 +41,7 @@ class PackageType extends AbstractType
             ])
             ->add('packageLodging', CollectionType::class, [
                 'entry_type' => PackageLodgingType::class,
+                'label' => ' ',
                 'allow_add' => true,
                 'by_reference' => false,
                 'allow_delete' => true

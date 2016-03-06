@@ -35,6 +35,7 @@ class ExamType extends AbstractType
             ])
             ->add('examRangeWeeks', CollectionType::class, [
                 'entry_type' => ExamRangeWeeksType::class,
+                'label' => ' ',
                 'allow_add' => true,
                 'by_reference' => false,
                 'allow_delete' => true

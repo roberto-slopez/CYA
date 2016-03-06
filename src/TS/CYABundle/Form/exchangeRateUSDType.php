@@ -30,7 +30,8 @@ class exchangeRateUSDType extends AbstractType
                         ->orderBy('coin.name', 'ASC');
                     return $qb;
                 },
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => ['class' => 'select-select2']
             ])
             ->add('local', MoneyType::class, [
                 'currency' => 'USD',

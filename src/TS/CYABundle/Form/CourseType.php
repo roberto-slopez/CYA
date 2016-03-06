@@ -33,6 +33,7 @@ class CourseType extends AbstractType
             ->add('name')
             ->add('courseRangeWeeks', CollectionType::class, [
                 'entry_type' => CourseRangeWeeksType::class,
+                'label' => ' ',
                 'allow_add' => true,
                 'by_reference' => false,
                 'allow_delete' => true

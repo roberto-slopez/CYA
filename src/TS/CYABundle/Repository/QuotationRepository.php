@@ -35,4 +35,21 @@ class QuotationRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param string $name
+     * @param string $lastName
+     * @return array
+     */
+    public function getByNameAndLastName($name, $lastName) {
+        $qb = $this->createQueryBuilder('quotation');
+        $qb->join('quotation.client', 'client')
+            ->add('where', $qb->expr()->andX(
+                $qb->expr()->like('client.first_name', $qb->expr()->literal($name.'%')),
+                $qb->expr()->like('client.last_name', $qb->expr()->literal($lastName.'%'))
+            ))
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

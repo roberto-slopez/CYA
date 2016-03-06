@@ -42,6 +42,12 @@ class DiscretionarySpending
     protected $price;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Coin")
+     * @ORM\JoinColumn(name="coin_id", referencedColumnName="id", nullable=true)
+     */
+    protected $coin;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Quotation", inversedBy="discretionarySpending")
      * @ORM\JoinColumn(name="quotation_id", referencedColumnName="id", nullable=false)
      */

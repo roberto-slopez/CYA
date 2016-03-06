@@ -163,10 +163,9 @@
                     </li>
                 </ul>
 
-                <form action="#{#search#}" method="post" class="navbar-form-custom">
+                <form action="{{ url('search_cotizacion') }}" method="post" class="navbar-form-custom">
                     <div class="form-group">
-                        <input type="text" id="top-search" name="top-search" class="form-control"
-                               placeholder="{% trans %}Search{% endtrans %}...">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{% trans %}Search{% endtrans %}...">
                     </div>
                 </form>
 

@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use TS\CYABundle\Entity\Client;
 use TS\CYABundle\Entity\DiscretionarySpending;
@@ -165,6 +166,33 @@ class CotizadorController extends BaseController
 
         return [
             'form' => $form->createView(),
+        ];
+    }
+
+    /**
+     * @Route("/search", name="search_cotizacion")
+     * @Method({"GET", "POST"})
+     * @Template()
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function resultSearchAction(Request $request)
+    {
+        $result = explode(' ', $request->get('name'));
+        try {
+            $name = $result[0];
+            $last = $result[1];
+            $em = $this->getDoctrine()->getManager();
+            $quotations = $em->getRepository('TSCYABundle:Quotation')->getByNameAndLastName($name, $last);
+        } catch (\Exception $e) {
+            $this->setFlashError($e->getMessage());
+
+            return $this->redirectToRoute('main');
+        }
+
+        return [
+            'quotations' => $quotations
         ];
     }
 }

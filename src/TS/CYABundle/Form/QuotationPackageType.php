@@ -58,6 +58,7 @@ class QuotationPackageType extends AbstractType
             ->add('discretionarySpending', CollectionType::class, [
                 'entry_type' => DiscretionarySpendingType::class,
                 'allow_add' => true,
+                'label' => ' ',
                 'by_reference' => false,
                 'allow_delete' => true
             ])
