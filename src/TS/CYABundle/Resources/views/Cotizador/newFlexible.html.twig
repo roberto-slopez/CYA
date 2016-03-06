@@ -42,10 +42,18 @@
     {{ form_row(form.country) }}
     {{ form_row(form.city) }}
     {{ form_row(form.headquarter) }}
+    {{ form_row(form.semanas) }}
     {{ form_row(form.course) }}
     {{ form_row(form.lodging) }}
     {{ form_row(form.service) }}
-    {{ form_row(form.semanas) }}
+    <div class="form-group">
+        <div class="col-sm-10 text-center">
+            <div class="label label-info" id="valor_moneda">$</div>
+            <div class="label label-success" id="valor_curso">Curso: 0.00</div>
+            <div class="label label-success" id="valor_alojamiento">Alojamiento: 0.00</div>
+            <div class="label label-success" id="valor_servicio">Servicio: 0.00</div>
+        </div>
+    </div>
     <ul class="item list list-unstyled text-center" data-prototype="{{ _self.discretionarySpendingCollectionItem(form.discretionarySpending.vars.prototype)|e }}">
 
         <h3>Gastos opcionales</h3>

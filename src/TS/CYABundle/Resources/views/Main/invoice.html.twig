@@ -19,7 +19,6 @@
                 <img height="150px" src="{{ asset('bundles/tscya/img/fullsize.png') }}" style="display: block;margin: 0 auto;">
             </div>
             <div class="col-md-6">
-                <h3>COTIZACIÓN</h3>
                 <h4>Promoción valida hasta: {fecha}</h4>
                 <address>
                     Destino: {ciudad/pais}<br>
@@ -30,7 +29,7 @@
             </div>
             <div class="col-md-6 text-right">
                 <address>
-                    Fecha: {Fecha}<br>
+                    Fecha: {{ "now"|date("d/m/Y") }}<br>
                     Asesora: {Asesora}<br>
                     <i class="fa fa-phone"></i> (000) 000-0000<br>
                     <i class="fa fa-envelope-o"></i> <a href="javascript:void(0)">example@example.com</a>

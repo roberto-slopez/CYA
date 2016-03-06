@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use TS\CYABundle\Entity\Coin;
+use TS\CYABundle\Entity\Country;
 
 /**
  * @Security("has_role('ROLE_USER')")
@@ -177,6 +179,20 @@ class MainController extends BaseController
         $lodging = $em->getRepository('TSCYABundle:Exam')->getByHeadquarter($headquarterId);
 
         return new JsonResponse($lodging);
+    }
+
+    /**
+     * @Route("/country/{id}/coin", name="country_id_coin", options={"expose"=true})
+     * @Method("GET")
+     * @ParamConverter("id", class="\TS\CYABundle\Entity\Country")
+     *
+     * @param Country $country
+     * @return JsonResponse
+     */
+    public function coinSimbolByIdAction(Country $country)
+    {
+        $coin = $country->getCoin();
+        return new JsonResponse($coin->getCode().' '.$coin->getSymbol());
     }
 
     /**

@@ -69,6 +69,22 @@ class CourseRangeWeeks
     }
 
     /**
+     * @param $weeks
+     * @return bool
+     */
+    public function isThisRange($weeks) {
+        if ($this->min > 0 && $this->max > 0) {
+            if ($weeks >= $this->min && $weeks <= $this->max) {
+                return $this->price;
+            }
+        } elseif ($weeks >= $this->greaterThan) {
+            return $this->price;
+        }
+
+        return false;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
