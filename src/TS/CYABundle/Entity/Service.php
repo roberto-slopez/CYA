@@ -53,8 +53,7 @@ class Service
     protected $headquarters_id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Quotation", inversedBy="service")
-     * @ORM\JoinColumn(name="id", referencedColumnName="service_id", nullable=false)
+     * @ORM\ManyToMany(targetEntity="Quotation", mappedBy="service")
      */
     protected $quotations;
 

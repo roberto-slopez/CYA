@@ -24,6 +24,9 @@ class AppKernel extends Kernel
 
             // JMS SecurityExtraBundle
             new JMS\SerializerBundle\JMSSerializerBundle(),
+
+            // PDF
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

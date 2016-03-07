@@ -8,7 +8,14 @@
 
 namespace TS\CYABundle\Handler;
 
-class ProviderDataPDF extends  BaseProviderPDF
+class ProviderDataPDF
 {
+    /**
+     * @param $css
+     * @param $html
+     * @param $name
+     */
+    public function getPDF ($css, $html, $name) {
 
+    }
 }

@@ -77,19 +77,20 @@ class BaseController extends Controller
      */
     public function calculateValues(Quotation $quotation, $type)
     {
+        $coin = $quotation->getCountry()->getCoin();
         $totalService = 0;
         foreach ($quotation->getService() as $service) {
-            $totalService = $service->getPrice();
+            $totalService += $service->getPrice();
         }
         $quotation->setAmountService(round($totalService, 2));
-        $idCoin = $quotation->getCountry()->getCoin()->getId();
-        $current = $this->getDoctrine()->getManager()
-            ->getRepository('TSCYABundle:ExchangeRateUSD')
-            ->getCurrentExchangeRateUSDByCoinId($idCoin);
-
-        $localCountryValue = $this->getDoctrine()->getManager()
-            ->getRepository('TSCYABundle:ExchangeRateUSD')
-            ->getLocalCountryValue();
+        $isLocal = $coin->getIsLocalCountry();
+        $idCoin = $coin->getId();
+        $current = 1;
+        if (!$isLocal) {
+            $current = $this->getDoctrine()->getManager()
+                ->getRepository('TSCYABundle:ExchangeRateUSD')
+                ->getCurrentExchangeRateUSDByCoinId($idCoin);
+        }
 
         if ($type == Quotation::FLEXIBLE) {
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
@@ -126,7 +127,7 @@ class BaseController extends Controller
 
         $quotation->setTotalLocal($totalLocal);
         $quotation->setTotalUSD(round($totalLocal * $current, 2));
-        $quotation->setTotalLocalCountry(round($quotation->getTotalUSD() * $localCountryValue, 2));
+        $quotation->setTotalLocalCountry(round($quotation->getTotalUSD(), 2));
 
         return $quotation;
     }

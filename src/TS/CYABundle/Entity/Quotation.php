@@ -157,8 +157,8 @@ class Quotation
     protected $lodging;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Service", mappedBy="quotations")
-     * @ORM\JoinColumn(name="service_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToMany(targetEntity="Service", inversedBy="quotations")
+     * @ORM\JoinTable(name="quotation_service")
      */
     protected $service;
 
@@ -749,6 +749,7 @@ class Quotation
      */
     public function addService(Service $service)
     {
+        $service->addQuotation($this);
         $this->service->add($service);
 
         return $this;

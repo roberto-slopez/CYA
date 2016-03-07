@@ -77,7 +77,8 @@ class CotizadorController extends BaseController
             $em->flush();
 
             $this->setFlashInfo('Registro agregado correctamente');
-
+            /*$html = $this->renderView()
+            $this->get('cya.handler.provider_data_pdf')->getPDF(null,$html, 'demo');*/
             return $this->redirectToRoute('main');
         }
 

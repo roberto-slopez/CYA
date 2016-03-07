@@ -7,11 +7,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use TS\CYABundle\Entity\Coin;
 use TS\CYABundle\Entity\Country;
+use TS\CYABundle\Entity\Quotation;
 
 /**
  * @Security("has_role('ROLE_USER')")
@@ -49,7 +51,7 @@ class MainController extends BaseController
         $exchangeRate = $em->getRepository('TSCYABundle:ExchangeRateUSD')
             ->getExchangeRateCount();
 
-        $coin = $em->getRepository('TSCYABundle:Coin')->findAll();
+        $coin = $em->getRepository('TSCYABundle:Coin')->getCount('COP');
 
         if (intval($exchangeRate) < intval($coin) ) {
             if (intval($exchangeRate) == 0) {
@@ -196,11 +198,33 @@ class MainController extends BaseController
     }
 
     /**
-     * @Route("/invoice", name="invoice")
-     * @Method("GET")
-     * @Template()
+     * @Route("/test/{id}", name="test_invoice")
+     * @ParamConverter("id", class="\TS\CYABundle\Entity\Quotation")
+     *
+     * @param Quotation $quotation
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function invoiceAction() {
-        return [];
+    public function invoiceAction(Quotation $quotation)
+    {
+        //$finder = new Finder();
+
+
+        $count = 1;
+        /*foreach ($finder->in(__DIR__.'/../Resources/public/css') as $file) {
+            if ($file->fileName == 'bootstrap.min.css' || $file->fileName == 'main.css') {
+                $mpdf->WriteHTML($file->getRealpath(), $count);
+                $count++;
+            }
+        }*/
+        $html = $this->renderView('@TSCYA/Main/invoice.html.twig', ['quotation' => $quotation]);
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="file.pdf"'
+            )
+        );
     }
 }

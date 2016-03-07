@@ -169,6 +169,22 @@ class DiscretionarySpending
     }
 
     /**
+     * @return mixed
+     */
+    public function getCoin()
+    {
+        return $this->coin;
+    }
+
+    /**
+     * @param mixed $coin
+     */
+    public function setCoin($coin)
+    {
+        $this->coin = $coin;
+    }
+
+    /**
      * @return string
      */
     public function __toString()
