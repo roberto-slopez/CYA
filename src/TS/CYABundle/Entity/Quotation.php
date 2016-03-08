@@ -198,6 +198,22 @@ class Quotation
     }
 
     /**
+     * @return int
+     */
+    public function getCourseValue() {
+        $course = $this->getCourse();
+        $weeks = $this->getSemanas();
+
+        foreach ($course->getCourseRangeWeeks() as $courseRangeWeek) {
+            $price = $courseRangeWeek->isThisRange($weeks);
+            if ($price) {
+                return  $price;
+            }
+        }
+
+        return 0;
+    }
+    /**
      * Set the value of id.
      *
      * @param integer $id

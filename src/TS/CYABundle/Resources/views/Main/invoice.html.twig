@@ -2720,33 +2720,37 @@
             <td class="text-left"><strong>Curso</strong></td>
             <td class="text-left"><strong>{{ quotation.course.name }}</strong> {{ quotation.course.description }}</td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary"><strong></strong></span></td>
+            <td class="text-right"><span class="label label-primary"><b>{{ quotation.courseValue | number_format(2, '.', ',') }}</b></span></td>
         </tr>
         <tr>
             <td class="text-left"><strong>Alojamiento</strong></td>
             <td class="text-left">{{ quotation.lodging.description }}</td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary">{{ quotation.lodging.pricePerWeek }}</span></td>
+            <td class="text-right"><span class="label label-primary"><b>{{ quotation.lodging.pricePerWeek | number_format(2, '.', ',') }}</b></span></td>
         </tr>
         {% for service in quotation.service %}
             <tr>
                 <td class="text-left"><strong>{{ service.name }}</strong></td>
                 <td class="text-left">{{ service.description }}</td>
                 <td class="text-right">{{ quotation.country.coin.code }}</td>
-                <td class="text-right"><span class="label label-primary"><strong>{{ service.price }}</strong></span></td>
+                <td class="text-right"><span class="label label-primary"><b>{{ service.price | number_format(2, '.', ',') }}</b></span></td>
             </tr>
         {% endfor %}
         <tr>
             <td class="text-left"><strong>Total</strong></td>
-            <td class="text-left">Moneda local ({moneda}).</td>
+            <td class="text-left">Moneda local <strong>{{ quotation.country.coin.code }}</strong></td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary"><strong>$ 1.000.00</strong></span></td>
+            <td class="text-right"><span class="label label-primary"><b> {{ quotation.totalLocal | number_format(2, '.', ',') }}</b></span></td>
         </tr>
         <tr>
             <td class="text-left"><strong>Total en pesos</strong></td>
-            <td class="text-left">Cambio GBP a COP {valor de cambio} - Tasa hasta el { fecha expiracion cambio}</td>
-            <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary"><strong>$ 1.000.00</strong></span></td>
+            <td class="text-left">
+                Cambio <strong>{{ quotation.country.coin.code }}</strong> a <b>COP</b>
+                <b>{{ quotation.country.coin.currentExChangeRate | number_format(4, '.', ',') }}</b> -
+                Tasa hasta el <b>{{ quotation.country.coin.currentExChangeRateExpirate | date('d/m/Y') }}</b>
+            </td>
+            <td class="text-right"><b>COP</b></td>
+            <td class="text-right"><span class="label label-primary"><b>{{ quotation.totalLocalCountry | number_format(2, '.', ',') }}</b></span></td>
         </tr>
         <tr>
             <td colspan="4" style="background-color: #1e68b4"></td>
@@ -2756,7 +2760,7 @@
             <td class="text-left"><strong>Descripción</strong></td>
             <td class="text-left">{{ optional.description }}</td>
             <td class="text-right">{{ optional.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary"><strong>$ {{ optional.price }}</strong></span></td>
+            <td class="text-right"><span class="label label-primary"><strong> {{ optional.price | number_format(2, '.', ',') }}</strong></span></td>
         </tr>
         {% endfor %}
         <tr>

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %} <i class="gi gi-eye_open"></i>{% endblock iconHead %}
+{% block pageTitle %}
+    {% trans %}Previsualización{% endtrans %}
+{% endblock pageTitle %}
+{% block subtitle %} Cotizacion {% endblock subtitle %}
+    {% block action %}
+    {% endblock action %}
+        {% block titlePanel %}
+            Vista previa
+            <a href="{{ url('to_pdf_invoice', { 'id': quotation.id }) }}" target="_blank" class="btn btn-sm btn-danger"><i class="fa fa-angle-right"></i> PDF</a>
+        {% endblock titlePanel %}
+{% block bodyPanel %}
+{% include '@TSCYA/Main/invoice.html.twig' %}
+{% endblock bodyPanel %}

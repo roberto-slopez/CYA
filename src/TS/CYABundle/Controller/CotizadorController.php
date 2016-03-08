@@ -75,11 +75,9 @@ class CotizadorController extends BaseController
             $em = $this->getDoctrine()->getManager();
             $em->persist($quotation);
             $em->flush();
-
             $this->setFlashInfo('Registro agregado correctamente');
-            /*$html = $this->renderView()
-            $this->get('cya.handler.provider_data_pdf')->getPDF(null,$html, 'demo');*/
-            return $this->redirectToRoute('main');
+
+            return $this->redirectToRoute('preview_invoice', ['id' => $quotation->getId()]);
         }
 
         return [
@@ -120,7 +118,7 @@ class CotizadorController extends BaseController
 
                 $this->setFlashInfo('Registro agregado correctamente');
 
-                return $this->redirectToRoute('main');
+                return $this->redirectToRoute('preview_invoice', ['id' => $quotation->getId()]);
             }
         } catch (\Exception $e) {
             $this->setFlashError(sprintf("Error: %s", $e->getMessage()));

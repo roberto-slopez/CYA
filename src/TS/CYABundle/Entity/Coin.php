@@ -69,6 +69,34 @@ class Coin
     }
 
     /**
+     * @return int
+     */
+    public function getCurrentExChangeRate() {
+        $ex = $this->getExchangeRateUSDs();
+        foreach ($ex as $item) {
+            if ($item->getEnable()) {
+                return $item->getLocal();
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCurrentExChangeRateExpirate() {
+        $ex = $this->getExchangeRateUSDs();
+        foreach ($ex as $item) {
+            if ($item->getEnable()) {
+                return $item->getDate();
+            }
+        }
+
+        return new \DateTime('today');
+    }
+
+    /**
      * Set the value of id.
      *
      * @param string $id

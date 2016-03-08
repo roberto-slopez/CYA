@@ -198,24 +198,14 @@ class MainController extends BaseController
     }
 
     /**
-     * @Route("/test/{id}", name="test_invoice")
+     * @Route("/invoice/pdf/{id}", name="to_pdf_invoice")
      * @ParamConverter("id", class="\TS\CYABundle\Entity\Quotation")
      *
      * @param Quotation $quotation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function invoiceAction(Quotation $quotation)
+    public function invoiceToPDFAction(Quotation $quotation)
     {
-        //$finder = new Finder();
-
-
-        $count = 1;
-        /*foreach ($finder->in(__DIR__.'/../Resources/public/css') as $file) {
-            if ($file->fileName == 'bootstrap.min.css' || $file->fileName == 'main.css') {
-                $mpdf->WriteHTML($file->getRealpath(), $count);
-                $count++;
-            }
-        }*/
         $html = $this->renderView('@TSCYA/Main/invoice.html.twig', ['quotation' => $quotation]);
 
         return new Response(
@@ -226,5 +216,18 @@ class MainController extends BaseController
                 'Content-Disposition'   => 'attachment; filename="file.pdf"'
             )
         );
+    }
+
+    /**
+     * @Route("/invoice/preview/{id}", name="preview_invoice")
+     * @ParamConverter("id", class="\TS\CYABundle\Entity\Quotation")
+     * @Template()
+     *
+     * @param Quotation $quotation
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function invoicePreviewAction(Quotation $quotation)
+    {
+        return ['quotation' => $quotation];
     }
 }
