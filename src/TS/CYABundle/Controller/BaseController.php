@@ -95,11 +95,7 @@ class BaseController extends Controller
         if ($type == Quotation::FLEXIBLE) {
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             $quotation->setAmountLodging($lodgingAmount);
-            $quotation->setAmountCourse(round(
-                    $this->getPricePerWeek($quotation->getCourse(), $quotation->getSemanas()) *
-                    $quotation->getSemanas(),
-                    2
-            ));
+            $quotation->setAmountCourse(round($quotation->getCourseValue()* $quotation->getSemanas(), 2));
         } elseif ($type == Quotation::PACKAGE) {
             $quotation->setSemanas($quotation->getPackage()->getSemanas());
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
@@ -130,25 +126,6 @@ class BaseController extends Controller
         $quotation->setTotalLocalCountry(round($quotation->getTotalUSD(), 2));
 
         return $quotation;
-    }
-
-    /**
-     * @param Course $course
-     * @param $numberWeek
-     * @return int
-     */
-    public function getPricePerWeek(Course $course, $numberWeek) {
-        $courseRangeWeeks = $course->getCourseRangeWeeks();
-
-        foreach ($courseRangeWeeks as $item) {
-            if ($numberWeek >= $item->getMin() && $numberWeek <= $item->getMax()) {
-                return $item->getPrice();
-            } elseif ($numberWeek >= $item->getGreaterThan()) {
-                return $item->getPrice();
-            }
-        }
-
-        return 0;
     }
 
     /**
