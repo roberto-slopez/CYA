@@ -2753,9 +2753,10 @@
              style="display: block;margin: 0 auto;">
     </div>
     <div class="col-md-12 text-center">
-        <h2>Promoción valida hasta: {fecha}</h2>
-        <b>Destino</b>: {{ quotation.country.name }}/{{ quotation.city.name }} <b>Fecha</b>: {{ "now"|date("d/m/Y") }}<br>
-        <b>Tipo curso</b>: {{ quotation.course.name }} <b>Fecha inicio</b>: {inici} <b>N° Semanas</b>: {{ quotation.semanas }}<br>
+        {#<h2>Promoción valida hasta: {fecha}</h2>#}
+        <b>Nombre:</b>{{ quotation.client.fullName }} <br/>
+        <b>Destino</b>: {{ quotation.country.name }}/{{ quotation.headquarter.name }} <b>Fecha</b>: {{ "now"|date("d/m/Y") }}<br>
+        <b>Tipo curso</b>: {{ quotation.course.name }} {#<b>Fecha inicio</b>: {inici}#} <b>N° Semanas</b>: {{ quotation.semanas }}<br>
         <b>Asesora</b>: {{ quotation.seller.fullName }}<br>
         <i class="fa fa-phone"></i> {{ quotation.seller.telephone }}<br>
         <i class="fa fa-envelope-o"></i> {{ quotation.seller.userSeller.email }}
@@ -2778,11 +2779,6 @@
             </td>
         </tr>
         <tr>
-            <td class="text-center" colspan="4" style="background-color: #1e68b4;color: white;">
-                Inscripción abonable {{ quotation.country.coin.code }} 100 (costos en {{ quotation.country.coin.code }}). No reembolsable
-            </td>
-        </tr>
-        <tr>
             <td class="text-left"><strong>Curso</strong></td>
             <td class="text-left"><strong>{{ quotation.course.name }}</strong> {{ quotation.course.description }}</td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
@@ -2790,14 +2786,20 @@
         </tr>
         <tr>
             <td class="text-left"><strong>Alojamiento</strong></td>
-            <td class="text-left">{{ quotation.lodging.description }}</td>
+            <td class="text-left"><b>({{ quotation.lodging.name }})</b> {{ quotation.lodging.description }}</td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
             <td class="text-right"><span class="label label-primary"><b>{{ quotation.lodging.pricePerWeek | number_format(2, '.', ',') }}</b></span></td>
         </tr>
         {% for service in quotation.service %}
             <tr>
                 <td class="text-left"><strong>{{ service.name }}</strong></td>
-                <td class="text-left">{{ service.description }}</td>
+                <td class="text-left">
+                    {% if '*' in service.description %}
+                        <b>{{ service.description }}</b>
+                    {% else %}
+                        {{ service.description }}
+                    {% endif %}
+                </td>
                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                 <td class="text-right"><span class="label label-primary"><b>{{ service.price | number_format(2, '.', ',') }}</b></span></td>
             </tr>

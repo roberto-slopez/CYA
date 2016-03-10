@@ -105,6 +105,14 @@ class Lodging
     /**
      * @return string
      */
+    public function getNameType()
+    {
+        return sprintf('%s - %s', $this->getName(), $this->getType());
+    }
+
+    /**
+     * @return string
+     */
     public function getLabel()
     {
         return $this->getName().'-'.$this->getHeadquarter()->getName();
