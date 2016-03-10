@@ -113,6 +113,22 @@ $(".course_selector").change(function(){
             }
         });
     }
+    //Promocion
+    $.ajax({
+        type: 'post',
+        url: Routing.generate('select_promocions', null, true),
+        data: data,
+        success: function(data) {
+            if (data.length > 0) {
+                var $course_selector = $('.promocion_selector');
+                $course_selector.html('<option>Seleccionar opción</option>');
+
+                for (var i=0, total = data.length; i < total; i++) {
+                    $course_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                }
+            }
+        }
+    });
 });
 $(".lodging_selector").change(function(){
     var data = {
@@ -145,7 +161,6 @@ $(".service_selector").change(function(){
             url: Routing.generate('services_by_id', null, true),
             data: data,
             success: function(price) {
-                console.log(price);
                 $("#valor_servicio").html("Servicios: " + price);
             }
         });
@@ -163,7 +178,6 @@ $("#quotation_semanas").change(function(){
         "lodging": lodging,
         "services": services
     };
-    console.log(data);
     if (semanas > 0 && (course && course !== 'Seleccionar opción' || lodging && lodging !== 'Seleccionar opción' || services)) {
         $.ajax({
             type: 'post',

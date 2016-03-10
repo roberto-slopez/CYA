@@ -31,14 +31,20 @@ class Promocion
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    protected $code;
-
-    /**
      * @ORM\Column(type="float")
      */
     protected $percentage;
+
+    /**
+     * @ORM\Column(name="`expiration`", type="date")
+     */
+    protected $expiration;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Course")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
+     */
+    protected $course;
 
     /**
      * @ORM\Column(name="`enable`", type="boolean")
@@ -54,6 +60,38 @@ class Promocion
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    /**
+     * @param mixed $course
+     */
+    public function setCourse($course)
+    {
+        $this->course = $course;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpiration()
+    {
+        return $this->expiration;
+    }
+
+    /**
+     * @param mixed $expiration
+     */
+    public function setExpiration($expiration)
+    {
+        $this->expiration = $expiration;
     }
 
     /**
@@ -119,29 +157,6 @@ class Promocion
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set the value of code.
-     *
-     * @param string $code
-     * @return \TS\CYABundle\Entity\Promocion
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of code.
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
     }
 
     /**

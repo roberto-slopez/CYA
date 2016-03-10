@@ -44,6 +44,7 @@
     {{ form_row(form.headquarter) }}
     {{ form_row(form.semanas) }}
     {{ form_row(form.course) }}
+    {{ form_row(form.promocion) }}
     {{ form_row(form.lodging) }}
     {{ form_row(form.service) }}
     <div class="form-group">
@@ -64,7 +65,7 @@
         </style>
         {% for discretionarySpending in form.discretionarySpending %}
             <li class="bg-info">
-                {{ _self.tagCollectionItem(discretionarySpending) }}
+                {{ _self.discretionarySpendingCollectionItem(discretionarySpending) }}
             </li>
         {% endfor %}
     </ul>

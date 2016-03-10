@@ -36,8 +36,12 @@
                 <td>{{ promocion.name }}</td>
             </tr>
             <tr>
-                <th>{% trans %}Code{% endtrans %}</th>
-                <td>{{ promocion.code }}</td>
+                <th>{% trans %}Course{% endtrans %}</th>
+                <td>{{ promocion.course.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Expiration{% endtrans %}</th>
+                <td>{{ promocion.expiration |date('d/m/Y') }}</td>
             </tr>
             <tr>
                 <th>{% trans %}Percentage{% endtrans %}</th>

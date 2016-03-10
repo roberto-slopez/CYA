@@ -95,15 +95,24 @@ class BaseController extends Controller
         if ($type == Quotation::FLEXIBLE) {
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             $quotation->setAmountLodging($lodgingAmount);
-            $quotation->setAmountCourse(round($quotation->getCourseValue()* $quotation->getSemanas(), 2));
+
+            $courseValue = $quotation->getCourseValue() * $quotation->getSemanas();
+            $courseValueFinish = $courseValue;
+
+            if ($quotation->getPromocion()) {
+                $percentage = $quotation->getPromocion()->getPercentage();
+                $discount = $percentage * $courseValueFinish;
+                $courseValueFinish -= $discount;
+            }
+
+            $quotation->setAmountCourse(round($courseValueFinish, 2));
         } elseif ($type == Quotation::PACKAGE) {
             $quotation->setSemanas($quotation->getPackage()->getSemanas());
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
 
             $packageLodging = $this->getDoctrine()->getManager()
                 ->getRepository('TSCYABundle:PackageLodging')
-                ->getPriceLodgingById($quotation->getLodging()->getId())
-            ;
+                ->getPriceLodgingById($quotation->getLodging()->getId());
 
             $lodgingPrice = $packageLodging->getLodgingPrice();
             $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;

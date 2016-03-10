@@ -17,5 +17,17 @@ use Doctrine\ORM\Query;
  */
 class PromocionRepository extends EntityRepository
 {
+    /**
+     * @param $courseId
+     * @return array
+     */
+    public function getByCourse($courseId)
+    {
+        $qb = $this->createQueryBuilder('promocion')
+        ->join('promocion.course', 'course');
+        $qb->where('course.id =:course_id')
+            ->setParameter('course_id', $courseId);
 
+        return $qb->getQuery()->getArrayResult();
+    }
 }

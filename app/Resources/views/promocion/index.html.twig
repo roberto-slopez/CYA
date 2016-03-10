@@ -20,7 +20,8 @@
                 <thead>
                 <tr>
                     <th>{% trans %}Name{% endtrans %}</th>
-                    <th>{% trans %}Code{% endtrans %}</th>
+                    <th>{% trans %}Course{% endtrans %}</th>
+                    <th>{% trans %}Expiration{% endtrans %}</th>
                     <th>{% trans %}Percentage{% endtrans %}</th>
                     <th>{% trans %}Actions{% endtrans %}</th>
                 </tr>
@@ -29,7 +30,8 @@
                 {% for promocion in promocions %}
                     <tr>
                         <td>{{ promocion.name }}</td>
-                        <td>{{ promocion.code }}</td>
+                        <td>{{ promocion.course.label }}</td>
+                        <td>{{ promocion.expiration | date('d/m/Y') }}</td>
                         <td>{{ promocion.percentage }}</td>
                         <td>
                             <div class="btn-group">

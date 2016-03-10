@@ -2,7 +2,10 @@
 
 namespace TS\CYABundle\Form;
 
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +20,18 @@ class PromocionType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('code')
+            ->add('expiration', DateType::class)
+            ->add('course', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Course',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('course')
+                        ->join('course.headquarter', 'headquarter')
+                        ->orderBy('headquarter.name', 'ASC');
+                    return $qb;
+                },
+                'choice_label' => 'label',
+                'attr' => ['class' => 'select-select2']
+            ])
             ->add('percentage', PercentType::class)
             ->add('enable')
         ;

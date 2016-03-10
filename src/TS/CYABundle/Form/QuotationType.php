@@ -15,6 +15,7 @@ use TS\CYABundle\Form\EventListener\AddCourseFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddHeadquarterFieldSubscriber;
 use TS\CYABundle\Form\ClientType;
 use TS\CYABundle\Form\EventListener\AddLodgingFieldSubscriber;
+use TS\CYABundle\Form\EventListener\AddPromocionFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddServiceFieldSubscriber;
 
 /**
@@ -35,6 +36,7 @@ class QuotationType extends AbstractType
         $builder->addEventSubscriber(new AddLodgingFieldSubscriber('lodging'));
         $builder->addEventSubscriber(new AddCourseFieldSubscriber('course'));
         $builder->addEventSubscriber(new AddServiceFieldSubscriber('service'));
+        $builder->addEventSubscriber(new AddPromocionFieldSubscriber('promocion'));
         $builder
             ->add('country', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Country',

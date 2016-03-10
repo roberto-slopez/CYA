@@ -89,7 +89,7 @@ class Coin
         $ex = $this->getExchangeRateUSDs();
         foreach ($ex as $item) {
             if ($item->getEnable()) {
-                return $item->getDate();
+                return $item->getExpiration();
             }
         }
 

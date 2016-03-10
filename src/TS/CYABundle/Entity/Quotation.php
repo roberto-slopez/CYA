@@ -850,7 +850,7 @@ class Quotation
      * @param \TS\CYABundle\Entity\Promocion $promocion
      * @return \TS\CYABundle\Entity\Quotation
      */
-    public function setPromocione(Promocion $promocion = null)
+    public function setPromocion(Promocion $promocion = null)
     {
         $this->promocion = $promocion;
 

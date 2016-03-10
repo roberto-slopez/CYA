@@ -85,6 +85,10 @@ class Course
         return $this;
     }
 
+    public function getLabel() {
+        return sprintf('%s %s', $this->getName(), $this->getHeadquarter()->getName());
+    }
+
     /**
      * Get the value of id.
      *

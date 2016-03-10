@@ -136,6 +136,21 @@ class MainController extends BaseController
     }
 
     /**
+     * @Route("/promocions", name="select_promocions", options={"expose"=true})
+     * @Method("POST")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function promocionsAction(Request $request)
+    {
+        $courseId= $request->request->get('courseId');
+        $em = $this->getDoctrine()->getManager();
+        $promocions = $em->getRepository('TSCYABundle:Promocion')->getByCourse($courseId);
+
+        return new JsonResponse($promocions);
+    }
+
+    /**
      * @Route("/lodgings", name="select_lodgings", options={"expose"=true})
      * @Method("POST")
      * @param Request $request
