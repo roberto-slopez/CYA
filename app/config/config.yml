@@ -87,9 +87,9 @@ knp_snappy:
     temporary_folder: %kernel.cache_dir%/snappy
     pdf:
         enabled:    true
-        binary:     xvfb-run /usr/bin/wkhtmltopdf
+        binary:     %binary_wkhtmltopdf%
         options:    []
     image:
         enabled:    true
-        binary:     xvfb-run /usr/bin/wkhtmltoimage
+        binary:     %binary_wkhtmltoimage%
         options:    []
