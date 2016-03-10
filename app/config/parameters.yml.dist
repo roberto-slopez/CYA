@@ -5,14 +5,14 @@
 parameters:
     database_host: 127.0.0.1
     database_port: null
-    database_name: cya
+    database_name: CYA
     database_user: root
-    database_password: null
-    mailer_transport: gmail
-    mailer_host: smtp.gmail.com
-    #mailer_encryption: ssl
-    #mailer_auth_mode: login
-    mailer_user: micorreo@gmail.com
+    database_password: 1234
+    binary_wkhtmltopdf: xvfb-run /usr/local/bin/wkhtmltopdf
+    binary_wkhtmltoimage: xvfb-run /usr/local/bin/wkhtmltoimage
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
     mailer_password: null
     locale: es
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: autoGenDontChange
