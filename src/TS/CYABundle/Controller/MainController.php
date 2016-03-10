@@ -222,13 +222,22 @@ class MainController extends BaseController
     public function invoiceToPDFAction(Quotation $quotation)
     {
         $html = $this->renderView('@TSCYA/Main/invoice.html.twig', ['quotation' => $quotation]);
+        $client = $quotation->getClient();
+        $namePDF = sprintf(
+            '%s_%s_%s_%s',
+            $client->getFirstName(),
+            $client->getLastName(),
+            $quotation->getSemanas(),
+            $quotation->getHeadquarter()->getName()
+        );
 
+        $attachment = sprintf('attachment; filename="%s.pdf"', $namePDF); // Nombre, número de semanas y sede
         return new Response(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
             200,
             array(
                 'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => 'attachment; filename="file.pdf"'
+                'Content-Disposition'   => $attachment
             )
         );
     }

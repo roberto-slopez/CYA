@@ -706,7 +706,7 @@ class Quotation
     /**
      * Get Quotation entity collection (one to many).
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \TS\CYABundle\Entity\Client
      */
     public function getClient()
     {
