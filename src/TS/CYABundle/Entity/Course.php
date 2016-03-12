@@ -45,6 +45,16 @@ class Course
     protected $enable;
 
     /**
+     * @ORM\Column(type="float", options={"default": 0})
+     */
+    protected $price_inscription = 0;
+
+    /**
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    protected $description_inscription = '';
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $headquarters_id;
@@ -97,6 +107,38 @@ class Course
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriceInscription()
+    {
+        return $this->price_inscription;
+    }
+
+    /**
+     * @param mixed $price_inscription
+     */
+    public function setPriceInscription($price_inscription)
+    {
+        $this->price_inscription = $price_inscription;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionInscription()
+    {
+        return $this->description_inscription;
+    }
+
+    /**
+     * @param mixed $description_inscription
+     */
+    public function setDescriptionInscription($description_inscription)
+    {
+        $this->description_inscription = $description_inscription;
     }
 
     /**

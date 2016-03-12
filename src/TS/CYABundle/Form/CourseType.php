@@ -39,6 +39,10 @@ class CourseType extends AbstractType
                 'allow_delete' => true
             ])
             ->add('description')
+            ->add('price_inscription', MoneyType::class, [
+                'currency' => 'USD'
+            ])
+            ->add('description_inscription')
             ->add('enable')
         ;
     }
