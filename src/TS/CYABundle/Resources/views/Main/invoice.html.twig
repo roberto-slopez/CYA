@@ -2753,7 +2753,9 @@
              style="display: block;margin: 0 auto;">
     </div>
     <div class="col-md-12 text-center">
-        {#<h2>Promoción valida hasta: {fecha}</h2>#}
+        {% if quotation.promocion %}
+        <h2>Promoción valida hasta: {{ quotation.promocion.expiration |date("d/m/Y") }}</h2>
+        {% endif %}
         <b>Nombre:</b>{{ quotation.client.fullName }} <br/>
         <b>Destino</b>: {{ quotation.country.name }}/{{ quotation.headquarter.name }} <b>Fecha</b>: {{ "now"|date("d/m/Y") }}<br>
         <b>Tipo curso</b>: {{ quotation.course.name }} {#<b>Fecha inicio</b>: {inici}#} <b>N° Semanas</b>: {{ quotation.semanas }}<br>

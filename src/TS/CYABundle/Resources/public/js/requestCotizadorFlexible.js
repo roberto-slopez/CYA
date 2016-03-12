@@ -113,22 +113,6 @@ $(".course_selector").change(function(){
             }
         });
     }
-    //Promocion
-    $.ajax({
-        type: 'post',
-        url: Routing.generate('select_promocions', null, true),
-        data: data,
-        success: function(data) {
-            if (data.length > 0) {
-                var $course_selector = $('.promocion_selector');
-                $course_selector.html('<option>Seleccionar opción</option>');
-
-                for (var i=0, total = data.length; i < total; i++) {
-                    $course_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
-                }
-            }
-        }
-    });
 });
 $(".lodging_selector").change(function(){
     var data = {

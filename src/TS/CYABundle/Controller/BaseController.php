@@ -77,6 +77,7 @@ class BaseController extends Controller
      */
     public function calculateValues(Quotation $quotation, $type)
     {
+        $em = $this->getDoctrine()->getManager();
         $coin = $quotation->getCountry()->getCoin();
         $totalService = 0;
         foreach ($quotation->getService() as $service) {
@@ -86,9 +87,14 @@ class BaseController extends Controller
         $isLocal = $coin->getIsLocalCountry();
         $idCoin = $coin->getId();
         $current = 1;
+        $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByCourse($quotation->getCourse()->getId());
+
+        if ($promocion) {
+            $quotation->setPromocion($promocion);
+        }
+
         if (!$isLocal) {
-            $current = $this->getDoctrine()->getManager()
-                ->getRepository('TSCYABundle:ExchangeRateUSD')
+            $current = $em ->getRepository('TSCYABundle:ExchangeRateUSD')
                 ->getCurrentExchangeRateUSDByCoinId($idCoin);
         }
 
@@ -110,8 +116,7 @@ class BaseController extends Controller
             $quotation->setSemanas($quotation->getPackage()->getSemanas());
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
 
-            $packageLodging = $this->getDoctrine()->getManager()
-                ->getRepository('TSCYABundle:PackageLodging')
+            $packageLodging = $em->getRepository('TSCYABundle:PackageLodging')
                 ->getPriceLodgingById($quotation->getLodging()->getId());
 
             $lodgingPrice = $packageLodging->getLodgingPrice();

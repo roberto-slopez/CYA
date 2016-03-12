@@ -30,4 +30,20 @@ class PromocionRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    /**
+     * @param $courseId
+     * @return array
+     */
+    public function getSingleByCourse($courseId)
+    {
+        $qb = $this->createQueryBuilder('promocion')
+            ->join('promocion.course', 'course')
+            ->where('course.id =:course_id')
+            ->setParameter('course_id', $courseId)
+            ->andWhere('promocion.enable = 1')
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }
