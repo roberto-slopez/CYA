@@ -164,7 +164,7 @@ class Quotation
 
     /**
      * @ORM\ManyToOne(targetEntity="TS\CYABundle\Entity\DiscretionarySpending")
-     * @ORM\JoinColumn(name="promociones_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="discretionary_spending_id", referencedColumnName="id", nullable=true)
      */
     protected $discretionarySpending;
 
@@ -791,7 +791,7 @@ class Quotation
     }
 
     /**
-     * @return mixed
+     * @return DiscretionarySpending
      */
     public function getDiscretionarySpending()
     {

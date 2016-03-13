@@ -73,7 +73,6 @@
             margin: 0.67em 0;
         }
 
-
         small {
             font-size: 80%;
         }
@@ -1908,101 +1907,130 @@
         .text-left {
             text-align: left;
         }
+
         .text-right {
             text-align: right;
         }
+
         .text-center {
             text-align: center;
         }
+
         .text-justify {
             text-align: justify;
         }
+
         .text-nowrap {
             white-space: nowrap;
         }
+
         .text-lowercase {
             text-transform: lowercase;
         }
+
         .text-uppercase {
             text-transform: uppercase;
         }
+
         .text-capitalize {
             text-transform: capitalize;
         }
+
         .text-muted {
             color: #777;
         }
+
         .text-primary {
             color: #337ab7;
         }
+
         a.text-primary:hover,
         a.text-primary:focus {
             color: #286090;
         }
+
         .text-success {
             color: #3c763d;
         }
+
         a.text-success:hover,
         a.text-success:focus {
             color: #2b542c;
         }
+
         .text-info {
             color: #31708f;
         }
+
         a.text-info:hover,
         a.text-info:focus {
             color: #245269;
         }
+
         .text-warning {
             color: #8a6d3b;
         }
+
         a.text-warning:hover,
         a.text-warning:focus {
             color: #66512c;
         }
+
         .text-danger {
             color: #a94442;
         }
+
         a.text-danger:hover,
         a.text-danger:focus {
             color: #843534;
         }
+
         .bg-primary {
             color: #fff;
             background-color: #337ab7;
         }
+
         a.bg-primary:hover,
         a.bg-primary:focus {
             background-color: #286090;
         }
+
         .bg-success {
             background-color: #dff0d8;
         }
+
         a.bg-success:hover,
         a.bg-success:focus {
             background-color: #c1e2b3;
         }
+
         .bg-info {
             background-color: #d9edf7;
         }
+
         a.bg-info:hover,
         a.bg-info:focus {
             background-color: #afd9ee;
         }
+
         .bg-warning {
             background-color: #fcf8e3;
         }
+
         a.bg-warning:hover,
         a.bg-warning:focus {
             background-color: #f7ecb5;
         }
+
         .bg-danger {
             background-color: #f2dede;
         }
+
         a.bg-danger:hover,
         a.bg-danger:focus {
             background-color: #e4b9b9;
         }
+
         #page-container,
         #main-container,
         #page-content + footer {
@@ -2754,11 +2782,13 @@
     </div>
     <div class="col-md-12 text-center">
         {% if quotation.promocion %}
-        <h2>Promoción valida hasta: {{ quotation.promocion.expiration |date("d/m/Y") }}</h2>
+            <h2>Promoción valida hasta: {{ quotation.promocion.expiration |date("d/m/Y") }}</h2>
         {% endif %}
         <b>Nombre:</b>{{ quotation.client.fullName }} <br/>
-        <b>Destino</b>: {{ quotation.country.name }}/{{ quotation.headquarter.name }} <b>Fecha</b>: {{ "now"|date("d/m/Y") }}<br>
-        <b>Tipo curso</b>: {{ quotation.course.name }} {#<b>Fecha inicio</b>: {inici}#} <b>N° Semanas</b>: {{ quotation.semanas }}<br>
+        <b>Destino</b>: {{ quotation.country.name }}/{{ quotation.headquarter.name }}
+        <b>Fecha</b>: {{ "now"|date("d/m/Y") }}<br>
+        <b>Tipo curso</b>: {{ quotation.course.name }} {#<b>Fecha inicio</b>: {inici}#} <b>N°
+            Semanas</b>: {{ quotation.semanas }}<br>
         <b>Asesora</b>: {{ quotation.seller.fullName }}<br>
         <i class="fa fa-phone"></i> {{ quotation.seller.telephone }}<br>
         <i class="fa fa-envelope-o"></i> {{ quotation.seller.userSeller.email }}
@@ -2784,19 +2814,25 @@
             <td class="text-left"><strong>Inscripción</strong></td>
             <td class="text-left"><strong>{{ quotation.course.descriptionInscription }}</strong></td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary"><b>{{ quotation.course.priceInscription | number_format(2, '.', ',') }}</b></span></td>
+            <td class="text-right"><span
+                        class="label label-primary"><b>{{ quotation.course.priceInscription | number_format(2, '.', ',') }}</b></span>
+            </td>
         </tr>
         <tr>
             <td class="text-left"><strong>Curso</strong></td>
             <td class="text-left"><strong>{{ quotation.course.name }}</strong> {{ quotation.course.description }}</td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary"><b>{{ quotation.courseValue | number_format(2, '.', ',') }}</b></span></td>
+            <td class="text-right"><span
+                        class="label label-primary"><b>{{ quotation.courseValue | number_format(2, '.', ',') }}</b></span>
+            </td>
         </tr>
         <tr>
             <td class="text-left"><strong>Alojamiento</strong></td>
             <td class="text-left"><b>({{ quotation.lodging.name }})</b> {{ quotation.lodging.description }}</td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary"><b>{{ quotation.lodging.pricePerWeek | number_format(2, '.', ',') }}</b></span></td>
+            <td class="text-right"><span
+                        class="label label-primary"><b>{{ quotation.lodging.pricePerWeek | number_format(2, '.', ',') }}</b></span>
+            </td>
         </tr>
         {% for service in quotation.service %}
             <tr>
@@ -2809,14 +2845,18 @@
                     {% endif %}
                 </td>
                 <td class="text-right">{{ quotation.country.coin.code }}</td>
-                <td class="text-right"><span class="label label-primary"><b>{{ service.price | number_format(2, '.', ',') }}</b></span></td>
+                <td class="text-right"><span
+                            class="label label-primary"><b>{{ service.price | number_format(2, '.', ',') }}</b></span>
+                </td>
             </tr>
         {% endfor %}
         <tr>
             <td class="text-left"><strong>Total</strong></td>
             <td class="text-left">Moneda local <strong>{{ quotation.country.coin.code }}</strong></td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary"><b> {{ quotation.totalLocal | number_format(2, '.', ',') }}</b></span></td>
+            <td class="text-right"><span
+                        class="label label-primary"><b> {{ quotation.totalLocal | number_format(2, '.', ',') }}</b></span>
+            </td>
         </tr>
         <tr>
             <td class="text-left"><strong>Total en pesos</strong></td>
@@ -2826,19 +2866,49 @@
                 Tasa hasta el <b>{{ quotation.country.coin.currentExChangeRateExpirate | date('d/m/Y') }}</b>
             </td>
             <td class="text-right"><b>COP</b></td>
-            <td class="text-right"><span class="label label-primary"><b>{{ quotation.totalLocalCountry | number_format(2, '.', ',') }}</b></span></td>
+            <td class="text-right"><span
+                        class="label label-primary"><b>{{ quotation.totalLocalCountry | number_format(2, '.', ',') }}</b></span>
+            </td>
         </tr>
         <tr>
             <td colspan="4" style="background-color: #1e68b4"></td>
         </tr>
-        {% for optional in quotation.discretionarySpending %}
         <tr>
             <td class="text-left"><strong>Descripción</strong></td>
-            <td class="text-left">{{ optional.description }}</td>
-            <td class="text-right">{{ optional.coin.code }}</td>
-            <td class="text-right"><span class="label label-primary"><strong> {{ optional.price | number_format(2, '.', ',') }}</strong></span></td>
+            <td class="text-left">Valor de visa</td>
+            <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
+            <td class="text-right">
+                <span class="label label-primary">
+                    <strong>
+                        {{ quotation.discretionarySpending.valueVisa | number_format(2, '.', ',') }}
+                    </strong>
+                </span>
+            </td>
         </tr>
-        {% endfor %}
+        <tr>
+            <td class="text-left"><strong>Descripción</strong></td>
+            <td class="text-left">Valor adicional</td>
+            <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
+            <td class="text-right">
+                <span class="label label-primary">
+                    <strong>
+                        {{ quotation.discretionarySpending.valueAdicional | number_format(2, '.', ',') }}
+                    </strong>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left"><strong>Descripción</strong></td>
+            <td class="text-left">Valor de envio</td>
+            <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
+            <td class="text-right">
+                <span class="label label-primary">
+                    <strong>
+                        {{ quotation.discretionarySpending.valueShipping | number_format(2, '.', ',') }}
+                    </strong>
+                </span>
+            </td>
+        </tr>
         <tr>
             <td class="text-center" style="background-color: #1e68b4; color: white;" colspan="4">OBSERVACIONES</td>
         </tr>
