@@ -15,7 +15,20 @@ use Doctrine\ORM\Query;
  * Class DiscretionarySpending
  * @package TS\CYABundle\Repository
  */
-class DiscretionarySpending extends EntityRepository
+class DiscretionarySpendingRepository extends EntityRepository
 {
+    /**
+     * @param $countryId
+     * @return array
+     */
+    public function getByCountry($countryId)
+    {
+        $qb = $this->createQueryBuilder('discretionary_spending')
+            ->join('discretionary_spending.country', 'country')
+            ->where('country.id =:country')
+            ->setParameter('country', $countryId)
+            ->orderBy('discretionary_spending.name', 'ASC');
 
+        return $qb->getQuery()->getArrayResult();
+    }
 }

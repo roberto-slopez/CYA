@@ -17,6 +17,7 @@ class ClientType extends AbstractType
         $builder
             ->add('first_name')
             ->add('last_name')
+            ->add('isUnderAge')
         ;
     }
     

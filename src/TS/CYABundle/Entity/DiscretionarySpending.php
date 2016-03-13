@@ -29,7 +29,7 @@ class DiscretionarySpending
     /**
      * @ORM\Column(name="`name`", type="string", length=250)
      */
-    protected $name = 'DiscretionarySpending';
+    protected $name;
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
@@ -37,9 +37,19 @@ class DiscretionarySpending
     protected $description;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(name="value_visa", type="float", nullable=true)
      */
-    protected $price;
+    protected $valueVisa;
+
+    /**
+     * @ORM\Column(name="value_adicional", type="float", nullable=true)
+     */
+    protected $valueAdicional;
+
+    /**
+     * @ORM\Column(name="value_shipping", type="float", nullable=true)
+     */
+    protected $valueShipping;
 
     /**
      * @ORM\ManyToOne(targetEntity="Coin")
@@ -48,14 +58,10 @@ class DiscretionarySpending
     protected $coin;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Quotation", inversedBy="discretionarySpending")
-     * @ORM\JoinColumn(name="quotation_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Country")
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
      */
-    protected $quotations;
-
-    public function __construct()
-    {
-    }
+    protected $country;
 
     /**
      * Set the value of id.
@@ -104,6 +110,22 @@ class DiscretionarySpending
     }
 
     /**
+     * @return Country
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param mixed $country
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+    /**
      * Set the value of description.
      *
      * @param string $description
@@ -127,49 +149,55 @@ class DiscretionarySpending
     }
 
     /**
-     * Set the value of price.
-     *
-     * @param float $price
-     * @return \TS\CYABundle\Entity\DiscretionarySpending
+     * @return mixed
      */
-    public function setPrice($price)
+    public function getValueVisa()
     {
-        $this->price = $price;
-
-        return $this;
+        return $this->valueVisa;
     }
 
     /**
-     * Get the value of price.
-     *
-     * @return float
+     * @param mixed $valueVisa
      */
-    public function getPrice()
+    public function setValueVisa($valueVisa)
     {
-        return $this->price;
+        $this->valueVisa = $valueVisa;
     }
 
     /**
      * @return mixed
      */
-    public function getQuotations()
+    public function getValueAdicional()
     {
-        return $this->quotations;
+        return $this->valueAdicional;
     }
 
     /**
-     * @param $quotations
-     * @return $this
+     * @param mixed $valueAdicional
      */
-    public function setQuotations($quotations)
+    public function setValueAdicional($valueAdicional)
     {
-        $this->quotations = $quotations;
-
-        return $this;
+        $this->valueAdicional = $valueAdicional;
     }
 
     /**
      * @return mixed
+     */
+    public function getValueShipping()
+    {
+        return $this->valueShipping;
+    }
+
+    /**
+     * @param mixed $valueShipping
+     */
+    public function setValueShipping($valueShipping)
+    {
+        $this->valueShipping = $valueShipping;
+    }
+
+    /**
+     * @return Coin
      */
     public function getCoin()
     {

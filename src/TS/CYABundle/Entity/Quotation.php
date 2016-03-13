@@ -163,7 +163,8 @@ class Quotation
     protected $service;
 
     /**
-     * @ORM\OneToMany(targetEntity="DiscretionarySpending", mappedBy="quotations", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="TS\CYABundle\Entity\DiscretionarySpending")
+     * @ORM\JoinColumn(name="promociones_id", referencedColumnName="id", nullable=true)
      */
     protected $discretionarySpending;
 
@@ -193,7 +194,6 @@ class Quotation
 
     public function __construct()
     {
-        $this->discretionarySpending = new ArrayCollection();
         $this->service = new ArrayCollection();
     }
 
@@ -791,34 +791,19 @@ class Quotation
     }
 
     /**
-     * @param DiscretionarySpending $discretionarySpending
-     * @return $this
-     */
-    public function addDiscretionarySpending(DiscretionarySpending $discretionarySpending)
-    {
-        $discretionarySpending->setQuotations($this);
-        $this->discretionarySpending->add($discretionarySpending);
-
-        return $this;
-    }
-
-    /**
-     * @param DiscretionarySpending $discretionarySpending
-     * @return $this
-     */
-    public function removeDiscretionarySpending(DiscretionarySpending $discretionarySpending)
-    {
-        $this->discretionarySpending->removeElement($discretionarySpending);
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection
+     * @return mixed
      */
     public function getDiscretionarySpending()
     {
         return $this->discretionarySpending;
+    }
+
+    /**
+     * @param mixed $discretionarySpending
+     */
+    public function setDiscretionarySpending($discretionarySpending)
+    {
+        $this->discretionarySpending = $discretionarySpending;
     }
 
     /**

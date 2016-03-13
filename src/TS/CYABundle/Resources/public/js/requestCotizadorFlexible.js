@@ -22,6 +22,21 @@ $(".country_selector").change(function(){
     });
 
     $.ajax({
+        type: 'post',
+        url: Routing.generate('select_discretionary_spendings', null, true),
+        data: data,
+        success: function(data) {
+            var $city_selector = $('.discretionary_spending_selector');
+
+            $city_selector.html('<option>Seleccionar opción</option>');
+
+            for (var i=0, total = data.length; i < total; i++) {
+                $city_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            }
+        }
+    });
+
+    $.ajax({
         type: 'get',
         url: Routing.generate('country_id_coin', {id: data.countryId}, true),
         success: function(string) {
@@ -82,18 +97,31 @@ $(".headquarter_selector").change(function(){
         }
     });
     //Service
+    var array = [];
     $.ajax({
         type: 'post',
         url: Routing.generate('select_services', null, true),
         data: data,
-        success: function(data) {
-            var $service_selector = $('.service_selector');
-
-            for (var i=0, total = data.length; i < total; i++) {
-                $service_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
-            }
+        success: function (data) {
+            var select = document.getElementById('quotation_service');
+            select.options.length = 0;
+            $.each(data, function (index, item) {
+                //
+                if (item.type == "REQUIRED" || (item.name == "FEE" && $('#quotation_client_isUnderAge').is(":checked"))) {
+                    array.push(item.id);
+                    select.options.add(new Option(item.name, item.id, true, true));
+                } else {
+                    select.options.add(new Option(item.name, item.id));
+                }
+            });
         }
     });
+
+    setTimeout(function(){
+        var multi = $("#quotation_service").select2();
+        multi.val(array).trigger("change");
+
+    }, 1000);
 });
 /**
  * Get preview values

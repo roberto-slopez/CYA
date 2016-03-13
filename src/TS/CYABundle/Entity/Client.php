@@ -56,6 +56,11 @@ class Client
     protected $notes;
 
     /**
+     * @ORM\Column(name="is_under_age", type="boolean", options={"default": 0})
+     */
+    protected $isUnderAge = false;
+
+    /**
      * @ORM\OneToMany(targetEntity="Quotation", mappedBy="client")
      * @ORM\JoinColumn(name="id", referencedColumnName="client_id", nullable=false)
      */
@@ -94,6 +99,22 @@ class Client
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsUnderAge()
+    {
+        return $this->isUnderAge;
+    }
+
+    /**
+     * @param mixed $isUnderAge
+     */
+    public function setIsUnderAge($isUnderAge)
+    {
+        $this->isUnderAge = $isUnderAge;
     }
 
     /**

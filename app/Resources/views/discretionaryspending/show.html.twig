@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block MenuCatalog %} class="sidebar-nav-menu open" {% endblock MenuCatalog %}
+{% block MenuDiscretionarySpending %} class="active" {% endblock MenuDiscretionarySpending %}
+{% block ulCatalog %} style="display: block;" {% endblock ulCatalog %}
+
+{% block iconHead %}
+    <i class="fa fa-eye"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+    Gastos Adicionales
+{% endblock pageTitle %}
+{% block subtitle %}
+    Visualizar
+{% endblock subtitle %}
+{% block titlePanel %}
+    Gastos adicionales
+{% endblock titlePanel %}
+{% block action %}
+    <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('admin_discretionaryspending_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a> <a href="{{ path('admin_discretionaryspending_edit', { 'id': discretionarySpending.id }) }}"
+                class="btn btn-sm btn-warning">
+            <i class="gi gi-edit"></i>
+            Editar
+        </a></div>
+    </div>{% endblock action %}
+{% block bodyPanel %}
+    <div class="table-responsive">
+        <table class="table table-vcenter table-striped">
+            <tbody>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ discretionarySpending.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Description{% endtrans %}</th>
+                <td>{{ discretionarySpending.description }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Value visa{% endtrans %}</th>
+                <td>{{ discretionarySpending.valueVisa }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Value adicional{% endtrans %}</th>
+                <td>{{ discretionarySpending.valueAdicional }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Value shipping{% endtrans %}</th>
+                <td>{{ discretionarySpending.valueShipping }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Coin{% endtrans %}</th>
+                <td>{{ discretionarySpending.coin.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Country{% endtrans %}</th>
+                <td>{{ discretionarySpending.country.name }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock bodyPanel %}

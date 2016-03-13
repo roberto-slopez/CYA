@@ -1,11 +1,11 @@
 {% extends '::base.html.twig' %}
-{% macro discretionarySpendingCollectionItem(discretionarySpending) %}
+{#{% macro discretionarySpendingCollectionItem(discretionarySpending) %}
     <span class="form-inline text-center">
         {{ form_widget(discretionarySpending.description) }}
         {{ form_widget(discretionarySpending.price) }}
         {{ form_widget(discretionarySpending.coin) }}
     </span>
-{% endmacro %}
+{% endmacro %}#}
 {% block MenuCotizadores %} class="sidebar-nav-menu open" {% endblock MenuCotizadores %}
 {% block MenuFlexible %} class="active" {% endblock MenuFlexible %}
 {% block ulCotizador %} style="display: block;" {% endblock ulCotizador %}
@@ -22,7 +22,7 @@
 
 {% block action %}
     <div class="block-options pull-right">
-        <a data-original-title="Regresar" href="{{ url('cotizador_index') }}" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title=""><i class="fa fa-chevron-left"></i></a>
+        <a data-original-title="Regresar" href="{{ url('main') }}" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title=""><i class="fa fa-chevron-left"></i></a>
     </div>
 {% endblock action %}
 
@@ -38,11 +38,12 @@
         <h3>Cliente</h3>
         {{ form_row(form.client.first_name) }}
         {{ form_row(form.client.last_name) }}
+        {{ form_row(form.client.isUnderAge) }}
     </div>
+    {{ form_row(form.semanas) }}
     {{ form_row(form.country) }}
     {{ form_row(form.city) }}
     {{ form_row(form.headquarter) }}
-    {{ form_row(form.semanas) }}
     {{ form_row(form.course) }}
     {{ form_row(form.lodging) }}
     {{ form_row(form.service) }}
@@ -54,20 +55,8 @@
             <div class="label label-success" id="valor_servicio">Servicio: 0.00</div>
         </div>
     </div>
-    <ul class="item list list-unstyled text-center" data-prototype="{{ _self.discretionarySpendingCollectionItem(form.discretionarySpending.vars.prototype)|e }}">
 
-        <h3>Gastos opcionales</h3>
-        <style>
-            li>div>div.form-group {
-                width: 100%;
-            }
-        </style>
-        {% for discretionarySpending in form.discretionarySpending %}
-            <li class="bg-info">
-                {{ _self.discretionarySpendingCollectionItem(discretionarySpending) }}
-            </li>
-        {% endfor %}
-    </ul>
+    {{ form_row(form.discretionarySpending) }}
     {{ form_row(form.note) }}
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">

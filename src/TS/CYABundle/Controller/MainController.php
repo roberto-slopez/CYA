@@ -199,6 +199,21 @@ class MainController extends BaseController
     }
 
     /**
+     * @Route("/discretionary_spending", name="select_discretionary_spendings", options={"expose"=true})
+     * @Method("POST")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function discretionarySpendingAction(Request $request)
+    {
+        $countryId = $request->request->get('countryId');
+        $em = $this->getDoctrine()->getManager();
+        $discretionarySpending = $em->getRepository('TSCYABundle:DiscretionarySpending')->getByCountry($countryId);
+
+        return new JsonResponse($discretionarySpending);
+    }
+
+    /**
      * @Route("/country/{id}/coin", name="country_id_coin", options={"expose"=true})
      * @Method("GET")
      * @ParamConverter("id", class="\TS\CYABundle\Entity\Country")
