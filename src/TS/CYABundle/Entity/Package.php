@@ -41,6 +41,16 @@ class Package
     protected $semanas;
 
     /**
+     * @ORM\Column(type="float", options={"default": 0})
+     */
+    protected $price_inscription = 0;
+
+    /**
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    protected $description_inscription = '';
+
+    /**
      * @ORM\OneToMany(targetEntity="PackageLodging", mappedBy="package", cascade={"persist", "remove"})
      */
     protected $packageLodging;
@@ -61,6 +71,38 @@ class Package
     {
         $this->quotations = new ArrayCollection();
         $this->packageLodging = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriceInscription()
+    {
+        return $this->price_inscription;
+    }
+
+    /**
+     * @param mixed $price_inscription
+     */
+    public function setPriceInscription($price_inscription)
+    {
+        $this->price_inscription = $price_inscription;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionInscription()
+    {
+        return $this->description_inscription;
+    }
+
+    /**
+     * @param mixed $description_inscription
+     */
+    public function setDescriptionInscription($description_inscription)
+    {
+        $this->description_inscription = $description_inscription;
     }
 
     /**

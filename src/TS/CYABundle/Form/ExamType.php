@@ -21,7 +21,6 @@ class ExamType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('enable')
             ->add('headquarter', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Headquarter',
                 'query_builder' => function (EntityRepository $repository) {
@@ -40,6 +39,11 @@ class ExamType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true
             ])
+            ->add('enable')
+            ->add('price_inscription', MoneyType::class, [
+                'currency' => 'USD'
+            ])
+            ->add('description_inscription')
         ;
     }
     

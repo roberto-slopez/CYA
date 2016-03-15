@@ -46,6 +46,10 @@ class PackageType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true
             ])
+            ->add('price_inscription', MoneyType::class, [
+                'currency' => 'USD'
+            ])
+            ->add('description_inscription')
         ;
     }
     
