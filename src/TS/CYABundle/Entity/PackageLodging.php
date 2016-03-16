@@ -109,7 +109,7 @@ class PackageLodging
     }
 
     /**
-     * @return mixed
+     * @return Lodging
      */
     public function getLodging()
     {

@@ -34,7 +34,6 @@ class QuotationType extends AbstractType
     {
         $builder->addEventSubscriber(new AddCityFieldSubscriber('city'));
         $builder->addEventSubscriber(new AddHeadquarterFieldSubscriber('headquarter'));
-
         $builder->addEventSubscriber(new AddLodgingFieldSubscriber('lodging'));
         $builder->addEventSubscriber(new AddCourseFieldSubscriber('course'));
         $builder->addEventSubscriber(new AddServiceFieldSubscriber('service'));

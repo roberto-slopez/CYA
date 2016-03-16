@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TS\CYABundle\Form\EventListener\AddCityFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddCourseFieldSubscriber;
+use TS\CYABundle\Form\EventListener\AddDiscretionarySpendingFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddHeadquarterFieldSubscriber;
 use TS\CYABundle\Form\ClientType;
 use TS\CYABundle\Form\EventListener\AddLodgingFieldSubscriber;
@@ -38,10 +39,10 @@ class QuotationPackageType extends AbstractType
     {
         $builder->addEventSubscriber(new AddCityFieldSubscriber('city'));
         $builder->addEventSubscriber(new AddHeadquarterFieldSubscriber('headquarter'));
-
         $builder->addEventSubscriber(new AddLodgingFieldSubscriber('lodging'));
         $builder->addEventSubscriber(new AddPackageFieldSubscriber('package'));
         $builder->addEventSubscriber(new AddServiceFieldSubscriber('service'));
+        $builder->addEventSubscriber(new AddDiscretionarySpendingFieldSubscriber('discretionarySpending'));
         $builder
             ->add('country', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Country',
@@ -55,16 +56,6 @@ class QuotationPackageType extends AbstractType
                 'attr' => ['class' => 'country_selector select-select2']
             ])
             ->add('client', ClientType::class)
-            ->add('discretionarySpending', CollectionType::class, [
-                'entry_type' => DiscretionarySpendingType::class,
-                'allow_add' => true,
-                'label' => ' ',
-                'by_reference' => false,
-                'allow_delete' => true
-            ])
-            ->add('semanas', IntegerType::class, [
-                'label' => 'Weeks'
-            ])
             ->add('note')
         ;
     }

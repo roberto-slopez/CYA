@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use TS\CYABundle\Entity\Package;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -221,17 +222,74 @@ class CotizadorController extends BaseController
     }
 
     /**
-     * @Route("/lodging/{id}/{weeks}", name="lodging_by_id", options={"expose"=true})
+     * @Route("/services/package/filter", name="services_and_package", options={"expose"=true})
+     * @Method("POST")
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function ServicesAndPackagection(Request $request)
+    {
+        $package = $request->request->get('package');
+        $services = $request->request->get('services');
+        $em = $this->getDoctrine()->getManager();
+        $total = 0;
+
+        $package = $em->getRepository('TSCYABundle:Package')->find($package);
+        if ($package) {
+            $weeks = $package->getSemanas();
+            foreach ($services as $service) {
+                $result = $em->getRepository('TSCYABundle:Service')->find($service);
+                $total += $result->getPrice();
+            }
+            $total = $weeks * $total;
+        }
+
+        return new JsonResponse(number_format($total, 2, '.', ','));
+    }
+
+    /**
+     * @Route("/package/{id}", name="package_by_id", options={"expose"=true})
+     * @ParamConverter("id", class="\TS\CYABundle\Entity\Package")
+     * @Method("GET")
+     *
+     * @param Package $package
+     * @return JsonResponse
+     */
+    public function packageByIdAction(Package $package)
+    {
+        return new JsonResponse(number_format($package->getPrice(), 2, '.', ','));
+    }
+
+    /**
+     * @Route("/lodging/{id}/{weeks}/{package}", defaults={"package" = "0"}, name="lodging_by_id", options={"expose"=true})
      * @ParamConverter("id", class="\TS\CYABundle\Entity\Lodging")
      * @Method("GET")
      *
      * @param Lodging $lodging
      * @param $weeks
+     * @param Package $package
      * @return JsonResponse
      */
-    public function lodgingByIdAction(Lodging $lodging, $weeks)
+    public function lodgingByIdAction(Lodging $lodging, $weeks, $package)
     {
-        return new JsonResponse(number_format($weeks * $lodging->getPricePerWeek(), 2, '.', ','));
+        $priceLodging = $weeks * $lodging->getPricePerWeek();
+        if ($package) {
+            $em = $this->getDoctrine()->getManager();
+            $package = $em->getRepository('TSCYABundle:Package')->find($package);
+            foreach ($package->getPackageLodging() as $item) {
+                $idLodging = $item->getLodging()->getId();
+                if ($idLodging === $lodging->getId()) {
+                    $priceLodging =  $item->getLodgingPrice();
+                    break;
+                }
+            }
+            if (!($priceLodging > 0)) {
+                $priceLodging = $package->getSemanas() * $lodging->getPricePerWeek();
+            }
+        }
+
+        return new JsonResponse(number_format($priceLodging, 2, '.', ','));
     }
 
     /**
