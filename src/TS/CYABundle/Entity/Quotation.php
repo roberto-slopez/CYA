@@ -213,6 +213,23 @@ class Quotation
 
         return 0;
     }
+
+    /**
+     * @return int
+     */
+    public function getExamValue() {
+        $exam = $this->getExam();
+        $weeks = $this->getSemanas();
+
+        foreach ($exam->getExamRangeWeeks() as $examRangeWeek) {
+            $price = $examRangeWeek->isThisRange($weeks);
+            if ($price) {
+                return  $price;
+            }
+        }
+
+        return 0;
+    }
     /**
      * Set the value of id.
      *

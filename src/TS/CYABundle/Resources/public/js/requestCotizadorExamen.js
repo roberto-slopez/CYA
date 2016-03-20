@@ -20,6 +20,29 @@ $(".country_selector").change(function(){
             }
         }
     });
+
+    $.ajax({
+        type: 'post',
+        url: Routing.generate('select_discretionary_spendings', null, true),
+        data: data,
+        success: function(data) {
+            var $city_selector = $('.discretionary_spending_selector');
+
+            $city_selector.html('<option>Seleccionar opción</option>');
+
+            for (var i=0, total = data.length; i < total; i++) {
+                $city_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            }
+        }
+    });
+
+    $.ajax({
+        type: 'get',
+        url: Routing.generate('country_id_coin', {id: data.countryId}, true),
+        success: function(string) {
+            $("#valor_moneda").html(string);
+        }
+    });
 });
 $(".city_selector").change(function(){
     var data = {
@@ -75,16 +98,109 @@ $(".headquarter_selector").change(function(){
         }
     });
     //Service
+    var array = [];
     $.ajax({
         type: 'post',
         url: Routing.generate('select_services', null, true),
         data: data,
-        success: function(data) {
-            var $service_selector = $('.service_selector');
-
-            for (var i=0, total = data.length; i < total; i++) {
-                $service_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
-            }
+        success: function (data) {
+            var select = document.getElementById('quotation_exam_service');
+            select.options.length = 0;
+            $.each(data, function (index, item) {
+                //
+                if (item.type == "REQUIRED" || (item.name == "FEE" && $('#quotation_exam_client_isUnderAge').is(":checked"))) {
+                    array.push(item.id);
+                    select.options.add(new Option(item.name, item.id, true, true));
+                } else {
+                    select.options.add(new Option(item.name, item.id));
+                }
+            });
         }
     });
+
+    setTimeout(function(){
+        var multi = $("#quotation_exam_service").select2();
+        multi.val(array).trigger("change");
+
+    }, 1000);
+});
+/**
+ * Get preview values
+ */
+$("#quotation_exam_exam").change(function(){
+    var data = {
+        exmanId: $(this).val()
+    };
+    var semanas = $("#quotation_exam_semanas").val();
+
+    if (semanas) {
+        $.ajax({
+            type: 'get',
+            url: Routing.generate('exam_by_id', {id: data.exmanId, weeks: semanas}, true),
+            success: function(price) {
+                $("#valor_curso").html("Examen: " + price);
+            }
+        });
+    }
+});
+$(".lodging_selector").change(function(){
+    var data = {
+        lodgingId: $(this).val()
+    };
+    var semanas = $("#quotation_exam_semanas").val();
+
+    if (semanas) {
+        $.ajax({
+            type: 'get',
+            url: Routing.generate('lodging_by_id', {id: data.lodgingId, weeks: semanas}, true),
+            success: function(price) {
+                $("#valor_alojamiento").html("Alojamiento: " + price);
+            }
+        });
+    }
+});
+
+$(".service_selector").change(function(){
+    var services = $(this).val();
+    var semanas = $("#quotation_exam_semanas").val();
+    var data = {
+        "weeks": semanas,
+        "services": services
+    };
+
+    if (semanas) {
+        $.ajax({
+            type: 'post',
+            url: Routing.generate('services_by_id', null, true),
+            data: data,
+            success: function(price) {
+                $("#valor_servicio").html("Servicios: " + price);
+            }
+        });
+    }
+});
+
+$("#quotation_exam_semanas").change(function(){
+    var semanas = $(this).val();
+    var exam = $("#quotation_exam_exam").val();
+    var lodging = $(".lodging_selector").val();
+    var services = $(".service_selector").val();
+    var data = {
+        "weeks": semanas,
+        "exam": exam,
+        "lodging": lodging,
+        "services": services
+    };
+    if (semanas > 0 && (exam && exam !== 'Seleccionar opción' || lodging && lodging !== 'Seleccionar opción' || services)) {
+        $.ajax({
+            type: 'post',
+            url: Routing.generate('weekschange', null, true),
+            data: data,
+            success: function(result) {
+                $("#valor_curso").html("Exam: " + result.exam);
+                $("#valor_alojamiento").html("Alojamiento: " + result.lodging);
+                $("#valor_servicio").html("Servicios: " + result.services);
+            }
+        });
+    }
 });

@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use TS\CYABundle\Entity\Exam;
 use TS\CYABundle\Entity\Package;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -123,7 +124,6 @@ class CotizadorController extends BaseController
             }
         } catch (\Exception $e) {
             $this->setFlashError(sprintf("Error: %s", $e->getMessage()));
-            $this->setFlashInfo('Registro agregado correctamente');
 
             return $this->redirectToRoute('main');
         }
@@ -142,28 +142,34 @@ class CotizadorController extends BaseController
      */
     public function newExamenAction(Request $request)
     {
-        $user = $this->getCurrenUser();
+        try {
+            $user = $this->getCurrenUser();
+            $seller = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('TSCYABundle:Seller')
+                ->getByUser($user->getId());
 
-        $seller = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('TSCYABundle:Seller')
-            ->getByUser($user->getId());
+            $quotation = new Quotation();
+            $quotation->setClient(new Client());
+            $quotation->setSeller($seller);
+            $quotation->setType(Quotation::EXAM);
 
-        $quotation = new Quotation();
-        $quotation->setClient(new Client());
-        $quotation->setSeller($seller);
-        $quotation->setType(Quotation::EXAM);
+            $form = $this->createForm(QuotationExamType::class, $quotation);
+            $form->handleRequest($request);
 
-        $form = $this->createForm(QuotationExamType::class, $quotation);
-        $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $quotation = $this->calculateValues($quotation, Quotation::EXAM);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($quotation);
+                $em->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $quotation = $this->calculateValues($quotation, Quotation::EXAM);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($quotation);
-            $em->flush();
+                $this->setFlashInfo('Registro agregado correctamente');
 
-            $this->setFlashInfo('Registro agregado correctamente');
+                return $this->redirectToRoute('preview_invoice', ['id' => $quotation->getId()]);
+            }
+
+        } catch (\Exception $e) {
+            $this->setFlashError(sprintf("Error: %s", $e->getMessage()));
 
             return $this->redirectToRoute('main');
         }
@@ -249,6 +255,27 @@ class CotizadorController extends BaseController
     }
 
     /**
+     * @Route("/examn/{id}/{weeks}", name="exam_by_id", options={"expose"=true})
+     * @ParamConverter("id", class="\TS\CYABundle\Entity\Exam")
+     * @Method("GET")
+     *
+     * @param Exam $exam
+     * @param $weeks
+     * @return JsonResponse
+     */
+    public function examByIdAction(Exam $exam, $weeks)
+    {
+        foreach ($exam->getExamRangeWeeks() as $examRangeWeek) {
+            $price = $examRangeWeek->isThisRange($weeks);
+            if ($price) {
+                return new JsonResponse(number_format($price * $weeks, 2, '.', ','));
+            }
+        }
+
+        return new JsonResponse(0);
+    }
+
+    /**
      * @Route("/package/{id}", name="package_by_id", options={"expose"=true})
      * @ParamConverter("id", class="\TS\CYABundle\Entity\Package")
      * @Method("GET")
@@ -280,7 +307,7 @@ class CotizadorController extends BaseController
             foreach ($package->getPackageLodging() as $item) {
                 $idLodging = $item->getLodging()->getId();
                 if ($idLodging === $lodging->getId()) {
-                    $priceLodging =  $item->getLodgingPrice();
+                    $priceLodging = $item->getLodgingPrice();
                     break;
                 }
             }
@@ -329,6 +356,7 @@ class CotizadorController extends BaseController
         $weeks = $request->request->get('weeks');
         $services = $request->request->get('services');
         $course = $request->request->get('course');
+        $exam = $request->request->get('exam');
         $lodging = $request->request->get('lodging');
 
         $totalService = 0;
@@ -344,6 +372,7 @@ class CotizadorController extends BaseController
             $totalService = $totalService * $weeks;
         }
 
+        $totalCourse = 0;
         if ($course) {
             $courseResult = $em->getRepository('TSCYABundle:Course')->find($course);
             foreach ($courseResult->getCourseRangeWeeks() as $courseRangeWeek) {
@@ -355,12 +384,24 @@ class CotizadorController extends BaseController
             }
         }
 
+        $totalExam = 0;
+        if ($exam) {
+            $examResult = $em->getRepository('TSCYABundle:Exam')->find($exam);
+            foreach ($examResult->getExamRangeWeeks() as $examRangeWeek) {
+                $price = $examRangeWeek->isThisRange($weeks);
+                if ($price) {
+                    $totalExam = $price * $weeks;
+                    break;
+                }
+            }
+        }
         if ($lodging) {
             $lodgingResult = $em->getRepository('TSCYABundle:Lodging')->find($lodging);
             $totalLodging = $lodgingResult->getPricePerWeek() * $weeks;
         }
 
         $response = [
+            "exam" => number_format($weeks * $totalExam, 2, '.', ','),
             "course" => number_format($weeks * $totalCourse, 2, '.', ','),
             "lodging" => number_format($weeks * $totalLodging, 2, '.', ','),
             "services" => number_format($weeks * $totalService, 2, '.', ','),

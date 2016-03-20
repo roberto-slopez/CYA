@@ -2787,8 +2787,14 @@
         <b>Nombre:</b>{{ quotation.client.fullName }} <br/>
         <b>Destino</b>: {{ quotation.country.name }}/{{ quotation.headquarter.name }}
         <b>Fecha</b>: {{ "now"|date("d/m/Y") }}<br>
-        <b>Tipo curso</b>: {{ quotation.course.name }} {#<b>Fecha inicio</b>: {inici}#} <b>N°
-            Semanas</b>: {{ quotation.semanas }}<br>
+        {% if quotation.type == 'FLEXIBLE' %}
+            <b>Tipo curso</b>: {{ quotation.course.name }} {#<b>Fecha inicio</b>: {inici}#}
+        {% elseif quotation.type == 'PACKAGE' %}
+            <b>Tipo paquete</b>: {{ quotation.package.name }} {#<b>Fecha inicio</b>: {inici}#}
+        {% elseif quotation.type == 'EXAM' %}
+            <b>Tipo examen</b>: {{ quotation.exam.name }} {#<b>Fecha inicio</b>: {inici}#}
+        {% endif %}
+        <b>N° Semanas</b>: {{ quotation.semanas }}<br>
         <b>Asesora</b>: {{ quotation.seller.fullName }}<br>
         <i class="fa fa-phone"></i> {{ quotation.seller.telephone }}<br>
         <i class="fa fa-envelope-o"></i> {{ quotation.seller.userSeller.email }}
@@ -2810,28 +2816,78 @@
                 Detalles del curso Kaplan (costos en {{ quotation.country.coin.code }}).
             </td>
         </tr>
-        <tr>
-            <td class="text-left"><strong>Inscripción</strong></td>
-            <td class="text-left"><strong>{{ quotation.course.descriptionInscription }}</strong></td>
-            <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span
-                        class="label label-primary"><b>{{ quotation.course.priceInscription | number_format(2, '.', ',') }}</b></span>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-left"><strong>Curso</strong></td>
-            <td class="text-left"><strong>{{ quotation.course.name }}</strong> {{ quotation.course.description }}</td>
-            <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span
-                        class="label label-primary"><b>{{ quotation.courseValue | number_format(2, '.', ',') }}</b></span>
-            </td>
-        </tr>
+        {% if quotation.type == 'FLEXIBLE' %}
+            <tr>
+                <td class="text-left"><strong>Inscripción</strong></td>
+                <td class="text-left"><strong>{{ quotation.course.descriptionInscription }}</strong></td>
+                <td class="text-right">{{ quotation.country.coin.code }}</td>
+                <td class="text-right">
+                <span class="label label-primary">
+                    <b>{{ quotation.course.priceInscription | number_format(2, '.', ',') }}</b>
+                </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left"><strong>Curso</strong></td>
+                <td class="text-left"><strong>{{ quotation.course.name }}</strong> {{ quotation.course.description }}</td>
+                <td class="text-right">{{ quotation.country.coin.code }}</td>
+                <td class="text-right">
+                <span class="label label-primary">
+                    <b>{{ quotation.courseValue | number_format(2, '.', ',') }}</b>
+                </span>
+                </td>
+            </tr>
+        {% elseif quotation.type == 'PACKAGE' %}
+            <tr>
+                <td class="text-left"><strong>Inscripción</strong></td>
+                <td class="text-left"><strong>{{ quotation.package.descriptionInscription }}</strong></td>
+                <td class="text-right">{{ quotation.country.coin.code }}</td>
+                <td class="text-right">
+                <span class="label label-primary">
+                    <b>{{ quotation.package.priceInscription | number_format(2, '.', ',') }}</b>
+                </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left"><strong>Paquete</strong></td>
+                <td class="text-left">{{ quotation.package.name }}</td>
+                <td class="text-right">{{ quotation.country.coin.code }}</td>
+                <td class="text-right">
+                <span class="label label-primary">
+                    <b>{{ quotation.package.price | number_format(2, '.', ',') }}</b>
+                </span>
+                </td>
+            </tr>
+        {% elseif quotation.type == 'EXAM' %}
+            <tr>
+                <td class="text-left"><strong>Inscripción</strong></td>
+                <td class="text-left"><strong>{{ quotation.exam.descriptionInscription }}</strong></td>
+                <td class="text-right">{{ quotation.country.coin.code }}</td>
+                <td class="text-right">
+                <span class="label label-primary">
+                    <b>{{ quotation.exam.priceInscription | number_format(2, '.', ',') }}</b>
+                </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left"><strong>Curso</strong></td>
+                <td class="text-left"><strong>{{ quotation.exam.name }}</strong> {{ quotation.exam.description }}</td>
+                <td class="text-right">{{ quotation.country.coin.code }}</td>
+                <td class="text-right">
+                <span class="label label-primary">
+                    <b>{{ quotation.examValue | number_format(2, '.', ',') }}</b>
+                </span>
+                </td>
+            </tr>
+        {% endif %}
         <tr>
             <td class="text-left"><strong>Alojamiento</strong></td>
             <td class="text-left"><b>({{ quotation.lodging.name }})</b> {{ quotation.lodging.description }}</td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
-            <td class="text-right"><span
-                        class="label label-primary"><b>{{ quotation.lodging.pricePerWeek | number_format(2, '.', ',') }}</b></span>
+            <td class="text-right">
+                <span class="label label-primary">
+                    <b>{{ quotation.lodging.pricePerWeek | number_format(2, '.', ',') }}</b>
+                </span>
             </td>
         </tr>
         {% for service in quotation.service %}

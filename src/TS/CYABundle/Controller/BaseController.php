@@ -87,11 +87,6 @@ class BaseController extends Controller
         $isLocal = $coin->getIsLocalCountry();
         $idCoin = $coin->getId();
         $current = 1;
-        $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByCourse($quotation->getCourse()->getId());
-
-        if ($promocion) {
-            $quotation->setPromocion($promocion);
-        }
 
         if (!$isLocal) {
             $current = $em ->getRepository('TSCYABundle:ExchangeRateUSD')
@@ -99,6 +94,11 @@ class BaseController extends Controller
         }
 
         if ($type == Quotation::FLEXIBLE) {
+            $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByCourse($quotation->getCourse()->getId());
+
+            if ($promocion) {
+                $quotation->setPromocion($promocion);
+            }
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             $quotation->setAmountLodging($lodgingAmount);
 
@@ -119,16 +119,15 @@ class BaseController extends Controller
             $packageLodging = $em->getRepository('TSCYABundle:PackageLodging')
                 ->getPriceLodgingById($quotation->getLodging()->getId());
 
-            $lodgingPrice = $packageLodging->getLodgingPrice();
+            $lodgingPrice = $packageLodging ? $packageLodging->getLodgingPrice() : 0;
             $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;
 
             $quotation->setAmountLodging(round($amountLodging, 2));
-            $quotation->setAmountCourse(round($quotation->getPackage()->getCoursePrice(), 2));
-            $quotation->setCourse($quotation->getPackage()->getCourse());
+            $quotation->setAmountCourse(round($quotation->getPackage()->getPrice(), 2));
         } elseif ($type == Quotation::EXAM) {
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             $quotation->setAmountLodging($lodgingAmount);
-            $quotation->setAmountCourse(round($quotation->getExam()->getPrice() * $quotation->getSemanas(), 2));
+            $quotation->setAmountCourse(round($quotation->getExamValue() * $quotation->getSemanas(), 2));
         }
 
         $totalLocal = $quotation->getAmountCourse() +

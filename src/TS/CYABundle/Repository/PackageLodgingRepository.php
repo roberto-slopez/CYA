@@ -24,12 +24,16 @@ class PackageLodgingRepository extends EntityRepository
      */
     public function getPriceLodgingById($lodgingId)
     {
-        $qb = $this->createQueryBuilder('package_lodging');
-        $qb->leftJoin('package_lodging.lodging', 'lodging')
-            ->where('lodging.id=:lodgingId')
-            ->setParameter('lodgingId', $lodgingId)
-            ->setMaxResults(1);
+        try {
+            $qb = $this->createQueryBuilder('package_lodging');
+            $qb->leftJoin('package_lodging.lodging', 'lodging')
+                ->where('lodging.id=:lodgingId')
+                ->setParameter('lodgingId', $lodgingId)
+                ->setMaxResults(1);
 
-        return $qb->getQuery()->getResult()[0];
+            return $qb->getQuery()->getSingleScalarResult();
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }
