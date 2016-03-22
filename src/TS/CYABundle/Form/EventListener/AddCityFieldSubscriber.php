@@ -54,6 +54,7 @@ class AddCityFieldSubscriber implements EventSubscriberInterface
         $formOptions = [
             'class' => 'TSCYABundle:City',
             'placeholder' => 'Choose an option',
+            'required' => true,
             'label' => 'City',
             'attr' => ['class' => 'city_selector select-select2'],
             'query_builder' => function (EntityRepository $repository) use ($country) {

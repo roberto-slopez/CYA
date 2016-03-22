@@ -194,7 +194,7 @@ class ExchangeRateUSD
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getExpiration()
     {

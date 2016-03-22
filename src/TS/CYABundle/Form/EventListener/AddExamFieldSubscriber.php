@@ -54,6 +54,7 @@ class AddExamFieldSubscriber implements EventSubscriberInterface
         $formOptions = [
             'class' => 'TS\CYABundle\Entity\Exam',
             'placeholder' => 'Choose an option',
+            'required' => true,
             'label' => 'Exam',
             'attr' => ['class' => 'exam_selector select-select2'],
             'query_builder' => function (EntityRepository $repository) use ($headquarter) {

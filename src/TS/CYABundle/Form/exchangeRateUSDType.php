@@ -39,10 +39,8 @@ class exchangeRateUSDType extends AbstractType
                 'label' => 'Amount'
             ])
             ->add('date', DateType::class, [
-                'data' => new \DateTime('today'),
             ])
             ->add('expiration', DateType::class, [
-                'data' => new \DateTime('today'),
             ])
         ;
     }

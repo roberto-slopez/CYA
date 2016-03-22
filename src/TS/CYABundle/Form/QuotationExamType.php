@@ -46,6 +46,7 @@ class QuotationExamType extends AbstractType
         $builder
             ->add('country', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Country',
+                'required' => true,
                 'query_builder' => function (EntityRepository $repository) {
                     $qb = $repository->createQueryBuilder('country')
                         ->orderBy('country.name', 'ASC');

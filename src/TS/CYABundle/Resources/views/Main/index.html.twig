@@ -45,6 +45,47 @@
 {% endblock contentHeader %}
 {% block pageContent %}
     <div class="row">
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                            Tasa de cambio apunto de expirar ({{ exchangeRateToExpireCount }})
+                            <i class="fa fa-asterisk"></i>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Moneda</th>
+                                <th>Dias para expirar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in exchangeRateToExpire %}
+                                <tr>
+                                    <td>
+                                        {{ item.name }}
+                                        <span class="label label-danger">{{ item.code }}{{ item.symbol }}</span>
+                                    </td>
+                                    <td>{{ item.days }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer bg-danger">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         {% for item in exchangeRateUSDs %}
             <div class="col-sm-6 col-lg-3">
                 <a href="#" class="widget widget-hover-effect1">
@@ -59,7 +100,9 @@
                             <strong class="text-danger">{{ item.expiration| date('d/m/Y') }}</strong><br>
                             <small>
                                 <i>(<strong>{{ item.coin.code }}</strong>) {{ item.coin.name }}</i>
-                                <p><i class="label label-success"><strong> COP </strong> {{ item.local |number_format(4, '.', ',') }} </i></p>
+
+                                <p><i class="label label-success"><strong>
+                                            COP </strong> {{ item.local |number_format(4, '.', ',') }} </i></p>
                             </small>
                         </h3>
                     </div>
@@ -68,3 +111,11 @@
         {% endfor %}
     </div>
 {% endblock pageContent %}
+{% block extraJS %}
+    <script type="text/javascript">
+        var count = parseInt({{ exchangeRateToExpireCount }});
+        if (count > 0) {
+            $('#myModal').modal('show')
+        }
+    </script>
+{% endblock extraJS %}

@@ -12,7 +12,7 @@ use TS\CYABundle\Form\ServiceType;
 /**
  * Service controller.
  *
- * @Route("/admin/service")
+ * @Route("/service")
  */
 class ServiceController extends Controller
 {

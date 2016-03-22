@@ -5,6 +5,7 @@ namespace TS\CYABundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Doctrine\ORM\Query;
 use TS\CYABundle\Entity\Course;
+use TS\CYABundle\Entity\ExchangeRateUSD;
 use TS\CYABundle\Entity\Quotation;
 use TS\CYABundle\Entity\Usuario;
 
@@ -149,5 +150,39 @@ class BaseController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($entity);
         $em->flush();
+    }
+
+    /**
+     * @param $currencys
+     * @return array
+     */
+    public function validExpirationDate($currencys) {
+        $currencysToExpire = [];
+        $today = new \DateTime('today');
+        foreach ($currencys as $currency) {
+            $data = $this->isAboutToExpire($currency, $today);
+            if ($data) {
+                $currencysToExpire[] = $data;
+            }
+        }
+
+        return $currencysToExpire;
+    }
+
+    public function isAboutToExpire(ExchangeRateUSD $exchangeRateUSD, \DateTime $today) {
+        $expirationDay = $exchangeRateUSD->getExpiration();
+        if ($today->format('m-Y') === $expirationDay->format('m-Y')) {
+            $expirationDays = $expirationDay->format('d') - $today->format('d');
+            if ($expirationDays <= 3) {
+                return [
+                    "name" => $exchangeRateUSD->getCoin()->getName(),
+                    "code" => $exchangeRateUSD->getCoin()->getCode(),
+                    "symbol" => $exchangeRateUSD->getCoin()->getSymbol(),
+                    "days" => $expirationDays
+                ];
+            }
+        }
+
+        return false;
     }
 }

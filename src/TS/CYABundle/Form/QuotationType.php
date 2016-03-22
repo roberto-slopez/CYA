@@ -41,6 +41,7 @@ class QuotationType extends AbstractType
         $builder
             ->add('country', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Country',
+                'required' => true,
                 'query_builder' => function (EntityRepository $repository) {
                     $qb = $repository->createQueryBuilder('country')
                         ->orderBy('country.name', 'ASC');
@@ -52,6 +53,7 @@ class QuotationType extends AbstractType
             ])
             ->add('client', ClientType::class)
             ->add('semanas', IntegerType::class, [
+                'required' => true,
                 'label' => 'Weeks'
             ])
             ->add('note')

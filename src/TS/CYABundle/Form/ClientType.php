@@ -3,6 +3,7 @@
 namespace TS\CYABundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,8 +16,12 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name')
-            ->add('last_name')
+            ->add('first_name', TextType::class, [
+                'required' => true
+            ])
+            ->add('last_name', TextType::class, [
+                'required' => true
+            ])
             ->add('isUnderAge')
         ;
     }

@@ -29,14 +29,15 @@ class MainController extends BaseController
     {
         $em = $this->getDoctrine()->getManager();
         $exchangeRateDisable = $em->getRepository('TSCYABundle:ExchangeRateUSD')->getAllExpiration();
-        $exchangeRateUSDs = $em->getRepository('TSCYABundle:ExchangeRateUSD')->findBy([
-            'enable' => true
-        ]);
 
         foreach ($exchangeRateDisable as $item) {
             $item->setEnable(false);
             $this->saveChangeEntity($item);
         }
+
+        $exchangeRateUSDs = $em->getRepository('TSCYABundle:ExchangeRateUSD')->findBy(['enable' => true]);
+
+        $exchangeRateToExpire = $this->validExpirationDate($exchangeRateUSDs);
 
         $lodging = $em->getRepository('TSCYABundle:Lodging')->getCount();
 
@@ -53,7 +54,7 @@ class MainController extends BaseController
 
         $coin = $em->getRepository('TSCYABundle:Coin')->getCount('COP');
 
-        if (intval($exchangeRate) < intval($coin) ) {
+        if (intval($exchangeRate) < intval($coin)) {
             if (intval($exchangeRate) == 0) {
                 $this->setFlashError('¡No hay ninguna tasa de cambio, ingresada para hoy!');
             } else {
@@ -72,6 +73,8 @@ class MainController extends BaseController
             'courses' => $course,
             'packages' => $package,
             'exchangeRateUSDs' => $exchangeRateUSDs,
+            'exchangeRateToExpire' => $exchangeRateToExpire,
+            'exchangeRateToExpireCount' => count($exchangeRateToExpire)
         ];
     }
 
@@ -143,7 +146,7 @@ class MainController extends BaseController
      */
     public function promocionsAction(Request $request)
     {
-        $courseId= $request->request->get('courseId');
+        $courseId = $request->request->get('courseId');
         $em = $this->getDoctrine()->getManager();
         $promocions = $em->getRepository('TSCYABundle:Promocion')->getByCourse($courseId);
 
@@ -224,6 +227,7 @@ class MainController extends BaseController
     public function coinSimbolByIdAction(Country $country)
     {
         $coin = $country->getCoin();
+
         return new JsonResponse($coin->getCode().' '.$coin->getSymbol());
     }
 
@@ -251,8 +255,8 @@ class MainController extends BaseController
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
             200,
             array(
-                'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => $attachment
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => $attachment,
             )
         );
     }

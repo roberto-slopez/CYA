@@ -43,6 +43,9 @@ class exchangeRateUSDController extends Controller
     public function newAction(Request $request)
     {
         $exchangeRateUSD = new ExchangeRateUSD();
+        $exchangeRateUSD->setDate(new \DateTime('today'));
+        $exchangeRateUSD->setExpiration(new \DateTime('today'));
+
         $form = $this->createForm('TS\CYABundle\Form\exchangeRateUSDType', $exchangeRateUSD);
         $form->handleRequest($request);
 

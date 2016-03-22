@@ -54,6 +54,7 @@ class AddPackageFieldSubscriber implements EventSubscriberInterface
         $formOptions = [
             'class' => 'TS\CYABundle\Entity\Package',
             'placeholder' => 'Choose an option',
+            'required' => true,
             'label' => 'Package',
             'attr' => ['class' => 'package_selector select-select2'],
             'query_builder' => function (EntityRepository $repository) use ($headquarter) {

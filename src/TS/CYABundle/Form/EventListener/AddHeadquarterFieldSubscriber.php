@@ -55,6 +55,7 @@ class AddHeadquarterFieldSubscriber implements  EventSubscriberInterface
         $formOptions = [
             'class' => 'TS\CYABundle\Entity\Headquarter',
             'placeholder' => 'Choose an option',
+            'required' => true,
             'label' => 'Headquarter',
             'attr' => ['class' => 'headquarter_selector select-select2'],
             'query_builder' => function (EntityRepository $repository) use ($city) {
