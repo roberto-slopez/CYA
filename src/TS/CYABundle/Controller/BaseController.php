@@ -104,6 +104,7 @@ class BaseController extends Controller
             $quotation->setAmountLodging($lodgingAmount);
 
             $courseValue = $quotation->getCourseValue() * $quotation->getSemanas();
+            $courseValue += $quotation->getCourse()->getPriceInscription();
             $courseValueFinish = $courseValue;
 
             if ($quotation->getPromocion()) {
@@ -123,12 +124,14 @@ class BaseController extends Controller
             $lodgingPrice = $packageLodging ? $packageLodging->getLodgingPrice() : 0;
             $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;
 
+            $valuePackage = $quotation->getPackage()->getPrice()  + $quotation->getPackage()->getPriceInscription();
             $quotation->setAmountLodging(round($amountLodging, 2));
-            $quotation->setAmountCourse(round($quotation->getPackage()->getPrice(), 2));
+            $quotation->setAmountCourse(round($valuePackage, 2));
         } elseif ($type == Quotation::EXAM) {
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             $quotation->setAmountLodging($lodgingAmount);
-            $quotation->setAmountCourse(round($quotation->getExamValue() * $quotation->getSemanas(), 2));
+            $valueExam = $quotation->getExamValue() * $quotation->getSemanas();
+            $quotation->setAmountCourse(round($valueExam + $quotation->getExam()->getPriceInscription(), 2));
         }
 
         $totalLocal = $quotation->getAmountCourse() +

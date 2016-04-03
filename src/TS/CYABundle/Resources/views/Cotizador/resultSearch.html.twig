@@ -22,6 +22,7 @@
         <thead>
         <tr>
             <th>Tipo</th>
+            <th>Cliente</th>
             <th>País</th>
             <th>Ciudad</th>
             <th>Sede</th>
@@ -42,6 +43,7 @@
                         <span class="label label-info">Paquete</span>
                     {% endif %}
                 </td>
+                <td>{{ quotation.client.fullName }}</td>
                 <td>{{ quotation.country.name }}</td>
                 <td>{{ quotation.city.name }}</td>
                 <td>{{ quotation.headquarter.name }}</td>

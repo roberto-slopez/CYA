@@ -2833,7 +2833,7 @@
                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                 <td class="text-right">
                 <span class="label label-primary">
-                    <b>{{ quotation.courseValue | number_format(2, '.', ',') }}</b>
+                    <b>{{ quotation.amountCourse | number_format(2, '.', ',') }}</b>
                 </span>
                 </td>
             </tr>
@@ -2854,7 +2854,7 @@
                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                 <td class="text-right">
                 <span class="label label-primary">
-                    <b>{{ quotation.package.price | number_format(2, '.', ',') }}</b>
+                    <b>{{ quotation.amountCourse | number_format(2, '.', ',') }}</b>
                 </span>
                 </td>
             </tr>
@@ -2875,7 +2875,7 @@
                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                 <td class="text-right">
                 <span class="label label-primary">
-                    <b>{{ quotation.examValue | number_format(2, '.', ',') }}</b>
+                    <b>{{ quotation.amountCourse | number_format(2, '.', ',') }}</b>
                 </span>
                 </td>
             </tr>
@@ -2886,7 +2886,7 @@
             <td class="text-right">{{ quotation.country.coin.code }}</td>
             <td class="text-right">
                 <span class="label label-primary">
-                    <b>{{ quotation.lodging.pricePerWeek | number_format(2, '.', ',') }}</b>
+                    <b>{{ quotation.amountLodging | number_format(2, '.', ',') }}</b>
                 </span>
             </td>
         </tr>
@@ -2926,6 +2926,11 @@
                         class="label label-primary"><b>{{ quotation.totalLocalCountry | number_format(2, '.', ',') }}</b></span>
             </td>
         </tr>
+        </tbody>
+    </table>
+</div>
+    <div style="overflow: hidden!important; page-break-inside: avoid; !important;">
+    <table class="table table-vcenter">
         <tr>
             <td class="text-center" style="background-color: #1e68b4; color: white;" colspan="4">Gastos adicionales</td>
         </tr>
@@ -2966,7 +2971,7 @@
             </td>
         </tr>
         <tr>
-            <td class="text-center" style="background-color: #1e68b4; color: white;" colspan="4">OBSERVACIONES</td>
+            <td class="text-center page" style="background-color: #1e68b4; color: white;" colspan="4">OBSERVACIONES</td>
         </tr>
         <tr>
             <td class="text-center" colspan="4">
@@ -2991,7 +2996,6 @@
         <tr>
             <td class="text-center" colspan="4">http://www.kaplaninternational.com/co</td>
         </tr>
-        </tbody>
     </table>
 </div>
 </body>

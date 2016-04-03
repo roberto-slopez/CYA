@@ -37,18 +37,30 @@ class QuotationRepository extends EntityRepository
     }
 
     /**
-     * @param string $name
-     * @param string $lastName
+     * @param $name
+     * @param $lastName
+     * @param bool|false $sellerId
      * @return array
      */
-    public function getByNameAndLastName($name, $lastName) {
+    public function getByNameAndLastName($name, $lastName, $sellerId = false) {
         $qb = $this->createQueryBuilder('quotation');
-        $qb->join('quotation.client', 'client')
-            ->add('where', $qb->expr()->andX(
-                $qb->expr()->like('client.first_name', $qb->expr()->literal($name.'%')),
-                $qb->expr()->like('client.last_name', $qb->expr()->literal($lastName.'%'))
-            ))
-        ;
+        $qb->join('quotation.client', 'client');
+        $qb->orderBy('client.first_name');
+
+        if (boolval($name)) {
+            $qb->andWhere('client.first_name LIKE :first_name');
+            $qb->setParameter('first_name', $name.'%');
+
+        }
+        if (boolval($lastName)) {
+            $qb->andWhere('client.last_name LIKE :last_name');
+            $qb->setParameter('last_name', '%'.$lastName);
+        }
+
+        if (boolval($sellerId)) {
+            $qb->andWhere('quotation.createdBy =:idSeller')
+            ->setParameter('idSeller', $sellerId);
+        }
 
         return $qb->getQuery()->getResult();
     }

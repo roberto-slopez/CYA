@@ -189,14 +189,24 @@ class CotizadorController extends BaseController
     */
     public function resultSearchAction(Request $request)
     {
-        $result = explode(' ', $request->get('name'));
+
         try {
-            $name = $result[0];
-            $last = $result[1];
+            $parameter = trim($request->get('name'));
+            if ($parameter == '' ||  !$parameter) {
+                $name = false;
+                $last = false;
+            } else {
+                $result = explode(' ', $parameter);
+                $name = array_key_exists(0,$result) ? $result[0]: false;
+                $last = array_key_exists(1, $result) ? $result[1]: false;
+            }
+
             $em = $this->getDoctrine()->getManager();
-            $quotations = $em->getRepository('TSCYABundle:Quotation')->getByNameAndLastName($name, $last);
+            $user = $this->getCurrenUser();
+            $userRole = $user->hasRole('ROLE_SUPER_ADMIN') || $user->hasRole('ROLE_ADMIN') ? false : $user->getId();
+            $quotations = $em->getRepository('TSCYABundle:Quotation')->getByNameAndLastName($name, $last, $userRole);
         } catch (\Exception $e) {
-            $this->setFlashError($e->getMessage());
+            $this->setFlashError('Sin resultados');
 
             return $this->redirectToRoute('main');
         }
