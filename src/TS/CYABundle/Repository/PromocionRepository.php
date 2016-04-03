@@ -50,4 +50,32 @@ class PromocionRepository extends EntityRepository
             return false;
         }
     }
+
+    /**
+     * @param $courseId
+     * @return array
+     */
+    public function getPromotion($courseId)
+    {
+        try {
+            $qb = $this->createQueryBuilder('promocion')
+                ->join('promocion.course', 'course')
+                ->where('course.id =:course_id')
+                ->setParameter('course_id', $courseId)
+                ->andWhere('promocion.enable = 1')
+                ->setMaxResults(1);
+
+            $result = $qb->getQuery()->getSingleResult();
+            if ($result) {
+                $result = ($result->getPercentage() * 100) . '%';
+            } else {
+                //TODO: puede que este de mas
+                $result = false;
+            }
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return $result;
+    }
 }
