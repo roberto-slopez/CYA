@@ -21,38 +21,11 @@ class PromocionType extends AbstractType
         $builder
             ->add('name')
             ->add('expiration', DateType::class)
-            ->add('course', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\Course',
-                'placeholder' => 'Choose an option',
-                'required' => false,
-                'query_builder' => function (EntityRepository $repository) {
-                    $qb = $repository->createQueryBuilder('course')
-                        ->join('course.headquarter', 'headquarter')
-                        ->orderBy('headquarter.name', 'ASC');
-                    return $qb;
-                },
-                'choice_label' => 'label',
-                'attr' => ['class' => 'select-select2']
-            ])
             ->add('package', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Package',
-                'placeholder' => 'Choose an option',
-                'required' => false,
                 'query_builder' => function (EntityRepository $repository) {
                     $qb = $repository->createQueryBuilder('package')
                         ->join('package.headquarter', 'headquarter')
-                        ->orderBy('headquarter.name', 'ASC');
-                    return $qb;
-                },
-                'choice_label' => 'label',
-                'attr' => ['class' => 'select-select2']
-            ])->add('exam', EntityType::class, [
-                'class' => 'TS\CYABundle\Entity\Exam',
-                'placeholder' => 'Choose an option',
-                'required' => false,
-                'query_builder' => function (EntityRepository $repository) {
-                    $qb = $repository->createQueryBuilder('exam')
-                        ->join('exam.headquarter', 'headquarter')
                         ->orderBy('headquarter.name', 'ASC');
                     return $qb;
                 },

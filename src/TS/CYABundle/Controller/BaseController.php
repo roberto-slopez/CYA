@@ -93,29 +93,27 @@ class BaseController extends Controller
             $current = $em ->getRepository('TSCYABundle:ExchangeRateUSD')
                 ->getCurrentExchangeRateUSDByCoinId($idCoin);
         }
-
+        $valueInscripcion =  0;
         if ($type == Quotation::FLEXIBLE) {
-            $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByCourse($quotation->getCourse()->getId());
-
-            if ($promocion) {
-                $quotation->setPromocion($promocion);
-            }
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             $quotation->setAmountLodging($lodgingAmount);
 
             $courseValue = $quotation->getCourseValue() * $quotation->getSemanas();
-            $courseValue += $quotation->getCourse()->getPriceInscription();
-            $courseValueFinish = $courseValue;
+            $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByCourse($quotation->getCourse()->getId());
 
-            if ($quotation->getPromocion()) {
-                $percentage = $quotation->getPromocion()->getPercentage();
-                $discount = $percentage * $courseValueFinish;
-                $courseValueFinish -= $discount;
+            if ($promocion) {
+                $quotation->setPromocion($promocion);
+                $percentage = $promocion->getPercentage();
+                $discount = $percentage * $courseValue;
+                $courseValue -= $discount;
             }
 
-            $quotation->setAmountCourse(round($courseValueFinish, 2));
+            $quotation->setAmountCourse(round($courseValue, 2));
+
+            $valueInscripcion = $quotation->getCourse()->getPriceInscription();
         } elseif ($type == Quotation::PACKAGE) {
-            $quotation->setSemanas($quotation->getPackage()->getSemanas());
+            $package = $quotation->getPackage();
+            $quotation->setSemanas($package->getSemanas());
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
 
             $packageLodging = $em->getRepository('TSCYABundle:PackageLodging')
@@ -123,20 +121,42 @@ class BaseController extends Controller
 
             $lodgingPrice = $packageLodging ? $packageLodging->getLodgingPrice() : 0;
             $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;
-
-            $valuePackage = $quotation->getPackage()->getPrice()  + $quotation->getPackage()->getPriceInscription();
             $quotation->setAmountLodging(round($amountLodging, 2));
+            $valuePackage = $package->getPrice();
+            $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByPackage($package->getId());
+
+            if ($promocion) {
+                $quotation->setPromocion($promocion);
+                $percentage = $promocion->getPercentage();
+                $discount = $percentage * $valuePackage;
+                $valuePackage = $valuePackage - $discount;
+            }
+
             $quotation->setAmountCourse(round($valuePackage, 2));
+
+            $valueInscripcion = $package->getPriceInscription();
         } elseif ($type == Quotation::EXAM) {
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             $quotation->setAmountLodging($lodgingAmount);
             $valueExam = $quotation->getExamValue() * $quotation->getSemanas();
-            $quotation->setAmountCourse(round($valueExam + $quotation->getExam()->getPriceInscription(), 2));
+
+            $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByExam($quotation->getExam()->getId());
+            if ($promocion) {
+                $quotation->setPromocion($promocion);
+                $percentage = $promocion->getPercentage();
+                $discount = $percentage * $valueExam;
+                $valueExam -= $discount;
+            }
+
+            $quotation->setAmountCourse(round($valueExam, 2));
+
+            $valueInscripcion = $quotation->getExam()->getPriceInscription();
         }
 
         $totalLocal = $quotation->getAmountCourse() +
             $quotation->getAmountLodging() +
-            $quotation->getAmountService();
+            $quotation->getAmountService() +
+            $valueInscripcion;
 
         $quotation->setTotalLocal($totalLocal);
         $quotation->setTotalUSD(round($totalLocal * $current, 2));

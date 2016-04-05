@@ -176,7 +176,7 @@ class Quotation
 
     /**
      * @ORM\ManyToOne(targetEntity="TS\CYABundle\Entity\Promocion", inversedBy="quotations")
-     * @ORM\JoinColumn(name="promociones_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="promocion_id", referencedColumnName="id", nullable=true)
      */
     protected $promocion;
 

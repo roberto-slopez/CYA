@@ -154,7 +154,6 @@ $(".lodging_selector").change(function () {
         type: 'get',
         url: Routing.generate('lodging_by_id', {id: data.lodgingId, weeks: 0, package: data.packageId}, true),
         success: function (price) {
-            console.log(price);
             $("#valor_alojamiento").html("Alojamiento: " + price);
         }
     });
@@ -173,6 +172,18 @@ packageSelect.change(function () {
     });
 
     getService();
+
+    $.ajax({
+        type: 'post',
+        url: Routing.generate('current_promotion', {id: data.packageId, type_promotion: 'package'}, true),
+        success: function(price) {
+            if (price) {
+                $("#valor_promocion").html("Promoción: " + price);
+            } else {
+                $("#valor_promocion").html("Sin promoción");
+            }
+        }
+    });
 });
 serviceSelect.change(function () {
     getService();

@@ -42,6 +42,7 @@ class PromocionController extends Controller
     public function newAction(Request $request)
     {
         $promocion = new Promocion();
+        $promocion->setEnable(true);
         $promocion->setExpiration(new \DateTime('today'));
         $form = $this->createForm('TS\CYABundle\Form\PromocionType', $promocion);
         $form->handleRequest($request);

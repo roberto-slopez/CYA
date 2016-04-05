@@ -10,8 +10,9 @@
 {% block subtitle %} Lista {% endblock subtitle %}
     {% block action %}
         <div class="block-options pull-right">
-            <a href="{{ path('admin_promocion_new') }}" data-original-title="Ingresar nuevo registro"
-               class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title=""><i class="fa fa-asterisk"></i></a>
+            <a href="{{ path('admin_promocion_new') }}" data-original-title="Ingresar nuevo registro" class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title="">
+                <i class="fa fa-asterisk"></i>
+            </a>
         </div>
     {% endblock action %}
         {% block titlePanel %}promociones registradas{% endblock titlePanel %}
@@ -20,7 +21,7 @@
                 <thead>
                 <tr>
                     <th>{% trans %}Name{% endtrans %}</th>
-                    <th>{% trans %}Course{% endtrans %}</th>
+                    <th>{% trans %}Tipo{% endtrans %}</th>
                     <th>{% trans %}Expiration{% endtrans %}</th>
                     <th>{% trans %}Percentage{% endtrans %}</th>
                     <th>{% trans %}Actions{% endtrans %}</th>
@@ -30,7 +31,15 @@
                 {% for promocion in promocions %}
                     <tr>
                         <td>{{ promocion.name }}</td>
-                        <td>{{ promocion.course.label }}</td>
+                        {% if promocion.course %}
+                            <td>{{ promocion.course.label }}</td>
+                        {% endif %}
+                        {% if promocion.exam %}
+                            <td>{{ promocion.exam.label }}</td>
+                        {% endif %}
+                        {% if promocion.package %}
+                            <td>{{ promocion.package.label }}</td>
+                        {% endif %}
                         <td>{{ promocion.expiration | date('d/m/Y') }}</td>
                         <td>{{ promocion.percentage }}</td>
                         <td>

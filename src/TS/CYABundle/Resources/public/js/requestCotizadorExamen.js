@@ -142,6 +142,18 @@ $("#quotation_exam_exam").change(function(){
             }
         });
     }
+
+    $.ajax({
+        type: 'post',
+        url: Routing.generate('current_promotion', {id: data.exmanId, type_promotion: 'exam'}, true),
+        success: function(price) {
+            if (price) {
+                $("#valor_promocion").html("Promoción: " + price);
+            } else {
+                $("#valor_promocion").html("Sin promoción");
+            }
+        }
+    });
 });
 $(".lodging_selector").change(function(){
     var data = {

@@ -73,6 +73,11 @@ class Package
         $this->packageLodging = new ArrayCollection();
     }
 
+    public function getLabel()
+    {
+        return sprintf('%s - %s', $this->getName(), $this->getHeadquarter()->getName());
+    }
+
     /**
      * @return mixed
      */
@@ -287,7 +292,7 @@ class Package
      */
     public function __toString()
     {
-        return (string) 'Package' . $this->getId();
+        return (string)'Package'.$this->getId();
     }
 
     public function __sleep()

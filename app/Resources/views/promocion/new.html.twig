@@ -34,3 +34,41 @@
         </a></div>
     </div>{{ form_end(form) }}
 {% endblock bodyPanel %}
+{% block extraJS %}
+    <script type="text/javascript">
+        var $course = $("#promocion_course");
+        var $package = $("#promocion_package");
+        var $exam = $("#promocion_exam");
+
+        $course.change(function(){
+            var value = $(this).val();
+            if (value != '') {
+                $package.prop("disabled", true);
+                $exam.prop("disabled", true);
+            } else {
+                $package.prop("disabled", false);
+                $exam.prop("disabled", false);
+            }
+        });
+        $package.change(function(){
+            var value = $(this).val();
+            if (value != '') {
+                $course.prop("disabled", true);
+                $exam.prop("disabled", true);
+            } else {
+                $course.prop("disabled", false);
+                $exam.prop("disabled", false);
+            }
+        });
+        $exam.change(function(){
+            var value = $(this).val();
+            if (value != '') {
+                $package.prop("disabled", true);
+                $course.prop("disabled", true);
+            } else {
+                $package.prop("disabled", false);
+                $course.prop("disabled", false);
+            }
+        });
+    </script>
+{% endblock extraJS %}

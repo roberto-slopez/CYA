@@ -21,6 +21,13 @@ use TS\CYABundle\Entity\Quotation;
 class MainController extends BaseController
 {
     /**
+     * @Route("/redirec/to/dashboard", name="fos_user_profile_show")
+     */
+    public function redirectToDashboard () {
+        return $this->redirectToRoute('main');
+    }
+
+    /**
      * @Route("/", name="main")
      * @Method("GET")
      * @Template()

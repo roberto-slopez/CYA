@@ -42,9 +42,21 @@ class Promocion
 
     /**
      * @ORM\ManyToOne(targetEntity="Course")
-     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable=true)
      */
     protected $course;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Package")
+     * @ORM\JoinColumn(name="package_id", referencedColumnName="id", nullable=true)
+     */
+    protected $package;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Exam")
+     * @ORM\JoinColumn(name="exam_id", referencedColumnName="id", nullable=true)
+     */
+    protected $exam;
 
     /**
      * @ORM\Column(name="`enable`", type="boolean")
@@ -216,6 +228,38 @@ class Promocion
     public function getQuotations()
     {
         return $this->quotations;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPackage()
+    {
+        return $this->package;
+    }
+
+    /**
+     * @param mixed $package
+     */
+    public function setPackage($package)
+    {
+        $this->package = $package;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExam()
+    {
+        return $this->exam;
+    }
+
+    /**
+     * @param mixed $exam
+     */
+    public function setExam($exam)
+    {
+        $this->exam = $exam;
     }
 
     public function __sleep()

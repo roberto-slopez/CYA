@@ -36,8 +36,18 @@
                 <td>{{ promocion.name }}</td>
             </tr>
             <tr>
-                <th>{% trans %}Course{% endtrans %}</th>
-                <td>{{ promocion.course.name }}</td>
+                {% if promocion.course %}
+                    <th>{% trans %}Course{% endtrans %}</th>
+                    <td>{{ promocion.course.label }}</td>
+                {% endif %}
+                {% if promocion.exam %}
+                    <th>{% trans %}Exam{% endtrans %}</th>
+                    <td>{{ promocion.exam.label }}</td>
+                {% endif %}
+                {% if promocion.package %}
+                    <th>{% trans %}Package{% endtrans %}</th>
+                    <td>{{ promocion.package.label }}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>{% trans %}Expiration{% endtrans %}</th>

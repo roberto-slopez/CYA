@@ -18,9 +18,8 @@ class SellerType extends AbstractType
         $builder
             ->add('first_name')
             ->add('last_name')
-            ->add('indentification')
+            ->add('cargo')
             ->add('telephone')
-            ->add('adress')
             ->add('userSeller', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Usuario',
                 'choice_label' => 'nombreImpresion'

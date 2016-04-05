@@ -354,7 +354,7 @@ class CotizadorController extends BaseController
     }
 
     /**
-     * @Route("/course/promotion/valor", name="current_promotion_course", options={"expose"=true})
+     * @Route("/cotizacion/promotion/valor", name="current_promotion", options={"expose"=true})
      * @Method("POST")
      *
      * @param Request $request
@@ -362,7 +362,21 @@ class CotizadorController extends BaseController
      */
     public function getCurrentPromotion(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $promotion = $em->getRepository('TSCYABundle:Promocion')->getPromotion($request->get('id'));
+
+        switch ($request->get('type_promotion')) {
+            case 'course':
+                $promotion = $em->getRepository('TSCYABundle:Promocion')->getPromotion($request->get('id'));
+                break;
+            case 'package':
+                $promotion = $em->getRepository('TSCYABundle:Promocion')->getPromotion(false, $request->get('id'));
+                break;
+            case 'exam':
+                $promotion = $em->getRepository('TSCYABundle:Promocion')->getPromotion(false, false, $request->get('id'));
+                break;
+            default:
+                $promotion = false;
+                break;
+        }
 
         return new JsonResponse($promotion);
     }

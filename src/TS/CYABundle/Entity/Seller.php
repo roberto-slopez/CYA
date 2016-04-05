@@ -48,7 +48,7 @@ class Seller
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
      */
-    protected $adress;
+    protected $adress = 'Ciudad';
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)

@@ -88,6 +88,11 @@ class Exam
         $this->examRangeWeeks = new ArrayCollection();
     }
 
+    public function getLabel()
+    {
+        return sprintf('%s - %s', $this->getName(), $this->getHeadquarter()->getName());
+    }
+
     /**
      * @return mixed
      */
