@@ -2882,7 +2882,11 @@
         {% endif %}
         <tr>
             <td class="text-left"><strong>Alojamiento</strong></td>
-            <td class="text-left"><b>({{ quotation.lodging.name }})</b> {{ quotation.lodging.description }}</td>
+            <td class="text-left"><b>({{ quotation.lodging.name }})</b> {{ quotation.lodging.description }}
+                {% if quotation.semanasLodging %}
+                <b>Semanas: {{ quotation.semanasLodging }}</b>
+                {% endif %}
+            </td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
             <td class="text-right">
                 <span class="label label-primary">

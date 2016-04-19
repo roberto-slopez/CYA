@@ -57,6 +57,10 @@ class QuotationPackageType extends AbstractType
                 'attr' => ['class' => 'country_selector select-select2']
             ])
             ->add('client', ClientType::class)
+            ->add('semanas_lodging', IntegerType::class, [
+                'required' => true,
+                'label' => 'Weeks lodging'
+            ])
             ->add('note')
         ;
     }

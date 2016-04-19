@@ -114,14 +114,25 @@ class BaseController extends Controller
         } elseif ($type == Quotation::PACKAGE) {
             $package = $quotation->getPackage();
             $quotation->setSemanas($package->getSemanas());
-            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
+            //TODO: mejorar
+            if ($quotation->getSemanasLodging()) {
+                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+            } else {
+                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
+            }
 
-            $packageLodging = $em->getRepository('TSCYABundle:PackageLodging')
-                ->getPriceLodgingById($quotation->getLodging()->getId());
+            if (!$quotation->getSemanasLodging()) {
+                $packageLodging = $em->getRepository('TSCYABundle:PackageLodging')
+                    ->getPriceLodgingById($quotation->getLodging()->getId());
 
-            $lodgingPrice = $packageLodging ? $packageLodging->getLodgingPrice() : 0;
-            $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;
-            $quotation->setAmountLodging(round($amountLodging, 2));
+                $lodgingPrice = $packageLodging ? $packageLodging->getLodgingPrice() : 0;
+                $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;
+                $quotation->setAmountLodging(round($amountLodging, 2));
+            } else {
+                $quotation->setAmountLodging(round($lodgingAmount, 2));
+            }
+
+
             $valuePackage = $package->getPrice();
             $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByPackage($package->getId());
 
@@ -136,7 +147,7 @@ class BaseController extends Controller
 
             $valueInscripcion = $package->getPriceInscription();
         } elseif ($type == Quotation::EXAM) {
-            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
+            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
             $quotation->setAmountLodging($lodgingAmount);
             $valueExam = $quotation->getExamValue() * $quotation->getSemanas();
 
