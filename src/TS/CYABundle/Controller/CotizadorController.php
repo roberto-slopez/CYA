@@ -3,10 +3,10 @@
 namespace TS\CYABundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-Sensio\Bundle\FrameworkExtraBundle\Configuration\Security,
-Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
-Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\Security,
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use TS\CYABundle\Entity\Exam;
 use TS\CYABundle\Entity\Package;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,25 +23,25 @@ use TS\CYABundle\Form\QuotationPackageType;
 use TS\CYABundle\Form\QuotationType;
 
 /**
-* Class CotizadorController
-* @package TS\CYABundle\Controller
-*
-* @Route("/cotizador")
-*/
+ * Class CotizadorController
+ * @package TS\CYABundle\Controller
+ *
+ * @Route("/cotizador")
+ */
 class CotizadorController extends BaseController
 {
     /**
-    * @Route("/", name="cotizador_index")
-    * @Template()
-    * @Method("GET")
-    *
-    * @return array
-    */
+     * @Route("/", name="cotizador_index")
+     * @Template()
+     * @Method("GET")
+     *
+     * @return array
+     */
     public function indexAction()
     {
         $quotations = $this->getDoctrine()->getManager()
-        ->getRepository('TSCYABundle:Quotation')
-        ->getLastRecords(10);
+            ->getRepository('TSCYABundle:Quotation')
+            ->getLastRecords(10);
 
         return [
             'quotations' => $quotations,
@@ -49,20 +49,20 @@ class CotizadorController extends BaseController
     }
 
     /**
-    * @Route("/flexible/new", name="cotizador_flexible_new")
-    * @Template()
-    *
-    * @param Request $request
-    * @return array
-    */
+     * @Route("/flexible/new", name="cotizador_flexible_new")
+     * @Template()
+     *
+     * @param Request $request
+     * @return array
+     */
     public function newFlexibleAction(Request $request)
     {
         $user = $this->getCurrenUser();
 
         $seller = $this->getDoctrine()
-        ->getManager()
-        ->getRepository('TSCYABundle:Seller')
-        ->getByUser($user->getId());
+            ->getManager()
+            ->getRepository('TSCYABundle:Seller')
+            ->getByUser($user->getId());
 
         $quotation = new Quotation();
         $quotation->setClient(new Client());
@@ -88,21 +88,21 @@ class CotizadorController extends BaseController
     }
 
     /**
-    * @Route("/paquete/new", name="cotizador_paquete_new")
-    * @Template()
-    *
-    * @param Request $request
-    * @return array
-    */
+     * @Route("/paquete/new", name="cotizador_paquete_new")
+     * @Template()
+     *
+     * @param Request $request
+     * @return array
+     */
     public function newPaqueteAction(Request $request)
     {
         try {
             $user = $this->getCurrenUser();
 
             $seller = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('TSCYABundle:Seller')
-            ->getByUser($user->getId());
+                ->getManager()
+                ->getRepository('TSCYABundle:Seller')
+                ->getByUser($user->getId());
 
             $quotation = new Quotation();
             $quotation->setClient(new Client());
@@ -134,20 +134,20 @@ class CotizadorController extends BaseController
     }
 
     /**
-    * @Route("/examen/new", name="cotizador_examen_new")
-    * @Template()
-    *
-    * @param Request $request
-    * @return array
-    */
+     * @Route("/examen/new", name="cotizador_examen_new")
+     * @Template()
+     *
+     * @param Request $request
+     * @return array
+     */
     public function newExamenAction(Request $request)
     {
         try {
             $user = $this->getCurrenUser();
             $seller = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('TSCYABundle:Seller')
-            ->getByUser($user->getId());
+                ->getManager()
+                ->getRepository('TSCYABundle:Seller')
+                ->getByUser($user->getId());
 
             $quotation = new Quotation();
             $quotation->setClient(new Client());
@@ -180,25 +180,25 @@ class CotizadorController extends BaseController
     }
 
     /**
-    * @Route("/search", name="search_cotizacion")
-    * @Method({"GET", "POST"})
-    * @Template()
-    *
-    * @param Request $request
-    * @return \Symfony\Component\HttpFoundation\Response
-    */
+     * @Route("/search", name="search_cotizacion")
+     * @Method({"GET", "POST"})
+     * @Template()
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function resultSearchAction(Request $request)
     {
 
         try {
             $parameter = trim($request->get('name'));
-            if ($parameter == '' ||  !$parameter) {
+            if ($parameter == '' || !$parameter) {
                 $name = false;
                 $last = false;
             } else {
                 $result = explode(' ', $parameter);
-                $name = array_key_exists(0,$result) ? $result[0]: false;
-                $last = array_key_exists(1, $result) ? $result[1]: false;
+                $name = array_key_exists(0, $result) ? $result[0] : false;
+                $last = array_key_exists(1, $result) ? $result[1] : false;
             }
 
             $em = $this->getDoctrine()->getManager();
@@ -217,14 +217,14 @@ class CotizadorController extends BaseController
     }
 
     /**
-    * @Route("/course/{id}/{weeks}", name="course_by_id", options={"expose"=true})
-    * @ParamConverter("id", class="\TS\CYABundle\Entity\Course")
-    * @Method("GET")
-    *
-    * @param Course $course
-    * @param $weeks
-    * @return JsonResponse
-    */
+     * @Route("/course/{id}/{weeks}", name="course_by_id", options={"expose"=true})
+     * @ParamConverter("id", class="\TS\CYABundle\Entity\Course")
+     * @Method("GET")
+     *
+     * @param Course $course
+     * @param $weeks
+     * @return JsonResponse
+     */
     public function courseByIdAction(Course $course, $weeks)
     {
         foreach ($course->getCourseRangeWeeks() as $courseRangeWeek) {
@@ -238,12 +238,12 @@ class CotizadorController extends BaseController
     }
 
     /**
-    * @Route("/services/package/filter", name="services_and_package", options={"expose"=true})
-    * @Method("POST")
-    *
-    * @param Request $request
-    * @return JsonResponse
-    */
+     * @Route("/services/package/filter", name="services_and_package", options={"expose"=true})
+     * @Method("POST")
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function ServicesAndPackagection(Request $request)
     {
         $package = $request->request->get('package');
@@ -265,14 +265,14 @@ class CotizadorController extends BaseController
     }
 
     /**
-    * @Route("/examn/{id}/{weeks}", name="exam_by_id", options={"expose"=true})
-    * @ParamConverter("id", class="\TS\CYABundle\Entity\Exam")
-    * @Method("GET")
-    *
-    * @param Exam $exam
-    * @param $weeks
-    * @return JsonResponse
-    */
+     * @Route("/examn/{id}/{weeks}", name="exam_by_id", options={"expose"=true})
+     * @ParamConverter("id", class="\TS\CYABundle\Entity\Exam")
+     * @Method("GET")
+     *
+     * @param Exam $exam
+     * @param $weeks
+     * @return JsonResponse
+     */
     public function examByIdAction(Exam $exam, $weeks)
     {
         foreach ($exam->getExamRangeWeeks() as $examRangeWeek) {
@@ -286,28 +286,28 @@ class CotizadorController extends BaseController
     }
 
     /**
-    * @Route("/package/{id}", name="package_by_id", options={"expose"=true})
-    * @ParamConverter("id", class="\TS\CYABundle\Entity\Package")
-    * @Method("GET")
-    *
-    * @param Package $package
-    * @return JsonResponse
-    */
+     * @Route("/package/{id}", name="package_by_id", options={"expose"=true})
+     * @ParamConverter("id", class="\TS\CYABundle\Entity\Package")
+     * @Method("GET")
+     *
+     * @param Package $package
+     * @return JsonResponse
+     */
     public function packageByIdAction(Package $package)
     {
         return new JsonResponse(number_format($package->getPrice(), 2, '.', ','));
     }
 
     /**
-    * @Route("/lodging/{id}/{weeks}/{package}", defaults={"package" = "0"}, name="lodging_by_id", options={"expose"=true})
-    * @ParamConverter("id", class="\TS\CYABundle\Entity\Lodging")
-    * @Method("GET")
-    *
-    * @param Lodging $lodging
-    * @param $weeks
-    * @param Package $package
-    * @return JsonResponse
-    */
+     * @Route("/lodging/{id}/{weeks}/{package}", defaults={"package" = "0"}, name="lodging_by_id", options={"expose"=true})
+     * @ParamConverter("id", class="\TS\CYABundle\Entity\Lodging")
+     * @Method("GET")
+     *
+     * @param Lodging $lodging
+     * @param $weeks
+     * @param Package $package
+     * @return JsonResponse
+     */
     public function lodgingByIdAction(Lodging $lodging, $weeks, $package)
     {
         $priceLodging = $weeks * $lodging->getPricePerWeek();
@@ -330,12 +330,12 @@ class CotizadorController extends BaseController
     }
 
     /**
-    * @Route("/services/filter", name="services_by_id", options={"expose"=true})
-    * @Method("POST")
-    *
-    * @param Request $request
-    * @return JsonResponse
-    */
+     * @Route("/services/filter", name="services_by_id", options={"expose"=true})
+     * @Method("POST")
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function ServicesByIdAction(Request $request)
     {
         $weeks = $request->request->get('weeks');
@@ -360,7 +360,8 @@ class CotizadorController extends BaseController
      * @param Request $request
      * @return JsonResponse
      */
-    public function getCurrentPromotion(Request $request) {
+    public function getCurrentPromotion(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
 
         switch ($request->get('type_promotion')) {
@@ -371,7 +372,11 @@ class CotizadorController extends BaseController
                 $promotion = $em->getRepository('TSCYABundle:Promocion')->getPromotion(false, $request->get('id'));
                 break;
             case 'exam':
-                $promotion = $em->getRepository('TSCYABundle:Promocion')->getPromotion(false, false, $request->get('id'));
+                $promotion = $em->getRepository('TSCYABundle:Promocion')->getPromotion(
+                    false,
+                    false,
+                    $request->get('id')
+                );
                 break;
             default:
                 $promotion = false;
@@ -380,13 +385,14 @@ class CotizadorController extends BaseController
 
         return new JsonResponse($promotion);
     }
+
     /**
-    * @Route("/weeks/change", name="weekschange", options={"expose"=true})
-    * @Method("POST")
-    *
-    * @param Request $request
-    * @return JsonResponse
-    */
+     * @Route("/weeks/change", name="weekschange", options={"expose"=true})
+     * @Method("POST")
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function changeWeeksAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -395,10 +401,8 @@ class CotizadorController extends BaseController
         $services = $request->request->get('services');
         $course = $request->request->get('course');
         $exam = $request->request->get('exam');
-        $lodging = $request->request->get('lodging');
 
         $totalService = 0;
-        $totalLodging = 0;
         $totalCourse = 0;
 
         if ($services) {
@@ -433,17 +437,36 @@ class CotizadorController extends BaseController
                 }
             }
         }
+
+        $response = [
+            "exam" => number_format($weeks * $totalExam, 2, '.', ','),
+            "course" => number_format($weeks * $totalCourse, 2, '.', ','),
+            "services" => number_format($weeks * $totalService, 2, '.', ','),
+        ];
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/weeks/change/lodging", name="weekschangeLodging", options={"expose"=true})
+     * @Method("POST")
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function changeWeeksLodgingAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $weeks = $request->request->get('weeks');
+        $lodging = $request->request->get('lodging');
+        $totalLodging = 0;
+
         if ($lodging) {
             $lodgingResult = $em->getRepository('TSCYABundle:Lodging')->find($lodging);
             $totalLodging = $lodgingResult->getPricePerWeek() * $weeks;
         }
 
-        $response = [
-            "exam" => number_format($weeks * $totalExam, 2, '.', ','),
-            "course" => number_format($weeks * $totalCourse, 2, '.', ','),
-            "lodging" => number_format($weeks * $totalLodging, 2, '.', ','),
-            "services" => number_format($weeks * $totalService, 2, '.', ','),
-        ];
+        $response = ["lodging" => number_format($weeks * $totalLodging, 2, '.', ',')];
 
         return new JsonResponse($response);
     }

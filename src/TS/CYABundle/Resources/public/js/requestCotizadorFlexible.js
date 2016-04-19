@@ -158,7 +158,7 @@ $(".lodging_selector").change(function(){
     var data = {
         lodgingId: $(this).val()
     };
-    var semanas = $("#quotation_semanas").val();
+    var semanas = $("#quotation_semanas_lodging").val();
 
     if (semanas) {
         $.ajax({
@@ -194,23 +194,39 @@ $(".service_selector").change(function(){
 $("#quotation_semanas").change(function(){
     var semanas = $(this).val();
     var course = $(".course_selector").val();
-    var lodging = $(".lodging_selector").val();
     var services = $(".service_selector").val();
     var data = {
         "weeks": semanas,
         "course": course,
-        "lodging": lodging,
         "services": services
     };
-    if (semanas > 0 && (course && course !== 'Seleccionar opción' || lodging && lodging !== 'Seleccionar opción' || services)) {
+    if (semanas > 0 && (course && course !== 'Seleccionar opción' || services)) {
         $.ajax({
             type: 'post',
             url: Routing.generate('weekschange', null, true),
             data: data,
             success: function(result) {
                 $("#valor_curso").html("Curso: " + result.course);
-                $("#valor_alojamiento").html("Alojamiento: " + result.lodging);
                 $("#valor_servicio").html("Servicios: " + result.services);
+            }
+        });
+    }
+});
+
+$("#quotation_semanas_lodging").change(function(){
+    var semanas = $(this).val();
+    var lodging = $(".lodging_selector").val();
+    var data = {
+        "weeks": semanas,
+        "lodging": lodging
+    };
+    if (semanas > 0 &&  lodging && lodging !== 'Seleccionar opción') {
+        $.ajax({
+            type: 'post',
+            url: Routing.generate('weekschangeLodging', null, true),
+            data: data,
+            success: function(result) {
+                $("#valor_alojamiento").html("Alojamiento: " + result.lodging);
             }
         });
     }

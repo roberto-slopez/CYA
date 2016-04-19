@@ -71,6 +71,11 @@ class Quotation
     protected $semanas;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $semanas_lodging;
+
+    /**
      * @ORM\Column(type="string", length=250, nullable=true)
      */
     protected $note;
@@ -230,6 +235,23 @@ class Quotation
 
         return 0;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSemanasLodging()
+    {
+        return $this->semanas_lodging;
+    }
+
+    /**
+     * @param mixed $semanas_lodging
+     */
+    public function setSemanasLodging($semanas_lodging)
+    {
+        $this->semanas_lodging = $semanas_lodging;
+    }
+
     /**
      * Set the value of id.
      *

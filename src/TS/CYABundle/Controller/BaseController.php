@@ -95,7 +95,7 @@ class BaseController extends Controller
         }
         $valueInscripcion =  0;
         if ($type == Quotation::FLEXIBLE) {
-            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
+            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
             $quotation->setAmountLodging($lodgingAmount);
 
             $courseValue = $quotation->getCourseValue() * $quotation->getSemanas();
