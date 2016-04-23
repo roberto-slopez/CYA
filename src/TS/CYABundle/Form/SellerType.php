@@ -4,6 +4,7 @@ namespace TS\CYABundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +19,9 @@ class SellerType extends AbstractType
         $builder
             ->add('first_name')
             ->add('last_name')
-            ->add('cargo')
+            ->add('indentification', TextType::class, [
+                'label' => 'Cargo'
+            ])
             ->add('telephone')
             ->add('userSeller', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Usuario',
