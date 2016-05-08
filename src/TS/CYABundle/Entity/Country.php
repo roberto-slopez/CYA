@@ -41,6 +41,11 @@ class Country
     protected $description;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $use_health_coverage;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $coin_id;
@@ -90,6 +95,22 @@ class Country
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUseHealthCoverage()
+    {
+        return $this->use_health_coverage;
+    }
+
+    /**
+     * @param mixed $use_health_coverage
+     */
+    public function setUseHealthCoverage($use_health_coverage)
+    {
+        $this->use_health_coverage = $use_health_coverage;
     }
 
     /**

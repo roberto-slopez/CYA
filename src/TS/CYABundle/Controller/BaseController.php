@@ -4,9 +4,11 @@ namespace TS\CYABundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Doctrine\ORM\Query;
+use TS\CYABundle\Entity\Agency;
 use TS\CYABundle\Entity\Course;
 use TS\CYABundle\Entity\ExchangeRateUSD;
 use TS\CYABundle\Entity\Quotation;
+use TS\CYABundle\Entity\Service;
 use TS\CYABundle\Entity\Usuario;
 
 /**
@@ -80,26 +82,23 @@ class BaseController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $coin = $quotation->getCountry()->getCoin();
-        $totalService = 0;
-        foreach ($quotation->getService() as $service) {
-            $totalService += $service->getPrice();
-        }
-        $quotation->setAmountService(round($totalService, 2));
         $isLocal = $coin->getIsLocalCountry();
         $idCoin = $coin->getId();
         $current = 1;
 
         if (!$isLocal) {
-            $current = $em ->getRepository('TSCYABundle:ExchangeRateUSD')
+            $current = $em->getRepository('TSCYABundle:ExchangeRateUSD')
                 ->getCurrentExchangeRateUSDByCoinId($idCoin);
         }
-        $valueInscripcion =  0;
+        $valueInscripcion = 0;
         if ($type == Quotation::FLEXIBLE) {
             $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
             $quotation->setAmountLodging($lodgingAmount);
 
             $courseValue = $quotation->getCourseValue() * $quotation->getSemanas();
-            $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByCourse($quotation->getCourse()->getId());
+            $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByCourse(
+                $quotation->getCourse()->getId()
+            );
 
             if ($promocion) {
                 $quotation->setPromocion($promocion);
@@ -116,7 +115,10 @@ class BaseController extends Controller
             $quotation->setSemanas($package->getSemanas());
             //TODO: mejorar
             if ($quotation->getSemanasLodging()) {
-                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+                $lodgingAmount = round(
+                    $quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(),
+                    2
+                );
             } else {
                 $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             }
@@ -164,6 +166,13 @@ class BaseController extends Controller
             $valueInscripcion = $quotation->getExam()->getPriceInscription();
         }
 
+        $totalService = 0;
+        $agency = $em->getRepository('TSCYABundle:Agency')->getLastRecords(1);
+        foreach ($quotation->getService() as $service) {
+            $totalService += $this->getPriceServiceByParameters($service, $agency[0]);
+        }
+        $quotation->setAmountService(round($totalService, 2));
+
         $totalLocal = $quotation->getAmountCourse() +
             $quotation->getAmountLodging() +
             $quotation->getAmountService() +
@@ -174,6 +183,19 @@ class BaseController extends Controller
         $quotation->setTotalLocalCountry(round($quotation->getTotalUSD(), 2));
 
         return $quotation;
+    }
+
+    /**
+     * TODO: completar funcionalidad
+     *
+     * @param Service $service
+     * @param Agency $agency
+     * @return float
+     */
+    public function getPriceServiceByParameters(Service $service, Agency $agency)
+    {
+        //$agency->isSumerSchedule();
+        return $service->getPrice();
     }
 
     /**
@@ -190,11 +212,12 @@ class BaseController extends Controller
      * @param $currencys
      * @return array
      */
-    public function validExpirationDate($currencys) {
+    public function validExpirationDate($currencys)
+    {
         $currencysToExpire = [];
         $today = new \DateTime('today');
         foreach ($currencys as $currency) {
-            $data = $this->isAboutToExpire($currency, $today);
+            $data = $this->isNearbyToExpire($currency, $today);
             if ($data) {
                 $currencysToExpire[] = $data;
             }
@@ -203,8 +226,10 @@ class BaseController extends Controller
         return $currencysToExpire;
     }
 
-    public function isAboutToExpire(ExchangeRateUSD $exchangeRateUSD, \DateTime $today) {
+    public function isNearbyToExpire(ExchangeRateUSD $exchangeRateUSD, \DateTime $today)
+    {
         $expirationDay = $exchangeRateUSD->getExpiration();
+        // TODO: evaluar si es necesario cambiar, puesto que funciona solamente cuando esta en el mes actual
         if ($today->format('m-Y') === $expirationDay->format('m-Y')) {
             $expirationDays = $expirationDay->format('d') - $today->format('d');
             if ($expirationDays <= 3) {
@@ -212,7 +237,7 @@ class BaseController extends Controller
                     "name" => $exchangeRateUSD->getCoin()->getName(),
                     "code" => $exchangeRateUSD->getCoin()->getCode(),
                     "symbol" => $exchangeRateUSD->getCoin()->getSymbol(),
-                    "days" => $expirationDays
+                    "days" => $expirationDays,
                 ];
             }
         }

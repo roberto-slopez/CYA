@@ -5,6 +5,7 @@ namespace TS\CYABundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,6 +31,7 @@ class CountryType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => ['class' => 'select-select2']
             ])
+            ->add('use_health_coverage', CheckboxType::class)
         ;
     }
     

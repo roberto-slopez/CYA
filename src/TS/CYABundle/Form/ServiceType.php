@@ -5,8 +5,10 @@ namespace TS\CYABundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TS\CYABundle\Entity\Service;
@@ -41,6 +43,10 @@ class ServiceType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => ['class' => 'select-select2']
             ])
+            ->add('charge_per_week', CheckboxType::class)
+            ->add('uses_limit_weeks', CheckboxType::class)
+            ->add('limit_week', NumberType::class)
+            ->add('is_health_coverage', CheckboxType::class)
         ;
     }
     

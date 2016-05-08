@@ -20,6 +20,7 @@ class Service
 
     const OPTIONAL = 'OPTIONAL';
     const REQUIRED = 'REQUIRED';
+
     /**
      * @ORM\Column(type="guid")
      * @ORM\Id
@@ -41,6 +42,26 @@ class Service
      * @ORM\Column(name="`type`", type="string", length=10)
      */
     protected $type = self::OPTIONAL;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $charge_per_week;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $uses_limit_weeks;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $limit_week;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $is_health_coverage;
 
     /**
      * @ORM\Column(type="float")
@@ -108,6 +129,70 @@ class Service
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChargePerWeek()
+    {
+        return $this->charge_per_week;
+    }
+
+    /**
+     * @param mixed $charge_per_week
+     */
+    public function setChargePerWeek($charge_per_week)
+    {
+        $this->charge_per_week = $charge_per_week;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsesLimitWeeks()
+    {
+        return $this->uses_limit_weeks;
+    }
+
+    /**
+     * @param mixed $uses_limit_weeks
+     */
+    public function setUsesLimitWeeks($uses_limit_weeks)
+    {
+        $this->uses_limit_weeks = $uses_limit_weeks;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLimitWeek()
+    {
+        return $this->limit_week;
+    }
+
+    /**
+     * @param mixed $limit_week
+     */
+    public function setLimitWeek($limit_week)
+    {
+        $this->limit_week = $limit_week;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsHealthCoverage()
+    {
+        return $this->is_health_coverage;
+    }
+
+    /**
+     * @param mixed $is_health_coverage
+     */
+    public function setIsHealthCoverage($is_health_coverage)
+    {
+        $this->is_health_coverage = $is_health_coverage;
     }
 
     /**

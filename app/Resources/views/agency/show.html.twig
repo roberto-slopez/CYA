@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block iconHead %}
+    <i class="fa fa-eye"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+    {% trans %}Agency{% endtrans %}
+{% endblock pageTitle %}
+{% block subtitle %}
+    Visualizar
+{% endblock subtitle %}
+{% block titlePanel %}
+{% endblock titlePanel %}
+{% block action %}
+    <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('agency_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a> <a href="{{ path('agency_edit', { 'id': agency.id }) }}" class="btn btn-sm btn-warning">
+            <i class="gi gi-edit"></i>
+            {% trans %}Edit{% endtrans %}
+        </a></div>
+    </div>{% endblock action %}
+{% block bodyPanel %}
+    <div class="table-responsive">
+        <table class="table table-vcenter table-striped">
+            <tbody>
+            <tr>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <td>{{ agency.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Sumer schedule start{% endtrans %}</th>
+                <td>{% if agency.sumerScheduleStart %}{{ agency.sumerScheduleStart|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Sumer schedule end{% endtrans %}</th>
+                <td>{% if agency.sumerScheduleEnd %}{{ agency.sumerScheduleEnd|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock bodyPanel %}

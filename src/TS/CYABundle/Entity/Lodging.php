@@ -45,6 +45,11 @@ class Lodging
     protected $price_per_week;
 
     /**
+     * @ORM\Column(type="float")
+     */
+    protected $summer_price;
+
+    /**
      * @ORM\Column(type="string", length=250, nullable=true)
      */
     protected $description;
@@ -92,6 +97,22 @@ class Lodging
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSummerPrice()
+    {
+        return $this->summer_price;
+    }
+
+    /**
+     * @param mixed $summer_price
+     */
+    public function setSummerPrice($summer_price)
+    {
+        $this->summer_price = $summer_price;
     }
 
     /**
