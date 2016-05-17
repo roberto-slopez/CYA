@@ -49,6 +49,7 @@ class LodgingController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($lodging);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_lodging_show', array('id' => $lodging->getId()));
         }
@@ -91,6 +92,7 @@ class LodgingController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($lodging);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_lodging_edit', array('id' => $lodging->getId()));
         }

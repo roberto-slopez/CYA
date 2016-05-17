@@ -49,6 +49,7 @@ class PackageController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($package);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_package_show', array('id' => $package->getId()));
         }
@@ -91,6 +92,7 @@ class PackageController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($package);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_package_edit', array('id' => $package->getId()));
         }

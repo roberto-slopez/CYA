@@ -49,6 +49,7 @@ class CourseController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($course);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_course_show', array('id' => $course->getId()));
         }
@@ -91,6 +92,7 @@ class CourseController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($course);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_course_edit', array('id' => $course->getId()));
         }

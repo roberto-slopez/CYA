@@ -49,6 +49,7 @@ class CountryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($country);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_country_show', array('id' => $country->getId()));
         }
@@ -91,6 +92,7 @@ class CountryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($country);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_country_edit', array('id' => $country->getId()));
         }

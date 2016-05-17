@@ -49,6 +49,7 @@ class ExamController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($exam);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_exam_show', array('id' => $exam->getId()));
         }
@@ -91,6 +92,7 @@ class ExamController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($exam);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_exam_edit', array('id' => $exam->getId()));
         }

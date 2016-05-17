@@ -51,6 +51,7 @@ class PromocionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($promocion);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_promocion_show', array('id' => $promocion->getId()));
         }
@@ -93,6 +94,7 @@ class PromocionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($promocion);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_promocion_edit', array('id' => $promocion->getId()));
         }

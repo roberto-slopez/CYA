@@ -43,13 +43,21 @@ class ServiceType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => ['class' => 'select-select2']
             ])
-            ->add('charge_per_week', CheckboxType::class)
-            ->add('uses_limit_weeks', CheckboxType::class)
-            ->add('limit_week', NumberType::class)
-            ->add('is_health_coverage', CheckboxType::class)
+            ->add('charge_per_week', CheckboxType::class, [
+                'required' => false
+            ])
+            ->add('uses_limit_weeks', CheckboxType::class, [
+              'required' => false
+            ])
+            ->add('limit_week', NumberType::class,[
+              'required' => false
+            ])
+            ->add('is_health_coverage', CheckboxType::class,[
+              'required' => false
+            ])
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

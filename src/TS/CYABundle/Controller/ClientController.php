@@ -49,6 +49,7 @@ class ClientController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($client);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_client_show', array('id' => $client->getId()));
         }
@@ -91,6 +92,7 @@ class ClientController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($client);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_client_edit', array('id' => $client->getId()));
         }

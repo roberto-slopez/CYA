@@ -53,6 +53,7 @@ class exchangeRateUSDController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($exchangeRateUSD);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_exchangeRateUSD_show', array('id' => $exchangeRateUSD->getId()));
         }
@@ -95,6 +96,7 @@ class exchangeRateUSDController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($exchangeRateUSD);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_exchangeRateUSD_edit', array('id' => $exchangeRateUSD->getId()));
         }

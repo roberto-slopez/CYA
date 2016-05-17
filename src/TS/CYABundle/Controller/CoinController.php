@@ -49,6 +49,7 @@ class CoinController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($coin);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_coin_show', array('id' => $coin->getId()));
         }
@@ -91,6 +92,7 @@ class CoinController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($coin);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_coin_edit', array('id' => $coin->getId()));
         }

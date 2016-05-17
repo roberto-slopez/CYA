@@ -10,6 +10,7 @@ namespace TS\CYABundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use TS\CYABundle\Entity\Agency;
 
 class AgencyRepository  extends EntityRepository
 {

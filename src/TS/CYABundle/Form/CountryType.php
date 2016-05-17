@@ -31,10 +31,12 @@ class CountryType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => ['class' => 'select-select2']
             ])
-            ->add('use_health_coverage', CheckboxType::class)
+            ->add('use_health_coverage', CheckboxType::class, [
+                'required' => false
+            ])
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

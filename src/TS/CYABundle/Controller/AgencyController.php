@@ -50,6 +50,8 @@ class AgencyController extends Controller
             $em->persist($agency);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
+
             return $this->redirectToRoute('agency_show', array('id' => $agency->getId()));
         }
 
@@ -92,6 +94,7 @@ class AgencyController extends Controller
             $em->persist($agency);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
             return $this->redirectToRoute('agency_edit', array('id' => $agency->getId()));
         }
 

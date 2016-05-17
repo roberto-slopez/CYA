@@ -49,6 +49,7 @@ class CityController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($city);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_city_show', array('id' => $city->getId()));
         }
@@ -91,6 +92,7 @@ class CityController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($city);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_city_edit', array('id' => $city->getId()));
         }

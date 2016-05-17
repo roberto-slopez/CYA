@@ -50,6 +50,7 @@ class HeadquarterController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($headquarter);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_headquarter_show', array('id' => $headquarter->getId()));
         }
@@ -92,6 +93,7 @@ class HeadquarterController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($headquarter);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_headquarter_edit', array('id' => $headquarter->getId()));
         }

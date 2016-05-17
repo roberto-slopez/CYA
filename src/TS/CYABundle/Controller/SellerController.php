@@ -49,6 +49,7 @@ class SellerController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($seller);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_seller_show', array('id' => $seller->getId()));
         }
@@ -91,6 +92,7 @@ class SellerController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($seller);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_seller_edit', array('id' => $seller->getId()));
         }

@@ -85,14 +85,20 @@ class BaseController extends Controller
         $isLocal = $coin->getIsLocalCountry();
         $idCoin = $coin->getId();
         $current = 1;
-
+        $agency = $em->getRepository('TSCYABundle:Agency')->getLastRecords(1);
+        $agency = $agency[0];
         if (!$isLocal) {
             $current = $em->getRepository('TSCYABundle:ExchangeRateUSD')
                 ->getCurrentExchangeRateUSDByCoinId($idCoin);
         }
         $valueInscripcion = 0;
         if ($type == Quotation::FLEXIBLE) {
-            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+            if ($agency->isSumerSchedule()) {
+                $lodgingAmount = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodging(), 2);
+            } else {
+                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+            }
+
             $quotation->setAmountLodging($lodgingAmount);
 
             $courseValue = $quotation->getCourseValue() * $quotation->getSemanas();
@@ -115,10 +121,11 @@ class BaseController extends Controller
             $quotation->setSemanas($package->getSemanas());
             //TODO: mejorar
             if ($quotation->getSemanasLodging()) {
-                $lodgingAmount = round(
-                    $quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(),
-                    2
-                );
+                if ($agency->isSumerSchedule()) {
+                    $lodgingAmount = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodging(), 2);
+                } else {
+                    $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+                }
             } else {
                 $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             }
@@ -149,7 +156,11 @@ class BaseController extends Controller
 
             $valueInscripcion = $package->getPriceInscription();
         } elseif ($type == Quotation::EXAM) {
-            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+            if ($agency->isSumerSchedule()) {
+                $lodgingAmount = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodging(), 2);
+            } else {
+                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+            }
             $quotation->setAmountLodging($lodgingAmount);
             $valueExam = $quotation->getExamValue() * $quotation->getSemanas();
 
@@ -167,9 +178,9 @@ class BaseController extends Controller
         }
 
         $totalService = 0;
-        $agency = $em->getRepository('TSCYABundle:Agency')->getLastRecords(1);
+
         foreach ($quotation->getService() as $service) {
-            $totalService += $this->getPriceServiceByParameters($service, $agency[0]);
+            $totalService += $this->getPriceServiceByParameters($service, $quotation);
         }
         $quotation->setAmountService(round($totalService, 2));
 
@@ -186,15 +197,32 @@ class BaseController extends Controller
     }
 
     /**
-     * TODO: completar funcionalidad
-     *
      * @param Service $service
-     * @param Agency $agency
+     * @param Quotation $quotation
      * @return float
      */
-    public function getPriceServiceByParameters(Service $service, Agency $agency)
+    public function getPriceServiceByParameters(Service $service, Quotation $quotation)
     {
-        //$agency->isSumerSchedule();
+        if ($quotation->getCountry()->getUseHealthCoverage()) {
+
+        }
+
+        if ($service->getChargePerWeek()) {
+            // limite de semanas
+            if ($service->getUsesLimitWeeks()) {
+                if ($service->getLimitWeek() <= $quotation->getSemanas()) {
+                    return $service->getPrice() * $quotation->getSemanas();
+                } else {
+                    // aplicar limite de semanas
+                    return $service->getPrice() * $service->getLimitWeek();
+                }
+            } else {
+                // multiplicar por semanas
+                return $service->getPrice() * $quotation->getSemanas();
+            }
+        } else {
+
+        }
         return $service->getPrice();
     }
 

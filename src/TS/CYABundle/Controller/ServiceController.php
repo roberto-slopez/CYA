@@ -49,6 +49,7 @@ class ServiceController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($service);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro agregado correctamente');
 
             return $this->redirectToRoute('admin_service_show', array('id' => $service->getId()));
         }
@@ -91,6 +92,7 @@ class ServiceController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($service);
             $em->flush();
+            $this->get('session')->getFlashBag()->set('exito', 'Registro editado correctamente');
 
             return $this->redirectToRoute('admin_service_edit', array('id' => $service->getId()));
         }
