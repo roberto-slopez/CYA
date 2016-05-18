@@ -55,9 +55,18 @@ class QuotationType extends AbstractType
             ->add('semanas', IntegerType::class, [
                 'required' => true,
                 'label' => 'Weeks'
-            ])->add('semanas_lodging', IntegerType::class, [
+            ])
+            ->add('semanas_summer', IntegerType::class, [
+                'required' => true,
+                'label' => 'Summer weeks'
+            ])
+            ->add('semanas_lodging', IntegerType::class, [
                 'required' => true,
                 'label' => 'Weeks lodging'
+            ])
+            ->add('semanas_lodging_summer', IntegerType::class, [
+                'required' => true,
+                'label' => 'Summer weeks lodging'
             ])
             ->add('note')
         ;

@@ -68,12 +68,22 @@ class Quotation
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
+    protected $semanas_summer;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     protected $semanas;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $semanas_lodging;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $semanas_lodging_summer;
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
@@ -200,6 +210,38 @@ class Quotation
     public function __construct()
     {
         $this->service = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSemanasLodgingSummer()
+    {
+        return $this->semanas_lodging_summer;
+    }
+
+    /**
+     * @param mixed $semanas_lodging_summer
+     */
+    public function setSemanasLodgingSummer($semanas_lodging_summer)
+    {
+        $this->semanas_lodging_summer = $semanas_lodging_summer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSemanasSummer()
+    {
+        return $this->semanas_summer;
+    }
+
+    /**
+     * @param mixed $semanas_summer
+     */
+    public function setSemanasSummer($semanas_summer)
+    {
+        $this->semanas_summer = $semanas_summer;
     }
 
     /**
