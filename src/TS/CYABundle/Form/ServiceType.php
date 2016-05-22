@@ -55,6 +55,9 @@ class ServiceType extends AbstractType
             ->add('is_health_coverage', CheckboxType::class,[
               'required' => false
             ])
+            ->add('summer_supplement', CheckboxType::class,[
+              'required' => false
+            ])
         ;
     }
 

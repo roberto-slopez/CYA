@@ -54,6 +54,11 @@ class Service
     protected $uses_limit_weeks;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $summer_supplement;
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $limit_week;
@@ -129,6 +134,22 @@ class Service
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSummerSupplement()
+    {
+        return $this->summer_supplement;
+    }
+
+    /**
+     * @param mixed $summer_supplement
+     */
+    public function setSummerSupplement($summer_supplement)
+    {
+        $this->summer_supplement = $summer_supplement;
     }
 
     /**

@@ -204,21 +204,24 @@ class BaseController extends Controller
     public function getPriceServiceByParameters(Service $service, Quotation $quotation)
     {
         if ($quotation->getCountry()->getUseHealthCoverage()) {
-
+            if ($service->getIsHealthCoverage() && $quotation->getTotalSemanas() >= 4) {
+                $meses = $quotation->getTotalSemanas() / 4;
+                return $meses * $service->getPrice();
+            }
         }
 
         if ($service->getChargePerWeek()) {
             // limite de semanas
             if ($service->getUsesLimitWeeks()) {
-                if ($service->getLimitWeek() <= $quotation->getSemanas()) {
-                    return $service->getPrice() * $quotation->getSemanas();
+                if ($service->getLimitWeek() <= $quotation->getTotalSemanas()) {
+                    return $service->getPrice() * $quotation->getTotalSemanas();
                 } else {
                     // aplicar limite de semanas
                     return $service->getPrice() * $service->getLimitWeek();
                 }
             } else {
                 // multiplicar por semanas
-                return $service->getPrice() * $quotation->getSemanas();
+                return $service->getPrice() * $quotation->getTotalSemanas();
             }
         } else {
 

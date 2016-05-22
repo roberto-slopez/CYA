@@ -78,6 +78,11 @@ class Quotation
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
+    protected $total_semanas;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     protected $semanas_lodging;
 
     /**
@@ -228,6 +233,23 @@ class Quotation
         $this->semanas_lodging_summer = $semanas_lodging_summer;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTotalSemanas()
+    {
+        return $this->total_semanas;
+    }
+
+    /**
+     * @param mixed $total_semanas
+     */
+    public function setTotalSemanas($total_semanas)
+    {
+        $this->total_semanas = $total_semanas;
+    }
+
+    
     /**
      * @return mixed
      */
