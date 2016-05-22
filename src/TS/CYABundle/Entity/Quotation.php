@@ -68,27 +68,27 @@ class Quotation
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $semanas_summer;
+    protected $semanas_summer = 0;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $semanas;
+    protected $semanas = 0;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $total_semanas;
+    protected $total_semanas = 0;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $semanas_lodging;
+    protected $semanas_lodging = 0;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $semanas_lodging_summer;
+    protected $semanas_lodging_summer = 0;
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)

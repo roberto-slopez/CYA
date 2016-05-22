@@ -87,21 +87,22 @@ class BaseController extends Controller
         $current = 1;
         $agency = $em->getRepository('TSCYABundle:Agency')->getLastRecords(1);
         $agency = $agency[0];
+
+        $quotation->setTotalSemanas($quotation->getSemanas() + $quotation->getSemanasSummer());
+
         if (!$isLocal) {
             $current = $em->getRepository('TSCYABundle:ExchangeRateUSD')
                 ->getCurrentExchangeRateUSDByCoinId($idCoin);
         }
         $valueInscripcion = 0;
         if ($type == Quotation::FLEXIBLE) {
-            if ($agency->isSumerSchedule()) {
-                $lodgingAmount = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodging(), 2);
-            } else {
-                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
-            }
+            $lodgingAmountSummer = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodgingSummer(), 2);
+            $lodgingAmountSingle = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+            $lodgingAmount =$lodgingAmountSingle + $lodgingAmountSummer;
 
             $quotation->setAmountLodging($lodgingAmount);
 
-            $courseValue = $quotation->getCourseValue() * $quotation->getSemanas();
+            $courseValue = $quotation->getCourseValue() * $quotation->getTotalSemanas();
             $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByCourse(
                 $quotation->getCourse()->getId()
             );
@@ -119,18 +120,16 @@ class BaseController extends Controller
         } elseif ($type == Quotation::PACKAGE) {
             $package = $quotation->getPackage();
             $quotation->setSemanas($package->getSemanas());
-            //TODO: mejorar
-            if ($quotation->getSemanasLodging()) {
-                if ($agency->isSumerSchedule()) {
-                    $lodgingAmount = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodging(), 2);
-                } else {
-                    $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
-                }
+
+            if ($quotation->getSemanasLodging() > 0) {
+                $lodgingAmountSummer = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodgingSummer(), 2);
+                $lodgingAmountSingle = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+                $lodgingAmount =$lodgingAmountSingle + $lodgingAmountSummer;
             } else {
                 $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             }
 
-            if (!$quotation->getSemanasLodging()) {
+            if ($quotation->getSemanasLodging() == 0) {
                 $packageLodging = $em->getRepository('TSCYABundle:PackageLodging')
                     ->getPriceLodgingById($quotation->getLodging()->getId());
 
@@ -156,13 +155,12 @@ class BaseController extends Controller
 
             $valueInscripcion = $package->getPriceInscription();
         } elseif ($type == Quotation::EXAM) {
-            if ($agency->isSumerSchedule()) {
-                $lodgingAmount = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodging(), 2);
-            } else {
-                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
-            }
+            $lodgingAmountSummer = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodgingSummer(), 2);
+            $lodgingAmountSingle = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+            $lodgingAmount =$lodgingAmountSingle + $lodgingAmountSummer;
+
             $quotation->setAmountLodging($lodgingAmount);
-            $valueExam = $quotation->getExamValue() * $quotation->getSemanas();
+            $valueExam = $quotation->getExamValue() * $quotation->getTotalSemanas();
 
             $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByExam($quotation->getExam()->getId());
             if ($promocion) {
@@ -197,6 +195,7 @@ class BaseController extends Controller
     }
 
     /**
+     * Calc service price
      * @param Service $service
      * @param Quotation $quotation
      * @return float
@@ -208,6 +207,10 @@ class BaseController extends Controller
                 $meses = $quotation->getTotalSemanas() / 4;
                 return $meses * $service->getPrice();
             }
+        }
+
+        if ($service->getSummerSupplement()) {
+            return $service->getPrice() * $quotation->getSemanasSummer();
         }
 
         if ($service->getChargePerWeek()) {

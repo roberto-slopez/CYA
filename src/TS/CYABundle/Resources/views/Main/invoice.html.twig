@@ -2794,7 +2794,7 @@
         {% elseif quotation.type == 'EXAM' %}
             <b>Tipo examen</b>: {{ quotation.exam.name }} {#<b>Fecha inicio</b>: {inici}#}
         {% endif %}
-        <b>N° Semanas</b>: {{ quotation.semanas }}<br>
+        <b>N° Semanas / Semanas de verano </b>: {{ quotation.semanas }} / {{ quotation.semanasSummer }}<br>
         <b>Asesora</b>: {{ quotation.seller.fullName }}<br>
         <i class="fa fa-phone"></i> {{ quotation.seller.telephone }}<br>
         <i class="fa fa-envelope-o"></i> {{ quotation.seller.userSeller.email }}
@@ -2884,7 +2884,7 @@
             <td class="text-left"><strong>Alojamiento</strong></td>
             <td class="text-left"><b>({{ quotation.lodging.name }})</b> {{ quotation.lodging.description }}
                 {% if quotation.semanasLodging %}
-                <b>Semanas: {{ quotation.semanasLodging }}</b>
+                <b>Semanas normal/verano : {{ quotation.semanasLodging }} / {{ quotation.semanasLodgingSummer }}</b>
                 {% endif %}
             </td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
