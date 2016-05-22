@@ -131,7 +131,10 @@ $("#quotation_exam_exam").change(function(){
     var data = {
         exmanId: $(this).val()
     };
-    var semanas = $("#quotation_exam_semanas").val();
+
+    var semanas1 = $("#quotation_exam_semanas").val();
+    var semanas2 = $("#quotation_exam_semanas_summer").val();
+    var semanas = semanas1 + semanas2;
 
     if (semanas) {
         $.ajax({
@@ -155,7 +158,8 @@ $("#quotation_exam_exam").change(function(){
         }
     });
 });
-$(".lodging_selector").change(function(){
+
+/*$(".lodging_selector").change(function(){
     var data = {
         lodgingId: $(this).val()
     };
@@ -170,11 +174,15 @@ $(".lodging_selector").change(function(){
             }
         });
     }
-});
+});*/
 
-$(".service_selector").change(function(){
+/*$(".service_selector").change(function(){
     var services = $(this).val();
-    var semanas = $("#quotation_exam_semanas").val();
+
+    var semanas1 = $("#quotation_exam_semanas").val();
+    var semanas2 = $("#quotation_exam_semanas_summer").val();
+    var semanas = semanas1 + semanas2;
+
     var data = {
         "weeks": semanas,
         "services": services
@@ -190,10 +198,13 @@ $(".service_selector").change(function(){
             }
         });
     }
-});
+});*/
 
 $("#quotation_exam_semanas").change(function(){
-    var semanas = $(this).val();
+    var semanas1 = $(this).val();
+    var semanas2 = $("#quotation_exam_semanas_summer").val();
+    var semanas = semanas1 + semanas2;
+
     var exam = $("#quotation_exam_exam").val();
     var services = $(".service_selector").val();
     var data = {
@@ -208,12 +219,12 @@ $("#quotation_exam_semanas").change(function(){
             data: data,
             success: function(result) {
                 $("#valor_curso").html("Exam: " + result.exam);
-                $("#valor_servicio").html("Servicios: " + result.services);
+                /*$("#valor_servicio").html("Servicios: " + result.services);*/
             }
         });
     }
 });
-
+/*
 $("#quotation_exam_semanas_lodging").change(function(){
     var semanas = $(this).val();
     var lodging = $(".lodging_selector").val();
@@ -231,4 +242,4 @@ $("#quotation_exam_semanas_lodging").change(function(){
             }
         });
     }
-});
+});*/

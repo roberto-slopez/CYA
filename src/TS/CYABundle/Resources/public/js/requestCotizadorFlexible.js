@@ -130,7 +130,10 @@ $(".course_selector").change(function(){
     var data = {
         courseId: $(this).val()
     };
-    var semanas = $("#quotation_semanas").val();
+
+    var semanas1 = $("#quotation_semanas").val();
+    var semanas2 = $("#quotation_semanas_summer").val();
+    var semanas = semanas1 + semanas2;
 
     if (semanas) {
         $.ajax({
@@ -154,11 +157,15 @@ $(".course_selector").change(function(){
         }
     });
 });
-$(".lodging_selector").change(function(){
+
+/*$(".lodging_selector").change(function(){
     var data = {
         lodgingId: $(this).val()
     };
-    var semanas = $("#quotation_semanas_lodging").val();
+
+    var semanas1 = $("#quotation_semanas_lodging").val();
+    var semanas2 = $("#quotation_semanas_lodging_summer").val();
+    var semanas =  semanas1 + semanas2;
 
     if (semanas) {
         $.ajax({
@@ -169,11 +176,15 @@ $(".lodging_selector").change(function(){
             }
         });
     }
-});
+});*/
 
-$(".service_selector").change(function(){
+/*$(".service_selector").change(function(){
     var services = $(this).val();
-    var semanas = $("#quotation_semanas").val();
+
+    var semanas1 = $("#quotation_semanas").val();
+    var semanas2 = $("#quotation_semanas_summer").val();
+    var semanas = semanas1 + semanas2;
+
     var data = {
         "weeks": semanas,
         "services": services
@@ -189,10 +200,13 @@ $(".service_selector").change(function(){
             }
         });
     }
-});
+});*/
 
 $("#quotation_semanas").change(function(){
-    var semanas = $(this).val();
+    var semanas1 = $(this).val();
+    var semanas2 = $("#quotation_semanas_summer").val();
+    var semanas = semanas1 + semanas2;
+
     var course = $(".course_selector").val();
     var services = $(".service_selector").val();
     var data = {
@@ -207,14 +221,17 @@ $("#quotation_semanas").change(function(){
             data: data,
             success: function(result) {
                 $("#valor_curso").html("Curso: " + result.course);
-                $("#valor_servicio").html("Servicios: " + result.services);
+                /*$("#valor_servicio").html("Servicios: " + result.services);*/
             }
         });
     }
 });
-
+/*
 $("#quotation_semanas_lodging").change(function(){
-    var semanas = $(this).val();
+    var semanas1 = $(this).val();
+    var semanas2 = $("#quotation_semanas_lodging_summer").val();
+    var semanas =  semanas1 + semanas2;
+
     var lodging = $(".lodging_selector").val();
     var data = {
         "weeks": semanas,
@@ -230,4 +247,4 @@ $("#quotation_semanas_lodging").change(function(){
             }
         });
     }
-});
+});*/

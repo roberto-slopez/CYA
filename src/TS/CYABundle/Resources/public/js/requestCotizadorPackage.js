@@ -145,7 +145,7 @@ $(".headquarter_selector").change(function () {
 
     }, 1000);
 });
-
+/*
 $(".lodging_selector").change(function () {
     var data = {
         lodgingId: $(this).val(),
@@ -169,7 +169,7 @@ $(".lodging_selector").change(function () {
         });
     }
 
-});
+});*/
 packageSelect.change(function () {
     var data = {
         packageId: $(this).val()
@@ -201,6 +201,7 @@ serviceSelect.change(function () {
     getService();
 });
 
+/*
 weekslodging.change(function(){
     var semanas = $(this).val();
     var lodging = $(".lodging_selector").val();
@@ -219,4 +220,4 @@ weekslodging.change(function(){
             }
         });
     }
-});
+});*/
