@@ -52,33 +52,13 @@ class MainController extends BaseController
 
         $course = $em->getRepository('TSCYABundle:Course')->getCount();
 
-        $package = $em->getRepository('TSCYABundle:Package')->getCount();
-
         $exam = $em->getRepository('TSCYABundle:Exam')->getCount();
-
-        $exchangeRate = $em->getRepository('TSCYABundle:ExchangeRateUSD')
-            ->getExchangeRateCount();
-
-        $coin = $em->getRepository('TSCYABundle:Coin')->getCount('COP');
-
-        if (intval($exchangeRate) < intval($coin)) {
-            if (intval($exchangeRate) == 0) {
-                $this->setFlashError('¡No hay ninguna tasa de cambio, ingresada para hoy!');
-            } else {
-                $this->setFlashAviso(
-                    sprintf('¡Aún faltan tasas de cambio por ingresar %s/%s!', (string)$exchangeRate, (string)$coin)
-                );
-            }
-        } else {
-            $this->setFlashInfo('Todas las tasas de cambio estan actualizadas');
-        }
 
         return [
             'lodgings' => $lodging,
             'exams' => $exam,
             'headquarters' => $headquarter,
             'courses' => $course,
-            'packages' => $package,
             'exchangeRateUSDs' => $exchangeRateUSDs,
             'exchangeRateToExpire' => $exchangeRateToExpire,
             'exchangeRateToExpireCount' => count($exchangeRateToExpire)

@@ -85,8 +85,8 @@ class BaseController extends Controller
         $isLocal = $coin->getIsLocalCountry();
         $idCoin = $coin->getId();
         $current = 1;
-        $agency = $em->getRepository('TSCYABundle:Agency')->getLastRecords(1);
-        $agency = $agency[0];
+        //$agency = $em->getRepository('TSCYABundle:Agency')->getLastRecords(1);
+        //$agency = $agency[0];
 
         $quotation->setTotalSemanas($quotation->getSemanas() + $quotation->getSemanasSummer());
 
@@ -263,7 +263,6 @@ class BaseController extends Controller
     public function isNearbyToExpire(ExchangeRateUSD $exchangeRateUSD, \DateTime $today)
     {
         $expirationDay = $exchangeRateUSD->getExpiration();
-        // TODO: evaluar si es necesario cambiar, puesto que funciona solamente cuando esta en el mes actual
         if ($today->format('m-Y') === $expirationDay->format('m-Y')) {
             $expirationDays = $expirationDay->format('d') - $today->format('d');
             if ($expirationDays <= 3) {
@@ -274,6 +273,18 @@ class BaseController extends Controller
                     "days" => $expirationDays,
                 ];
             }
+        }
+
+        $curdate = strtotime($today->format('d-m-Y'));
+        $mydate = strtotime($expirationDay->format('d-m-Y'));
+
+        if($curdate > $mydate) {
+            return [
+                "name" => $exchangeRateUSD->getCoin()->getName(),
+                "code" => $exchangeRateUSD->getCoin()->getCode(),
+                "symbol" => $exchangeRateUSD->getCoin()->getSymbol(),
+                "days" => 0,
+            ];
         }
 
         return false;
