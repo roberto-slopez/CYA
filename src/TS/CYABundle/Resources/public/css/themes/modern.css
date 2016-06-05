@@ -16,7 +16,7 @@ body,
 li.dropdown-header,
 .chosen-container-single .chosen-single,
 .themed-color-dark {
-    color: #121B60;
+    color: #AC1011;
 }
 
 #page-container,
@@ -25,21 +25,21 @@ li.dropdown-header,
 .table-pricing.table-featured td,
 .table-pricing td.table-featured,
 .themed-background-dark {
-    background-color: #121B60;
+    background-color: #AC1011;
 }
 
 .themed-border-dark {
-    border-color: #121B60;
+    border-color: #AC1011;
 }
 
 header.navbar-inverse.navbar-fixed-bottom {
-    border-top-color: #121B60;
+    border-top-color: #AC1011;
 }
 
 header.navbar-inverse.navbar-fixed-top,
 .table-pricing.table-featured th,
 .table-pricing th.table-featured {
-    border-bottom-color: #121B60;
+    border-bottom-color: #AC1011;
 }
 
 .navbar.navbar-inverse {
@@ -386,7 +386,7 @@ div.tagsinput span.tag,
 .btn-default {
     background-color: #f0f4f5;
     border-color: #dae7e8;
-    color: #121B60;
+    color: #AC1011;
 }
 
 .btn-default:hover {
@@ -478,6 +478,6 @@ fieldset[disabled] .btn-primary.active:focus {
 @media screen and (min-width: 992px) {
     .sidebar-mini.sidebar-visible-lg-mini #sidebar .sidebar-nav .sidebar-nav-menu + ul {
         border-left-color: #46b7bf;
-        background-color: #121B60;
+        background-color: #AC1011;
     }
 }
