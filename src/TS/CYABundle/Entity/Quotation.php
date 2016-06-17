@@ -68,11 +68,6 @@ class Quotation
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $semanas_summer = 0;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
     protected $semanas = 0;
 
     /**
@@ -88,7 +83,7 @@ class Quotation
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $semanas_lodging_summer = 0;
+    protected $summer_supplement = 0;
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
@@ -114,6 +109,11 @@ class Quotation
      * @ORM\Column(type="float", nullable=false)
      */
     protected $amountLodging;
+
+    /**
+     * @ORM\Column(type="float", nullable=false)
+     */
+    protected $amount_summer_supplement;
 
     /**
      * @ORM\Column(type="float", nullable=false)
@@ -220,17 +220,33 @@ class Quotation
     /**
      * @return mixed
      */
-    public function getSemanasLodgingSummer()
+    public function getAmountSummerSupplement()
     {
-        return $this->semanas_lodging_summer;
+        return $this->amount_summer_supplement;
     }
 
     /**
-     * @param mixed $semanas_lodging_summer
+     * @param mixed $amount_summer_supplement
      */
-    public function setSemanasLodgingSummer($semanas_lodging_summer)
+    public function setAmountSummerSupplement($amount_summer_supplement)
     {
-        $this->semanas_lodging_summer = $semanas_lodging_summer;
+        $this->amount_summer_supplement = $amount_summer_supplement;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSummerSupplement()
+    {
+        return $this->summer_supplement;
+    }
+
+    /**
+     * @param mixed $summer_supplement
+     */
+    public function setSummerSupplement($summer_supplement)
+    {
+        $this->summer_supplement = $summer_supplement;
     }
 
     /**
@@ -247,23 +263,6 @@ class Quotation
     public function setTotalSemanas($total_semanas)
     {
         $this->total_semanas = $total_semanas;
-    }
-
-    
-    /**
-     * @return mixed
-     */
-    public function getSemanasSummer()
-    {
-        return $this->semanas_summer;
-    }
-
-    /**
-     * @param mixed $semanas_summer
-     */
-    public function setSemanasSummer($semanas_summer)
-    {
-        $this->semanas_summer = $semanas_summer;
     }
 
     /**
@@ -995,10 +994,5 @@ class Quotation
     public function getPackage()
     {
         return $this->package;
-    }
-
-    public function __sleep()
-    {
-        return array('id', 'country_id', 'city_id', 'headquarters_id', 'client_id', 'seller_id', 'lodging_id', 'service_id', 'course_id', 'semanas', 'note', 'type', 'promociones_id', 'package_id');
     }
 }

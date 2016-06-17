@@ -46,7 +46,12 @@ class Service
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $charge_per_week;
+    protected $charge_per_week_course;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $charge_per_week_lodging;
 
     /**
      * @ORM\Column(type="boolean")
@@ -92,6 +97,38 @@ class Service
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChargePerWeekCourse()
+    {
+        return $this->charge_per_week_course;
+    }
+
+    /**
+     * @param mixed $charge_per_week_course
+     */
+    public function setChargePerWeekCourse($charge_per_week_course)
+    {
+        $this->charge_per_week_course = $charge_per_week_course;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChargePerWeekLodging()
+    {
+        return $this->charge_per_week_lodging;
+    }
+
+    /**
+     * @param mixed $charge_per_week_lodging
+     */
+    public function setChargePerWeekLodging($charge_per_week_lodging)
+    {
+        $this->charge_per_week_lodging = $charge_per_week_lodging;
     }
 
     /**
@@ -150,22 +187,6 @@ class Service
     public function setSummerSupplement($summer_supplement)
     {
         $this->summer_supplement = $summer_supplement;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getChargePerWeek()
-    {
-        return $this->charge_per_week;
-    }
-
-    /**
-     * @param mixed $charge_per_week
-     */
-    public function setChargePerWeek($charge_per_week)
-    {
-        $this->charge_per_week = $charge_per_week;
     }
 
     /**

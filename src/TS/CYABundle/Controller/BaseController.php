@@ -85,8 +85,6 @@ class BaseController extends Controller
         $isLocal = $coin->getIsLocalCountry();
         $idCoin = $coin->getId();
         $current = 1;
-        //$agency = $em->getRepository('TSCYABundle:Agency')->getLastRecords(1);
-        //$agency = $agency[0];
 
         $quotation->setTotalSemanas($quotation->getSemanas() + $quotation->getSemanasSummer());
 

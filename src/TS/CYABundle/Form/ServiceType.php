@@ -43,7 +43,10 @@ class ServiceType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => ['class' => 'select-select2']
             ])
-            ->add('charge_per_week', CheckboxType::class, [
+            ->add('charge_per_week_course', CheckboxType::class, [
+                'required' => false
+            ])
+            ->add('charge_per_week_lodging', CheckboxType::class, [
                 'required' => false
             ])
             ->add('uses_limit_weeks', CheckboxType::class, [

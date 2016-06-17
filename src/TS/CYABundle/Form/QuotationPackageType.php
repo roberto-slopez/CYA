@@ -61,9 +61,9 @@ class QuotationPackageType extends AbstractType
                 'required' => true,
                 'label' => 'Weeks lodging'
             ])
-            ->add('semanas_lodging_summer', IntegerType::class, [
+            ->add('summer_supplement', IntegerType::class, [
                 'required' => true,
-                'label' => 'Summer weeks lodging'
+                'label' => 'Summer supplement weeks'
             ])
             ->add('note')
         ;
