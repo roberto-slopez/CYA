@@ -61,6 +61,12 @@ class ServiceType extends AbstractType
             ->add('summer_supplement', CheckboxType::class,[
               'required' => false
             ])
+            ->add('use_amount_initial_weeks', CheckboxType::class, [
+                'required' => false
+            ])
+            ->add('initial_weeks', NumberType::class,[
+                'required' => false
+            ])
         ;
     }
 

@@ -2794,7 +2794,7 @@
         {% elseif quotation.type == 'EXAM' %}
             <b>Tipo examen</b>: {{ quotation.exam.name }} {#<b>Fecha inicio</b>: {inici}#}
         {% endif %}
-        <b>N° Semanas / Semanas de verano </b>: {{ quotation.semanas }} / {{ quotation.semanasSummer }}<br>
+        <b>N° Semanas</b>: {{ quotation.semanas }}<br>
         <b>Asesora</b>: {{ quotation.seller.fullName }}<br>
         <i class="fa fa-phone"></i> {{ quotation.seller.telephone }}<br>
         <i class="fa fa-envelope-o"></i> {{ quotation.seller.userSeller.email }}
@@ -2939,8 +2939,7 @@
             <td class="text-center" style="background-color: #1e68b4; color: white;" colspan="4">Gastos adicionales</td>
         </tr>
         <tr>
-            <td class="text-left"><strong>Descripción</strong></td>
-            <td class="text-left">Valor de visa</td>
+            <td class="text-left" colspan="2">Valor de visa</td>
             <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
             <td class="text-right">
                 <span class="label label-primary">
@@ -2951,8 +2950,7 @@
             </td>
         </tr>
         <tr>
-            <td class="text-left"><strong>Descripción</strong></td>
-            <td class="text-left">Valor adicional</td>
+            <td class="text-left" colspan="2">Valor adicional</td>
             <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
             <td class="text-right">
                 <span class="label label-primary">
@@ -2963,8 +2961,7 @@
             </td>
         </tr>
         <tr>
-            <td class="text-left"><strong>Descripción</strong></td>
-            <td class="text-left">Valor de envio</td>
+            <td class="text-left" colspan="2">Valor de envio</td>
             <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
             <td class="text-right">
                 <span class="label label-primary">

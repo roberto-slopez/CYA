@@ -200,6 +200,7 @@ class BaseController extends Controller
      */
     public function getPriceServiceByParameters(Service $service, Quotation $quotation)
     {
+        //TODO: validar
         if ($quotation->getCountry()->getUseHealthCoverage()) {
             if ($service->getIsHealthCoverage() && $quotation->getTotalSemanas() >= 4) {
                 $meses = $quotation->getTotalSemanas() / 4;
@@ -208,10 +209,10 @@ class BaseController extends Controller
         }
 
         if ($service->getSummerSupplement()) {
-            return $service->getPrice() * $quotation->getSemanasSummer();
+            return $service->getPrice() * $quotation->getSummerSupplement();
         }
 
-        if ($service->getChargePerWeek()) {
+        if ($service->getChargePerWeekCourse()) {
             // limite de semanas
             if ($service->getUsesLimitWeeks()) {
                 if ($service->getLimitWeek() <= $quotation->getTotalSemanas()) {

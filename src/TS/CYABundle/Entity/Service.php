@@ -74,6 +74,16 @@ class Service
     protected $is_health_coverage;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $use_amount_initial_weeks;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $initial_weeks;
+
+    /**
      * @ORM\Column(type="float")
      */
     protected $price;
@@ -113,6 +123,38 @@ class Service
     public function setChargePerWeekCourse($charge_per_week_course)
     {
         $this->charge_per_week_course = $charge_per_week_course;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUseAmountInitialWeeks()
+    {
+        return $this->use_amount_initial_weeks;
+    }
+
+    /**
+     * @param mixed $use_amount_initial_weeks
+     */
+    public function setUseAmountInitialWeeks($use_amount_initial_weeks)
+    {
+        $this->use_amount_initial_weeks = $use_amount_initial_weeks;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInitialWeeks()
+    {
+        return $this->initial_weeks;
+    }
+
+    /**
+     * @param mixed $initial_weeks
+     */
+    public function setInitialWeeks($initial_weeks)
+    {
+        $this->initial_weeks = $initial_weeks;
     }
 
     /**
