@@ -44,52 +44,57 @@ class Service
     protected $type = self::OPTIONAL;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $charge_per_week_course;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $multiples_of_four;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $charge_per_week_lodging;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $uses_limit_weeks;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $summer_supplement;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $limit_week;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $is_health_coverage;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $use_amount_initial_weeks;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $initial_weeks;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     protected $price;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $headquarters_id;
 
@@ -107,6 +112,22 @@ class Service
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMultiplesOfFour()
+    {
+        return $this->multiples_of_four;
+    }
+
+    /**
+     * @param mixed $multiples_of_four
+     */
+    public function setMultiplesOfFour($multiples_of_four)
+    {
+        $this->multiples_of_four = $multiples_of_four;
     }
 
     /**

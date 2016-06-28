@@ -172,7 +172,7 @@ class Quotation
 
     /**
      * @ORM\ManyToOne(targetEntity="Lodging", inversedBy="quotations")
-     * @ORM\JoinColumn(name="lodging_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="lodging_id", referencedColumnName="id", nullable=true)
      */
     protected $lodging;
 

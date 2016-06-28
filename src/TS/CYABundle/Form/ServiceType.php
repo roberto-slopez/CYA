@@ -67,6 +67,9 @@ class ServiceType extends AbstractType
             ->add('initial_weeks', NumberType::class,[
                 'required' => false
             ])
+            ->add('multiples_of_four', CheckboxType::class, [
+                'required' => false
+            ])
         ;
     }
 

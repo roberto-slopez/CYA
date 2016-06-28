@@ -200,12 +200,9 @@ class BaseController extends Controller
      */
     public function getPriceServiceByParameters(Service $service, Quotation $quotation)
     {
-        //TODO: validar
-        if ($quotation->getCountry()->getUseHealthCoverage()) {
-            if ($service->getIsHealthCoverage() && $quotation->getTotalSemanas() >= 4) {
-                $meses = $quotation->getTotalSemanas() / 4;
-                return $meses * $service->getPrice();
-            }
+        if ($service->getIsHealthCoverage() && $quotation->getSemanas() >= 4) {
+            $meses = $quotation->getSemanas() / 4;
+            return $meses * $service->getPrice();
         }
 
         if ($service->getSummerSupplement()) {
@@ -215,19 +212,53 @@ class BaseController extends Controller
         if ($service->getChargePerWeekCourse()) {
             // limite de semanas
             if ($service->getUsesLimitWeeks()) {
-                if ($service->getLimitWeek() <= $quotation->getTotalSemanas()) {
-                    return $service->getPrice() * $quotation->getTotalSemanas();
+                if ($service->getLimitWeek() <= $quotation->getSemanas()) {
+                    return $service->getPrice() * $quotation->getSemanas();
                 } else {
                     // aplicar limite de semanas
                     return $service->getPrice() * $service->getLimitWeek();
                 }
             } else {
                 // multiplicar por semanas
-                return $service->getPrice() * $quotation->getTotalSemanas();
+                return $service->getPrice() * $quotation->getSemanas();
             }
-        } else {
-
         }
+
+        if ($service->getChargePerWeekLodging()) {
+            // limite de semanas
+            if ($service->getUsesLimitWeeks()) {
+                if ($service->getLimitWeek() <= $quotation->getSemanasLodging()) {
+                    return $service->getPrice() * $quotation->getSemanasLodging();
+                } else {
+                    // aplicar limite de semanas
+                    return $service->getPrice() * $service->getLimitWeek();
+                }
+            } else {
+                // multiplicar por semanas
+                return $service->getPrice() * $quotation->getSemanasLodging();
+            }
+        }
+
+        if ($service->getUseAmountInitialWeeks()) {
+            if ($service->getInitialWeeks() >= $quotation->getSemanas()) {
+                return $service->getPrice() * $quotation->getSemanas();
+            } else {
+                return 0;
+            }
+        }
+
+        if ($service->getMultiplesOfFour()) {
+            $result = 0;
+            foreach (range(0, 100, 4) as $k => $n) {
+                if ($quotation->getSemanas() <= $n) {
+                    $result = $service->getPrice() * $k;
+                    break;
+                }
+            }
+
+            return $result;
+        }
+
         return $service->getPrice();
     }
 

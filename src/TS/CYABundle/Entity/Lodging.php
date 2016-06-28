@@ -18,9 +18,9 @@ class Lodging
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable;
 
-    const SIMPLE = "SIMPLE";
-    const DOUBLE = "DOUBLE";
-    const TRIPLE = "TRIPLE";
+    const SIMPLE = "DOBLE";
+    const DOUBLE = "INDIVIDUAL";
+    const TRIPLE = "MULTI";
 
     /**
      * @ORM\Column(type="guid")
@@ -180,18 +180,6 @@ class Lodging
      */
     public function getType()
     {
-        switch ($this->type) {
-            case self::DOUBLE:
-                return "DOBLE";
-                break;
-            case self::SIMPLE:
-                return "INDIVIDUAL";
-                break;
-            case self::TRIPLE:
-                return "MULTI";
-                break;
-        }
-
         return $this->type;
     }
 
