@@ -111,6 +111,11 @@ class Quotation
     protected $amountLodging;
 
     /**
+     * @ORM\Column(type="float", nullable=false, options={"default": 0.00})
+     */
+    protected $amountManualMultiplier = 0.00;
+
+    /**
      * @ORM\Column(type="float", nullable=false)
      */
     protected $amount_summer_supplement;
@@ -212,9 +217,63 @@ class Quotation
      */
     protected $exam;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ManualMultiplier", mappedBy="quotation", cascade={"persist", "remove"})
+     */
+    protected $manualMultiplier;
+
+    /**
+     * @return mixed
+     */
+    public function getAmountManualMultiplier()
+    {
+        return $this->amountManualMultiplier;
+    }
+
+    /**
+     * @param mixed $amountManualMultiplier
+     */
+    public function setAmountManualMultiplier($amountManualMultiplier)
+    {
+        $this->amountManualMultiplier = $amountManualMultiplier;
+    }
+
     public function __construct()
     {
         $this->service = new ArrayCollection();
+        $this->manualMultiplier = new ArrayCollection();
+    }
+    /**
+     * @param ManualMultiplier $manualMultiplier
+     * @return $this
+     */
+    public function addManualMultiplier(ManualMultiplier $manualMultiplier)
+    {
+        $manualMultiplier->setQuotation($this);
+        $this->manualMultiplier->add($manualMultiplier);
+
+        return $this;
+    }
+
+    /**
+     * @param ManualMultiplier $manualMultiplier
+     * @return $this
+     */
+    public function removeManualMultiplier(ManualMultiplier $manualMultiplier)
+    {
+        $this->manualMultiplier->removeElement($manualMultiplier);
+
+        return $this;
+    }
+
+    /**
+     * Get Quotation entity collection (one to many).
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getManualMultiplier()
+    {
+        return $this->manualMultiplier;
     }
 
     /**

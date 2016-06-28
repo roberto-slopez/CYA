@@ -25,7 +25,9 @@ class ServiceRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('service');
         $qb->where('service.headquarters_id=:headquartersId')
-            ->setParameter('headquartersId', $headquartersId);
+            ->setParameter('headquartersId', $headquartersId)
+            ->andWhere('service.manual_multiplier=:manual_multiplier')
+            ->setParameter('manual_multiplier', false);
 
         return $qb->getQuery()->getArrayResult();
     }

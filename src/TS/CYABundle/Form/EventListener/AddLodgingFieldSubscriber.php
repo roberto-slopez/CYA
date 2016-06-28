@@ -54,7 +54,7 @@ class AddLodgingFieldSubscriber implements EventSubscriberInterface
         $formOptions = [
             'class' => 'TS\CYABundle\Entity\Lodging',
             'choice_label' => 'nameType',
-            'required' => true,
+            'required' => false,
             'placeholder' => 'Choose an option',
             'label' => 'Lodging',
             'attr' => ['class' => 'lodging_selector select-select2'],

@@ -31,9 +31,6 @@ class LodgingType extends AbstractType
             ->add('price_per_week', MoneyType::class, [
                 'currency' => 'USD'
             ])
-            ->add('summer_price', MoneyType::class, [
-                'currency' => 'USD'
-            ])
             ->add('description')
             ->add('headquarter', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Headquarter',

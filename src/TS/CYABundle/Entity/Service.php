@@ -59,6 +59,11 @@ class Service
     protected $charge_per_week_lodging;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default": 0})
+     */
+    protected $manual_multiplier = 0;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     protected $uses_limit_weeks;
@@ -112,6 +117,22 @@ class Service
     public function __construct()
     {
         $this->quotations = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getManualMultiplier()
+    {
+        return $this->manual_multiplier;
+    }
+
+    /**
+     * @param mixed $manual_multiplier
+     */
+    public function setManualMultiplier($manual_multiplier)
+    {
+        $this->manual_multiplier = $manual_multiplier;
     }
 
     /**

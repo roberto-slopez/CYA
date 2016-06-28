@@ -70,6 +70,9 @@ class ServiceType extends AbstractType
             ->add('multiples_of_four', CheckboxType::class, [
                 'required' => false
             ])
+            ->add('manual_multiplier', CheckboxType::class, [
+                'required' => false
+            ])
         ;
     }
 

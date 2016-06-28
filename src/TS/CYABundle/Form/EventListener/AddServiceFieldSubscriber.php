@@ -54,7 +54,7 @@ class AddServiceFieldSubscriber implements EventSubscriberInterface
         $formOptions = [
             'class' => 'TS\CYABundle\Entity\Service',
             'multiple' => true,
-            //'expanded' => true,
+            'required' => false,
             'placeholder' => 'Choose an option',
             'label' => 'Service',
             'attr' => ['class' => 'service_selector select-select2'],

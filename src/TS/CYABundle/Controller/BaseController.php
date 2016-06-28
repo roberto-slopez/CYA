@@ -86,7 +86,11 @@ class BaseController extends Controller
         $idCoin = $coin->getId();
         $current = 1;
 
-        $quotation->setTotalSemanas($quotation->getSemanas() + $quotation->getSemanasSummer());
+        $quotation->setTotalSemanas($quotation->getSemanas());
+        $totalManualMultiplier = 0;
+        foreach ($quotation->getManualMultiplier() as $key => $manual) {
+            $totalManualMultiplier += $manual->getPrice();
+        }
 
         if (!$isLocal) {
             $current = $em->getRepository('TSCYABundle:ExchangeRateUSD')
@@ -94,7 +98,7 @@ class BaseController extends Controller
         }
         $valueInscripcion = 0;
         if ($type == Quotation::FLEXIBLE) {
-            $lodgingAmountSummer = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodgingSummer(), 2);
+            $lodgingAmountSummer = round($quotation->getLodging()->getSummerPrice() * $quotation->getSummerSupplement(), 2);
             $lodgingAmountSingle = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
             $lodgingAmount =$lodgingAmountSingle + $lodgingAmountSummer;
 
@@ -120,9 +124,7 @@ class BaseController extends Controller
             $quotation->setSemanas($package->getSemanas());
 
             if ($quotation->getSemanasLodging() > 0) {
-                $lodgingAmountSummer = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodgingSummer(), 2);
-                $lodgingAmountSingle = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
-                $lodgingAmount =$lodgingAmountSingle + $lodgingAmountSummer;
+                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
             } else {
                 $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
             }
@@ -153,9 +155,7 @@ class BaseController extends Controller
 
             $valueInscripcion = $package->getPriceInscription();
         } elseif ($type == Quotation::EXAM) {
-            $lodgingAmountSummer = round($quotation->getLodging()->getSummerPrice() * $quotation->getSemanasLodgingSummer(), 2);
-            $lodgingAmountSingle = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
-            $lodgingAmount =$lodgingAmountSingle + $lodgingAmountSummer;
+            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
 
             $quotation->setAmountLodging($lodgingAmount);
             $valueExam = $quotation->getExamValue() * $quotation->getTotalSemanas();
@@ -178,6 +178,7 @@ class BaseController extends Controller
         foreach ($quotation->getService() as $service) {
             $totalService += $this->getPriceServiceByParameters($service, $quotation);
         }
+
         $quotation->setAmountService(round($totalService, 2));
 
         $totalLocal = $quotation->getAmountCourse() +
