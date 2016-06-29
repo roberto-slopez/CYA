@@ -56,7 +56,7 @@ class Quotation
     protected $seller_id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $lodging_id;
 
@@ -106,7 +106,7 @@ class Quotation
     protected $package_id;
 
     /**
-     * @ORM\Column(type="float", nullable=false)
+     * @ORM\Column(type="float", nullable=true, options={"default": 0.00})
      */
     protected $amountLodging;
 
@@ -116,9 +116,9 @@ class Quotation
     protected $amountManualMultiplier = 0.00;
 
     /**
-     * @ORM\Column(type="float", nullable=false)
+     * @ORM\Column(type="float", nullable=false, options={"default": 0.00})
      */
-    protected $amount_summer_supplement;
+    protected $amount_summer_supplement  = 0.00;
 
     /**
      * @ORM\Column(type="float", nullable=false)
@@ -126,7 +126,7 @@ class Quotation
     protected $amountCourse;
 
     /**
-     * @ORM\Column(type="float", nullable=false)
+     * @ORM\Column(type="float", nullable=true, options={"default": 0.00})
      */
     protected $amountService;
 

@@ -2046,12 +2046,6 @@
             transition: background-color 0.2s ease-out, opacity 0.3s ease-out;
         }
 
-        #page-container,
-        #sidebar,
-        #sidebar-alt {
-            background-color: #394263;
-        }
-
         #sidebar,
         #sidebar-alt {
             width: 0;
@@ -2644,12 +2638,6 @@
             margin-bottom: 0;
         }
 
-        .btn-default {
-            background-color: #f1f3f6;
-            border-color: #dbe1e8;
-            color: #394263;
-        }
-
         .btn-default.btn-alt {
             background-color: #ffffff;
         }
@@ -2884,7 +2872,7 @@
             <td class="text-left"><strong>Alojamiento</strong></td>
             <td class="text-left"><b>({{ quotation.lodging.name }})</b> {{ quotation.lodging.description }}
                 {% if quotation.semanasLodging %}
-                <b>Semanas normal/verano : {{ quotation.semanasLodging }} / {{ quotation.semanasLodgingSummer }}</b>
+                <b>Semanas{{ quotation.semanasLodging }}</b>
                 {% endif %}
             </td>
             <td class="text-right">{{ quotation.country.coin.code }}</td>
@@ -2898,15 +2886,74 @@
             <tr>
                 <td class="text-left"><strong>{{ service.name }}</strong></td>
                 <td class="text-left">
-                    {% if '*' in service.description %}
-                        <b>{{ service.description }}</b>
-                    {% else %}
-                        {{ service.description }}
+                    {{ service.description }}
+                    {% if service.isHealthCoverage %}
+                          <strong> Meses: {{ quotation.semanas / 4 }}</strong>
+                    {% elseif service.summerSupplement %}
+                        <strong> Semanas: {{ quotation.summerSupplement }}</strong>
+                    {% endif %}
+
+                    {% if service.chargePerWeekCourse %}
+
+                        {% if service.usesLimitWeeks %}
+
+                            {% if service.limitWeek <= quotation.semanas %}
+                                <strong> Semanas: {{ quotation.semanas }}</strong>
+                            {% else %}
+                                <strong> Semanas: {{ service.limitWeek }}</strong>
+                            {% endif %}
+
+                        {% else %}
+                            <strong> Semanas: {{ quotation.semanas }}</strong>
+                        {% endif %}
+
+                    {% endif %}
+
+                    {% if service.chargePerWeekLodging %}
+
+                        {% if service.usesLimitWeeks %}
+
+                            {% if service.limitWeek <= quotation.semanas %}
+                                <strong> Semanas: {{ quotation.semanasLodging }}</strong>
+                            {% else %}
+                                <strong> Semanas: {{ service.limitWeek }}</strong>
+                            {% endif %}
+
+                        {% else %}
+                            <strong> Semanas: {{ quotation.semanasLodging }}</strong>
+                        {% endif %}
+
+                    {% endif %}
+
+                    {% if service.useAmountInitialWeeks %}
+                        {% if service.initialWeeks %}
+                            <strong> Semanas: {{ quotation.semanas }}</strong>
+                        {% else %}
+                            <strong> Semanas: 0</strong>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if service.multiplesOfFour %}
+                        {% set keyValue = 0 %}
+                        {% for key, i in range(0, 100, 4) if quotation.semanas >= i %}
+                            {% set keyValue = key %}
+                        {% endfor %}
+                        <strong> {{ keyValue }}</strong>
                     {% endif %}
                 </td>
                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                 <td class="text-right"><span
                             class="label label-primary"><b>{{ service.price | number_format(2, '.', ',') }}</b></span>
+                </td>
+            </tr>
+        {% endfor %}
+        {% for manualMultiplier in quotation.manualMultiplier %}
+            <tr>
+                <td class="text-left"><strong>{{ manualMultiplier.service.name }}</strong></td>
+                <td class="text-left"> {{ manualMultiplier.service.description }} <strong>Cantidad {{ manualMultiplier.quantity }}</strong> </td>
+                <td class="text-right">{{ quotation.country.coin.code }}</td>
+                <td class="text-right"><span
+                            class="label label-primary"><b>{{ manualMultiplier.price | number_format(2, '.', ',') }}</b></span>
                 </td>
             </tr>
         {% endfor %}

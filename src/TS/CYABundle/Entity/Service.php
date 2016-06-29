@@ -61,7 +61,7 @@ class Service
     /**
      * @ORM\Column(type="boolean", nullable=true, options={"default": 0})
      */
-    protected $manual_multiplier = 0;
+    protected $manual_multiplier = false;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -477,7 +477,7 @@ class Service
      */
     public function __toString()
     {
-        return (string) $this->getName() . $this->getId();
+        return (string)$this->getName().$this->getId();
     }
 
     public function __sleep()

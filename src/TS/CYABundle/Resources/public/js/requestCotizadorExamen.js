@@ -132,20 +132,6 @@ $("#quotation_exam_exam").change(function(){
         exmanId: $(this).val()
     };
 
-    var semanas1 = $("#quotation_exam_semanas").val();
-    var semanas2 = $("#quotation_exam_semanas_summer").val();
-    var semanas = semanas1 + semanas2;
-
-    if (semanas) {
-        $.ajax({
-            type: 'get',
-            url: Routing.generate('exam_by_id', {id: data.exmanId, weeks: semanas}, true),
-            success: function(price) {
-                $("#valor_curso").html("Examen: " + price);
-            }
-        });
-    }
-
     $.ajax({
         type: 'post',
         url: Routing.generate('current_promotion', {id: data.exmanId, type_promotion: 'exam'}, true),
@@ -158,88 +144,3 @@ $("#quotation_exam_exam").change(function(){
         }
     });
 });
-
-/*$(".lodging_selector").change(function(){
-    var data = {
-        lodgingId: $(this).val()
-    };
-    var semanas = $("#quotation_exam_semanas_lodging").val();
-
-    if (semanas) {
-        $.ajax({
-            type: 'get',
-            url: Routing.generate('lodging_by_id', {id: data.lodgingId, weeks: semanas}, true),
-            success: function(price) {
-                $("#valor_alojamiento").html("Alojamiento: " + price);
-            }
-        });
-    }
-});*/
-
-/*$(".service_selector").change(function(){
-    var services = $(this).val();
-
-    var semanas1 = $("#quotation_exam_semanas").val();
-    var semanas2 = $("#quotation_exam_semanas_summer").val();
-    var semanas = semanas1 + semanas2;
-
-    var data = {
-        "weeks": semanas,
-        "services": services
-    };
-
-    if (semanas) {
-        $.ajax({
-            type: 'post',
-            url: Routing.generate('services_by_id', null, true),
-            data: data,
-            success: function(price) {
-                $("#valor_servicio").html("Servicios: " + price);
-            }
-        });
-    }
-});*/
-
-$("#quotation_exam_semanas").change(function(){
-    var semanas1 = $(this).val();
-    var semanas2 = $("#quotation_exam_semanas_summer").val();
-    var semanas = semanas1 + semanas2;
-
-    var exam = $("#quotation_exam_exam").val();
-    var services = $(".service_selector").val();
-    var data = {
-        "weeks": semanas,
-        "exam": exam,
-        "services": services
-    };
-    if (semanas > 0 && (exam && exam !== 'Seleccionar opción'|| services)) {
-        $.ajax({
-            type: 'post',
-            url: Routing.generate('weekschange', null, true),
-            data: data,
-            success: function(result) {
-                $("#valor_curso").html("Exam: " + result.exam);
-                /*$("#valor_servicio").html("Servicios: " + result.services);*/
-            }
-        });
-    }
-});
-/*
-$("#quotation_exam_semanas_lodging").change(function(){
-    var semanas = $(this).val();
-    var lodging = $(".lodging_selector").val();
-    var data = {
-        "weeks": semanas,
-        "lodging": lodging
-    };
-    if (semanas > 0 &&  lodging && lodging !== 'Seleccionar opción') {
-        $.ajax({
-            type: 'post',
-            url: Routing.generate('weekschangeLodging', null, true),
-            data: data,
-            success: function(result) {
-                $("#valor_alojamiento").html("Alojamiento: " + result.lodging);
-            }
-        });
-    }
-});*/

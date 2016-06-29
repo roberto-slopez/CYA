@@ -4,24 +4,6 @@
 var packageSelect = $(".package_selector");
 var serviceSelect = $(".service_selector");
 var weekslodging = $("#quotation_package_semanas_lodging");
-function getService() {
-    var services = serviceSelect.val();
-    if (packageSelect.val() !== 'Seleccionar opción' && services) {
-        var data = {
-            "services": services,
-            "package": packageSelect.val()
-        };
-
-        $.ajax({
-            type: 'post',
-            url: Routing.generate('services_and_package', null, true),
-            data: data,
-            success: function (price) {
-                $("#valor_servicio").html("Servicios: " + price);
-            }
-        });
-    }
-}
 $(".country_selector").change(function () {
     var data = {
         countryId: $(this).val()
@@ -145,45 +127,10 @@ $(".headquarter_selector").change(function () {
 
     }, 1000);
 });
-/*
-$(".lodging_selector").change(function () {
-    var data = {
-        lodgingId: $(this).val(),
-        packageId: packageSelect.val()
-    };
-    if (weekslodging.val() > 0) {
-        $.ajax({
-            type: 'get',
-            url: Routing.generate('lodging_by_id', {id: data.lodgingId, weeks: weekslodging.val()}, true),
-            success: function(price) {
-                $("#valor_alojamiento").html("Alojamiento: " + price);
-            }
-        });
-    } else  {
-        $.ajax({
-            type: 'get',
-            url: Routing.generate('lodging_by_id', {id: data.lodgingId, weeks: 0, package: data.packageId}, true),
-            success: function (price) {
-                $("#valor_alojamiento").html("Alojamiento: " + price);
-            }
-        });
-    }
-
-});*/
 packageSelect.change(function () {
     var data = {
         packageId: $(this).val()
     };
-
-    $.ajax({
-        type: 'get',
-        url: Routing.generate('package_by_id', {id: data.packageId}, true),
-        success: function (price) {
-            $("#valor_curso").html("Paquete: " + price);
-        }
-    });
-
-    getService();
 
     $.ajax({
         type: 'post',
@@ -197,27 +144,3 @@ packageSelect.change(function () {
         }
     });
 });
-serviceSelect.change(function () {
-    getService();
-});
-
-/*
-weekslodging.change(function(){
-    var semanas = $(this).val();
-    var lodging = $(".lodging_selector").val();
-
-    var data = {
-        "weeks": semanas,
-        "lodging": lodging
-    };
-    if (semanas > 0 &&  lodging && lodging !== 'Seleccionar opción') {
-        $.ajax({
-            type: 'post',
-            url: Routing.generate('weekschangeLodging', null, true),
-            data: data,
-            success: function(result) {
-                $("#valor_alojamiento").html("Alojamiento: " + result.lodging);
-            }
-        });
-    }
-});*/

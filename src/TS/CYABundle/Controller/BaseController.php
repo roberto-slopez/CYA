@@ -96,11 +96,11 @@ class BaseController extends Controller
             $current = $em->getRepository('TSCYABundle:ExchangeRateUSD')
                 ->getCurrentExchangeRateUSDByCoinId($idCoin);
         }
+
         $valueInscripcion = 0;
+
         if ($type == Quotation::FLEXIBLE) {
-            $lodgingAmountSummer = round($quotation->getLodging()->getSummerPrice() * $quotation->getSummerSupplement(), 2);
-            $lodgingAmountSingle = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
-            $lodgingAmount =$lodgingAmountSingle + $lodgingAmountSummer;
+            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
 
             $quotation->setAmountLodging($lodgingAmount);
 
@@ -117,8 +117,8 @@ class BaseController extends Controller
             }
 
             $quotation->setAmountCourse(round($courseValue, 2));
-
             $valueInscripcion = $quotation->getCourse()->getPriceInscription();
+
         } elseif ($type == Quotation::PACKAGE) {
             $package = $quotation->getPackage();
             $quotation->setSemanas($package->getSemanas());
@@ -161,6 +161,7 @@ class BaseController extends Controller
             $valueExam = $quotation->getExamValue() * $quotation->getTotalSemanas();
 
             $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByExam($quotation->getExam()->getId());
+
             if ($promocion) {
                 $quotation->setPromocion($promocion);
                 $percentage = $promocion->getPercentage();
@@ -169,7 +170,6 @@ class BaseController extends Controller
             }
 
             $quotation->setAmountCourse(round($valueExam, 2));
-
             $valueInscripcion = $quotation->getExam()->getPriceInscription();
         }
 
@@ -180,10 +180,12 @@ class BaseController extends Controller
         }
 
         $quotation->setAmountService(round($totalService, 2));
+        $quotation->setAmountManualMultiplier(round($totalManualMultiplier, 2));
 
         $totalLocal = $quotation->getAmountCourse() +
             $quotation->getAmountLodging() +
             $quotation->getAmountService() +
+            $quotation->getAmountManualMultiplier() +
             $valueInscripcion;
 
         $quotation->setTotalLocal($totalLocal);

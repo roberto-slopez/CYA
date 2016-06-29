@@ -65,6 +65,14 @@ class QuotationPackageType extends AbstractType
                 'required' => true,
                 'label' => 'Summer supplement weeks'
             ])
+            ->add('manualMultiplier', CollectionType::class, [
+                'required' => false,
+                'entry_type' => ManualMultiplierType::class,
+                'label' => ' ',
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' => true
+            ])
             ->add('note')
         ;
     }

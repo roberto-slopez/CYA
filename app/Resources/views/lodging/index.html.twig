@@ -32,11 +32,11 @@
                     <tr>
                         <td>{{ lodging.name }}</td>
                         <td>
-                            {% if (lodging.type == 'SIMPLE') %}
+                            {% if (lodging.type == 'INDIVIDUAL') %}
                                 <span class="label label-info">Individual</span>
-                            {% elseif (lodging.type == 'DOUBLE') %}
+                            {% elseif (lodging.type == 'DOBLE') %}
                                 <span class="label label-info">Doble</span>
-                            {% elseif (lodging.type == 'TRIPLE') %}
+                            {% elseif (lodging.type == 'MULTI') %}
                                 <span class="label label-info">Multi</span>
                             {% endif %}
                         </td>
