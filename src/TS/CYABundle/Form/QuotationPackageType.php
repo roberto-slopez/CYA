@@ -11,6 +11,7 @@ namespace TS\CYABundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -57,9 +58,10 @@ class QuotationPackageType extends AbstractType
                 'attr' => ['class' => 'country_selector select-select2']
             ])
             ->add('client', ClientType::class)
+            ->add('without_lodging', CheckboxType::class)
             ->add('semanas_lodging', IntegerType::class, [
                 'required' => true,
-                'label' => 'Weeks lodging'
+                'label' => 'Manual number loading weeks'
             ])
             ->add('summer_supplement', IntegerType::class, [
                 'required' => true,

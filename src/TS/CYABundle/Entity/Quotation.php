@@ -182,6 +182,11 @@ class Quotation
     protected $lodging;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default": 0})
+     */
+    protected $without_lodging = false;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Service", inversedBy="quotations")
      * @ORM\JoinTable(name="quotation_service")
      */
@@ -221,6 +226,22 @@ class Quotation
      * @ORM\OneToMany(targetEntity="ManualMultiplier", mappedBy="quotation", cascade={"persist", "remove"})
      */
     protected $manualMultiplier;
+
+    /**
+     * @return mixed
+     */
+    public function getWithoutLodging()
+    {
+        return $this->without_lodging;
+    }
+
+    /**
+     * @param mixed $without_lodging
+     */
+    public function setWithoutLodging($without_lodging)
+    {
+        $this->without_lodging = $without_lodging;
+    }
 
     /**
      * @return mixed

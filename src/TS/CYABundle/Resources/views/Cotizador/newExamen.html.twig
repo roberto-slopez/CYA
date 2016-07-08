@@ -14,9 +14,6 @@
 {% endblock subtitle %}
 
 {% block action %}
-    <div class="block-options pull-right">
-        <a data-original-title="Regresar" href="{{ url('cotizador_index') }}" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title=""><i class="fa fa-chevron-left"></i></a>
-    </div>
 {% endblock action %}
 
 {% block titlePanel %}
@@ -38,9 +35,10 @@
     {{ form_row(form.city) }}
     {{ form_row(form.headquarter) }}
     {{ form_row(form.exam) }}
+    {{ form_row(form.without_lodging) }}
     {{ form_row(form.semanas_lodging) }}
-    {{ form_row(form.summer_supplement) }}
     {{ form_row(form.lodging) }}
+    {{ form_row(form.summer_supplement) }}
     {{ form_row(form.service) }}
     <div class="form-group">
         <div class="col-sm-10 text-center">

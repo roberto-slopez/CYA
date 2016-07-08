@@ -56,6 +56,7 @@ class QuotationType extends AbstractType
                 'required' => true,
                 'label' => 'Weeks'
             ])
+            ->add('without_lodging', CheckboxType::class)
             ->add('semanas_lodging', IntegerType::class, [
                 'required' => false,
                 'label' => 'Weeks lodging'

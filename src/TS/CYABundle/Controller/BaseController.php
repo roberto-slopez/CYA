@@ -100,9 +100,11 @@ class BaseController extends Controller
         $valueInscripcion = 0;
 
         if ($type == Quotation::FLEXIBLE) {
-            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
-
-            $quotation->setAmountLodging($lodgingAmount);
+            $quotation->setAmountLodging(0.00);
+            if (!$quotation->getWithoutLodging()) {
+                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+                $quotation->setAmountLodging($lodgingAmount);
+            }
 
             $courseValue = $quotation->getCourseValue() * $quotation->getTotalSemanas();
             $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByCourse(
@@ -123,21 +125,24 @@ class BaseController extends Controller
             $package = $quotation->getPackage();
             $quotation->setSemanas($package->getSemanas());
 
-            if ($quotation->getSemanasLodging() > 0) {
-                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
-            } else {
-                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
-            }
+            $quotation->setAmountLodging(0.00);
+            if (!$quotation->getWithoutLodging()) {
+                if ($quotation->getSemanasLodging() > 0) {
+                    $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+                } else {
+                    $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
+                }
 
-            if ($quotation->getSemanasLodging() == 0) {
-                $packageLodging = $em->getRepository('TSCYABundle:PackageLodging')
-                    ->getPriceLodgingById($quotation->getLodging()->getId());
+                if ($quotation->getSemanasLodging() == 0) {
+                    $packageLodging = $em->getRepository('TSCYABundle:PackageLodging')
+                        ->getPriceLodgingById($quotation->getLodging()->getId());
 
-                $lodgingPrice = $packageLodging ? $packageLodging->getLodgingPrice() : 0;
-                $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;
-                $quotation->setAmountLodging(round($amountLodging, 2));
-            } else {
-                $quotation->setAmountLodging(round($lodgingAmount, 2));
+                    $lodgingPrice = $packageLodging ? $packageLodging->getLodgingPrice() : 0;
+                    $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;
+                    $quotation->setAmountLodging(round($amountLodging, 2));
+                } else {
+                    $quotation->setAmountLodging(round($lodgingAmount, 2));
+                }
             }
 
 
@@ -155,9 +160,12 @@ class BaseController extends Controller
 
             $valueInscripcion = $package->getPriceInscription();
         } elseif ($type == Quotation::EXAM) {
-            $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+            $quotation->setAmountLodging(0.00);
+            if (!$quotation->getWithoutLodging()) {
+                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+                $quotation->setAmountLodging($lodgingAmount);
+            }
 
-            $quotation->setAmountLodging($lodgingAmount);
             $valueExam = $quotation->getExamValue() * $quotation->getTotalSemanas();
 
             $promocion = $em->getRepository('TSCYABundle:Promocion')->getSingleByExam($quotation->getExam()->getId());
