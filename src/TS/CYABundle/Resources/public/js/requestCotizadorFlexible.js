@@ -13,7 +13,7 @@ $(".country_selector").change(function(){
         success: function(data) {
             var $city_selector = $('.city_selector');
 
-            $city_selector.html('<option>Seleccionar opción</option>');
+            $city_selector.html('<option value="">Seleccionar opción</option>');
 
             for (var i=0, total = data.length; i < total; i++) {
                 $city_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
@@ -28,7 +28,7 @@ $(".country_selector").change(function(){
         success: function(data) {
             var $city_selector = $('.discretionary_spending_selector');
 
-            $city_selector.html('<option>Seleccionar opción</option>');
+            $city_selector.html('<option value="">Seleccionar opción</option>');
 
             for (var i=0, total = data.length; i < total; i++) {
                 $city_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
@@ -55,7 +55,7 @@ $(".city_selector").change(function(){
         data: data,
         success: function(data) {
             var $headquarter_selector = $('.headquarter_selector');
-            $headquarter_selector.html('<option>Seleccionar opción</option>');
+            $headquarter_selector.html('<option value="">Seleccionar opción</option>');
 
             for (var i=0, total = data.length; i < total; i++) {
                 $headquarter_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
@@ -75,7 +75,7 @@ $(".headquarter_selector").change(function(){
         data: data,
         success: function(data) {
             var $lodging_selector = $('.lodging_selector');
-            $lodging_selector.html('<option>Seleccionar opción</option>');
+            $lodging_selector.html('<option value="">Seleccionar opción</option>');
 
             for (var i=0, total = data.length; i < total; i++) {
                 $lodging_selector.append('<option value="' + data[i].id + '">' + data[i].name +' - '+ data[i].type +'</option>');
@@ -89,7 +89,7 @@ $(".headquarter_selector").change(function(){
         data: data,
         success: function(data) {
             var $course_selector = $('.course_selector');
-            $course_selector.html('<option>Seleccionar opción</option>');
+            $course_selector.html('<option value="">Seleccionar opción</option>');
 
             for (var i=0, total = data.length; i < total; i++) {
                 $course_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');

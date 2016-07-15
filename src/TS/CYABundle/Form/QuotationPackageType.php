@@ -16,6 +16,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TS\CYABundle\Form\EventListener\AddCityFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddCourseFieldSubscriber;
@@ -41,6 +43,9 @@ class QuotationPackageType extends AbstractType
         $builder->addEventSubscriber(new AddCityFieldSubscriber('city'));
         $builder->addEventSubscriber(new AddHeadquarterFieldSubscriber('headquarter'));
         $builder->addEventSubscriber(new AddLodgingFieldSubscriber('lodging'));
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $event->stopPropagation();
+        }, 900);
         $builder->addEventSubscriber(new AddPackageFieldSubscriber('package'));
         $builder->addEventSubscriber(new AddServiceFieldSubscriber('service'));
         $builder->addEventSubscriber(new AddDiscretionarySpendingFieldSubscriber('discretionarySpending'));
@@ -58,13 +63,15 @@ class QuotationPackageType extends AbstractType
                 'attr' => ['class' => 'country_selector select-select2']
             ])
             ->add('client', ClientType::class)
-            ->add('without_lodging', CheckboxType::class)
+            ->add('without_lodging', CheckboxType::class, [
+                'required' => false
+            ])
             ->add('semanas_lodging', IntegerType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Manual number loading weeks'
             ])
             ->add('summer_supplement', IntegerType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Summer supplement weeks'
             ])
             ->add('manualMultiplier', CollectionType::class, [

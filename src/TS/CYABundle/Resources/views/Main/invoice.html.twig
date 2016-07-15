@@ -2868,6 +2868,7 @@
                 </td>
             </tr>
         {% endif %}
+        {% if quotation.lodging %}
         <tr>
             <td class="text-left"><strong>Alojamiento</strong></td>
             <td class="text-left"><b>({{ quotation.lodging.name }})</b> {{ quotation.lodging.description }}
@@ -2882,6 +2883,7 @@
                 </span>
             </td>
         </tr>
+        {% endif %}
         {% for service in quotation.service %}
             <tr>
                 <td class="text-left"><strong>{{ service.name }}</strong></td>
@@ -2985,6 +2987,7 @@
         <tr>
             <td class="text-center" style="background-color: #1e68b4; color: white;" colspan="4">Gastos adicionales</td>
         </tr>
+        {% if quotation.discretionarySpending %}
         <tr>
             <td class="text-left" colspan="2">Valor de visa</td>
             <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
@@ -3018,6 +3021,7 @@
                 </span>
             </td>
         </tr>
+        {% endif %}
         <tr>
             <td class="text-center page" style="background-color: #1e68b4; color: white;" colspan="4">OBSERVACIONES</td>
         </tr>

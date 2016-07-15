@@ -179,7 +179,7 @@ class Quotation
      * @ORM\ManyToOne(targetEntity="Lodging", inversedBy="quotations")
      * @ORM\JoinColumn(name="lodging_id", referencedColumnName="id", nullable=true)
      */
-    protected $lodging;
+    protected $lodging = null;
 
     /**
      * @ORM\Column(type="boolean", nullable=true, options={"default": 0})

@@ -16,6 +16,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TS\CYABundle\Form\EventListener\AddCityFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddCourseFieldSubscriber;
@@ -40,6 +42,9 @@ class QuotationExamType extends AbstractType
     {
         $builder->addEventSubscriber(new AddCityFieldSubscriber('city'));
         $builder->addEventSubscriber(new AddHeadquarterFieldSubscriber('headquarter'));
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $event->stopPropagation();
+        }, 900);
         $builder->addEventSubscriber(new AddDiscretionarySpendingFieldSubscriber('discretionarySpending'));
         $builder->addEventSubscriber(new AddLodgingFieldSubscriber('lodging'));
         $builder->addEventSubscriber(new AddExamFieldSubscriber('exam'));
@@ -62,13 +67,15 @@ class QuotationExamType extends AbstractType
                 'required' => true,
                 'label' => 'Summer weeks'
             ])
-            ->add('without_lodging', CheckboxType::class)
+            ->add('without_lodging', CheckboxType::class, [
+                'required' => false
+            ])
             ->add('semanas_lodging', IntegerType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Weeks lodging'
             ])
             ->add('summer_supplement', IntegerType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Summer supplement weeks'
             ])
             ->add('manualMultiplier', CollectionType::class, [

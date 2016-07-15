@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TS\CYABundle\Form\EventListener\AddCityFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddCourseFieldSubscriber;
@@ -35,6 +37,11 @@ class QuotationType extends AbstractType
         $builder->addEventSubscriber(new AddCityFieldSubscriber('city'));
         $builder->addEventSubscriber(new AddHeadquarterFieldSubscriber('headquarter'));
         $builder->addEventSubscriber(new AddLodgingFieldSubscriber('lodging'));
+
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $event->stopPropagation();
+        }, 900);
+
         $builder->addEventSubscriber(new AddCourseFieldSubscriber('course'));
         $builder->addEventSubscriber(new AddServiceFieldSubscriber('service'));
         $builder->addEventSubscriber(new AddDiscretionarySpendingFieldSubscriber('discretionarySpending'));
@@ -56,7 +63,9 @@ class QuotationType extends AbstractType
                 'required' => true,
                 'label' => 'Weeks'
             ])
-            ->add('without_lodging', CheckboxType::class)
+            ->add('without_lodging', CheckboxType::class, [
+                'required' => false
+            ])
             ->add('semanas_lodging', IntegerType::class, [
                 'required' => false,
                 'label' => 'Weeks lodging'
