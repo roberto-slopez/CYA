@@ -212,8 +212,17 @@ class BaseController extends Controller
     public function getPriceServiceByParameters(Service $service, Quotation $quotation)
     {
         if ($service->getIsHealthCoverage() && $quotation->getSemanas() >= 4) {
-            $meses = $quotation->getSemanas() / 4;
-            return $meses * $service->getPrice();
+            if ($service->getUseAmountInitialWeeks()) {
+                if ($service->getInitialWeeks() >= $quotation->getSemanas()) {
+                    $meses = $quotation->getSemanas() / 4;
+                    return $meses * $service->getPrice();
+                } else {
+                    return 0;
+                }
+            } else {
+                $meses = $quotation->getSemanas() / 4;
+                return $meses * $service->getPrice();
+            }
         }
 
         if ($service->getSummerSupplement()) {
