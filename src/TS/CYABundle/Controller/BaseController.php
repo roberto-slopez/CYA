@@ -102,7 +102,10 @@ class BaseController extends Controller
         if ($type == Quotation::FLEXIBLE) {
             $quotation->setAmountLodging(0.00);
             if (!$quotation->getWithoutLodging()) {
-                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+                $lodgingAmount = round(
+                    $quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(),
+                    2
+                );
                 $quotation->setAmountLodging($lodgingAmount);
             }
 
@@ -128,7 +131,10 @@ class BaseController extends Controller
             $quotation->setAmountLodging(0.00);
             if (!$quotation->getWithoutLodging()) {
                 if ($quotation->getSemanasLodging() > 0) {
-                    $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+                    $lodgingAmount = round(
+                        $quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(),
+                        2
+                    );
                 } else {
                     $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanas(), 2);
                 }
@@ -162,7 +168,10 @@ class BaseController extends Controller
         } elseif ($type == Quotation::EXAM) {
             $quotation->setAmountLodging(0.00);
             if (!$quotation->getWithoutLodging()) {
-                $lodgingAmount = round($quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(), 2);
+                $lodgingAmount = round(
+                    $quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(),
+                    2
+                );
                 $quotation->setAmountLodging($lodgingAmount);
             }
 
@@ -215,12 +224,14 @@ class BaseController extends Controller
             if ($service->getUseAmountInitialWeeks()) {
                 if ($service->getInitialWeeks() >= $quotation->getSemanas()) {
                     $meses = $quotation->getSemanas() / 4;
+
                     return $meses * $service->getPrice();
                 } else {
                     return 0;
                 }
             } else {
                 $meses = $quotation->getSemanas() / 4;
+
                 return $meses * $service->getPrice();
             }
         }
@@ -232,35 +243,48 @@ class BaseController extends Controller
         if ($service->getChargePerWeekCourse()) {
             // limite de semanas
             if ($service->getUsesLimitWeeks()) {
-                if ($service->getLimitWeek() <= $quotation->getSemanas()) {
+                if ($quotation->getSemanas() <= $service->getLimitWeek()) {
                     return $service->getPrice() * $quotation->getSemanas();
                 } else {
                     // aplicar limite de semanas
                     return $service->getPrice() * $service->getLimitWeek();
                 }
-            } else {
-                // multiplicar por semanas
-                return $service->getPrice() * $quotation->getSemanas();
             }
+            if ($service->getUseAmountInitialWeeks()) {
+                if ($quotation->getSemanas() >= $service->getInitialWeeks()) {
+                    return $service->getPrice() * $quotation->getSemanas();
+                } else {
+                    return 0;
+                }
+            }
+
+            return $service->getPrice() * $quotation->getSemanas();
         }
 
         if ($service->getChargePerWeekLodging()) {
             // limite de semanas
             if ($service->getUsesLimitWeeks()) {
-                if ($service->getLimitWeek() <= $quotation->getSemanasLodging()) {
+                if ($quotation->getSemanasLodging() <= $service->getLimitWeek()) {
                     return $service->getPrice() * $quotation->getSemanasLodging();
                 } else {
                     // aplicar limite de semanas
                     return $service->getPrice() * $service->getLimitWeek();
                 }
-            } else {
-                // multiplicar por semanas
-                return $service->getPrice() * $quotation->getSemanasLodging();
             }
+
+            if ($service->getUseAmountInitialWeeks()) {
+                if ($quotation->getSemanas() >= $service->getInitialWeeks()) {
+                    return $service->getPrice() * $quotation->getSemanasLodging();
+                } else {
+                    return 0;
+                }
+            }
+
+            return $service->getPrice() * $quotation->getSemanasLodging();
         }
 
         if ($service->getUseAmountInitialWeeks()) {
-            if ($service->getInitialWeeks() >= $quotation->getSemanas()) {
+            if ($quotation->getSemanas() >= $service->getInitialWeeks()) {
                 return $service->getPrice() * $quotation->getSemanas();
             } else {
                 return 0;
@@ -328,7 +352,7 @@ class BaseController extends Controller
         $curdate = strtotime($today->format('d-m-Y'));
         $mydate = strtotime($expirationDay->format('d-m-Y'));
 
-        if($curdate > $mydate) {
+        if ($curdate > $mydate) {
             return [
                 "name" => $exchangeRateUSD->getCoin()->getName(),
                 "code" => $exchangeRateUSD->getCoin()->getCode(),

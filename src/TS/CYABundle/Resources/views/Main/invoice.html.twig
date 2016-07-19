@@ -2944,7 +2944,7 @@
                         {% set isSimpleService = false %}
                         {% if service.usesLimitWeeks %}
 
-                            {% if service.limitWeek <= quotation.semanas %}
+                            {% if quotation.semanas <= service.limitWeek %}
                                 <td class="text-left">
                                     {{ service.description }}
                                     <strong> Semanas: {{ quotation.semanas }}</strong>
@@ -2984,7 +2984,7 @@
                         {% set isSimpleService = false %}
                         {% if service.usesLimitWeeks %}
 
-                            {% if service.limitWeek <= quotation.semanas %}
+                            {% if quotation.semanas <= service.limitWeek %}
                                 <td class="text-left">
                                     {{ service.description }}
                                     <strong> Semanas: {{ quotation.semanasLodging }}</strong>
@@ -3022,7 +3022,7 @@
 
                     {% if service.useAmountInitialWeeks %}
                         {% set isSimpleService = false %}
-                        {% if service.initialWeeks >= quotation.semanas %}
+                        {% if quotation.semanas >= service.initialWeeks %}
                             <td class="text-left">
                                 {{ service.description }}
                                 <strong> Semanas: {{ quotation.semanas }}</strong>
