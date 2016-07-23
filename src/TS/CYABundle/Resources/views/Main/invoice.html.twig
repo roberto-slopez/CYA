@@ -2906,7 +2906,7 @@
                         {% if service.useAmountInitialWeeks %}
                             {% set isSimpleService = false %}
 
-                            {% if service.initialWeeks >= quotation.semanas %}
+                            {% if quotation.semanas >= service.initialWeeks %}
                                 <td class="text-left">
                                     {{ service.description }}
                                     <strong> Meses: {{ quotation.semanas / 4 }}</strong>
@@ -2938,21 +2938,19 @@
                                 <span class="label label-primary"><b>{{ (service.price * quotation.semanas / 4) | number_format(2, '.', ',') }}</b></span>
                             </td>
                         {% endif %}
-                    {% endif %}
-                    {% if service.summerSupplement %}
-                        {% set isSimpleService = false %}
-                    <td class="text-left">
-                        {{ service.description }}
-                        <strong> Semanas: {{ quotation.summerSupplement }}</strong>
-                        <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
-                    </td>
-                    <td class="text-right">{{ quotation.country.coin.code }}</td>
-                    <td class="text-right">
-                        <span class="label label-primary"><b>{{ (service.price * quotation.summerSupplement) | number_format(2, '.', ',') }}</b></span>
-                    </td>
-                    {% endif %}
 
-                    {% if service.chargePerWeekCourse %}
+                    {% elseif service.summerSupplement %}
+                        {% set isSimpleService = false %}
+                        <td class="text-left">
+                            {{ service.description }}
+                            <strong> Semanas: {{ quotation.summerSupplement }}</strong>
+                            <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
+                        </td>
+                        <td class="text-right">{{ quotation.country.coin.code }}</td>
+                        <td class="text-right">
+                            <span class="label label-primary"><b>{{ (service.price * quotation.summerSupplement) | number_format(2, '.', ',') }}</b></span>
+                        </td>
+                    {% elseif service.chargePerWeekCourse %}
                         {% set isSimpleService = false %}
                         {% if service.usesLimitWeeks %}
 
@@ -2990,9 +2988,7 @@
                             </td>
                         {% endif %}
 
-                    {% endif %}
-
-                    {% if service.chargePerWeekLodging %}
+                    {% elseif service.chargePerWeekLodging %}
                         {% set isSimpleService = false %}
                         {% if service.usesLimitWeeks %}
 
@@ -3030,9 +3026,7 @@
                             </td>
                         {% endif %}
 
-                    {% endif %}
-
-                    {% if service.useAmountInitialWeeks %}
+                    {% elseif service.useAmountInitialWeeks %}
                         {% set isSimpleService = false %}
                         {% if quotation.semanas >= service.initialWeeks %}
                             <td class="text-left">
@@ -3055,9 +3049,8 @@
                                 <span class="label label-primary"><b>{{ (service.price * 0) | number_format(2, '.', ',') }}</b></span>
                             </td>
                         {% endif %}
-                    {% endif %}
 
-                    {% if service.multiplesOfFour %}
+                    {% elseif service.multiplesOfFour %}
                         {% set isSimpleService = false %}
                         {% set keyValue = 0 %}
                         {% for key, i in range(0, 100, 4) if quotation.semanas >= i %}
@@ -3072,8 +3065,7 @@
                         <td class="text-right">
                             <span class="label label-primary"><b>{{ (service.price * keyValue) | number_format(2, '.', ',') }}</b></span>
                         </td>
-                    {% endif %}
-                    {% if isSimpleService %}
+                    {% elseif isSimpleService %}
                         <td class="text-left">
                             {{ service.description }}
                         </td>
