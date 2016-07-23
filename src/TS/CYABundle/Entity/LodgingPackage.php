@@ -31,7 +31,7 @@ class LodgingPackage
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=45, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=true)
      */
     protected $description;
 

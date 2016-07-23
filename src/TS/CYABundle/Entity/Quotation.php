@@ -182,6 +182,12 @@ class Quotation
     protected $lodging = null;
 
     /**
+     * @ORM\ManyToOne(targetEntity="LodgingPackage")
+     * @ORM\JoinColumn(name="lodging_package_id", referencedColumnName="id", nullable=true)
+     */
+    protected $lodgingpackage = null;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true, options={"default": 0})
      */
     protected $without_lodging = false;
@@ -223,15 +229,25 @@ class Quotation
     protected $exam;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LodgingPackage")
-     * @ORM\JoinColumn(name="lodging_package_id", referencedColumnName="id", nullable=true)
-     */
-    protected $lodgingPackage;
-
-    /**
      * @ORM\OneToMany(targetEntity="ManualMultiplier", mappedBy="quotation", cascade={"persist", "remove"})
      */
     protected $manualMultiplier;
+
+    /**
+     * @return LodgingPackage
+     */
+    public function getLodgingpackage()
+    {
+        return $this->lodgingpackage;
+    }
+
+    /**
+     * @param LodgingPackage $lodgingpackage
+     */
+    public function setLodgingpackage(LodgingPackage $lodgingpackage)
+    {
+        $this->lodgingpackage = $lodgingpackage;
+    }
 
     /**
      * @return mixed

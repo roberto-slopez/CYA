@@ -82,6 +82,20 @@ $(".headquarter_selector").change(function(){
             }
         }
     });
+
+    $.ajax({
+        type: 'post',
+        url: Routing.generate('select_lodgings_package', null, true),
+        data: data,
+        success: function(data) {
+            var $lodging_selector = $('.lodging_package_selector');
+            $lodging_selector.html('<option value="">Seleccionar opción</option>');
+
+            for (var i=0, total = data.length; i < total; i++) {
+                $lodging_selector.append('<option value="' + data[i].id + '">' + data[i].description +'</option>');
+            }
+        }
+    });
     //Course
     $.ajax({
         type: 'post',

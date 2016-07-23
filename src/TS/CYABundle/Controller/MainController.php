@@ -159,6 +159,21 @@ class MainController extends BaseController
     }
 
     /**
+     * @Route("/lodgings/package/all", name="select_lodgings_package", options={"expose"=true})
+     * @Method("POST")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function lodgingPackageAction(Request $request)
+    {
+        $headquarterId = $request->request->get('headquarterId');
+        $em = $this->getDoctrine()->getManager();
+        $lodging = $em->getRepository('TSCYABundle:LodgingPackage')->getByHeadquarter($headquarterId);
+
+        return new JsonResponse($lodging);
+    }
+
+    /**
      * @Route("/packages", name="select_packages", options={"expose"=true})
      * @Method("POST")
      * @param Request $request

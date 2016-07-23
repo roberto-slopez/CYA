@@ -2868,6 +2868,18 @@
                 </td>
             </tr>
         {% endif %}
+        {% if quotation.lodgingpackage %}
+            <tr>
+                <td class="text-left"><strong>Alojamiento</strong></td>
+                <td class="text-left"><b>({{ quotation.lodgingpackage.name }})</b> {{ quotation.lodgingpackage.description }}</td>
+                <td class="text-right">{{ quotation.country.coin.code }}</td>
+                <td class="text-right">
+                <span class="label label-primary">
+                    <b>{{ quotation.amountLodging | number_format(2, '.', ',') }}</b>
+                </span>
+                </td>
+            </tr>
+        {% endif %}
         {% if quotation.lodging %}
         <tr>
             <td class="text-left"><strong>Alojamiento</strong></td>

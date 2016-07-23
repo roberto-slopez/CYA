@@ -21,6 +21,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Descripción</th>
+                <th>Precio</th>
                 <th>Sede</th>
                 <th>Alojamiento</th>
                 <th>Actions</th>
@@ -31,6 +32,7 @@
             <tr>
                 <td><a href="{{ path('lodgingpackage_show', { 'id': lodgingPackage.id }) }}">{{ lodgingPackage.name }}</a></td>
                 <td>{{ lodgingPackage.description }}</td>
+                <td>{{ lodgingPackage.price |number_format(2, '.', ',') }}</td>
                 <td>{{ lodgingPackage.headquarter.name }}</td>
                 <td>{{ lodgingPackage.lodging.name }}</td>
                 <td>                        <div class="btn-group">

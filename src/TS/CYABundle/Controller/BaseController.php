@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 use TS\CYABundle\Entity\Agency;
 use TS\CYABundle\Entity\Course;
 use TS\CYABundle\Entity\ExchangeRateUSD;
+use TS\CYABundle\Entity\LodgingPackage;
 use TS\CYABundle\Entity\Quotation;
 use TS\CYABundle\Entity\Service;
 use TS\CYABundle\Entity\Usuario;
@@ -102,10 +103,16 @@ class BaseController extends Controller
         if ($type == Quotation::FLEXIBLE) {
             $quotation->setAmountLodging(0.00);
             if (!$quotation->getWithoutLodging()) {
-                $lodgingAmount = round(
-                    $quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(),
-                    2
-                );
+                $lodgingAmount = 0;
+                $lodgingPackage = $quotation->getLodgingpackage();
+                if ($lodgingPackage) {
+                    $lodgingAmount = $lodgingPackage->getPrice();
+                } else {
+                    $lodgingAmount = round(
+                        $quotation->getLodging()->getPricePerWeek() * $quotation->getSemanasLodging(),
+                        2
+                    );
+                }
                 $quotation->setAmountLodging($lodgingAmount);
             }
 

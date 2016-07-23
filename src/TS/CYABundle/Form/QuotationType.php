@@ -19,6 +19,7 @@ use TS\CYABundle\Form\EventListener\AddDiscretionarySpendingFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddHeadquarterFieldSubscriber;
 use TS\CYABundle\Form\ClientType;
 use TS\CYABundle\Form\EventListener\AddLodgingFieldSubscriber;
+use TS\CYABundle\Form\EventListener\AddLodgingPackageFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddPromocionFieldSubscriber;
 use TS\CYABundle\Form\EventListener\AddServiceFieldSubscriber;
 
@@ -37,6 +38,7 @@ class QuotationType extends AbstractType
         $builder->addEventSubscriber(new AddCityFieldSubscriber('city'));
         $builder->addEventSubscriber(new AddHeadquarterFieldSubscriber('headquarter'));
         $builder->addEventSubscriber(new AddLodgingFieldSubscriber('lodging'));
+        $builder->addEventSubscriber(new AddLodgingPackageFieldSubscriber('lodgingpackage'));
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $event->stopPropagation();
