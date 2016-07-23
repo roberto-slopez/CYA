@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use TS\CYABundle\Entity\Headquarter;
+
 class HeadquarterType extends AbstractType
 {
     /**

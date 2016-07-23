@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block MenuCatalog %} class="sidebar-nav-menu open" {% endblock MenuCatalog %}
+{% block MenuLodgingPackage %} class="active" {% endblock MenuLodgingPackage %}
+{% block ulCatalog %} style="display: block;" {% endblock ulCatalog %}
+
+{% block iconHead %}
+    <i class="fa fa-asterisk"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+    Alojamiento paquete
+{% endblock pageTitle %}
+{% block subtitle %}
+    Crear
+{% endblock subtitle %}
+
+{% block titlePanel %}
+    Ingreso Alojamiento paquete
+{% endblock titlePanel %}
+{% block action %}{% endblock action %}
+{% block bodyPanel %}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal form-bordered'} }) }}
+        {{ form_widget(form) }}
+            <div class="form-group">
+                <div class="col-md-12 col-md-offset-6">
+                    <input type="submit" value="Create" class="btn btn-sm btn-success"/>
+                </div>
+            </div>
+                        <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('lodgingpackage_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a>    </div>
+</div>{{ form_end(form) }}
+{% endblock bodyPanel %}
+{% block extraJS %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script type="text/javascript">
+        $("#lodging_package_headquarter").change(function(){
+            var data = {
+                headquarterId: $(this).val()
+            };
+
+            //Lodging
+            $.ajax({
+                type: 'post',
+                url: Routing.generate('select_lodgings', null, true),
+                data: data,
+                success: function(data) {
+                    var $lodging_selector = $('.lodging_selector');
+                    $lodging_selector.html('<option value="">Seleccionar opción</option>');
+
+                    for (var i=0, total = data.length; i < total; i++) {
+                        $lodging_selector.append('<option value="' + data[i].id + '">' + data[i].name +' - '+ data[i].type +'</option>');
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock extraJS %}

@@ -119,13 +119,12 @@
                                 <li>
                                     <a href="{{ url("admin_lodging_index") }}" {% block MenuLodging %}{% endblock MenuLodging %}>{% trans %}Lodging{% endtrans %}</a>
                                 </li>
-                                {% endif %}
-                                {% if is_granted('ROLE_SELLER') %}
+                                <li>
+                                    <a href="{{ url("lodgingpackage_index") }}" {% block MenuLodgingPackage %}{% endblock MenuLodgingPackage %}>{% trans %}Lodging Package{% endtrans %}</a>
+                                </li>
                                 <li>
                                     <a href="{{ url("admin_service_index") }}" {% block MenuService %}{% endblock MenuService %}>{% trans %}Service{% endtrans %}</a>
                                 </li>
-                                {% endif %}
-                                {% if is_granted('ROLE_ADMIN') %}
                                 <li>
                                     <a href="{{ url("admin_course_index") }}" {% block MenuCourse %}{% endblock MenuCourse %}>{% trans %}Course{% endtrans %}</a>
                                 </li>

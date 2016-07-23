@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block MenuCatalog %} class="sidebar-nav-menu open" {% endblock MenuCatalog %}
+{% block MenuLodgingPackage %} class="active" {% endblock MenuLodgingPackage %}
+{% block ulCatalog %} style="display: block;" {% endblock ulCatalog %}
+
+{% block iconHead %}
+<i class="fa fa-eye"></i>
+{% endblock iconHead %}
+
+{% block pageTitle %}
+    Alojamiento paquete
+{% endblock pageTitle %}
+{% block subtitle %}
+Visualizar
+{% endblock subtitle %}
+{% block titlePanel %}
+    Alojamiento paquete
+{% endblock titlePanel %}
+{% block action %}
+        <div class="form-group form-actions">
+    <div class="col-md-12 col-md-offset-6">
+        <a href="{{ path('lodgingpackage_index') }}" class="btn btn-sm btn-primary">
+            <i class="hi hi-chevron-left"></i>
+            Regresar
+        </a>            <a href="{{ path('lodgingpackage_edit', { 'id': lodgingPackage.id }) }}" class="btn btn-sm btn-warning">
+                <i class="gi gi-edit"></i>
+                Edit
+            </a>    </div>
+</div>{% endblock action %}
+{% block bodyPanel %}
+    <div class="table-responsive">
+        <table class="table table-vcenter table-striped">
+            <tbody>
+                <tr>
+                    <th>Nombre</th>
+                        <td>{{ lodgingPackage.name }}</td>
+                </tr>
+                <tr>
+                    <th>Descripción</th>
+                        <td>{{ lodgingPackage.description }}</td>
+                </tr>
+                <tr>
+                    <th>Sede</th>
+                    <td>{{ lodgingPackage.headquarter.name }}</td>
+                </tr>
+                <tr>
+                    <th>Alojamiento</th>
+                    <td>{{ lodgingPackage.lodging.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock bodyPanel %}

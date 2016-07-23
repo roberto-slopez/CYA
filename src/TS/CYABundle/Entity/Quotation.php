@@ -223,6 +223,12 @@ class Quotation
     protected $exam;
 
     /**
+     * @ORM\ManyToOne(targetEntity="LodgingPackage")
+     * @ORM\JoinColumn(name="lodging_package_id", referencedColumnName="id", nullable=true)
+     */
+    protected $lodgingPackage;
+
+    /**
      * @ORM\OneToMany(targetEntity="ManualMultiplier", mappedBy="quotation", cascade={"persist", "remove"})
      */
     protected $manualMultiplier;
