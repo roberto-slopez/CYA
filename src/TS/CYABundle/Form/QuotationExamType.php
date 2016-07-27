@@ -65,7 +65,7 @@ class QuotationExamType extends AbstractType
             ->add('client', ClientType::class)
             ->add('semanas', IntegerType::class, [
                 'required' => true,
-                'label' => 'Summer weeks'
+                'label' => 'Weeks'
             ])
             ->add('without_lodging', CheckboxType::class, [
                 'required' => false

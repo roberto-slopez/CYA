@@ -231,14 +231,14 @@ class BaseController extends Controller
             if ($service->getUseAmountInitialWeeks()) {
                 if ($service->getInitialWeeks() >= $quotation->getSemanas()) {
                     $meses = $quotation->getSemanas() / 4;
-
+                    $meses++;
                     return $meses * $service->getPrice();
                 } else {
                     return 0;
                 }
             } else {
                 $meses = $quotation->getSemanas() / 4;
-
+                $meses++;
                 return $meses * $service->getPrice();
             }
         }

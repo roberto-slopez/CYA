@@ -1,6 +1,16 @@
 /**
  * Created by tscompany on 20/02/16.
  */
+$("#quotation_package_without_lodging").change(function(a){
+    if ($(this).is(':checked')) {
+        $("#quotation_package_semanas_lodging").prop('disabled', true);
+        $("#quotation_package_lodging").prop('disabled', true);
+    } else {
+        $("#quotation_package_semanas_lodging").prop('disabled', false);
+        $("#quotation_package_lodging").prop('disabled', false);
+    }
+});
+
 var packageSelect = $(".package_selector");
 var serviceSelect = $(".service_selector");
 var weekslodging = $("#quotation_package_semanas_lodging");

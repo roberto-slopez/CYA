@@ -1,6 +1,18 @@
 /**
  * Created by tscompany on 17/02/16.
  */
+$("#quotation_without_lodging").change(function(a){
+    if ($(this).is(':checked')) {
+        $("#quotation_lodgingpackage").prop('disabled', true);
+        $("#quotation_semanas_lodging").prop('disabled', true);
+        $("#quotation_lodging").prop('disabled', true);
+    } else {
+        $("#quotation_lodgingpackage").prop('disabled', false);
+        $("#quotation_semanas_lodging").prop('disabled', false);
+        $("#quotation_lodging").prop('disabled', false);
+    }
+});
+
 $(".country_selector").change(function(){
     var data = {
         countryId: $(this).val()

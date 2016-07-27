@@ -2909,17 +2909,17 @@
                             {% if quotation.semanas >= service.initialWeeks %}
                                 <td class="text-left">
                                     {{ service.description }}
-                                    <strong> Meses: {{ quotation.semanas / 4 }}</strong>
+                                    <strong> Meses: {{ (quotation.semanas / 4) + 1 }}</strong>
                                     <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 </td>
                                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                                 <td class="text-right">
-                                    <span class="label label-primary"><b>{{ (service.price * quotation.semanas / 4) | number_format(2, '.', ',') }}</b></span>
+                                    <span class="label label-primary"><b>{{ (service.price * ((quotation.semanas / 4) +1)) | number_format(2, '.', ',') }}</b></span>
                                 </td>
                             {% else %}
                                 <td class="text-left">
                                     {{ service.description }}
-                                    <strong> Meses: {{ quotation.semanas / 4 }}</strong>
+                                    <strong> Meses: {{ (quotation.semanas / 4) +1  }}</strong>
                                     <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 </td>
                                 <td class="text-right">{{ quotation.country.coin.code }}</td>
@@ -2930,12 +2930,12 @@
                         {% else %}
                             <td class="text-left">
                                 {{ service.description }}
-                                <strong> Meses: {{ quotation.semanas / 4 }}</strong>
+                                <strong> Meses: {{ (quotation.semanas / 4) +1  }}</strong>
                                 <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                             </td>
                             <td class="text-right">{{ quotation.country.coin.code }}</td>
                             <td class="text-right">
-                                <span class="label label-primary"><b>{{ (service.price * quotation.semanas / 4) | number_format(2, '.', ',') }}</b></span>
+                                <span class="label label-primary"><b>{{ (service.price * ((quotation.semanas / 4) +1)) | number_format(2, '.', ',') }}</b></span>
                             </td>
                         {% endif %}
 

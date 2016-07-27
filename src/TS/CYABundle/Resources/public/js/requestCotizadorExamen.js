@@ -1,6 +1,17 @@
 /**
  * Created by tscompany on 20/02/16.
  */
+
+$("#quotation_exam_without_lodging").change(function(a){
+    if ($(this).is(':checked')) {
+        $("#quotation_exam_semanas_lodging").prop('disabled', true);
+        $("#quotation_exam_lodging").prop('disabled', true);
+    } else {
+        $("#quotation_exam_semanas_lodging").prop('disabled', false);
+        $("#quotation_exam_lodging").prop('disabled', false);
+    }
+});
+
 $(".country_selector").change(function(){
     var data = {
         countryId: $(this).val()
