@@ -31,7 +31,9 @@
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "jms/serializer-bundle": "dev-master",
-        "knplabs/knp-snappy-bundle": "dev-master"
+        "knplabs/knp-snappy-bundle": "dev-master",
+        "h4cc/wkhtmltopdf-amd64": "^0.12.3",
+        "h4cc/wkhtmltoimage-amd64": "^0.12.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
