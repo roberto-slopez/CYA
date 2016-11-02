@@ -92,7 +92,7 @@ knp_snappy:
         options:
             no-outline: true
             page-size: Letter
-            zoom: 0.5
+            zoom: 0.65
             # Recommended to set UTF-8 as default encoding :)
             encoding: UTF-8
     image:
