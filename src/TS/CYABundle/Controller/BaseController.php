@@ -86,6 +86,7 @@ class BaseController extends Controller
         $isLocal = $coin->getIsLocalCountry();
         $idCoin = $coin->getId();
         $current = 1;
+        $lodgingAmount = 0;
 
         $quotation->setTotalSemanas($quotation->getSemanas());
         $totalManualMultiplier = 0;
@@ -103,7 +104,6 @@ class BaseController extends Controller
         if ($type == Quotation::FLEXIBLE) {
             $quotation->setAmountLodging(0.00);
             if (!$quotation->getWithoutLodging()) {
-                $lodgingAmount = 0;
                 $lodgingPackage = $quotation->getLodgingpackage();
                 if ($lodgingPackage) {
                     $lodgingAmount = $lodgingPackage->getPrice();
@@ -229,7 +229,7 @@ class BaseController extends Controller
     {
         if ($service->getIsHealthCoverage() && $quotation->getSemanas() >= 4) {
             if ($service->getUseAmountInitialWeeks()) {
-                if ($service->getInitialWeeks() >= $quotation->getSemanas()) {
+                if ($quotation->getSemanas() >= $service->getInitialWeeks()) {
                     $meses = $quotation->getSemanas() / 4;
                     $meses++;
                     return $meses * $service->getPrice();

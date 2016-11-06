@@ -2782,7 +2782,7 @@
         {% elseif quotation.type == 'EXAM' %}
             <b>Tipo examen</b>: {{ quotation.exam.name }} {#<b>Fecha inicio</b>: {inici}#}
         {% endif %}
-        <b>N° Semanas</b>: {{ quotation.semanas }}<br>
+        <b>N° Semanas: </b>{{ quotation.semanas }} | <b>Fecha inicio</b> {{ quotation.startDate |date("d/m/Y") }}<br>
         <b>Asesora</b>: {{ quotation.seller.fullName }}<br>
         <i class="fa fa-phone"></i> {{ quotation.seller.telephone }}<br>
         <i class="fa fa-envelope-o"></i> {{ quotation.seller.userSeller.email }}
@@ -2871,7 +2871,8 @@
         {% if quotation.lodgingpackage %}
             <tr>
                 <td class="text-left"><strong>Alojamiento</strong></td>
-                <td class="text-left"><b>({{ quotation.lodgingpackage.name }})</b> {{ quotation.lodgingpackage.description }}</td>
+                <td class="text-left">
+                    <b>({{ quotation.lodgingpackage.name }}) </b> {{ quotation.lodgingpackage.description }}</td>
                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                 <td class="text-right">
                 <span class="label label-primary">
@@ -2883,7 +2884,15 @@
         {% if quotation.lodging %}
         <tr>
             <td class="text-left"><strong>Alojamiento</strong></td>
-            <td class="text-left"><b>({{ quotation.lodging.name }})</b> {{ quotation.lodging.description }}
+            <td class="text-left">
+                <b>({{ quotation.lodging.name }})
+                    {% if quotation.lodging.type == "DOBLE" or quotation.lodging.type == "MULTI" %}
+                        COMPARTIDA {# << TODO: Añadir traduccion  #}
+                    {% else %}
+                        {{ quotation.lodging.type }}
+                    {% endif %}
+                </b>
+                {{ quotation.lodging.description }}
                 {% if quotation.semanasLodging %}
                 <b>Semanas {{ quotation.semanasLodging }}</b>
                 {% endif %}
@@ -3165,6 +3174,9 @@
                 -Kaplan no congela tasas ni valores en pesos colombianos (COP).<br/>
                 -El alojamiento estará sujeto a disponibilidad.<br/>
                 -Las fechas del suplemento de verano va de 24 de junio hasta agosto 26<br/>
+                {% if quotation.country.code == "EEUU" %}
+                -Si reservas con menos de 3 meses a la fecha de inicio debes asumir el costo del envío del I-20 por correo expreso de USD 60.<br/>
+                {% endif %}
                 <strong>**Favor aclarar estos detalles con tu asesor</strong>
             </td>
         </tr>

@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -62,6 +63,7 @@ class QuotationPackageType extends AbstractType
                 'placeholder' => 'Choose an option',
                 'attr' => ['class' => 'country_selector select-select2']
             ])
+            ->add('startDate', DateType::class, [])
             ->add('client', ClientType::class)
             ->add('without_lodging', CheckboxType::class, [
                 'required' => false

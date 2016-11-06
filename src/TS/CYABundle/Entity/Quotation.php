@@ -31,6 +31,11 @@ class Quotation
     protected $id;
 
     /**
+     * @ORM\Column(name="start_date", type="date")
+     */
+    protected $start_date;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $country_id;
@@ -232,6 +237,25 @@ class Quotation
      * @ORM\OneToMany(targetEntity="ManualMultiplier", mappedBy="quotation", cascade={"persist", "remove"})
      */
     protected $manualMultiplier;
+
+    /**
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->start_date;
+    }
+
+    /**
+     * @param $start_date
+     * @return $this
+     */
+    public function setStartDate($start_date)
+    {
+        $this->start_date = $start_date;
+
+        return $this;
+    }
 
     /**
      * @return LodgingPackage
