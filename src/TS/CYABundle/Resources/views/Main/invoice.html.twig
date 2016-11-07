@@ -2782,7 +2782,7 @@
         {% elseif quotation.type == 'EXAM' %}
             <b>Tipo examen</b>: {{ quotation.exam.name }} {#<b>Fecha inicio</b>: {inici}#}
         {% endif %}
-        <b>N° Semanas: </b>{{ quotation.semanas }} | <b>Fecha inicio</b> {{ quotation.startDate |date("d/m/Y") }}<br>
+        <b>Semanas de curso: </b>{{ quotation.semanas }} | <b>Semanas de alojamiento: </b>{{ quotation.semanasLodging }} | <b>Fecha inicio</b> {{ quotation.startDate |date("d/m/Y") }}<br>
         <b>Asesora</b>: {{ quotation.seller.fullName }}<br>
         <i class="fa fa-phone"></i> {{ quotation.seller.telephone }}<br>
         <i class="fa fa-envelope-o"></i> {{ quotation.seller.userSeller.email }}
