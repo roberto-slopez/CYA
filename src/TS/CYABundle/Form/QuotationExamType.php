@@ -63,7 +63,12 @@ class QuotationExamType extends AbstractType
                 'placeholder' => 'Choose an option',
                 'attr' => ['class' => 'country_selector select-select2']
             ])
-            ->add('startDate', DateType::class, [])
+            ->add('startDate', DateType::class, [
+                //'input' => 'string',
+                'widget' => 'single_text',
+                'required' => false,
+                //'format' => 'dd-MM-yyyy',
+            ])
             ->add('client', ClientType::class)
             ->add('semanas', IntegerType::class, [
                 'required' => true,
