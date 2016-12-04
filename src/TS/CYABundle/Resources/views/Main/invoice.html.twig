@@ -2926,7 +2926,7 @@
                                 <td class="text-left">
                                     <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                     {{ service.description }}
-                                    <strong> Meses: {{ (quotation.semanas / 4) + 1 }}</strong>
+                                    {#<strong> Meses: {{ (quotation.semanas / 4) + 1 }}</strong>#}
                                 </td>
                                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                                 <td class="text-right">
@@ -2947,7 +2947,7 @@
                             <td class="text-left">
                                 <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 {{ service.description }}
-                                <strong> Meses: {{ (quotation.semanas / 4) +1  }}</strong>
+                                {#<strong> Meses: {{ (quotation.semanas / 4) +1  }}</strong>#}
                             </td>
                             <td class="text-right">{{ quotation.country.coin.code }}</td>
                             <td class="text-right">
