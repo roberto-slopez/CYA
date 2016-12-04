@@ -19,17 +19,39 @@ class DiscretionarySpendingType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
             ->add('valueVisa', MoneyType::class, [
                 'currency' => 'USD'
+            ])
+            ->add('descriptionVisa')
+            ->add('coinVisa', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Coin',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('coin')
+                        ->orderBy('coin.name', 'ASC');
+                    return $qb;
+                },
+                'choice_label' => 'name',
+                'attr' => ['class' => 'select-select2']
             ])
             ->add('valueAdicional', MoneyType::class, [
                 'currency' => 'USD'
             ])
+            ->add('descriptionAdicional')
+            ->add('coinAdicional', EntityType::class, [
+                'class' => 'TS\CYABundle\Entity\Coin',
+                'query_builder' => function (EntityRepository $repository) {
+                    $qb = $repository->createQueryBuilder('coin')
+                        ->orderBy('coin.name', 'ASC');
+                    return $qb;
+                },
+                'choice_label' => 'name',
+                'attr' => ['class' => 'select-select2']
+            ])
             ->add('valueShipping', MoneyType::class, [
                 'currency' => 'USD'
             ])
-            ->add('coin', EntityType::class, [
+            ->add('descriptionShipping')
+            ->add('coinShipping', EntityType::class, [
                 'class' => 'TS\CYABundle\Entity\Coin',
                 'query_builder' => function (EntityRepository $repository) {
                     $qb = $repository->createQueryBuilder('coin')

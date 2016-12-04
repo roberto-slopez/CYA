@@ -67,7 +67,7 @@ class CotizadorController extends BaseController
         $quotation = new Quotation();
         $quotation->setClient(new Client());
         $quotation->setSeller($seller);
-        $quotation->setStartDate(new \DateTime('today'));
+        //$quotation->setStartDate(new \DateTime('today'));
         $quotation->setType(Quotation::FLEXIBLE);
 
         $form = $this->createForm(QuotationType::class, $quotation);

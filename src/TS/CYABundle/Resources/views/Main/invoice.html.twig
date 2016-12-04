@@ -2772,7 +2772,8 @@
         {% if quotation.promocion %}
             <h2>Promoción valida hasta: {{ quotation.promocion.expiration |date("d/m/Y") }}</h2>
         {% endif %}
-        <b>Nombre:</b>{{ quotation.client.fullName }} <br/>
+        {#<b>Nombre:</b>{{ quotation.client.fullName }} <br/>#}
+        <span style="margin: 0; font-size: 20px; line-height: 32px; font-weight: bold">{{ quotation.client.fullName }}</span> <br />
         <b>Destino</b>: {{ quotation.country.name }}/{{ quotation.headquarter.name }}
         <b>Fecha</b>: {{ "now"|date("d/m/Y") }}<br>
         {% if quotation.type == 'FLEXIBLE' %}
@@ -2782,10 +2783,16 @@
         {% elseif quotation.type == 'EXAM' %}
             <b>Tipo examen</b>: {{ quotation.exam.name }} {#<b>Fecha inicio</b>: {inici}#}
         {% endif %}
-        <b>Semanas de curso: </b>{{ quotation.semanas }} | <b>Semanas de alojamiento: </b>{{ quotation.semanasLodging }} | <b>Fecha inicio</b> {{ quotation.startDate |date("d/m/Y") }}<br>
-        <b>Asesora</b>: {{ quotation.seller.fullName }}<br>
-        <i class="fa fa-phone"></i> {{ quotation.seller.telephone }}<br>
-        <i class="fa fa-envelope-o"></i> {{ quotation.seller.userSeller.email }}
+        <b>
+            Semanas de curso: </b>{{ quotation.semanas }}
+            {% if quotation.semanasLodging %}
+                | <b>Semanas de alojamiento: </b>{{ quotation.semanasLodging }}
+            {% endif %}
+            {% if quotation.startDate %}
+                | <b>Fecha inicio</b> {{ quotation.startDate |date("d/m/Y") }}
+            {% endif %}
+        <br>
+        <b>Asesora</b>: {{ quotation.seller.fullName }} | <i class="fa fa-phone"></i> {{ quotation.seller.telephone }} | <i class="fa fa-envelope-o"></i> {{ quotation.seller.userSeller.email }}
     </div>
 </div>
 <div class="{#table-responsive#}">
@@ -2917,9 +2924,9 @@
 
                             {% if quotation.semanas >= service.initialWeeks %}
                                 <td class="text-left">
+                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                     {{ service.description }}
                                     <strong> Meses: {{ (quotation.semanas / 4) + 1 }}</strong>
-                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 </td>
                                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                                 <td class="text-right">
@@ -2927,9 +2934,9 @@
                                 </td>
                             {% else %}
                                 <td class="text-left">
+                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                     {{ service.description }}
                                     <strong> Meses: {{ (quotation.semanas / 4) +1  }}</strong>
-                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 </td>
                                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                                 <td class="text-right">
@@ -2938,9 +2945,9 @@
                             {% endif %}
                         {% else %}
                             <td class="text-left">
+                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 {{ service.description }}
                                 <strong> Meses: {{ (quotation.semanas / 4) +1  }}</strong>
-                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                             </td>
                             <td class="text-right">{{ quotation.country.coin.code }}</td>
                             <td class="text-right">
@@ -2951,9 +2958,9 @@
                     {% elseif service.summerSupplement %}
                         {% set isSimpleService = false %}
                         <td class="text-left">
+                            <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                             {{ service.description }}
                             <strong> Semanas: {{ quotation.summerSupplement }}</strong>
-                            <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                         </td>
                         <td class="text-right">{{ quotation.country.coin.code }}</td>
                         <td class="text-right">
@@ -2965,9 +2972,9 @@
 
                             {% if quotation.semanas <= service.limitWeek %}
                                 <td class="text-left">
+                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                     {{ service.description }}
                                     <strong> Semanas: {{ quotation.semanas }}</strong>
-                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 </td>
                                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                                 <td class="text-right">
@@ -2975,9 +2982,9 @@
                                 </td>
                             {% else %}
                                 <td class="text-left">
+                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                     {{ service.description }}
                                     <strong> Semanas: {{ service.limitWeek }}</strong>
-                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 </td>
                                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                                 <td class="text-right">
@@ -2987,9 +2994,9 @@
 
                         {% else %}
                             <td class="text-left">
+                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 {{ service.description }}
                                 <strong> Semanas: {{ quotation.semanas }}</strong>
-                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                             </td>
                             <td class="text-right">{{ quotation.country.coin.code }}</td>
                             <td class="text-right">
@@ -3003,9 +3010,9 @@
 
                             {% if quotation.semanas <= service.limitWeek %}
                                 <td class="text-left">
+                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                     {{ service.description }}
                                     <strong> Semanas: {{ quotation.semanasLodging }}</strong>
-                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 </td>
                                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                                 <td class="text-right">
@@ -3013,9 +3020,9 @@
                                 </td>
                             {% else %}
                                 <td class="text-left">
+                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                     {{ service.description }}
                                     <strong> Semanas: {{ service.limitWeek }}</strong>
-                                    <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 </td>
                                 <td class="text-right">{{ quotation.country.coin.code }}</td>
                                 <td class="text-right">
@@ -3025,9 +3032,9 @@
 
                         {% else %}
                             <td class="text-left">
+                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 {{ service.description }}
                                 <strong> Semanas: {{ quotation.semanasLodging }}</strong>
-                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                             </td>
                             <td class="text-right">{{ quotation.country.coin.code }}</td>
                             <td class="text-right">
@@ -3039,9 +3046,9 @@
                         {% set isSimpleService = false %}
                         {% if quotation.semanas >= service.initialWeeks %}
                             <td class="text-left">
+                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 {{ service.description }}
                                 <strong> Semanas: {{ quotation.semanas }}</strong>
-                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                             </td>
                             <td class="text-right">{{ quotation.country.coin.code }}</td>
                             <td class="text-right">
@@ -3049,9 +3056,9 @@
                             </td>
                         {% else %}
                             <td class="text-left">
+                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                                 {{ service.description }}
                                 <strong> Semanas: 0</strong>
-                                <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                             </td>
                             <td class="text-right">{{ quotation.country.coin.code }}</td>
                             <td class="text-right">
@@ -3066,9 +3073,9 @@
                             {% set keyValue = key %}
                         {% endfor %}
                         <td class="text-left">
+                            <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                             {{ service.description }}
                             <strong> {{ keyValue }}</strong>
-                            <span class="label label-primary">{{ service.price | number_format(2, '.', ',') }}</span>
                         </td>
                         <td class="text-right">{{ quotation.country.coin.code }}</td>
                         <td class="text-right">
@@ -3121,50 +3128,7 @@
     {#<div style="overflow: hidden!important; page-break-inside: avoid; !important;">#}
     <table class="table table-vcenter" style="display: table;">
         <tr>
-            <td class="text-center" style="background-color: #1e68b4; color: white;" colspan="4">Gastos adicionales</td>
-        </tr>
-        {% if quotation.discretionarySpending %}
-        <tr>
-            <td class="text-left" colspan="2">Valor de visa</td>
-            <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
-            <td class="text-right">
-                <span class="label label-primary">
-                    <strong>
-                        {{ quotation.discretionarySpending.valueVisa | number_format(2, '.', ',') }}
-                    </strong>
-                </span>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-left" colspan="2">Valor adicional</td>
-            <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
-            <td class="text-right">
-                <span class="label label-primary">
-                    <strong>
-                        {{ quotation.discretionarySpending.valueAdicional | number_format(2, '.', ',') }}
-                    </strong>
-                </span>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-left" colspan="2">Valor de envio</td>
-            <td class="text-right">{{ quotation.discretionarySpending.coin.code }}</td>
-            <td class="text-right">
-                <span class="label label-primary">
-                    <strong>
-                        {{ quotation.discretionarySpending.valueShipping | number_format(2, '.', ',') }}
-                    </strong>
-                </span>
-            </td>
-        </tr>
-        {% endif %}
-        <tr>
             <td class="text-center page" style="background-color: #1e68b4; color: white;" colspan="4">OBSERVACIONES</td>
-        </tr>
-        <tr>
-            <td class="text-center" colspan="4" style="word-wrap: break-word;">
-                {{ quotation.note }}
-            </td>
         </tr>
         <tr>
             <td class="text-center" colspan="4">
@@ -3175,7 +3139,7 @@
                 -El alojamiento estará sujeto a disponibilidad.<br/>
                 -Las fechas del suplemento de verano va de 24 de junio hasta agosto 26<br/>
                 {% if quotation.country.code == "EEUU" %}
-                -Si reservas con menos de 3 meses a la fecha de inicio debes asumir el costo del envío del I-20 por correo expreso de USD 60.<br/>
+                    -Si reservas con menos de 3 meses a la fecha de inicio debes asumir el costo del envío del I-20 por correo expreso de USD 60.<br/>
                 {% endif %}
                 <strong>**Favor aclarar estos detalles con tu asesor</strong>
             </td>
@@ -3188,6 +3152,52 @@
         <tr>
             <td class="text-center" colspan="4">http://www.kaplaninternational.com/co</td>
         </tr>
+        <tr>
+            <td class="text-center" style="background-color: #1e68b4; color: white;" colspan="4">Gastos adicionales</td>
+        </tr>
+        {% if quotation.discretionarySpending %}
+        <tr>
+            <td class="text-left">Valor de visa</td>
+            <td class="text-left">{{ quotation.discretionarySpending.descriptionVisa }}</td>
+            <td class="text-right">{{ quotation.discretionarySpending.coinVisa.code }}</td>
+            <td class="text-right">
+                <span class="label label-primary">
+                    <strong>
+                        {{ quotation.discretionarySpending.valueVisa | number_format(2, '.', ',') }}
+                    </strong>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left">Valor adicional</td>
+            <td class="text-left">{{ quotation.discretionarySpending.descriptionAdicional }}</td>
+            <td class="text-right">{{ quotation.discretionarySpending.coinAdicional.code }}</td>
+            <td class="text-right">
+                <span class="label label-primary">
+                    <strong>
+                        {{ quotation.discretionarySpending.valueAdicional | number_format(2, '.', ',') }}
+                    </strong>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left">Valor de envio</td>
+            <td class="text-left">{{ quotation.discretionarySpending.descriptionShipping }}</td>
+            <td class="text-right">{{ quotation.discretionarySpending.coinShipping.code }}</td>
+            <td class="text-right">
+                <span class="label label-primary">
+                    <strong>
+                        {{ quotation.discretionarySpending.valueShipping | number_format(2, '.', ',') }}
+                    </strong>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center" colspan="4" style="word-wrap: break-word;">
+                {{ quotation.note }}
+            </td>
+        </tr>
+        {% endif %}
     </table>
 </div>
 </body>

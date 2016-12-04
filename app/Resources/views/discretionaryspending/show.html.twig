@@ -37,24 +37,40 @@
                 <td>{{ discretionarySpending.name }}</td>
             </tr>
             <tr>
-                <th>{% trans %}Description{% endtrans %}</th>
-                <td>{{ discretionarySpending.description }}</td>
-            </tr>
-            <tr>
                 <th>{% trans %}Value visa{% endtrans %}</th>
                 <td>{{ discretionarySpending.valueVisa }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Description visa{% endtrans %}</th>
+                <td>{{ discretionarySpending.descriptionVisa }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Coin{% endtrans %}</th>
+                <td>{{ discretionarySpending.coinVisa.name }}</td>
             </tr>
             <tr>
                 <th>{% trans %}Value adicional{% endtrans %}</th>
                 <td>{{ discretionarySpending.valueAdicional }}</td>
             </tr>
             <tr>
+                <th>{% trans %}Description adicional{% endtrans %}</th>
+                <td>{{ discretionarySpending.descriptionVisa }}</td>
+            </tr>
+            <tr>
+                <th>{% trans %}Coin{% endtrans %}</th>
+                <td>{{ discretionarySpending.coinAdicional.name }}</td>
+            </tr>
+            <tr>
                 <th>{% trans %}Value shipping{% endtrans %}</th>
                 <td>{{ discretionarySpending.valueShipping }}</td>
             </tr>
             <tr>
+                <th>{% trans %}Description shipping{% endtrans %}</th>
+                <td>{{ discretionarySpending.descriptionVisa }}</td>
+            </tr>
+            <tr>
                 <th>{% trans %}Coin{% endtrans %}</th>
-                <td>{{ discretionarySpending.coin.name }}</td>
+                <td>{{ discretionarySpending.coinShipping.name }}</td>
             </tr>
             <tr>
                 <th>{% trans %}Country{% endtrans %}</th>

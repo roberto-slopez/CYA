@@ -20,7 +20,6 @@
                 <thead>
                 <tr>
                     <th>{% trans %}Name{% endtrans %}</th>
-                    <th>{% trans %}Description{% endtrans %}</th>
                     <th>{% trans %}Value visa{% endtrans %}</th>
                     <th>{% trans %}Value adicional{% endtrans %}</th>
                     <th>{% trans %}Value shipping{% endtrans %}</th>
@@ -31,7 +30,6 @@
                 {% for discretionarySpending in discretionarySpendings %}
                     <tr>
                         <td>{{ discretionarySpending.name }}</td>
-                        <td>{{ discretionarySpending.description }}</td>
                         <td>{{ discretionarySpending.valueVisa }}</td>
                         <td>{{ discretionarySpending.valueAdicional }}</td>
                         <td>{{ discretionarySpending.valueShipping }}</td>

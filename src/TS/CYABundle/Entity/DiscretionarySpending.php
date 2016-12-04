@@ -32,14 +32,20 @@ class DiscretionarySpending
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=250, nullable=true)
-     */
-    protected $description;
-
-    /**
      * @ORM\Column(name="value_visa", type="float", nullable=true)
      */
     protected $valueVisa;
+
+    /**
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    protected $description_visa;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Coin")
+     * @ORM\JoinColumn(name="coin_id", referencedColumnName="id", nullable=true)
+     */
+    protected $coin_visa;
 
     /**
      * @ORM\Column(name="value_adicional", type="float", nullable=true)
@@ -47,15 +53,31 @@ class DiscretionarySpending
     protected $valueAdicional;
 
     /**
-     * @ORM\Column(name="value_shipping", type="float", nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=true)
      */
-    protected $valueShipping;
+    protected $description_adicional;
 
     /**
      * @ORM\ManyToOne(targetEntity="Coin")
      * @ORM\JoinColumn(name="coin_id", referencedColumnName="id", nullable=true)
      */
-    protected $coin;
+    protected $coin_adicional;
+
+    /**
+     * @ORM\Column(name="value_shipping", type="float", nullable=true)
+     */
+    protected $valueShipping;
+
+    /**
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    protected $description_shipping;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Coin")
+     * @ORM\JoinColumn(name="coin_id", referencedColumnName="id", nullable=true)
+     */
+    protected $coin_shipping;
 
     /**
      * @ORM\ManyToOne(targetEntity="Country")
@@ -84,6 +106,102 @@ class DiscretionarySpending
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionVisa()
+    {
+        return $this->description_visa;
+    }
+
+    /**
+     * @param mixed $description_visa
+     */
+    public function setDescriptionVisa($description_visa)
+    {
+        $this->description_visa = $description_visa;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoinVisa()
+    {
+        return $this->coin_visa;
+    }
+
+    /**
+     * @param mixed $coin_visa
+     */
+    public function setCoinVisa($coin_visa)
+    {
+        $this->coin_visa = $coin_visa;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionAdicional()
+    {
+        return $this->description_adicional;
+    }
+
+    /**
+     * @param mixed $description_adicional
+     */
+    public function setDescriptionAdicional($description_adicional)
+    {
+        $this->description_adicional = $description_adicional;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoinAdicional()
+    {
+        return $this->coin_adicional;
+    }
+
+    /**
+     * @param mixed $coin_adicional
+     */
+    public function setCoinAdicional($coin_adicional)
+    {
+        $this->coin_adicional = $coin_adicional;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionShipping()
+    {
+        return $this->description_shipping;
+    }
+
+    /**
+     * @param mixed $description_shipping
+     */
+    public function setDescriptionShipping($description_shipping)
+    {
+        $this->description_shipping = $description_shipping;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoinShipping()
+    {
+        return $this->coin_shipping;
+    }
+
+    /**
+     * @param mixed $coin_shipping
+     */
+    public function setCoinShipping($coin_shipping)
+    {
+        $this->coin_shipping = $coin_shipping;
     }
 
     /**
@@ -123,29 +241,6 @@ class DiscretionarySpending
     public function setCountry($country)
     {
         $this->country = $country;
-    }
-
-    /**
-     * Set the value of description.
-     *
-     * @param string $description
-     * @return \TS\CYABundle\Entity\DiscretionarySpending
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of description.
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
@@ -197,31 +292,10 @@ class DiscretionarySpending
     }
 
     /**
-     * @return Coin
-     */
-    public function getCoin()
-    {
-        return $this->coin;
-    }
-
-    /**
-     * @param mixed $coin
-     */
-    public function setCoin($coin)
-    {
-        $this->coin = $coin;
-    }
-
-    /**
      * @return string
      */
     public function __toString()
     {
         return (string) $this->getName() . $this->getId();
-    }
-
-    public function __sleep()
-    {
-        return array('id', 'name', 'description', 'price', 'headquarters_id');
     }
 }

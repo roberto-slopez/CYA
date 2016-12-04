@@ -31,7 +31,7 @@ class Quotation
     protected $id;
 
     /**
-     * @ORM\Column(name="start_date", type="date")
+     * @ORM\Column(name="start_date", nullable=true, type="date")
      */
     protected $start_date;
 
