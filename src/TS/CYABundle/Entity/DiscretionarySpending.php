@@ -43,7 +43,7 @@ class DiscretionarySpending
 
     /**
      * @ORM\ManyToOne(targetEntity="Coin")
-     * @ORM\JoinColumn(name="coin_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="coin_visa_id", referencedColumnName="id", nullable=true)
      */
     protected $coin_visa;
 
@@ -59,7 +59,7 @@ class DiscretionarySpending
 
     /**
      * @ORM\ManyToOne(targetEntity="Coin")
-     * @ORM\JoinColumn(name="coin_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="coin_adicional_id", referencedColumnName="id", nullable=true)
      */
     protected $coin_adicional;
 
@@ -75,7 +75,7 @@ class DiscretionarySpending
 
     /**
      * @ORM\ManyToOne(targetEntity="Coin")
-     * @ORM\JoinColumn(name="coin_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="coin_shipping_id", referencedColumnName="id", nullable=true)
      */
     protected $coin_shipping;
 
