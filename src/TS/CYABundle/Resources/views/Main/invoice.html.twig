@@ -3137,7 +3137,7 @@
     </tr>
     {% if quotation.discretionarySpending %}
         <tr>
-            <td class="text-left">Valor de Tarjeta de asistencia</td>
+            <td class="text-left">Valor de VISA</td>
             <td class="text-left">{{ quotation.discretionarySpending.descriptionVisa }}</td>
             <td class="text-right">{{ quotation.discretionarySpending.coinVisa.code  | default('') }}</td>
             <td class="text-right">
@@ -3161,7 +3161,7 @@
             </td>
         </tr>
         <tr>
-            <td class="text-left">Valor de envio</td>
+            <td class="text-left">Valor tarjeta de asistencia</td>
             <td class="text-left">{{ quotation.discretionarySpending.descriptionShipping }}</td>
             <td class="text-right">{{ quotation.discretionarySpending.coinShipping.code  | default('') }}</td>
             <td class="text-right">
