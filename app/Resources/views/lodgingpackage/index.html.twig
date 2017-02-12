@@ -23,7 +23,7 @@
                 <th>Descripción</th>
                 <th>Precio</th>
                 <th>Sede</th>
-                <th>Alojamiento</th>
+                <th>Alojaminto</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,7 +34,7 @@
                 <td>{{ lodgingPackage.description }}</td>
                 <td>{{ lodgingPackage.price |number_format(2, '.', ',') }}</td>
                 <td>{{ lodgingPackage.headquarter.name }}</td>
-                <td>{{ lodgingPackage.lodging.name }}</td>
+                <td>{{ lodgingPackage.lodging.name |default(' ') }}</td>
                 <td>                        <div class="btn-group">
                             <a href="{{ path('lodgingpackage_show', { 'id': lodgingPackage.id }) }}" class="btn btn-xs btn-primary">show</a>
                         </div>                        <div class="btn-group">

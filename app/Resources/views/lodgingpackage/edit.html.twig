@@ -40,3 +40,29 @@ Edición alojamiento paquete
         </a>    </div>
 </div>{{ form_end(edit_form) }}
 {% endblock bodyPanel %}
+{% block extraJS %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script type="text/javascript">
+        $("#lodging_package_headquarter").change(function(){
+            var data = {
+                headquarterId: $(this).val()
+            };
+
+            //Lodging
+            $.ajax({
+                type: 'post',
+                url: Routing.generate('select_lodgings', null, true),
+                data: data,
+                success: function(data) {
+                    var $lodging_selector = $('.lodging_selector');
+                    $lodging_selector.html('<option value="">Seleccionar opción</option>');
+
+                    for (var i=0, total = data.length; i < total; i++) {
+                        $lodging_selector.append('<option value="' + data[i].id + '">' + data[i].name +' - '+ data[i].type +'</option>');
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock extraJS %}
