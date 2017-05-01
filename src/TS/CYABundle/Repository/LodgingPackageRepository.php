@@ -5,6 +5,7 @@ namespace TS\CYABundle\Repository;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
+use TS\CYABundle\Entity\LodgingPackage;
 
 class LodgingPackageRepository extends EntityRepository
 {
@@ -20,5 +21,25 @@ class LodgingPackageRepository extends EntityRepository
             ->setParameter('headquarter_id', $headquartersId);
 
         return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @param $lodgingId
+     * @return LodgingPackage
+     */
+    public function getPriceLodgingById($lodgingId)
+    {
+        try {
+            $qb = $this->createQueryBuilder('lodging_package');
+            $qb->leftJoin('lodging_package.lodging', 'lodging')
+                ->where('lodging.id=:lodgingId')
+                ->setParameter('lodgingId', $lodgingId)
+                ->setMaxResults(1);
+
+            return $qb->getQuery()->getSingleResult();
+        } catch (\Exception $e) {
+            var_dump($e);
+            return null;
+        }
     }
 }

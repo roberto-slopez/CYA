@@ -11,6 +11,7 @@ parameters:
     locale: es
 
 framework:
+    ide: 'phpstorm://open?file=%%f&line=%%l'
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
@@ -79,6 +80,9 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
     user_class: TS\CYABundle\Entity\Usuario
     registration:
         form:
