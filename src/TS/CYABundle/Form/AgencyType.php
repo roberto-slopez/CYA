@@ -2,8 +2,10 @@
 
 namespace TS\CYABundle\Form;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,8 +19,12 @@ class AgencyType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('sumerScheduleStart', DateType::class)
-            ->add('sumerScheduleEnd', DateType::class)
+            ->add('description')
+            ->add('observations', CKEditorType::class, [
+                'attr' => ['rows' => 10],
+                'config' => ['language' => 'es'],
+            ])
+            ->add('update', SubmitType::class)
         ;
     }
     

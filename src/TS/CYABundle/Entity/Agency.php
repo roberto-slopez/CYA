@@ -37,45 +37,29 @@ class Agency
     protected $name;
 
     /**
-     * @ORM\Column(name="summer_schedule_start", type="date")
+     * @ORM\Column(type="string", length=200, nullable=true)
      */
-    protected $sumerScheduleStart;
+    protected $description;
 
     /**
-     * @ORM\Column(name="summer_schedule_end", type="date")
+     * @ORM\Column(type="text", nullable=true)
      */
-    protected $sumerScheduleEnd;
-
-    /**
-     * Check that today is between start & end
-     * @return bool
-     */
-    public function isSumerSchedule()
-    {
-        $today = new \DateTime('today');
-        $start = $this->getSumerScheduleStart();
-        $end = $this->getSumerScheduleEnd();
-
-        return (($today->getTimestamp() >= $start->getTimestamp()) && ($today->getTimestamp() <= $end->getTimestamp()));
-    }
+    protected $observations;
 
     /**
      * @return mixed
      */
-    public function getSumerScheduleEnd()
+    public function getId()
     {
-        return $this->sumerScheduleEnd;
+        return $this->id;
     }
 
     /**
-     * @param $sumerScheduleEnd
-     * @return $this
+     * @param mixed $id
      */
-    public function setSumerScheduleEnd($sumerScheduleEnd)
+    public function setId($id)
     {
-        $this->sumerScheduleEnd = $sumerScheduleEnd;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
@@ -87,51 +71,43 @@ class Agency
     }
 
     /**
-     * @param $name
-     * @return $this
+     * @param mixed $name
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getSumerScheduleStart()
+    public function getDescription()
     {
-        return $this->sumerScheduleStart;
+        return $this->description;
     }
 
     /**
-     * @param $sumerScheduleStart
-     * @return $this
+     * @param mixed $description
      */
-    public function setSumerScheduleStart($sumerScheduleStart)
+    public function setDescription($description)
     {
-        $this->sumerScheduleStart = $sumerScheduleStart;
-
-        return $this;
+        $this->description = $description;
     }
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getObservations()
     {
-        return $this->id;
+        return $this->observations;
     }
 
     /**
-     * @param $id
-     * @return $this
+     * @param mixed $observations
      */
-    public function setId($id)
+    public function setObservations($observations)
     {
-        $this->id = $id;
-
-        return $this;
+        $this->observations = $observations;
     }
+
 }

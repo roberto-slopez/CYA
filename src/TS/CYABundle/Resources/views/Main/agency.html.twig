@@ -1,0 +1,13 @@
+{% extends "::base.html.twig" %}
+{% block MenuDashboard %} class="active" {% endblock MenuDashboard %}
+{% block contentHeader %}
+    <div class="content-header content-header-media">
+        <img src="{{ asset('bundles/tscya/img/placeholders/headers/dashboard_header.jpg') }}" alt="header image"
+             class="animation-pulseSlow">
+    </div>
+{% endblock contentHeader %}
+{% block pageContent %}
+    <div class="row">
+        {{ form(form) }}
+    </div>
+{% endblock pageContent %}

@@ -3182,18 +3182,15 @@
         <td class="text-center page" style="background-color: #1e68b4; color: white;" colspan="4">OBSERVACIONES</td>
     </tr>
     <tr>
-        <td class="text-center" colspan="4">
-            -Promocion válida para viajar hasta octubre 30 de 2017.<br/>
-            -Por favor verificar la tasa de Kaplan antes de realizar cualquier pago.<br/>
-            -El valor que se congela como parte de la promoción, es en la moneda del país elegido<br/>
-            -Kaplan no congela tasas ni valores en pesos colombianos (COP).<br/>
-            -El alojamiento estará sujeto a disponibilidad.<br/>
-            -Las fechas del suplemento de verano va de 24 de junio hasta agosto 26<br/>
+        <td  class="text-center" colspan="4">
+            {{ agency.observations | raw }}
+            <strong>
             {% if quotation.country.code == "EEUU" %}
-                -Si reservas con menos de 3 meses a la fecha de inicio debes asumir el costo del envío del I-20 por correo expreso de USD 60.
+                *Si reservas con menos de 3 meses a la fecha de inicio debes asumir el costo del envío del I-20 por correo expreso de USD 60.
                 <br/>
             {% endif %}
-            <strong>**Favor aclarar estos detalles con tu asesor</strong>
+            **Favor aclarar estos detalles con tu asesor
+            </strong>
         </td>
     </tr>
     <tr>

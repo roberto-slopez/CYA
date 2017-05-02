@@ -27,6 +27,7 @@ class AppKernel extends Kernel
 
             // PDF
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -38,7 +38,6 @@ class LodgingPackageRepository extends EntityRepository
 
             return $qb->getQuery()->getSingleResult();
         } catch (\Exception $e) {
-            var_dump($e);
             return null;
         }
     }

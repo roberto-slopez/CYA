@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use TS\CYABundle\Entity\Coin;
 use TS\CYABundle\Entity\Country;
 use TS\CYABundle\Entity\Quotation;
+use TS\CYABundle\Form\AgencyType;
 
 /**
  * @Security("has_role('ROLE_USER')")
@@ -273,6 +274,45 @@ class MainController extends BaseController
      */
     public function invoicePreviewAction(Quotation $quotation)
     {
-        return ['quotation' => $quotation];
+        $agency = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('TSCYABundle:Agency')
+            ->find($this->getParameter('agency'));
+
+        return [
+            'quotation' => $quotation,
+            'agency' => $agency
+        ];
+    }
+
+
+    /**
+     * @Route("/agency/current", name="agency_current")
+     * @Template()
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @param Request $request
+     * @return array
+     */
+    public function agencyAction(Request $request)
+    {
+        $agency = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('TSCYABundle:Agency')
+            ->find($this->getParameter('agency'));
+
+        $form = $this->createForm(AgencyType::class, $agency);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($agency);
+            $em->flush();
+            $this->setFlashInfo('Datos actualizados correctamente');
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
     }
 }
