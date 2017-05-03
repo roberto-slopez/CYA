@@ -99,7 +99,6 @@ class CotizadorController extends BaseController
     {
         try {
             $user = $this->getCurrenUser();
-
             $seller = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('TSCYABundle:Seller')

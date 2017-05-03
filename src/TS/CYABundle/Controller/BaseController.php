@@ -147,10 +147,10 @@ class BaseController extends Controller
                 }
 
                 if ($quotation->getSemanasLodging() == 0) {
-                    $packageLodging = $em->getRepository('TSCYABundle:LodgingPackage')
-                        ->getPriceLodgingById($quotation->getLodging()->getId());
+                    $packageLodging = $em->getRepository('TSCYABundle:PackageLodging')
+                        ->getPriceLodgingById($quotation->getLodging()->getId(), $package->getId());
 
-                    $lodgingPrice = $packageLodging ? $packageLodging->getPrice() : 0;
+                    $lodgingPrice = $packageLodging ? $packageLodging->getLodgingPrice() : 0;
                     $amountLodging = intval($lodgingPrice) > 0 ? $lodgingPrice : $lodgingAmount;
                     $quotation->setAmountLodging(round($amountLodging, 2));
                 } else {
