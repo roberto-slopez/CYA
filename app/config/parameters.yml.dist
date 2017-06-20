@@ -16,4 +16,4 @@ parameters:
     mailer_password: null
     locale: es
     secret: autoGenDontChange
-    agency: 'EBF7E371-8665-49BC-93D0-1027EA47F009'
+    current_agency: 'EBF7E371-8665-49BC-93D0-1027EA47F009'

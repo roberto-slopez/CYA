@@ -239,11 +239,19 @@ class MainController extends BaseController
      * @ParamConverter("id", class="\TS\CYABundle\Entity\Quotation")
      *
      * @param Quotation $quotation
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function invoiceToPDFAction(Quotation $quotation)
     {
-        $html = $this->renderView('@TSCYA/Main/invoice.html.twig', ['quotation' => $quotation]);
+        $agency = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('TSCYABundle:Agency')
+            ->find($this->getParameter('agency'));
+        $html = $this->renderView('@TSCYA/Main/invoice.html.twig', [
+            'quotation' => $quotation,
+            'agency' => $agency
+        ]);
+
         $client = $quotation->getClient();
         $namePDF = sprintf(
             '%s_%s_%s_%s',
@@ -270,7 +278,7 @@ class MainController extends BaseController
      * @Template()
      *
      * @param Quotation $quotation
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array
      */
     public function invoicePreviewAction(Quotation $quotation)
     {

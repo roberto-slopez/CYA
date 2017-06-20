@@ -9,6 +9,9 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: es
+    agency: "%current_agency%"
+    knp.doctrine_behaviors.blameable_listener.user_callable.class: TS\CYABundle\Doctrine\Behaviors\Blameable\UserCallable
+    knp.doctrine_behaviors.blameable_listener.user_entity: TS\CYABundle\Entity\Usuario
 
 framework:
     ide: 'phpstorm://open?file=%%f&line=%%l'
@@ -64,10 +67,6 @@ doctrine:
               mappings:
                   TSCYABundle: ~
                   FOSUserBundle: ~
-
-parameters:
-    knp.doctrine_behaviors.blameable_listener.user_callable.class: TS\CYABundle\Doctrine\Behaviors\Blameable\UserCallable
-    knp.doctrine_behaviors.blameable_listener.user_entity: TS\CYABundle\Entity\Usuario
 
 # Swiftmailer Configuration
 swiftmailer:
