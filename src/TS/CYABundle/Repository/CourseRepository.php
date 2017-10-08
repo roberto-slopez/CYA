@@ -25,6 +25,7 @@ class CourseRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('course');
         $qb->where('course.headquarters_id=:headquartersId')
+            ->andWhere('course.enable = 1')
             ->setParameter('headquartersId', $headquartersId);
 
         return $qb->getQuery()->getArrayResult();
