@@ -29,6 +29,7 @@ class LodgingPackageType extends AbstractType
             ->add('price', MoneyType::class, [
                 'currency' => 'USD'
             ])
+            ->add('enable')
         ;
     }
     

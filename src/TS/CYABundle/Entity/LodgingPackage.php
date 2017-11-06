@@ -53,6 +53,11 @@ class LodgingPackage
     protected $lodging;
 
     /**
+     * @ORM\Column(name="`enable`", type="boolean", options={"default": 1})
+     */
+    protected $enable = true;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -146,5 +151,21 @@ class LodgingPackage
     public function setHeadquarter(Headquarter $headquarter)
     {
         $this->headquarter = $headquarter;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getEnable()
+    {
+        return $this->enable;
+    }
+
+    /**
+     * @param boolean $enable
+     */
+    public function setEnable($enable)
+    {
+        $this->enable = $enable;
     }
 }

@@ -18,6 +18,7 @@ class LodgingPackageRepository extends EntityRepository
         $qb = $this->createQueryBuilder('lodging');
         $qb->innerJoin('lodging.headquarter', 'headquarter')
             ->where('headquarter.id = :headquarter_id')
+            ->andWhere('lodging.enable = 1')
             ->setParameter('headquarter_id', $headquartersId);
 
         return $qb->getQuery()->getArrayResult();
@@ -33,6 +34,7 @@ class LodgingPackageRepository extends EntityRepository
             $qb = $this->createQueryBuilder('lodging_package');
             $qb->leftJoin('lodging_package.lodging', 'lodging')
                 ->where('lodging.id=:lodgingId')
+                ->andWhere('lodging.enable = 1')
                 ->setParameter('lodgingId', $lodgingId)
                 ->setMaxResults(1);
 
